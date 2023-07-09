@@ -1,0 +1,213 @@
+.form {
+  /* login */
+position: relative;
+
+width: 1728px;
+height: 1117px;
+height: 100vh;
+/* black */
+
+background: #27262C;
+}
+
+.elipse1 {
+  /* Ellipse 1 */
+
+  position: absolute;
+  width: 91.4rem;
+  height: 91.4rem;
+  left: -58.5rem;
+  top: 10.2rem;
+
+  /* primary */
+
+  background: #4044ed;
+}
+
+.elipse2 {
+  /* Ellipse 2 */
+
+  position: absolute;
+  max-width: 7.6rem;
+  max-height: 7.6rem;
+  left: 11.8rem;
+  top: 24.3rem;
+
+  /* secondary */
+
+  background: #93dfff;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.subtract {
+  /* Subtract */
+
+  position: absolute;
+  width: 107.076rem;
+  height: 101.05rem;
+  left: 109.8rem;
+  top: -14.086rem;
+
+  /* primary */
+
+  background: #4044ed;
+  transform: rotate(-45deg);
+}
+
+.polygon1 {
+  /* Polygon 1 */
+
+  position: absolute;
+  width: 336.47px;
+  height: 336.47px;
+  left: 1248px;
+  top: 920.08px;
+
+  background: rgba(64, 68, 237, 0.5);
+  transform: rotate(-44.32deg);
+}
+
+.polygon2 {
+  /* Polygon 2 */
+
+  position: absolute;
+  width: 33.647rem;
+  height: 33.647rem;
+  left: 135.314rem;
+  top: 101.415rem;
+
+  background: rgba(64, 68, 237, 0.5);
+  transform: rotate(-44.32deg);
+}
+
+.polygon3 {
+  /* Polygon 3 */
+
+  position: absolute;
+  width: 33.647rem;
+  height: 33.647rem;
+  left: 146.224rem;
+  top: 110.697rem;
+
+  background: rgba(64, 68, 237, 0.5);
+  transform: rotate(-44.32deg);
+}
+
+.usernameInputLine {
+  /* Line 1 */
+
+  position: absolute;
+  width: 53.1rem;
+  height: 0rem;
+  left: 59.9rem;
+  top: 55.9rem;
+
+  /* white */
+
+  border: 0.2rem solid #ffffff;
+}
+
+.passwordInputLine {
+  /* Line 2 */
+
+  position: absolute;
+  width: 531px;
+  height: 0px;
+  left: 599px;
+  top: 659px;
+
+  /* white */
+
+  border: 0.2rem solid #ffffff;
+}
+
+.loginHeading {
+  /* LOGIN */
+
+  position: absolute;
+  width: 19rem;
+  height: 9.6rem;
+  left: 59.9rem;
+  top: 28.9rem;
+
+  /* title */
+
+  font-family: 'Inter, sans-serif';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9.6rem;
+  line-height: 9.6rem;
+  /* identical to box height */
+
+  /* white */
+
+  color: #ffffff;
+}
+
+.username {
+  /* Username */
+
+  position: absolute;
+  width: 10.9rem;
+  height: 3.6rem;
+  left: 59.9rem;
+  top: 51.3rem;
+
+  /* subtitle */
+
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  /* identical to box height */
+
+  /* gray */
+
+  color: #999999;
+}
+
+.password {
+  /* Password */
+
+  position: absolute;
+  width: 10.6rem;
+  height: 3.6rem;
+  left: 59.9rem;
+  top: 61.3rem;
+
+  /* subtitle */
+
+  font-family: 'IRANSansXFaNum';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  /* identical to box height */
+
+  /* gray */
+
+  color: #999999;
+}
+
+.frame {
+  /* Frame 1 */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1rem 23.9rem;
+  gap: 10px;
+
+  position: absolute;
+  width: 53.1rem;
+  height: 5.6rem;
+  left: 59.9rem;
+  top: 72.3rem;
+
+  /* primary */
+
+  background: #4044ed;
+}

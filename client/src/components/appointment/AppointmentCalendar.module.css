@@ -1,0 +1,5 @@
+.calendar {
+  max-width: 85%;
+   display: grid;
+  grid-template-columns: repeat(7fr,1);
+}
