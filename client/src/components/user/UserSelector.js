@@ -14,7 +14,7 @@ export const UserType = Object.freeze({
 
   
     return (
-      <select value={userType} onChange={handleChange}>
+      <select value={userType} onChange={handleChange} name='userType'>
         <option value={UserType.Patient}>{UserType.Patient}</option>
         <option value={UserType.MedicalSpecialist}>{UserType.MedicalSpecialist}</option>
       </select>
