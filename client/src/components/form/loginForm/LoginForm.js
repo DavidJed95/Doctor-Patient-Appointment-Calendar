@@ -1,6 +1,5 @@
-// React Imports
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Footer from '../../footer/Footer';
 import styles from './loginForm.module.css';
@@ -10,6 +9,9 @@ import Button from '../../button/Button';
 const LoginForm = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -26,11 +28,9 @@ const LoginForm = () => {
     const requestBody = {
       id,
       password,
-      error: null,
     };
 
     try {
-      // Send the form data to the server using the fetch API
       const response = await fetch('/auth/login', {
         method: 'POST',
         headers: {
@@ -39,20 +39,26 @@ const LoginForm = () => {
         body: JSON.stringify(requestBody),
       });
 
-      // Handle the response from the server
       const data = await response.json();
-      console.log('Registration response:', data);
-      // Handle successful login
+
+      if (response.ok) {
+        // Handle successful login
+        setMessage(data.message);
+        navigate('/home');
+      } else {
+        // Handle login failure
+        setMessage(data.message);
+      }
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during login:', error);
-      // Handle error message
+      setMessage('The ID or password are incorrect. Please try again.');
     }
   };
 
   return (
     <div>
-      <form action='auth/login' method='POST' className={styles.form}>
+      <form action='/login' className={styles.form}>
         <h1 className={styles.loginHeading}>Login</h1>
         <div>
           <InputField
@@ -75,7 +81,7 @@ const LoginForm = () => {
             required
           />
         </div>
-        <Button text='Login' type='submit' fun={() => handleSubmit()} />
+        <Button text='Login' type='submit' fun={handleSubmit} />
         <div>
           <Link to='/register'>Sign Up</Link>
         </div>
@@ -83,6 +89,8 @@ const LoginForm = () => {
           <Link to='/password-reset'>Forgot your Password?</Link>
         </div>
       </form>
+
+      {message && <p className={styles.message}>{message}</p>}
 
       <Footer name='David Jedwabsky' />
     </div>

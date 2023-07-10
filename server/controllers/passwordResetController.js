@@ -6,7 +6,7 @@ exports.forgotPassword = async (req, res) => {
   const { id } = req.body;
 
   try {
-    const result = await forgotPassword(id);
+    const result = await forgotPassword(req, res, id);
 
     if (result.status === 'success') {
       // Password reset initiated successfully, send the query message to the user

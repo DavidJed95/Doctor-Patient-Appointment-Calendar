@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import Footer from '../../footer/Footer';
 import styles from '../loginForm/loginForm.module.css';
 import InputField from '../InputField';
@@ -17,7 +18,9 @@ const RegistrationForm = () => {
   const [medicalStatus, setMedicalStatus] = useState('');
   const [medicalLicense, setMedicalLicense] = useState('');
   const [specialization, setSpecialization] = useState('');
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   /**
    * This method handles the change of the input values
@@ -91,11 +94,17 @@ const RegistrationForm = () => {
       });
 
       const data = await response.json();
+      if(response.ok) {
+        setMessage(data.message)
+        navigate('/')
+      } else {
+        setMessage(data.message)
+      }
       console.log('Registration response:', data);
     } catch (error) {
       console.error('Error during registration:', error);
       const errorMessage = error.response.data.message;
-      setError(errorMessage);
+      setMessage(errorMessage);
     }
   };
 
@@ -137,7 +146,7 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <form action='auth/register' method='POST' className={styles.form}>
+      <form action='/register' method='POST' className={styles.form}>
         <h1 className={styles.registerHeading}>Register</h1>
 
         <UserSelector userType={userType} onChange={handleChange} />
@@ -221,8 +230,9 @@ const RegistrationForm = () => {
 
         {userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
-        <Button text='Register' type='submit' fun={() => handleSubmit()} />
+        <Button text='Register' type='submit' fun={handleSubmit} />
       </form>
+      {message && <p>{message}</p>}
       <Footer name='David Jedwabsky' />
     </div>
   );

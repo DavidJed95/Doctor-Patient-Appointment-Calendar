@@ -6,11 +6,14 @@ const emailService = require('../../services/emailService');
 
 /**
  * Initiate the password reset process for a user.
+ * @param {*} req - Express request object
+ * @param {*} res - Express response object
  * @param {*} id - User ID
  * @returns { status, message }
  */
-async function forgotPassword(id) {
-  console.log("id = "+id)
+async function forgotPassword(req, res, id) {
+  console.log(req.body.params.id);
+  console.log('id = ' + id);
   let user;
 
   // Check if the provided ID is an email
@@ -34,7 +37,8 @@ async function forgotPassword(id) {
   const resetToken = tokenService.generateEmailVerificationToken(user);
 
   // Update the user model with the reset token
-  const updateQuery = 'UPDATE users SET resetToken = ? WHERE id = ?';
+  const updateQuery =
+    'UPDATE users SET EmailVerificationToken = ? WHERE id = ?';
   await doQuery(updateQuery, [resetToken, user.id]);
 
   // Send the password reset email to the user

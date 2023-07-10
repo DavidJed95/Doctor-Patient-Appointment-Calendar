@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import InputField from '../InputField';
 import Button from '../../button/Button';
-
 
 const PasswordResetForm = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -36,26 +38,27 @@ const PasswordResetForm = () => {
 
       if (response.ok) {
         // Password reset was successful
-        setSuccessMessage(data);
-        setErrorMessage('');
+        setMessage(data.message);
+        navigate('/');
       } else {
         // Password reset failed
-        setErrorMessage(data);
-        setSuccessMessage('');
+        setMessage(data.message);
       }
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during password reset:', error);
-      setErrorMessage('An error occurred. Please try again later.');
-      setSuccessMessage('You have succeeded resetting your password.\nCheck your email for confirmation');
+      setMessage(
+        'The given ID or Email do not exist in the system. Please try again!',
+      );
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form action='/password-reset' method='POST'>
         <InputField
           label='ID:'
+          pattern='[0-9]{9}'
           placeholder='ID'
           value={id}
           name='id'
@@ -64,16 +67,15 @@ const PasswordResetForm = () => {
         />
         <InputField
           label='Email:'
-          placeholder='Email'
+          placeholder='name@gmail.com'
           value={email}
           name='email'
           onChange={handleChange}
           required
         />
-        <Button type='submit' text='Reset Password' />
+        <Button type='submit' text='Reset Password' fun={handleSubmit} />
       </form>
-      {successMessage && <p>{successMessage}</p>}
-      {errorMessage && <p>{errorMessage}</p>}
+      {message && <p>{message}</p>}
     </div>
   );
 };
