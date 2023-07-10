@@ -25,14 +25,15 @@ async function checkUserExist(id, email) {
  */
 async function createUser(user) {
   const {
+    userType,
     id,
-    email,
     password,
+    passwordConfirm,
     firstName,
     lastName,
+    email,
     mobile,
     languages,
-    creationDate,
     medicalStatus,
     medicalLicense,
     specialization,

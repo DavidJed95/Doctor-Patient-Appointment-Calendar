@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../footer/Footer';
-import styles from '../loginForm/loginForm.module.css';
+import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
 import UserSelector, { UserType } from '../../user/UserSelector';
 
+/**
+ * Registration form page component
+ * @returns The registration
+ */
 const RegistrationForm = () => {
   const [userType, setUserType] = useState(UserType.Patient);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,56 +33,74 @@ const RegistrationForm = () => {
    */
   const handleChange = event => {
     const { name, value } = event.target;
-    if (name === 'userType') {
-      setUserType(value);
-    } else {
-      switch (name) {
-        case 'userType':
-          setUserType(value);
-          break;
-        case 'id':
-          setId(value);
-          break;
-        case 'password':
-          setPassword(value);
-          break;
-        case 'firstName':
-          setFirstName(value);
-          break;
-        case 'lastName':
-          setLastName(value);
-          break;
-        case 'email':
-          setEmail(value);
-          break;
-        case 'mobile':
-          setMobile(value);
-          break;
-        case 'languages':
-          setLanguages(value);
-          break;
-        case 'medicalStatus':
-          setMedicalStatus(value);
-          break;
-        case 'medicalLicense':
-          setMedicalLicense(value);
-          break;
-        case 'specialization':
-          setSpecialization(value);
-          break;
-        default:
-          break;
-      }
+    switch (name) {
+      case 'userType':
+        setUserType(value);
+        break;
+      case 'id':
+        setId(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'passwordConfirm':
+        setPasswordConfirm(value);
+        break;
+      case 'firstName':
+        setFirstName(value);
+        break;
+      case 'lastName':
+        setLastName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'mobile':
+        setMobile(value);
+        break;
+      case 'languages':
+        setLanguages(value);
+        break;
+      case 'medicalStatus':
+        setMedicalStatus(value);
+        break;
+      case 'medicalLicense':
+        setMedicalLicense(value);
+        break;
+      case 'specialization':
+        setSpecialization(value);
+        break;
+      default:
+        break;
     }
   };
 
+  /**
+   * This method handles the Submission of the form
+   * @param {*} event event target to change for submission
+   */
   const handleSubmit = async event => {
     event.preventDefault();
+
+    if (
+      !id ||
+      !password ||
+      !passwordConfirm ||
+      !firstName ||
+      !lastName ||
+      !email ||
+      !mobile ||
+      !languages
+    ) {
+      setMessage('Please enter all required fields.');
+      return;
+    }
 
     const requestBody = {
       userType,
       id,
       password,
+      passwordConfirm,
       firstName,
       lastName,
       email,
@@ -114,36 +137,43 @@ const RegistrationForm = () => {
 
   const renderPatientFields = () => {
     return (
-      <InputField
-        label='Medical Status:'
-        placeholder='Medical Status'
-        value={medicalStatus}
-        name='medicalStatus'
-        onChange={handleChange}
-        required
-      />
+      <div>
+        <InputField
+          label='Medical Status:'
+          placeholder='Medical Status'
+          value={medicalStatus}
+          name='medicalStatus'
+          onChange={handleChange}
+          required
+        />
+      </div>
     );
   };
 
   const renderDoctorFields = () => {
     return (
       <>
-        <InputField
-          label='Medical License:'
-          placeholder='Medical License'
-          value={medicalLicense}
-          name='medicalLicense'
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          label='Specialization:'
-          placeholder='Specialization'
-          value={specialization}
-          name='specialization'
-          onChange={handleChange}
-          required
-        />
+        <div>
+          <InputField
+            label='Medical License:'
+            placeholder='Medical License'
+            value={medicalLicense}
+            name='medicalLicense'
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <InputField
+            label='Specialization:'
+            placeholder='Specialization'
+            value={specialization}
+            name='specialization'
+            onChange={handleChange}
+            required
+          />
+        </div>
       </>
     );
   };
@@ -151,9 +181,9 @@ const RegistrationForm = () => {
   return (
     <div>
       <form action='/register' method='POST' className={styles.form}>
-        <h1 className={styles.LoginHeading}>Register</h1>
+        <h1 className={styles.userAuthHeading}>Register</h1>
 
-        <UserSelector userType={userType} onChange={handleChange} />
+        <UserSelector onChange={handleChange} />
         <div>
           <InputField
             label='ID:'
@@ -173,6 +203,19 @@ const RegistrationForm = () => {
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
             value={password}
             name='password'
+            type='password'
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
+          <InputField
+            label='Password Confirmation:'
+            placeholder='Confirm your password:'
+            pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
+            value={passwordConfirm}
+            name='passwordConfirm'
             type='password'
             onChange={handleChange}
             required
@@ -235,8 +278,8 @@ const RegistrationForm = () => {
         {userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
         <Button text='Register' type='submit' fun={handleSubmit} />
+        {message && <p className={message.includes('success')? styles.success: styles.failure}>{message}</p>}
       </form>
-      {message && <p>{message}</p>}
       <Footer name='David Jedwabsky' />
     </div>
   );

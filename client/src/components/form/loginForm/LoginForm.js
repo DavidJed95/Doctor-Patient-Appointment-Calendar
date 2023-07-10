@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Footer from '../../footer/Footer';
-import styles from './loginForm.module.css';
+import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
 
@@ -59,7 +59,7 @@ const LoginForm = () => {
   return (
     <div>
       <form action='/login' className={styles.form}>
-        <h1 className={styles.loginHeading}>Login</h1>
+        <h1 className={styles.userAuthHeading}>Login</h1>
         <div>
           <InputField
             label='ID:'

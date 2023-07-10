@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
-
+import Footer from '../../footer/Footer';
 const PasswordResetForm = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
@@ -55,7 +55,8 @@ const PasswordResetForm = () => {
 
   return (
     <div>
-      <form action='/password-reset' method='POST'>
+      <form action='/password-reset' method='POST' className={styles.form}>
+        <h1 className={styles.userAuthHeading}>Password Reset</h1>
         <InputField
           label='ID:'
           pattern='[0-9]{9}'
@@ -76,6 +77,7 @@ const PasswordResetForm = () => {
         <Button type='submit' text='Reset Password' fun={handleSubmit} />
       </form>
       {message && <p>{message}</p>}
+      <Footer name='David Jedwabsky' />
     </div>
   );
 };
