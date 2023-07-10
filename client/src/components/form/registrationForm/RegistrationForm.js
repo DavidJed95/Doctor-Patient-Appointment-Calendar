@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../footer/Footer';
 import styles from '../loginForm/loginForm.module.css';
 import InputField from '../InputField';
@@ -28,42 +28,46 @@ const RegistrationForm = () => {
    */
   const handleChange = event => {
     const { name, value } = event.target;
-    switch (name) {
-      case 'userType':
-        setUserType(value);
-        break;
-      case 'id':
-        setId(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      case 'firstName':
-        setFirstName(value);
-        break;
-      case 'lastName':
-        setLastName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'mobile':
-        setMobile(value);
-        break;
-      case 'languages':
-        setLanguages(value);
-        break;
-      case 'medicalStatus':
-        setMedicalStatus(value);
-        break;
-      case 'medicalLicense':
-        setMedicalLicense(value);
-        break;
-      case 'specialization':
-        setSpecialization(value);
-        break;
-      default:
-        break;
+    if (name === 'userType') {
+      setUserType(value);
+    } else {
+      switch (name) {
+        case 'userType':
+          setUserType(value);
+          break;
+        case 'id':
+          setId(value);
+          break;
+        case 'password':
+          setPassword(value);
+          break;
+        case 'firstName':
+          setFirstName(value);
+          break;
+        case 'lastName':
+          setLastName(value);
+          break;
+        case 'email':
+          setEmail(value);
+          break;
+        case 'mobile':
+          setMobile(value);
+          break;
+        case 'languages':
+          setLanguages(value);
+          break;
+        case 'medicalStatus':
+          setMedicalStatus(value);
+          break;
+        case 'medicalLicense':
+          setMedicalLicense(value);
+          break;
+        case 'specialization':
+          setSpecialization(value);
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -94,11 +98,11 @@ const RegistrationForm = () => {
       });
 
       const data = await response.json();
-      if(response.ok) {
-        setMessage(data.message)
-        navigate('/')
+      if (response.ok) {
+        setMessage(data.message);
+        navigate('/');
       } else {
-        setMessage(data.message)
+        setMessage(data.message);
       }
       console.log('Registration response:', data);
     } catch (error) {
@@ -147,7 +151,7 @@ const RegistrationForm = () => {
   return (
     <div>
       <form action='/register' method='POST' className={styles.form}>
-        <h1 className={styles.registerHeading}>Register</h1>
+        <h1 className={styles.LoginHeading}>Register</h1>
 
         <UserSelector userType={userType} onChange={handleChange} />
         <div>
