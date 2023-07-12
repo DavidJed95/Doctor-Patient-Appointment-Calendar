@@ -3,33 +3,27 @@
  */
 'use strict';
 const express = require('express');
-const logger = require('./utils/errorHandler');
+// const validateRequest = require('./utils/validation')
+const errorHandler = require('./utils/errorHandler');
 const path = require('path');
 const app = express();
-
-app.use(logger);
-
 const dotenv = require('dotenv');
-
-const authRouter = require('./routes/authRoutes');
 
 // Load environment variables from .env file
 dotenv.config({ path: './.env' });
 
-// Configure middleware
+// Middleware
+// app.use(validateRequest)
 app.use(express.static(path.join(__dirname, '/client/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Routes
+const authRouter = require('./routes/authRoutes');
 app.use('/auth', authRouter);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  // Handle the error and send an appropriate response to the client
-  res
-    .status(500)
-    .json({ status: 'failure', message: 'Internal Server Error!' });
-});
+app.use(errorHandler);
 
 // Start the server
 const port = process.env.PORT || 8001;

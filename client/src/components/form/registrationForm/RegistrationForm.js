@@ -96,6 +96,12 @@ const RegistrationForm = () => {
       return;
     }
 
+    const creationDate = new Date();
+    const formattedCreationDate = creationDate
+      .toISOString()
+      .slice(0, 19)
+      .replace('T', ' ');
+
     const requestBody = {
       userType,
       id,
@@ -106,9 +112,12 @@ const RegistrationForm = () => {
       email,
       mobile,
       languages,
-      medicalStatus,
-      medicalLicense,
-      specialization,
+      creationDate: formattedCreationDate,
+      medicalStatus: userType === UserType.Patient ? medicalStatus : undefined,
+      medicalLicense:
+        userType === UserType.MedicalSpecialist ? medicalLicense : undefined,
+      specialization:
+        userType === UserType.MedicalSpecialist ? specialization : undefined,
     };
 
     try {
@@ -121,17 +130,16 @@ const RegistrationForm = () => {
       });
 
       const data = await response.json();
+      setMessage(data.message);
+
       if (response.ok) {
-        setMessage(data.message);
-        navigate('/');
-      } else {
-        setMessage(data.message);
+        setTimeout(() => {
+          navigate(data.redirectTo);
+        }, 5000);
       }
-      console.log('Registration response:', data);
     } catch (error) {
       console.error('Error during registration:', error);
-      const errorMessage = error.response.data.message;
-      setMessage(errorMessage);
+      setMessage('An error occurred during registration.');
     }
   };
 
@@ -245,7 +253,7 @@ const RegistrationForm = () => {
           <InputField
             label='Email:'
             placeholder='name@gmail.com'
-            pattern='[\w-\.]+@([\w-]+\.)+[\w-]{2,4}'
+            pattern='/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i'
             value={email}
             name='email'
             onChange={handleChange}
@@ -278,7 +286,15 @@ const RegistrationForm = () => {
         {userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
         <Button text='Register' type='submit' fun={handleSubmit} />
-        {message && <p className={message.includes('success')? styles.success: styles.failure}>{message}</p>}
+        {message && (
+          <p
+            className={
+              message.includes('success') ? styles.success : styles.failure
+            }
+          >
+            {message}
+          </p>
+        )}
       </form>
       <Footer name='David Jedwabsky' />
     </div>

@@ -2,13 +2,13 @@
 const doQuery = require('../query');
 
 /**
- * Get daily report of patients for a specific medical specialist within a date range.
+ * Get report of patients for a specific medical specialist within a date range.
  * @param {*} medicalSpecialistId - ID of the medical specialist
  * @param {*} startDate - Start date of the date range
  * @param {*} endDate - End date of the date range
  * @returns { status, message, report }
  */
-async function getDailyReportByMedicalSpecialist(
+async function getAppointmentReportByMedicalSpecialist(
   medicalSpecialistId,
   startDate,
   endDate,
@@ -37,4 +37,4 @@ async function getDailyReportByMedicalSpecialist(
   };
 }
 
-module.exports = getDailyReportByMedicalSpecialist;
+module.exports = getAppointmentReportByMedicalSpecialist;

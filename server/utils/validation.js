@@ -4,9 +4,9 @@ const { validationResult } = require('express-validator');
 
 /**
  * Validate the request using express-validator middleware
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  * @returns error messages
  */
 const validateRequest = (req, res, next) => {
@@ -17,3 +17,4 @@ const validateRequest = (req, res, next) => {
   }
   next();
 };
+exports.default = validateRequest;
