@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2023 at 09:38 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 12, 2023 at 12:59 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,7 @@ CREATE TABLE `appointments` (
   `EndingTime` datetime NOT NULL,
   `Date` datetime NOT NULL,
   `isPayedFor` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE `medicalspecialists` (
   `ID` int(9) NOT NULL,
   `MedicalLicense` int(11) NOT NULL,
   `Specialization` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `medicalspecialists` (
 CREATE TABLE `paitents` (
   `ID` int(9) NOT NULL,
   `MedicalStatus` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,7 @@ CREATE TABLE `treatments` (
   `Duration` time NOT NULL,
   `Price` double NOT NULL,
   `TreatmentType` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -90,10 +90,11 @@ CREATE TABLE `users` (
   `LastName` varchar(40) NOT NULL,
   `Email` varchar(40) NOT NULL,
   `Mobile` varchar(10) NOT NULL,
-  `Languages` varchar(200) NOT NULL,
-  `CreationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `EmailVerificationToken` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Languages` enum('Hebrew','Russian','English','Arabic') NOT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `EmailVerificationToken` varchar(255) DEFAULT NULL,
+  `UserType` enum('Patient','Medical Specialist') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Indexes for dumped tables

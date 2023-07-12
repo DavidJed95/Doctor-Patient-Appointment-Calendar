@@ -186,6 +186,7 @@ const RegistrationForm = () => {
     );
   };
 
+  const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   return (
     <div>
       <form action='/register' method='POST' className={styles.form}>
@@ -249,11 +250,12 @@ const RegistrationForm = () => {
             required
           />
         </div>
+        
         <div>
           <InputField
             label='Email:'
             placeholder='name@gmail.com'
-            pattern='/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i'
+            pattern={emailPattern}
             value={email}
             name='email'
             onChange={handleChange}
