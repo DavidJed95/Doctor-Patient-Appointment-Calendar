@@ -1,5 +1,5 @@
 'use strict';
-const { createUser } = require('../database/queries/all-queries');
+const createUser = require('../database/queries/create-user');
 
 exports.register = async (req, res) => {
   const {

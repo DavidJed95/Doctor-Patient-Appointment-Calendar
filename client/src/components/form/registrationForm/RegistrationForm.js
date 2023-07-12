@@ -189,7 +189,7 @@ const RegistrationForm = () => {
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   return (
     <div>
-      <form action='/register' method='POST' className={styles.form}>
+      <form action='/auth/register' method='POST' className={styles.form}>
         <h1 className={styles.userAuthHeading}>Register</h1>
 
         <UserSelector onChange={handleChange} />
@@ -250,7 +250,7 @@ const RegistrationForm = () => {
             required
           />
         </div>
-        
+
         <div>
           <InputField
             label='Email:'

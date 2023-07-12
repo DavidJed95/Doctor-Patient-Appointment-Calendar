@@ -61,7 +61,7 @@ async function createUser(user) {
     };
   }
 
-  const parsedId = Number(id);
+  const parsedId = Number(user.id);
 
   if (password !== passwordConfirm) {
     return { status: 'failure', message: 'The passwords do not match' };
