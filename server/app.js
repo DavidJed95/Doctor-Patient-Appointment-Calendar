@@ -3,7 +3,6 @@
  */
 'use strict';
 const express = require('express');
-// const validateRequest = require('./utils/validation')
 const errorHandler = require('./utils/errorHandler');
 const path = require('path');
 const app = express();
@@ -13,14 +12,18 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
 // Middleware
-// app.use(validateRequest)
-app.use(express.static(path.join(__dirname, '/client/public')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
 const authRouter = require('./routes/authRoutes');
 app.use('/auth', authRouter);
+
+// Serve React application
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Error handling middleware
 app.use(errorHandler);
