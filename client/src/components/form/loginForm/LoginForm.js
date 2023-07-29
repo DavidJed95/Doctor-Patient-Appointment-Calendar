@@ -88,9 +88,16 @@ const LoginForm = () => {
         <div>
           <Link to='/password-reset'>Forgot your Password?</Link>
         </div>
+        {message && (
+          <p
+            className={
+              message.includes('success') ? styles.success : styles.failure
+            }
+          >
+            {message}
+          </p>
+        )}
       </form>
-
-      {message && <p className={styles.message}>{message}</p>}
 
       <Footer name='David Jedwabsky' />
     </div>
