@@ -78,15 +78,15 @@ const PasswordResetForm = () => {
           required
         />
         <Button type='submit' text='Reset Password' fun={handleSubmit} />
-      {message && (
-        <p
-          className={
-            message.includes('success') ? styles.success : styles.failure
-          }
-        >
-          {message}
-        </p>
-      )}
+        {message && (
+          <p
+            className={
+              message.includes('success') ? styles.success : styles.failure
+            }
+          >
+            {message}
+          </p>
+        )}
       </form>
       <Footer name='David Jedwabsky' />
     </div>
