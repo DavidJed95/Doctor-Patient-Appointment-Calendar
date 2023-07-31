@@ -1,14 +1,17 @@
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config({ path: './.env' });
 
 /**
  * Function to generate an email verification token
  * @param {*} user
- * @returns
+ * @returns the token generated
  */
 const generateEmailVerificationToken = user => {
   const { id, email } = user;
-
-  const token = twt.sign(
+  const token = jwt.sign(
     {
       id,
       email,

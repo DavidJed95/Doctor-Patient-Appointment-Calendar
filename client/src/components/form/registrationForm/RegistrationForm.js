@@ -121,7 +121,7 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch('/auth/register', {
+      const response = await fetch('http://localhost:8000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,11 +135,14 @@ const RegistrationForm = () => {
       if (response.ok) {
         setTimeout(() => {
           navigate(data.redirectTo);
-        }, 5000);
+        }, 2000);
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      setMessage('An error occurred during registration.');
+      console.error(
+        'An error occurred during registration due to false data insertion:',
+        error,
+      );
+      setMessage('An error occurred during registration due to false data insertion.');
     }
   };
 
@@ -186,7 +189,7 @@ const RegistrationForm = () => {
     );
   };
 
-  const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  
   return (
     <div>
       <form action='/auth/register' method='POST' className={styles.form}>
@@ -255,7 +258,6 @@ const RegistrationForm = () => {
           <InputField
             label='Email:'
             placeholder='name@gmail.com'
-            pattern={emailPattern}
             value={email}
             name='email'
             onChange={handleChange}

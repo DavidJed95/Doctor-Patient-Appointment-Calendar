@@ -25,7 +25,7 @@ async function checkUserExist(id, email) {
  */
 
 async function createUser(user) {
-  console.log(user)
+  console.log(user);
   const {
     userType,
     id,
@@ -75,7 +75,7 @@ async function createUser(user) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const userParams = [
-    paredId,
+    parsedId,
     hashedPassword,
     firstName,
     lastName,
@@ -112,7 +112,7 @@ async function createUser(user) {
   // Send email verification email to the user
   const emailContent = `Hi ${
     firstName + ' ' + lastName
-  },\n\nThank you for registering. Please click on the following link to verify your email:\n\nEmail Verification: http://example.com/verify-email?token=${emailVerificationToken}\n\nIf you did not register for this account, please ignore this email.\n\nBest regards,\nThe Team`;
+  },\n\nThank you for registering. Please click on the following link to verify your email:\n\nEmail Verification: http://example.com/verify-email?token=${emailVerificationToken}\n\nBest regards,\nThe Team`;
   emailService.sendEmail(email, 'Verification Email', emailContent);
 
   return { status: 'success', message: 'User created successfully' };

@@ -25,13 +25,16 @@ const PasswordResetForm = () => {
 
     try {
       // Send a password reset request to the server
-      const response = await fetch('/password-reset', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'http://localhost:8000/auth/password-reset',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id, email }),
         },
-        body: JSON.stringify({ id, email }),
-      });
+      );
 
       // Handle the response from the server
       const data = await response.json();
@@ -75,8 +78,16 @@ const PasswordResetForm = () => {
           required
         />
         <Button type='submit' text='Reset Password' fun={handleSubmit} />
+      {message && (
+        <p
+          className={
+            message.includes('success') ? styles.success : styles.failure
+          }
+        >
+          {message}
+        </p>
+      )}
       </form>
-      {message && <p>{message}</p>}
       <Footer name='David Jedwabsky' />
     </div>
   );

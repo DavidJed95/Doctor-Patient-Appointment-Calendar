@@ -2,6 +2,7 @@
 const createUser = require('../database/queries/create-user');
 
 exports.register = async (req, res) => {
+  console.log(req.body.creationDate);
   const {
     userType,
     id,
@@ -12,6 +13,7 @@ exports.register = async (req, res) => {
     lastName,
     mobile,
     languages,
+    creationDate,
     medicalStatus,
     medicalLicense,
     specialization,
@@ -44,28 +46,23 @@ exports.register = async (req, res) => {
 
     if (result.status === 'success') {
       // Registration successful
-      setTimeout(() => {
-        res.status(200).json({
-          message: 'User registered successfully',
-          redirectTo: '/auth/login',
-        });
-      }, 5000);
+
+      res.status(200).json({
+        message: 'User registered successfully',
+        redirectTo: '/',
+      });
     } else {
       // Registration failed
-      setTimeout(() => {
-        res
-          .status(400)
-          .json({ message: result.message, redirectTo: '/auth/register' });
-      }, 5000);
+      res
+        .status(400)
+        .json({ message: result.message, redirectTo: '/auth/register' });
     }
   } catch (error) {
     console.error(error);
     // Handle any other errors that occurred during registration
-    setTimeout(() => {
-      res.status(500).json({
-        message: 'An error occurred during registration',
-        redirectTo: '/auth/register',
-      });
-    }, 5000);
+    res.status(500).json({
+      message: 'An error occurred during registration',
+      redirectTo: '/auth/register',
+    });
   }
 };

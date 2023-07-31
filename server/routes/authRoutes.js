@@ -24,37 +24,37 @@ router.get('/password-reset',(req,res) => {
   res.send('password-reset');
 })
 
-// router.get('/register/success', (req, res) => {
-//   // Display success message and redirect to login page
-//   setTimeout(() => {
-//     res.send('Successfully Registered!. Please Login to continue');
-//     // Redirection to login page after 5 seconds
-//     setTimeout(() => res.redirect('/auth/login'), 5000);
-//   });
-// });
+router.get('/register', (req, res) => {
+  // Display success message and redirect to login page
+  setTimeout(() => {
+    res.send('Successfully Registered!. Please Login to continue');
+    // Redirection to login page after 3 seconds
+    setTimeout(() => res.redirect('/login'),3000);
+  });
+});
 
-// router.get('/login', (req, res) => {
-//   res.send('login');
-// });
+router.get('/login', (req, res) => {
+  res.send('login');
+});
 
-// router.get('/login/failure', (req, res) => {
-//   // Display failure message and redirect back to login page
-//   setTimeout(() => {
-//     res.send('Login failed. Please try again.');
-//     // Redirect back to login page after 3 seconds
-//     setTimeout(() => {
-//       res.redirect('/auth/login');
-//     }, 3000);
-//   }, 2000);
-// });
+router.get('/login/failure', (req, res) => {
+  // Display failure message and redirect back to login page
+  setTimeout(() => {
+    res.send('Login failed. Please try again.');
+    // Redirect back to login page after 3 seconds
+    setTimeout(() => {
+      res.redirect('/auth/login');
+    }, 3000);
+  }, 2000);
+});
 
-// router.get('/login/success', (req, res) => {
-//   res.send('Login successful. Redirecting to home page');
-//   // Redirect to the login page after a short delay
-//   setTimeout(() => {
-//     res.redirect('/auth/login');
-//   }, 3000);
-// });
+router.get('/login/success', (req, res) => {
+  res.send('Login successful. Redirecting to home page');
+  // Redirect to the login page after a short delay
+  setTimeout(() => {
+    res.redirect('/auth/login');
+  }, 3000);
+});
 
 router.get('/profile', (req, res) => {
   res.send('profile');

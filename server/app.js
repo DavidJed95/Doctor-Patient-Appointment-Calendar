@@ -5,6 +5,7 @@
 const express = require('express');
 const errorHandler = require('./utils/errorHandler');
 const path = require('path');
+const cors = require('cors')
 const app = express();
 const dotenv = require('dotenv');
 
@@ -12,6 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
 // Middleware
+app.use(cors())
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

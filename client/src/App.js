@@ -7,16 +7,19 @@ import Appointments from './components/pages/Appointments';
 import About from './components/pages/About';
 import LoginForm from './components/form/loginForm/LoginForm';
 import RegistrationForm from './components/form/registrationForm/RegistrationForm';
-import PasswordResetForm from './components/form/passwordResetForm/PasswordResetForm'
+import PasswordResetForm from './components/form/passwordResetForm/PasswordResetForm';
 
 function App() {
+  const isLoggedIn = window.localStorage.getItem('loggedIn');
   return (
     <Router>
       {/* <Navbar siteTitle='Home' /> */}
       <Routes>
-        <Route path='/' element={<LoginForm />} />
-        <Route path='/register' element={<RegistrationForm/>}/>
-        <Route path='/password-reset' element={<PasswordResetForm/>}/>
+        <Route path='/' element={isLoggedIn ? <Home /> : <LoginForm />} />
+        <Route path='/register' element={<RegistrationForm />} />
+        <Route path='/password-reset' element={<PasswordResetForm />} />
+
+        {/* Pages after logging in */}
         <Route path='/home' element={<Home />} />
         <Route path='/appointments' element={<Appointments />} />
         <Route path='/about' element={<About />} />

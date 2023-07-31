@@ -31,7 +31,7 @@ const LoginForm = () => {
     };
 
     try {
-      const response = await fetch('/auth/login', {
+      const response = await fetch('http://localhost:8000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,9 +42,9 @@ const LoginForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Handle successful login
-        setMessage(data.message);
-        navigate('/home');
+        setTimeout(() => {
+          navigate(data.redirectTo);
+        }, 2000);
       } else {
         // Handle login failure
         setMessage(data.message);
