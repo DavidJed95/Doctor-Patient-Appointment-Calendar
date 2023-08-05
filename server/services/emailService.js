@@ -7,11 +7,15 @@ const nodemailer = require('nodemailer');
 
 // Create a transporter for sending email
 const transporter = nodemailer.createTransport({
-  host: 'sandbox.smtp.mailtrap.io',
+  host: 'gmail',
   prot: 2525,
   auth: {
     user: 'doctorpatientappointmentcalend@gmail.com',
+<<<<<<< HEAD
     pass: 'tpnlbqzttcjltrrz',
+=======
+    pass: '2f16a8a2c64719',
+>>>>>>> 0e431d16e5209f60169dc65877762067efd274c6
   },
 });
 
