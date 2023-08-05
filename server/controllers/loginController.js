@@ -2,17 +2,30 @@
 const { login } = require('../database/queries/all-queries');
 
 exports.login = async (req, res) => {
-  console.log(req.body);
   const { id, password } = req.body;
 
   try {
-    const result = await login(id, password);
+
+    const user = {
+      id,
+      password,
+    };
+
+    const result = await login(user);
+    console.log(`result is: ${result}`);
 
     if (result.status === 'success') {
-      // Login successful, you can send a response with the user information
+      // Login successful, send a response with the user information
+      const {userType, firstName, lastName} = result.user
+      console.log(`userType: ${userType}
+      firstName: ${firstName}
+      lastName: ${lastName}`);
+
+      const greeting = `Welcome ${userType === 'Medical Specialist' && 'Doctor'} ${firstName} ${lastName}`;
       return res.status(200).json({
         message: 'Login successful',
-        user: result.user,
+        user: { userType, firstName, lastName },
+        greeting,
         redirectTo: '/home', // Redirect to the home page after successful login
       });
     } else {
@@ -21,7 +34,6 @@ exports.login = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    // Handle any other errors that occurred during login
-    return res.status(500).json({ message: 'To login you must confirm your email after registration' });
+    // return res.status(500).json({ message: 'To login you must confirm your email after registration' });
   }
 };

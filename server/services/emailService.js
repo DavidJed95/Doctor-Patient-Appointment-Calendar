@@ -1,13 +1,17 @@
 'use strict';
 const nodemailer = require('nodemailer');
+// const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+// dotenv.config({ path: '../.env' });
 
 // Create a transporter for sending email
 const transporter = nodemailer.createTransport({
   host: 'sandbox.smtp.mailtrap.io',
   prot: 2525,
   auth: {
-    user: '5fc362c192e298',
-    pass: '2f16a8a2c64719',
+    user: 'doctorpatientappointmentcalend@gmail.com',
+    pass: 'tpnlbqzttcjltrrz',
   },
 });
 
@@ -20,7 +24,7 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (email, subject, content) => {
   // Compose the email options
   const mailOptions = {
-    from: 'System@stmp.mailtrap.io',
+    from: 'DoctorPatientAppointmentSystem@gmail.com',
     to: email,
     subject: subject,
     text: content,

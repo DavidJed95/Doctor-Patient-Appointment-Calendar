@@ -2,7 +2,6 @@
 const createUser = require('../database/queries/create-user');
 
 exports.register = async (req, res) => {
-  console.log(req.body.creationDate);
   const {
     userType,
     id,

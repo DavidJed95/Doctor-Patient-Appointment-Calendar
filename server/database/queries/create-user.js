@@ -1,8 +1,8 @@
 'use strict';
 const bcrypt = require('bcrypt');
 const doQuery = require('../query');
-const tokenService = require('../../services/tokenService');
-const emailService = require('../../services/emailService');
+// const tokenService = require('../../services/tokenService');
+// const emailService = require('../../services/emailService');
 
 /**
  * This method checks if the user already exists in the database on ID and Email
@@ -25,7 +25,6 @@ async function checkUserExist(id, email) {
  */
 
 async function createUser(user) {
-  console.log(user);
   const {
     userType,
     id,
@@ -100,20 +99,20 @@ async function createUser(user) {
     await doQuery(specialistSql, specialistParams);
   }
 
-  // Generate email verification token
-  const emailVerificationToken =
-    tokenService.generateEmailVerificationToken(user);
+  // // Generate email verification token
+  // const emailVerificationToken =
+  //   tokenService.generateEmailVerificationToken(user);
 
-  // Update the user model with the email verification token
-  const updateUserSql = `UPDATE users SET EmailVerificationToken = ? WHERE ID = ?`;
-  const tokenParams = [emailVerificationToken, parsedId];
-  await doQuery(updateUserSql, tokenParams);
+  // // Update the user model with the email verification token
+  // const updateUserSql = `UPDATE users SET EmailVerificationToken = ? WHERE ID = ?`;
+  // const tokenParams = [emailVerificationToken, parsedId];
+  // await doQuery(updateUserSql, tokenParams);
 
-  // Send email verification email to the user
-  const emailContent = `Hi ${
-    firstName + ' ' + lastName
-  },\n\nThank you for registering. Please click on the following link to verify your email:\n\nEmail Verification: http://example.com/verify-email?token=${emailVerificationToken}\n\nBest regards,\nThe Team`;
-  emailService.sendEmail(email, 'Verification Email', emailContent);
+  // // Send email verification email to the user
+  // const emailContent = `Hi ${
+  //   firstName + ' ' + lastName
+  // },\n\nThank you for registering. Please click on the following link to verify your email:\n\nEmail Verification: http://example.com/verify-email?token=${emailVerificationToken}\n\nBest regards,\nThe Team`;
+  // emailService.sendEmail(email, 'Verification Email', emailContent);
 
   return { status: 'success', message: 'User created successfully' };
 }

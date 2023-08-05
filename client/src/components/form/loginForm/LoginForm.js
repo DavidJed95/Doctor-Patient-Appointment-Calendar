@@ -22,6 +22,10 @@ const LoginForm = () => {
     }
   };
 
+  /**
+   * Function that handles the submission of the login information
+   * @param {*} event - event of submission
+   */
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -40,25 +44,25 @@ const LoginForm = () => {
       });
 
       const data = await response.json();
-
+      setMessage(data.message);
+      console.log('data: ', data)
+      
       if (response.ok) {
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);
-      } else {
-        // Handle login failure
-        setMessage(data.message);
-      }
+      } 
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during login:', error);
-      setMessage('The ID or password are incorrect. Please try again.');
+      
+      setMessage( setMessage(error || 'Login failed. Please try again.'));
     }
   };
 
   return (
     <div>
-      <form action='/login' className={styles.form}>
+      <form action='/auth/login' className={styles.form}>
         <h1 className={styles.userAuthHeading}>Login</h1>
         <div>
           <InputField

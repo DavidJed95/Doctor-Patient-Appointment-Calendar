@@ -20,40 +20,22 @@ router.get('/', (req, res) => {
 router.get('/register', (req, res) => {
   res.send('registration');
 });
-router.get('/password-reset',(req,res) => {
+router.get('/password-reset', (req, res) => {
   res.send('password-reset');
-})
+});
 
 router.get('/register', (req, res) => {
   // Display success message and redirect to login page
   setTimeout(() => {
     res.send('Successfully Registered!. Please Login to continue');
     // Redirection to login page after 3 seconds
-    setTimeout(() => res.redirect('/login'),3000);
+    setTimeout(() => res.redirect('/login'), 3000);
   });
 });
 
 router.get('/login', (req, res) => {
-  res.send('login');
-});
-
-router.get('/login/failure', (req, res) => {
-  // Display failure message and redirect back to login page
-  setTimeout(() => {
-    res.send('Login failed. Please try again.');
-    // Redirect back to login page after 3 seconds
-    setTimeout(() => {
-      res.redirect('/auth/login');
-    }, 3000);
-  }, 2000);
-});
-
-router.get('/login/success', (req, res) => {
-  res.send('Login successful. Redirecting to home page');
-  // Redirect to the login page after a short delay
-  setTimeout(() => {
-    res.redirect('/auth/login');
-  }, 3000);
+  res.send(res.message);
+  setTimeout(() => res.redirect('/home'), 3000);
 });
 
 router.get('/profile', (req, res) => {
@@ -103,4 +85,3 @@ router.get('/profile', (req, res) => {
 // Include the report routes
 // router.use('/reports', require('./reportRoutes'));
 module.exports = router;
-

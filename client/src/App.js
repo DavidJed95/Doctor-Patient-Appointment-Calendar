@@ -13,7 +13,6 @@ function App() {
   const isLoggedIn = window.localStorage.getItem('loggedIn');
   return (
     <Router>
-      {/* <Navbar siteTitle='Home' /> */}
       <Routes>
         <Route path='/' element={isLoggedIn ? <Home /> : <LoginForm />} />
         <Route path='/register' element={<RegistrationForm />} />
