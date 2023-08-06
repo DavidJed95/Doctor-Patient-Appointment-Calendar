@@ -140,9 +140,9 @@ const RegistrationForm = () => {
     } catch (error) {
       console.error(
         'An error occurred during registration due to false data insertion:',
-        error,
+        error
       );
-      setMessage('An error occurred during registration due to false data insertion.');
+      setMessage(error.message ||'An error occurred during registration due to false data insertion.');
     }
   };
 

@@ -5,7 +5,6 @@ exports.login = async (req, res) => {
   const { id, password } = req.body;
 
   try {
-
     const user = {
       id,
       password,
@@ -16,12 +15,14 @@ exports.login = async (req, res) => {
 
     if (result.status === 'success') {
       // Login successful, send a response with the user information
-      const {userType, firstName, lastName} = result.user
+      const { userType, firstName, lastName } = result.user;
       console.log(`userType: ${userType}
       firstName: ${firstName}
       lastName: ${lastName}`);
 
-      const greeting = `Welcome ${userType === 'Medical Specialist' && 'Doctor'} ${firstName} ${lastName}`;
+      const greeting = `Welcome ${
+        userType === 'Medical Specialist' && 'Doctor'
+      } ${firstName} ${lastName}`;
       return res.status(200).json({
         message: 'Login successful',
         user: { userType, firstName, lastName },
@@ -30,10 +31,15 @@ exports.login = async (req, res) => {
       });
     } else {
       // Login failed, you can send a response indicating the failure reason
-      return res.status(401).json({ message: result.message });
+      return res
+        .status(401)
+        .json({ message: result.message, redirectTo: '/auth/login' });
     }
   } catch (error) {
     console.error(error);
-    // return res.status(500).json({ message: 'To login you must confirm your email after registration' });
+    res.status(500).json({
+      message: 'Entered wrong login credentials. Please try again',
+      redirectTo: '/auth/login',
+    });
   }
 };

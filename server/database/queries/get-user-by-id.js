@@ -1,5 +1,5 @@
 'use strict';
-const doQuery = require('../query')
+const doQuery = require('../query');
 
 /**
  * Get a user by their ID.
@@ -9,8 +9,9 @@ const doQuery = require('../query')
 async function getUserByID(id) {
   const sql = 'SELECT * FROM users WHERE ID = ?';
   const result = await doQuery(sql, [id]);
-  console.log(`result in find user by id in database for login result[0]: ${result[0]}`)
-  return result.length > 0 ? result[0] : null;
+  console.log(`id of the user to find ${[id]} `);
+  console.log(`result in getUserById:   ${result}`);
+  return result ? result[0] : null;
 }
 
 module.exports = getUserByID;

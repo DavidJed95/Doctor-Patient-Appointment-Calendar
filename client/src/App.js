@@ -19,6 +19,7 @@ function App() {
         <Route path='/password-reset' element={<PasswordResetForm />} />
 
         {/* Pages after logging in */}
+        {isLoggedIn && <Navbar/> }
         <Route path='/home' element={<Home />} />
         <Route path='/appointments' element={<Appointments />} />
         <Route path='/about' element={<About />} />

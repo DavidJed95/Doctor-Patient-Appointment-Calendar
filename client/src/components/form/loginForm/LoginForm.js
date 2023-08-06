@@ -45,18 +45,18 @@ const LoginForm = () => {
 
       const data = await response.json();
       setMessage(data.message);
-      console.log('data: ', data)
-      
+      console.log('data: ', data);
+
       if (response.ok) {
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);
-      } 
+      }
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during login:', error);
-      
-      setMessage( setMessage(error || 'Login failed. Please try again.'));
+
+      setMessage(error || 'Login failed. Please try again.');
     }
   };
 
