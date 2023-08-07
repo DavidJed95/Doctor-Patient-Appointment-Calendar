@@ -13,6 +13,7 @@ export default class Navbar extends Component {
           {siteTitle}
         </Link>
         <ul>
+          
           <CustomLink to='/about'>About</CustomLink>
           <CustomLink to='/appointments'>Appointments</CustomLink>
           <CustomLink to='/profile-update'>Profile Update</CustomLink>

@@ -13,46 +13,6 @@ router.post('/login', loginController.login);
 router.post('/password-reset', passwordResetController.forgotPassword);
 router.put('/profile-update', updateUserProfileController.updateProfile);
 
-// router.get('/', (req, res) => {
-//   res.send('login');
-// });
-
-// router.get('/register', (req, res) => {
-//   res.send('registration');
-// });
-// router.get('/password-reset', (req, res) => {
-//   res.send('password-reset');
-// });
-
-// router.get('/register', (req, res) => {
-//   // Display success message and redirect to login page
-//   setTimeout(() => {
-//     res.send('Successfully Registered!. Please Login to continue');
-//     // Redirection to login page after 3 seconds
-//     setTimeout(() => res.redirect('/login'), 3000);
-//   });
-// });
-
-// router.get('/login', (req, res) => {
-//   res.send(res.message);
-//   setTimeout(() => res.redirect('/home'), 3000);
-// });
-
-// router.get('/profile', (req, res) => {
-//   res.send('profile');
-// });
-
-// router.get('/profile/update', (req, res) => {
-//   // Display success message and redirect back to profile page
-//   setTimeout(() => {
-//     res.send('Profile update successfully!');
-//     // Redirect back to profile page after 3 seconds
-//     setTimeout(() => {
-//       res.redirect('/auth/profile');
-//     }, 3000);
-//   }, 2000);
-// });
-
 // router.get('/appointment', (req, res) => {
 //   res.send('appointment');
 // });
