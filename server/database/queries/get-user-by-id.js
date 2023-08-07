@@ -9,8 +9,7 @@ const doQuery = require('../query');
 async function getUserByID(id) {
   const sql = 'SELECT * FROM users WHERE ID = ?';
   const result = await doQuery(sql, [id]);
-  console.log(`id of the user to find ${[id]} `);
-  console.log(`result in getUserById:   ${result}`);
+  
   return result ? result[0] : null;
 }
 

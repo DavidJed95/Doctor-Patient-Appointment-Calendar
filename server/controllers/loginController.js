@@ -15,17 +15,20 @@ exports.login = async (req, res) => {
 
     if (result.status === 'success') {
       // Login successful, send a response with the user information
-      const { userType, firstName, lastName } = result.user;
-      console.log(`userType: ${userType}
-      firstName: ${firstName}
-      lastName: ${lastName}`);
+      const { UserType, FirstName, LastName } = result.user;
+      console.log(`
+      User Info:
+      ${result.user.FirstName}
+      ${result.user.LastName}
+      ${result.user.ID}`);
 
       const greeting = `Welcome ${
-        userType === 'Medical Specialist' && 'Doctor'
-      } ${firstName} ${lastName}`;
+        UserType === 'Medical Specialist' ? 'Doctor' : ''
+      }${FirstName} ${LastName}`;
+      console.log(`greeting: ${greeting}`);
       return res.status(200).json({
         message: 'Login successful',
-        user: { userType, firstName, lastName },
+        user: { UserType, FirstName, LastName },
         greeting,
         redirectTo: '/home', // Redirect to the home page after successful login
       });

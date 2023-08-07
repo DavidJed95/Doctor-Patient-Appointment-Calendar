@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/register', registrationController.register);
 router.post('/login', loginController.login);
 router.post('/password-reset', passwordResetController.forgotPassword);
-router.put('/profile/update', updateUserProfileController.updateProfile);
+router.put('/profile-update', updateUserProfileController.updateProfile);
 
 // router.get('/', (req, res) => {
 //   res.send('login');

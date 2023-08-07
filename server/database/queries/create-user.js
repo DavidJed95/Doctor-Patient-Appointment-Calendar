@@ -14,7 +14,6 @@ async function checkUserExist(id, email) {
   let param = [id, email];
   const sql = `SELECT 1 from users Where id = ? OR email = ? LIMIT 1`;
   const result = await doQuery(sql, param);
-  console.log(result);
   return result.length > 0 ? true : false;
 }
 

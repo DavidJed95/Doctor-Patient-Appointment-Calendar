@@ -9,18 +9,16 @@ const getUserByID = require('./get-user-by-id');
  */
 async function login(user) {
   const { id, password } = user;
-  console.log(`password from login controller in database:  ${password}`);
   const foundUser = await getUserByID(id);
-  console.log(`user id: ${id}`);
-  console.log(`user attributes: ${foundUser}`);
 
-  if (!foundUser) {
+  console.log('foundUser:', foundUser); // Add this line to check the content of foundUser
+  console.log('Password property:', foundUser.Password); // Add this line to check the Password property
+  if (!foundUser || foundUser.length === 0) {
     return { status: 'failure', message: 'User not found', user: null };
   }
 
-  const passwordMatch = await bcrypt.compare(password, foundUser[0].Password);
-  console.log(passwordMatch);
-  console.table(foundUser[0]);
+  const passwordMatch = await bcrypt.compare(password, foundUser.Password);
+  console.log('Password match:', passwordMatch); // Add this line to check the output of bcrypt.compare
   if (passwordMatch) {
     return { status: 'success', message: 'Login successful', user: foundUser };
   } else {
