@@ -12,9 +12,8 @@ import PasswordResetForm from './components/form/passwordResetForm/PasswordReset
 import Footer from './components/footer/Footer';
 
 function App() {
-  
   const isLoggedIn = window.localStorage.getItem('loggedIn');
-  console.log('isLoggedIn:',isLoggedIn)
+  console.log('isLoggedIn:', isLoggedIn);
   // <Route
   //   path='/'
   //   element={isLoggedIn === 'true' ? <Home /> : <LoginForm />}
@@ -34,15 +33,22 @@ function App() {
   // )}
   return (
     <Router>
-      
       <Routes>
-        
+        <Route
+          path='/'
+          element={isLoggedIn === 'true' ? <Home /> : <LoginForm />}
+        />
+        <Route path='/register' element={<RegistrationForm />} />
+        <Route path='/password-reset' element={<PasswordResetForm />} />
+      </Routes>
+      <Navbar siteTitle='Doctor Patient Appointment Calendar' />
+      <Routes>
         <Route path='/home' element={<Home />} />
         <Route path='/appointments' element={<Appointments />} />
         <Route path='/about' element={<About />} />
         <Route path='/profile/update' element={<UpdateUserProfile />} />
-        
       </Routes>
+      <Footer name='David Jedwabsky' />
     </Router>
   );
 }

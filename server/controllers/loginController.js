@@ -9,13 +9,13 @@ exports.login = async (req, res) => {
       id,
       password,
     };
-    let isLoggedIn = window.localStorage.setItem('isLoggedIn','false')
+    // let isLoggedIn = window.localStorage.setItem('isLoggedIn','false')
     const result = await login(user);
     console.log(`result is: ${result}`);
 
     if (result.status === 'success') {
       // Login successfully, set the 'isLoggedIn' flag in the localStorage
-      let isLoggedIn =window.localStorage.setItem('isLoggedIn','true')
+      // let isLoggedIn =window.localStorage.setItem('isLoggedIn','true')
       // Login successful, send a response with the user information
       const { UserType, FirstName, LastName } = result.user;
       console.log(`
@@ -32,18 +32,20 @@ exports.login = async (req, res) => {
         message: 'Login successful',
         user: { UserType, FirstName, LastName },
         greeting,
-        isLoggedIn,
+        // isLoggedIn,
         redirectTo: '/home', // Redirect to the home page after successful login
       });
     } else {
       // Login failed, set the 'isLoggedIn' flag in the local storage
       // window.localStorage.removeItem('isLoggedIn')
 
-      isLoggedIn = window.localStorage.setItem('isLoggedIn', 'false');
+      // isLoggedIn = window.localStorage.setItem('isLoggedIn', 'false');
       // Login failed, sending a response indicating the failure reason
       return res
         .status(401)
-        .json({ message: result.message, redirectTo: '/auth/login', isLoggedIn });
+        .json({ message: result.message, redirectTo: '/auth/login'});
+
+        // .json({ message: result.message, redirectTo: '/auth/login', isLoggedIn });
     }
   } catch (error) {
     console.error(error);

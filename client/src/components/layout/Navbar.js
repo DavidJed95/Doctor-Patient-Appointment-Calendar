@@ -9,11 +9,10 @@ export default class Navbar extends Component {
     const siteTitle = this.props.siteTitle;
     return (
       <nav className={styles.nav}>
-        <Link to='/' className={styles.siteTitle}>
+        <Link to='home' className={styles.siteTitle}>
           {siteTitle}
         </Link>
         <ul>
-          
           <CustomLink to='/about'>About</CustomLink>
           <CustomLink to='/appointments'>Appointments</CustomLink>
           <CustomLink to='/profile-update'>Profile Update</CustomLink>

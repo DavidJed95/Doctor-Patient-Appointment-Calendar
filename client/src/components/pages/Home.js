@@ -15,11 +15,11 @@ const events = [{ title: 'Meeting', start: new Date() }];
 export function DemoApp() {
   return (
     <div>
-      <h1>Demo App</h1>
+      <h2>Appointment Calendar</h2>
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView='dayGridMonth'
-        weekends={false}
+        weekends={true}
         events={events}
         eventContent={renderEventContent}
       />
