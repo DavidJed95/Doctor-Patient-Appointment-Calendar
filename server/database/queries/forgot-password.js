@@ -1,8 +1,6 @@
 'use strict';
 const doQuery = require('../query');
 const getUserByID = require('./get-user-by-id');
-const tokenService = require('../../services/tokenService');
-const emailService = require('../../services/emailService');
 
 /**
  * Initiate the password reset process for a user.
@@ -33,22 +31,11 @@ async function forgotPassword(req, res, id) {
     return { status: 'failure', message: 'User not found' };
   }
 
-  // Generate a password reset token
-  const resetToken = tokenService.generateEmailVerificationToken(user);
-
-  // Update the user model with the reset token
-  const updateQuery =
-    'UPDATE users SET EmailVerificationToken = ? WHERE id = ?';
-  await doQuery(updateQuery, [resetToken, user.id]);
-
-  // Send the password reset email to the user
-  const emailContent = `Hi ${user.firstName},\n\nYou have requested to reset your password. Please click on the following link to reset your password:\n\nReset Password: http://example.com/reset-password?token=${resetToken}\n\nIf you did not request this password reset, please ignore this email.\n\nBest regards,\nThe Team`;
-  emailService.sendEmail(user.email, 'Password Reset', emailContent);
-
   return {
     status: 'success',
     message:
       'Password reset initiated. Check your email for further instructions.',
+    user: user,
   };
 }
 

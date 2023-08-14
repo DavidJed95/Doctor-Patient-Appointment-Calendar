@@ -58,7 +58,7 @@ const PasswordResetForm = () => {
 
   return (
     <div>
-      <form action='/password-reset' method='POST' className={styles.form}>
+      <form action='auth/password-reset' method='POST' className={styles.form}>
         <h1 className={styles.userAuthHeading}>Password Reset</h1>
         <InputField
           label='ID:'

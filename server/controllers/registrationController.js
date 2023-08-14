@@ -1,5 +1,7 @@
 'use strict';
 const createUser = require('../database/queries/create-user');
+const tokenService = require('../services/tokenService');
+const emailService = require('../services/emailService');
 
 exports.register = async (req, res) => {
   const {
@@ -45,21 +47,39 @@ exports.register = async (req, res) => {
 
     if (result.status === 'success') {
       // Registration successful
+      // Generate email verification token
+      const emailVerificationToken = tokenService.generateSessionToken(user);
+      console.log(
+        `emailVerificationToken generated in the registrationController: ${emailVerificationToken}`,
+      );
+      // Send email verification email to the user
+      const emailContent = `<p>Hi ${firstName} ${lastName},</p>
+      <p>Thank you for registering. Please click on the following link to verify your email:</p>
+      <p><a href="http://localhost:3000/verify-email/${emailVerificationToken}">Verify Email</a></p>
+      <p>Best regards,<br>The Team</p>`;
 
-      res.status(200).json({
-        message: 'User registered successfully',
+      await emailService.sendEmail(
+        email,
+        'Registration Verification Email',
+        emailContent,
+      );
+
+      return res.status(200).json({
+        message:
+          result.message +
+          '\nPlease enter your email to verify your registration',
         redirectTo: '/',
       });
     } else {
       // Registration failed
-      res
+      return res
         .status(400)
         .json({ message: result.message, redirectTo: '/auth/register' });
     }
   } catch (error) {
     console.error(error);
     // Handle any other errors that occurred during registration
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error occurred during registration',
       redirectTo: '/auth/register',
     });

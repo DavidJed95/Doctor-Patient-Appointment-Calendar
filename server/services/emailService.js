@@ -1,17 +1,18 @@
 'use strict';
 const nodemailer = require('nodemailer');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 
 // Load environment variables from .env file
-// dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../.env' });
 
 // Create a transporter for sending email
 const transporter = nodemailer.createTransport({
-  host: 'gmail',
-  prot: 2525,
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: 'doctorpatientappointmentcalend@gmail.com',
-    pass: 'tpnlbqzttcjltrrz',
+    user: process.env.NODEMAILER_USER,
+    pass: process.env.NODEMAILER_PASS,
   },
 });
 
@@ -27,7 +28,7 @@ const sendEmail = async (email, subject, content) => {
     from: 'DoctorPatientAppointmentSystem@gmail.com',
     to: email,
     subject: subject,
-    text: content,
+    html: content,
   };
 
   try {

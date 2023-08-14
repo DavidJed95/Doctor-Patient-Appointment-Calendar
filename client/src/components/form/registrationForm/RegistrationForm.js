@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../footer/Footer';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
@@ -134,6 +133,8 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         setTimeout(() => {
+          // const emailVerificationLink = `/verify-email?token=${data.emailVerificationToken}`;
+          // navigate(emailVerificationLink);
           navigate(data.redirectTo);
         }, 2000);
       }
@@ -300,7 +301,6 @@ const RegistrationForm = () => {
           </p>
         )}
       </form>
-      <Footer name='David Jedwabsky' />
     </div>
   );
 };

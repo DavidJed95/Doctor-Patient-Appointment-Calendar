@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-import Footer from '../../footer/Footer';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
@@ -55,7 +53,6 @@ const LoginForm = () => {
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during login:', error);
-
       setMessage(error || 'Login failed. Please try again.');
     }
   };
@@ -102,8 +99,6 @@ const LoginForm = () => {
           </p>
         )}
       </form>
-
-      <Footer name='David Jedwabsky' />
     </div>
   );
 };

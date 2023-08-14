@@ -1,3 +1,4 @@
+'user strict';
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
@@ -9,7 +10,8 @@ dotenv.config({ path: '../.env' });
  * @param {*} user
  * @returns the token generated
  */
-const generateEmailVerificationToken = user => {
+// generateEmailVerificationToken
+const generateSessionToken = user => {
   const { id, email } = user;
   const token = jwt.sign(
     {
@@ -27,7 +29,7 @@ const generateEmailVerificationToken = user => {
 
 /**
  * Function to verify an email verification token
- * @param {*} token 
+ * @param {*} token - to decode/verify
  * @returns decoded token/ null
  */
 const verifyEmailVerificationToken = token => {
@@ -35,12 +37,12 @@ const verifyEmailVerificationToken = token => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return decoded;
   } catch (error) {
-    console.log.error(`Token verification failed: ${error}`);
+    console.error(`Token verification failed: ${error}`);
     return null;
   }
 };
 
 module.exports = {
-  generateEmailVerificationToken,
+  generateSessionToken,
   verifyEmailVerificationToken,
 };

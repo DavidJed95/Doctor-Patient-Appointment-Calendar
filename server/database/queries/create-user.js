@@ -1,8 +1,6 @@
 'use strict';
 const bcrypt = require('bcrypt');
 const doQuery = require('../query');
-// const tokenService = require('../../services/tokenService');
-// const emailService = require('../../services/emailService');
 
 /**
  * This method checks if the user already exists in the database on ID and Email
@@ -82,8 +80,13 @@ async function createUser(user) {
     languages,
     creationDate,
     userType,
+    0,
   ];
-  const userSql = `INSERT INTO users (ID, Password, FirstName, LastName, Email, Mobile, Languages, CreationDate, UserType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const userSql = `
+    INSERT INTO users (ID, Password, FirstName, LastName, Email, Mobile, Languages, CreationDate, UserType, isUserVerified)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+  console.table(`userParams to save in the database in create user query: ${userParams}`);
   await doQuery(userSql, userParams);
 
   if (medicalStatus) {
@@ -97,21 +100,6 @@ async function createUser(user) {
     const specialistSql = `INSERT INTO medicalspecialists (ID, MedicalLicense, Specialization) VALUES (?,?,?)`;
     await doQuery(specialistSql, specialistParams);
   }
-
-  // // Generate email verification token
-  // const emailVerificationToken =
-  //   tokenService.generateEmailVerificationToken(user);
-
-  // // Update the user model with the email verification token
-  // const updateUserSql = `UPDATE users SET EmailVerificationToken = ? WHERE ID = ?`;
-  // const tokenParams = [emailVerificationToken, parsedId];
-  // await doQuery(updateUserSql, tokenParams);
-
-  // // Send email verification email to the user
-  // const emailContent = `Hi ${
-  //   firstName + ' ' + lastName
-  // },\n\nThank you for registering. Please click on the following link to verify your email:\n\nEmail Verification: http://example.com/verify-email?token=${emailVerificationToken}\n\nBest regards,\nThe Team`;
-  // emailService.sendEmail(email, 'Verification Email', emailContent);
 
   return { status: 'success', message: 'User created successfully' };
 }
