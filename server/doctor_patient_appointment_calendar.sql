@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 03:08 PM
+-- Generation Time: Aug 15, 2023 at 06:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -99,16 +99,16 @@ CREATE TABLE `users` (
   `Mobile` varchar(10) NOT NULL,
   `Languages` enum('Hebrew','Russian','English','Arabic') NOT NULL,
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `EmailVerificationToken` varchar(255) DEFAULT NULL,
-  `UserType` enum('Patient','Medical Specialist') NOT NULL
+  `UserType` enum('Patient','Medical Specialist') NOT NULL,
+  `isUserVerified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `Password`, `FirstName`, `LastName`, `Email`, `Mobile`, `Languages`, `CreationDate`, `EmailVerificationToken`, `UserType`) VALUES
-(315821207, '$2b$10$CJZJ7OXOq.jX91CTM4UtXui76Qh33hQW0OwYF84Rtbv4hNOTu0FkS', 'David', 'Jedwabsky', 'djedwabsky@gmail.com', '0507746116', '', '2023-07-31 14:47:43', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxNTgyMTIwNyIsImVtYWlsIjoiZGplZHdhYnNreUBnbWFpbC5jb20iLCJpYXQiOjE2OTA4MDQwNjMsImV4cCI6MTY5MDg5MDQ2M30.ro6NnUCrRVQpo3rGyjlDGzuI1J0KJDv_aqOYoD7Q97o', 'Patient');
+INSERT INTO `users` (`ID`, `Password`, `FirstName`, `LastName`, `Email`, `Mobile`, `Languages`, `CreationDate`, `UserType`, `isUserVerified`) VALUES
+(315821207, '$2b$10$K5kntso9NbpS11RudLZvjOMtJNouBtDD33v2.IOyoy6xQOxtGsl3m', 'David', 'Jedwabsky', 'djedwabsky@gmail.com', '0507746116', '', '2023-08-14 22:55:42', 'Patient', 1);
 
 --
 -- Indexes for dumped tables
@@ -326,7 +326,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"users\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"patients\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"medicalspecialists\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"treatments\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"paitents\"}]');
+('root', '[{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"users\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"patients\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"appointments\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"medicalspecialists\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"treatments\"},{\"db\":\"doctor_patient_appointment_calendar\",\"table\":\"paitents\"}]');
 
 -- --------------------------------------------------------
 
@@ -402,7 +402,7 @@ CREATE TABLE `pma__table_uiprefs` (
 --
 
 INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('root', 'doctor_patient_appointment_calendar', 'users', '{\"CREATE_TIME\":\"2023-07-12 13:56:04\",\"col_order\":[0,1,2,3,4,5,6,7,8,9],\"col_visib\":[1,1,1,1,1,1,1,1,1,1]}', '2023-07-30 17:36:56');
+('root', 'doctor_patient_appointment_calendar', 'users', '{\"CREATE_TIME\":\"2023-07-12 13:56:04\"}', '2023-08-12 00:02:55');
 
 -- --------------------------------------------------------
 
@@ -440,7 +440,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2023-07-31 10:20:59', '{\"Console\\/Mode\":\"collapse\"}');
+('root', '2023-08-15 16:12:22', '{\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":164}');
 
 -- --------------------------------------------------------
 
