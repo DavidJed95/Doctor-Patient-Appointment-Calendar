@@ -4,7 +4,7 @@ import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
 
-const LoginForm = () => {
+const LoginForm = ({ isLoggedIn, updateLoginStatus }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -46,6 +46,9 @@ const LoginForm = () => {
       console.log('data: ', data);
 
       if (response.ok) {
+        // Update isLoggedIn state in the parent component(APP.js)
+        updateLoginStatus(true);
+
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);

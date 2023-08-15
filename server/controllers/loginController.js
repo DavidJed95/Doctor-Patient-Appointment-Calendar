@@ -22,20 +22,22 @@ exports.login = async (req, res) => {
         });
       }
 
+      const user = result.user;
+
       //  Set session variables
       req.session.isLoggedIn = true;
       req.session.user = {
-        ID: result.result.user.ID,
-        UserType: result.user.UserType,
-        FirstName: result.user.FirstName,
-        LastName: result.user.LastName,
-        Mobile: result.user.Mobile,
+        ID: user.ID,
+        UserType: user.UserType,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        Mobile: user.Mobile,
       };
 
       // Login successful, send a response with the user information
       const greeting = `Welcome ${
-        UserType === 'Medical Specialist' ? 'Doctor' : ''
-      }${FirstName} ${LastName}`;
+        user.UserType === 'Medical Specialist' ? 'Doctor ' : ''
+      }${user.FirstName} ${user.LastName}`;
       console.log(`greeting: ${greeting}`);
       return res.status(200).json({
         message: 'Login successful',

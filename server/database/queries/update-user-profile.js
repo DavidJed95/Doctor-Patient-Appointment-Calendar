@@ -31,15 +31,6 @@ async function updateUserProfile(id, updates) {
   // Execute the update query
   await doQuery(updateQuery, updateFields);
 
-  // Send email to the user about the profile update
-  const user = await getUserByID(id);
-  const emailContent = `Your profile information has been updated. Please review the changes:\n\n${JSON.stringify(
-    updates,
-    null,
-    2,
-  )}`;
-  emailService.sendEmail(user.Email, 'Profile Update', emailContent);
-
   return { status: 'success', message: 'User profile updated successfully' };
 }
 

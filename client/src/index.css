@@ -25,11 +25,11 @@ body {
 
 footer {
   display: flex;
-  height: 10rem;
-  align-items: center;
   flex-direction: column;
-  background-color: #2229ff;
+  align-items: center;
   margin-top: auto;
+  height: 10rem;
+  background-color: #2229ff;
 }
 
 .app {

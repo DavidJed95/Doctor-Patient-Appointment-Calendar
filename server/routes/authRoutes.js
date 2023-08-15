@@ -25,6 +25,11 @@ router.get('/check-login', (req, res) => {
 
 router.post('/logout', (req, res) => {
   req.session.destroy(); // Clear session data
-  res.status(200).json({ message: 'See you again soon' });
+  res.clearCookie('connect.sid'); // Clear the session cookie
+  res.status(200).json({ message: 'See you again soon'});
 });
+
+ router.get('*', (req, res) => {
+   res.status(404).redirect('*');
+ });
 module.exports = router;
