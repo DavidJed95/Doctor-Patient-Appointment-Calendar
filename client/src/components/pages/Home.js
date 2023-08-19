@@ -2,11 +2,11 @@ import React from 'react'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default function Home() {
+export default function Home({userGreeting}) {
   return (
-    <h1>Home</h1>,
-    <DemoApp/>
-  )
+  <h1>Home</h1>
+  <h2>{userGreeting}</h2>
+  <DemoApp />);
 }
 
 

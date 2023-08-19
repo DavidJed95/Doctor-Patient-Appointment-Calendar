@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
-const UpdatePersonalProfile = () => {
+const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -14,6 +14,16 @@ const UpdatePersonalProfile = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (userInfo) {
+      setFirstName(userInfo.FirstName)
+      setLastName(userInfo.LastName)
+      setEmail(userInfo.Email);
+      setMobile(userInfo.Mobile);
+      setLanguages(userInfo.Languages);
+    }
+  },[userInfo])
+  
   /**
    * This method handles the change of the input values
    * @param {*} event - event target to change
