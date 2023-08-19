@@ -1,7 +1,5 @@
 'use strict';
 const doQuery = require('../query');
-const emailService = require('../../services/emailService');
-const getUserByID = require('./get-user-by-id');
 
 /**
  * Update the profile information of a user.
@@ -11,7 +9,7 @@ const getUserByID = require('./get-user-by-id');
  */
 async function updateUserProfile(id, updates) {
   const updateFields = [];
-
+//:TODO ID
   // Generate the update query and collect the update fields
   let updateQuery = 'UPDATE users SET ';
   for (const [key, value] of Object.entries(updates)) {

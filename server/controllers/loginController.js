@@ -32,6 +32,8 @@ exports.login = async (req, res) => {
         FirstName: user.FirstName,
         LastName: user.LastName,
         Mobile: user.Mobile,
+        Email: user.Email,
+        Languages: user.Languages,
       };
 
       // Login successful, send a response with the user information
