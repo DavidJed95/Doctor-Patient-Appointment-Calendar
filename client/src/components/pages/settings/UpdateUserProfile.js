@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
-const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
+const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -14,16 +14,6 @@ const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userInfo) {
-      setFirstName(userInfo.FirstName)
-      setLastName(userInfo.LastName)
-      setEmail(userInfo.Email);
-      setMobile(userInfo.Mobile);
-      setLanguages(userInfo.Languages);
-    }
-  },[userInfo])
-  
   /**
    * This method handles the change of the input values
    * @param {*} event - event target to change
@@ -61,7 +51,7 @@ const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (password || firstName || lastName || email || mobile || languages) {
+    if (!(password || firstName || lastName || email || mobile || languages)) {
       setMessage('You can update any of the fields');
       return;
     }
@@ -78,7 +68,7 @@ const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
       const response = await fetch(
         'http://localhost:8000/auth/profile-update',
         {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -121,62 +111,62 @@ const UpdatePersonalProfile = ({userInfo, getUserInfo}) => {
             name='password'
             type='password'
             onChange={handleChange}
-            required
+            
           />
         </div>
         <div>
           <InputField
             label='First Name:'
-            placeholder='First Name'
+            placeholder={userInfo.FirstName || 'FirstName'}
             value={firstName}
             name='firstName'
             onChange={handleChange}
-            required
+            
           />
         </div>
         <div>
           <InputField
             label='Last Name:'
-            placeholder='Last Name'
+            placeholder={userInfo.LastName || 'LastName'}
             value={lastName}
             name='lastName'
             onChange={handleChange}
-            required
+            
           />
         </div>
 
         <div>
           <InputField
             label='Email:'
-            placeholder='name@gmail.com'
+            placeholder={userInfo.Email || 'name@gmail.com'}
             value={email}
             name='email'
             onChange={handleChange}
-            required
+            
           />
         </div>
         <div>
           <InputField
             label='Mobile:'
-            placeholder='Mobile'
+            placeholder={userInfo.Mobile || 'Mobile'}
             value={mobile}
             name='mobile'
             onChange={handleChange}
-            required
+            
           />
         </div>
         <div>
           <InputField
             label='Languages:'
-            placeholder='Languages'
+            placeholder={userInfo.Languages || 'Languages'}
             value={languages}
             name='languages'
             onChange={handleChange}
-            required
+            
           />
         </div>
 
-        <Button text='Click to Update' type='submit' fun={handleSubmit} />
+        <Button text='Update & Save' type='submit' fun={handleSubmit} />
         {message && (
           <p
             className={

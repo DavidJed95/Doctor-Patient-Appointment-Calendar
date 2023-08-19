@@ -33,7 +33,7 @@ exports.updateProfile = async (req, res) => {
 
       return res
         .status(200)
-        .json({ message: 'User profile updated successfully' });
+        .json({ message: result.message });
     } else {
       // Profile update failed, you can send a response indicating the failure reason
       return res

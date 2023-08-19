@@ -8,7 +8,7 @@ const LoginForm = ({
   isLoggedIn,
   updateLoginStatus,
   userInfo,
-  getUserInfo,
+  getUserInformation,
   userGreeting,
   getUserGreeting,
 }) => {
@@ -55,7 +55,7 @@ const LoginForm = ({
       if (response.ok) {
         // Update isLoggedIn state in the parent component(APP.js)
         updateLoginStatus(true);
-        getUserInfo(data.user);
+        getUserInformation(data.user);
         getUserGreeting(data.greeting);
 
         setTimeout(() => {

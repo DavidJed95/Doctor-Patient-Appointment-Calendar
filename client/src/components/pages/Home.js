@@ -1,14 +1,16 @@
-import React from 'react'
+import React from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default function Home({userGreeting}) {
+export default function Home({ userGreeting }) {
   return (
-  <h1>Home</h1>
-  <h2>{userGreeting}</h2>
-  <DemoApp />);
+    <div>
+      <h1>{userGreeting}</h1>
+      {/* <h2></h2> */}
+      <DemoApp />
+    </div>
+  );
 }
-
 
 const events = [{ title: 'Meeting', start: new Date() }];
 

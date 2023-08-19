@@ -15,22 +15,20 @@ import NotFound from './components/pages/NotFound';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({});
-  const [userGreeting, setUserGreeting] = useState(() => {
-    return '';
-  });
-  console.log('isLoggedIn State: ', isLoggedIn);
+  const [userGreeting, setUserGreeting] = useState('');
 
   const updateLoginStatus = status => {
     setIsLoggedIn(status);
   };
 
-  const getUserInformation = info => {
-    setUserInfo(info);
+  const getUserInformation = user => {
+    setUserInfo(user);
   };
 
   const getUserGreeting = greeting => {
-    setUserGreeting(userGreeting)
-  }
+    setUserGreeting(greeting);
+  };
+
   // Simulate checking user's login status
   useEffect(() => {
     async function fetchLoginStatus() {
@@ -57,7 +55,7 @@ function App() {
       )}
       <Routes>
         {/* Only show login and registration forms if not logged in */}
-        {!isLoggedIn && (
+        {!isLoggedIn ? (
           <>
             <Route
               path='/'
@@ -74,20 +72,13 @@ function App() {
             />
             <Route path='/register' element={<RegistrationForm />} />
             <Route path='/password-reset' element={<PasswordResetForm />} />
+            <Route path='*' element={<NotFound />} />
           </>
-        )}
-        <Route path='/verify-email/:token' element={<EmailVerification />} />
-        {/* Protected routes, only visible if logged in */}
-
-        {isLoggedIn && (
+        ) : (
           <>
             <Route
               path='/home'
-              element={
-                <Home
-                  userGreeting={userGreeting}
-                />
-              }
+              element={<Home userGreeting={userGreeting} />}
             />
             <Route path='/appointments' element={<Appointments />} />
             <Route
@@ -101,7 +92,9 @@ function App() {
             />
           </>
         )}
+        <Route path='/verify-email/:token' element={<EmailVerification />} />
         <Route path='*' element={<NotFound />} />
+        {/* Protected routes, only visible if logged in */}
       </Routes>
 
       <Footer name='David Jedwabsky' />
