@@ -4,7 +4,14 @@ import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
 
-const LoginForm = ({ isLoggedIn, updateLoginStatus }) => {
+const LoginForm = ({
+  isLoggedIn,
+  updateLoginStatus,
+  userInfo,
+  getUserInfo,
+  userGreeting,
+  getUserGreeting,
+}) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -48,6 +55,8 @@ const LoginForm = ({ isLoggedIn, updateLoginStatus }) => {
       if (response.ok) {
         // Update isLoggedIn state in the parent component(APP.js)
         updateLoginStatus(true);
+        getUserInfo(data.user);
+        getUserGreeting(data.greeting);
 
         setTimeout(() => {
           navigate(data.redirectTo);

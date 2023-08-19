@@ -14,12 +14,23 @@ import NotFound from './components/pages/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  const [userGreeting, setUserGreeting] = useState(() => {
+    return '';
+  });
   console.log('isLoggedIn State: ', isLoggedIn);
 
   const updateLoginStatus = status => {
     setIsLoggedIn(status);
   };
 
+  const getUserInformation = info => {
+    setUserInfo(info);
+  };
+
+  const getUserGreeting = greeting => {
+    setUserGreeting(userGreeting)
+  }
   // Simulate checking user's login status
   useEffect(() => {
     async function fetchLoginStatus() {
@@ -54,6 +65,10 @@ function App() {
                 <LoginForm
                   isLoggedIn={isLoggedIn}
                   updateLoginStatus={updateLoginStatus}
+                  userInfo={userInfo}
+                  getUserInformation={getUserInformation}
+                  userGreeting={userGreeting}
+                  getUserGreeting={getUserGreeting}
                 />
               }
             />
@@ -66,9 +81,24 @@ function App() {
 
         {isLoggedIn && (
           <>
-            <Route path='/home' element={<Home />} />
+            <Route
+              path='/home'
+              element={
+                <Home
+                  userGreeting={userGreeting}
+                />
+              }
+            />
             <Route path='/appointments' element={<Appointments />} />
-            <Route path='/profile-update' element={<UpdateUserProfile />} />
+            <Route
+              path='/profile-update'
+              element={
+                <UpdateUserProfile
+                  userInfo={userInfo}
+                  getUserInformation={getUserInformation}
+                />
+              }
+            />
           </>
         )}
         <Route path='*' element={<NotFound />} />
