@@ -3,15 +3,16 @@ const { updateUserProfile } = require('../database/queries/all-queries');
 const emailService = require('../services/emailService');
 
 exports.updateProfile = async (req, res) => {
-  
-  const { password, firstName, lastName, email, mobile, languages } = req.body;
+  const { ID, Password, FirstName, LastName, Email, Mobile, Languages } =
+    req.body;
   const user = {
-    password,
-    firstName,
-    lastName,
-    email,
-    mobile,
-    languages,
+    ID,
+    Password,
+    FirstName,
+    LastName,
+    Email,
+    Mobile,
+    Languages,
   };
 
   try {
@@ -21,19 +22,17 @@ exports.updateProfile = async (req, res) => {
       // Profile update successful, you send a email and response indicating success
 
       // Send email verification email to the user
-      const emailContent = `<p>Hi ${updates.firstName} ${updates.lastName},</p>
+      const emailContent = `<p>Hi ${user.FirstName} ${user.LastName},</p>
       <p>You have updated your user profile successfully.</p>
       <p>Best regards,<br>The Team</p>`;
 
       await emailService.sendEmail(
-        updates.email,
+        user.Email,
         'Updated User Profile',
         emailContent,
       );
 
-      return res
-        .status(200)
-        .json({ message: result.message });
+      return res.status(200).json({ message: result.message });
     } else {
       // Profile update failed, you can send a response indicating the failure reason
       return res

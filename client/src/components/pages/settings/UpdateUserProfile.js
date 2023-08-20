@@ -55,14 +55,14 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
       setMessage('You can update any of the fields');
       return;
     }
-
     const requestBody = {
-      password,
-      firstName,
-      lastName,
-      email,
-      mobile,
-      languages,
+      Id: userInfo.ID,
+      Password: password,
+      FirstName: firstName,
+      LastName: lastName,
+      Email: email,
+      Mobile: mobile,
+      Languages: languages,
     };
     try {
       const response = await fetch(
@@ -108,10 +108,9 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             placeholder='Password'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
             value={password}
-            name='password'
+            name='Password'
             type='password'
             onChange={handleChange}
-            
           />
         </div>
         <div>
@@ -119,9 +118,8 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='First Name:'
             placeholder={userInfo.FirstName || 'FirstName'}
             value={firstName}
-            name='firstName'
+            name='FirstName'
             onChange={handleChange}
-            
           />
         </div>
         <div>
@@ -129,9 +127,8 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='Last Name:'
             placeholder={userInfo.LastName || 'LastName'}
             value={lastName}
-            name='lastName'
+            name='LastName'
             onChange={handleChange}
-            
           />
         </div>
 
@@ -140,9 +137,8 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='Email:'
             placeholder={userInfo.Email || 'name@gmail.com'}
             value={email}
-            name='email'
+            name='Email'
             onChange={handleChange}
-            
           />
         </div>
         <div>
@@ -150,9 +146,8 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='Mobile:'
             placeholder={userInfo.Mobile || 'Mobile'}
             value={mobile}
-            name='mobile'
+            name='Mobile'
             onChange={handleChange}
-            
           />
         </div>
         <div>
@@ -160,9 +155,8 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='Languages:'
             placeholder={userInfo.Languages || 'Languages'}
             value={languages}
-            name='languages'
+            name='Languages'
             onChange={handleChange}
-            
           />
         </div>
 

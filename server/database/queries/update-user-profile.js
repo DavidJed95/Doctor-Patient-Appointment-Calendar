@@ -7,13 +7,13 @@ const doQuery = require('../query');
  * @param {*} updates - Object containing the updated profile fields
  * @returns { status, message }
  */
-async function updateUserProfile(id, updates) {
+async function updateUserProfile(user) {
   const updateFields = [];
 //:TODO ID
   // Generate the update query and collect the update fields
   let updateQuery = 'UPDATE users SET ';
-  for (const [key, value] of Object.entries(updates)) {
-    if (key !== 'email' && key !== 'id') {
+  for (const [key, value] of Object.entries(user)) {
+    if (key !== 'ID') {
       updateQuery += `${key} = ?, `;
       updateFields.push(value);
     }
@@ -23,7 +23,7 @@ async function updateUserProfile(id, updates) {
   updateQuery = updateQuery.slice(0, -2);
 
   // Add the WHERE clause to update only the specific user
-  updateQuery += ' WHERE id = ?';
+  updateQuery += ' WHERE ID = ?';
   updateFields.push(id);
 
   // Execute the update query
