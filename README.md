@@ -1,1 +1,1 @@
-﻿# Doctor-Patient-Appointment-Calendar
+﻿# Doctor Patient Appointment Calendar
