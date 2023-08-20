@@ -6,6 +6,7 @@ const doQuery = require('../query');
  * @param {*} id - User ID
  * @param {*} updates - Object containing the updated profile fields
  * @returns { status, message }
+ * to DO
  */
 async function updateUserProfile(user) {
   const updateFields = [];

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
+
 const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -111,6 +112,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             name='Password'
             type='password'
             onChange={handleChange}
+            required={'required'}
           />
         </div>
         <div>
