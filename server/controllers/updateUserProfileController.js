@@ -14,7 +14,6 @@ exports.updateProfile = async (req, res) => {
     Mobile,
     Languages,
   };
-
   try {
     const result = await updateUserProfile(user);
 
@@ -32,7 +31,9 @@ exports.updateProfile = async (req, res) => {
         emailContent,
       );
 
-      return res.status(200).json({ message: result.message });
+      return res
+        .status(200)
+        .json({ message: result.message, user: result.user });
     } else {
       // Profile update failed, you can send a response indicating the failure reason
       return res

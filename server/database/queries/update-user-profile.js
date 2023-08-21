@@ -1,36 +1,40 @@
 'use strict';
 const doQuery = require('../query');
+const getUserByID = require('./get-user-by-id');
 
 /**
  * Update the profile information of a user.
- * @param {*} id - User ID
- * @param {*} updates - Object containing the updated profile fields
- * @returns { status, message }
- * to DO
+ * @param {*} user - user attributes
+ * @returns - status, message, user data
  */
 async function updateUserProfile(user) {
   const updateFields = [];
-//:TODO ID
-  // Generate the update query and collect the update fields
+
+  if (user.Password !== null || user.Password !== '') {
+    const bcrypt = require('bcrypt');
+    const hashedPassword = await bcrypt.hash(user.Password, 10);
+    user.Password = hashedPassword;
+  }
+
   let updateQuery = 'UPDATE users SET ';
   for (const [key, value] of Object.entries(user)) {
-    if (key !== 'ID') {
+    if (key !== 'ID' && value !== '') {
       updateQuery += `${key} = ?, `;
       updateFields.push(value);
     }
   }
 
-  // Remove the trailing comma and space
   updateQuery = updateQuery.slice(0, -2);
-
-  // Add the WHERE clause to update only the specific user
   updateQuery += ' WHERE ID = ?';
-  updateFields.push(id);
+  updateFields.push(user.ID);
 
-  // Execute the update query
   await doQuery(updateQuery, updateFields);
-
-  return { status: 'success', message: 'User profile updated successfully' };
+  const updatedUser = await getUserByID(user.ID);
+  return {
+    status: 'success',
+    message: 'User profile updated successfully',
+    user: updatedUser,
+  };
 }
 
 module.exports = updateUserProfile;

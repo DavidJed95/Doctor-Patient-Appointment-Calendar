@@ -5,8 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 export default function Home({ userGreeting }) {
   return (
     <div>
-      <h1>Welcome {userGreeting}</h1>
-      {/* <h2></h2> */}
+      <h1>{userGreeting}</h1>
       <DemoApp />
     </div>
   );

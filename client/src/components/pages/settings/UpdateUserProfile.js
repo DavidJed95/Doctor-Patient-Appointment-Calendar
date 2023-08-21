@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
 
 const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [languages, setLanguages] = useState('');
+  const [Password, setPassword] = useState('');
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Mobile, setMobile] = useState('');
+  const [Languages, setLanguages] = useState('');
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
@@ -22,22 +22,22 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
-      case 'password':
+      case 'Password':
         setPassword(value);
         break;
-      case 'firstName':
+      case 'FirstName':
         setFirstName(value);
         break;
-      case 'lastName':
+      case 'LastName':
         setLastName(value);
         break;
-      case 'email':
+      case 'Email':
         setEmail(value);
         break;
-      case 'mobile':
+      case 'Mobile':
         setMobile(value);
         break;
-      case 'languages':
+      case 'Languages':
         setLanguages(value);
         break;
       default:
@@ -52,18 +52,19 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!(password || firstName || lastName || email || mobile || languages)) {
+    if (!(Password || FirstName || LastName || Email || Mobile || Languages)) {
       setMessage('You can update any of the fields');
       return;
     }
+    const ID = userInfo.ID;
     const requestBody = {
-      Id: userInfo.ID,
-      Password: password,
-      FirstName: firstName,
-      LastName: lastName,
-      Email: email,
-      Mobile: mobile,
-      Languages: languages,
+      ID,
+      Password,
+      FirstName,
+      LastName,
+      Email,
+      Mobile,
+      Languages,
     };
     try {
       const response = await fetch(
@@ -108,18 +109,17 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
             label='Password:'
             placeholder='Password'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={password}
+            value={Password}
             name='Password'
             type='password'
             onChange={handleChange}
-            required={'required'}
           />
         </div>
         <div>
           <InputField
             label='First Name:'
             placeholder={userInfo.FirstName || 'FirstName'}
-            value={firstName}
+            value={FirstName}
             name='FirstName'
             onChange={handleChange}
           />
@@ -128,7 +128,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
           <InputField
             label='Last Name:'
             placeholder={userInfo.LastName || 'LastName'}
-            value={lastName}
+            value={LastName}
             name='LastName'
             onChange={handleChange}
           />
@@ -138,7 +138,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
           <InputField
             label='Email:'
             placeholder={userInfo.Email || 'name@gmail.com'}
-            value={email}
+            value={Email}
             name='Email'
             onChange={handleChange}
           />
@@ -147,7 +147,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
           <InputField
             label='Mobile:'
             placeholder={userInfo.Mobile || 'Mobile'}
-            value={mobile}
+            value={Mobile}
             name='Mobile'
             onChange={handleChange}
           />
@@ -156,7 +156,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
           <InputField
             label='Languages:'
             placeholder={userInfo.Languages || 'Languages'}
-            value={languages}
+            value={Languages}
             name='Languages'
             onChange={handleChange}
           />
