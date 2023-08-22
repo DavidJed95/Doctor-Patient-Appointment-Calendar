@@ -14,7 +14,7 @@ import NotFound from './components/pages/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useState({});
   const [userGreeting, setUserGreeting] = useState('');
 
   const updateLoginStatus = status => {
@@ -22,7 +22,7 @@ function App() {
   };
 
   const getUserInformation = user => {
-    setUserInfo(user);
+    setUser(user);
   };
 
   const getUserGreeting = greeting => {
@@ -63,7 +63,7 @@ function App() {
                 <LoginForm
                   isLoggedIn={isLoggedIn}
                   updateLoginStatus={updateLoginStatus}
-                  userInfo={userInfo}
+                  userInfo={user}
                   getUserInformation={getUserInformation}
                   userGreeting={userGreeting}
                   getUserGreeting={getUserGreeting}
@@ -85,7 +85,7 @@ function App() {
               path='/profile-update'
               element={
                 <UpdateUserProfile
-                  userInfo={userInfo}
+                  user={user}
                   getUserInformation={getUserInformation}
                 />
               }

@@ -4,7 +4,7 @@ import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
 
-const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
+const UpdatePersonalProfile = ({ user, getUserInfo }) => {
   const [Password, setPassword] = useState('');
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -56,7 +56,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
       setMessage('You can update any of the fields');
       return;
     }
-    const ID = userInfo.ID;
+    const ID = user.ID;
     const requestBody = {
       ID,
       Password,
@@ -118,7 +118,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
         <div>
           <InputField
             label='First Name:'
-            placeholder={userInfo.FirstName || 'FirstName'}
+            placeholder={user.FirstName || 'FirstName'}
             value={FirstName}
             name='FirstName'
             onChange={handleChange}
@@ -127,7 +127,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
         <div>
           <InputField
             label='Last Name:'
-            placeholder={userInfo.LastName || 'LastName'}
+            placeholder={user.LastName || 'LastName'}
             value={LastName}
             name='LastName'
             onChange={handleChange}
@@ -137,7 +137,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
         <div>
           <InputField
             label='Email:'
-            placeholder={userInfo.Email || 'name@gmail.com'}
+            placeholder={user.Email || 'name@gmail.com'}
             value={Email}
             name='Email'
             onChange={handleChange}
@@ -146,7 +146,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
         <div>
           <InputField
             label='Mobile:'
-            placeholder={userInfo.Mobile || 'Mobile'}
+            placeholder={user.Mobile || 'Mobile'}
             value={Mobile}
             name='Mobile'
             onChange={handleChange}
@@ -155,7 +155,7 @@ const UpdatePersonalProfile = ({ userInfo, getUserInfo }) => {
         <div>
           <InputField
             label='Languages:'
-            placeholder={userInfo.Languages || 'Languages'}
+            placeholder={user.Languages || 'Languages'}
             value={Languages}
             name='Languages'
             onChange={handleChange}

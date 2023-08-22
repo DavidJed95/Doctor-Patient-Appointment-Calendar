@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default function Home({ userGreeting }) {
+export default function Home({ user }) {
+  const [greeting, setGreeting] = useState(() => {
+    return '';
+  });
+  useEffect(() => {
+    const userTypePrefix =
+      user.UserType === 'Medical Specialist' ? 'Doctor ' : '';
+    setGreeting(`Welcome ${userTypePrefix} ${user.FirstName} ${user.LastName}`);
+  }, [user]);
   return (
     <div>
-      <h1>{userGreeting}</h1>
+      <h1>{greeting}</h1>
       <DemoApp />
     </div>
   );

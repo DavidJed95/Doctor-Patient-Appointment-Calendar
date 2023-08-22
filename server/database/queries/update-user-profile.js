@@ -30,6 +30,7 @@ async function updateUserProfile(user) {
 
   await doQuery(updateQuery, updateFields);
   const updatedUser = await getUserByID(user.ID);
+  
   return {
     status: 'success',
     message: 'User profile updated successfully',
