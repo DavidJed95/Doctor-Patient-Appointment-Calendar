@@ -3,13 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
-
+// isLoggedIn,
+// updateLoginStatus,
+// userInfo,
+// getUserInformation,
+// userGreeting,
+// getUserGreeting,
 const LoginForm = ({
-  isLoggedIn,
   updateLoginStatus,
-  userInfo,
   getUserInformation,
-  userGreeting,
   getUserGreeting,
 }) => {
   const [id, setId] = useState('');

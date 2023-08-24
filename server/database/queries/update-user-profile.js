@@ -8,9 +8,10 @@ const getUserByID = require('./get-user-by-id');
  * @returns - status, message, user data
  */
 async function updateUserProfile(user) {
+  console.log(user);
   const updateFields = [];
 
-  if (user.Password !== null || user.Password !== '') {
+  if (user.Password !== undefined && user.Password.trim() !== '') {
     const bcrypt = require('bcrypt');
     const hashedPassword = await bcrypt.hash(user.Password, 10);
     user.Password = hashedPassword;
@@ -30,7 +31,7 @@ async function updateUserProfile(user) {
 
   await doQuery(updateQuery, updateFields);
   const updatedUser = await getUserByID(user.ID);
-  
+
   return {
     status: 'success',
     message: 'User profile updated successfully',

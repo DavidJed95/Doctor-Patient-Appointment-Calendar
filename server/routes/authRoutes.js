@@ -16,6 +16,7 @@ router.post('/password-reset', passwordResetController.forgotPassword);
 router.put('/profile-update', updateUserProfileController.updateProfile);
 
 router.get('/check-login', (req, res) => {
+  console.log('authRoutes: ',req.session.isLoggedIn)
   if (req.session.isLoggedIn) {
     res.status(200).json({ isLoggedIn: true });
   } else {

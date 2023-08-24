@@ -20,7 +20,7 @@ const EmailVerification = () => {
           setVerificationStatus(data.message);
           setTimeout(() => {
             navigate(data.redirectTo);
-          }, 2000);
+          }, 3000);
         } else {
           setVerificationStatus(data.message);
         }
@@ -34,7 +34,15 @@ const EmailVerification = () => {
   return (
     <div className={`${styles.form} ${styles.emailAuthHeading}`}>
       <h1>Email Verification</h1>
-      <p>{verificationStatus}</p>
+      <p
+        className={
+          verificationStatus.includes('success')
+            ? styles.success
+            : styles.failure
+        }
+      >
+        {verificationStatus}
+      </p>
     </div>
   );
 };

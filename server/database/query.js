@@ -9,7 +9,7 @@ const db = require('./database');
  */
 async function doQuery(sql, param) {
   const result = await db.query(sql, param);
-  console.log(`KUKU: ${result}`);
+  console.log(`doQuery ${sql} Params ${param}: ${result[0]}`);
   return result[0];
 }
 

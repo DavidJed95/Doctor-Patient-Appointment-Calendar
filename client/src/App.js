@@ -25,6 +25,10 @@ function App() {
     setUser(user);
   };
 
+  const updateUser = userData => {
+    setUser(userData);
+  };
+
   const getUserGreeting = greeting => {
     setUserGreeting(greeting);
   };
@@ -37,6 +41,8 @@ function App() {
         const data = await response.json();
 
         setIsLoggedIn(data.isLoggedIn);
+        getUserInformation(data.user);
+        getUserGreeting(data.greeting);
       } catch (error) {
         console.error('Error fetching login status:', error);
       }
@@ -61,9 +67,7 @@ function App() {
               path='/'
               element={
                 <LoginForm
-                  isLoggedIn={isLoggedIn}
                   updateLoginStatus={updateLoginStatus}
-                  userInfo={user}
                   getUserInformation={getUserInformation}
                   userGreeting={userGreeting}
                   getUserGreeting={getUserGreeting}
@@ -78,7 +82,7 @@ function App() {
           <>
             <Route
               path='/home'
-              element={<Home userGreeting={userGreeting} />}
+              element={<Home user={user} userGreeting={userGreeting} />}
             />
             <Route path='/appointments' element={<Appointments />} />
             <Route

@@ -4,13 +4,8 @@ import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
 
-const UpdatePersonalProfile = ({ user, getUserInfo }) => {
-  const [Password, setPassword] = useState('');
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
-  const [Email, setEmail] = useState('');
-  const [Mobile, setMobile] = useState('');
-  const [Languages, setLanguages] = useState('');
+const UpdatePersonalProfile = ({ user, getUserInformation }) => {
+  const [updatedUser, setUpdatedUser] = useState({ ...user });
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
@@ -21,28 +16,7 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
    */
   const handleChange = event => {
     const { name, value } = event.target;
-    switch (name) {
-      case 'Password':
-        setPassword(value);
-        break;
-      case 'FirstName':
-        setFirstName(value);
-        break;
-      case 'LastName':
-        setLastName(value);
-        break;
-      case 'Email':
-        setEmail(value);
-        break;
-      case 'Mobile':
-        setMobile(value);
-        break;
-      case 'Languages':
-        setLanguages(value);
-        break;
-      default:
-        break;
-    }
+    setUpdatedUser(prevUser => ({ ...prevUser, [name]: value }));
   };
 
   /**
@@ -52,21 +26,8 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!(Password || FirstName || LastName || Email || Mobile || Languages)) {
-      setMessage('You can update any of the fields');
-      return;
-    }
-    const ID = user.ID;
-    const requestBody = {
-      ID,
-      Password,
-      FirstName,
-      LastName,
-      Email,
-      Mobile,
-      Languages,
-    };
     try {
+      const updatedUserData = { ...updatedUser, ID: user.ID }
       const response = await fetch(
         'http://localhost:8000/auth/profile-update',
         {
@@ -74,7 +35,7 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify(updatedUserData),
         },
       );
 
@@ -82,6 +43,8 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
       setMessage(data.message);
 
       if (response.ok) {
+        setUpdatedUser(data.user);
+        getUserInformation(data.user);
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);
@@ -109,8 +72,8 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
             label='Password:'
             placeholder='Password'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={Password}
             name='Password'
+            value={updatedUser.Password}
             type='password'
             onChange={handleChange}
           />
@@ -118,18 +81,18 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
         <div>
           <InputField
             label='First Name:'
-            placeholder={user.FirstName || 'FirstName'}
-            value={FirstName}
+            placeholder={updatedUser.FirstName || user.FirstName}
             name='FirstName'
+            value={updatedUser.FirstName}
             onChange={handleChange}
           />
         </div>
         <div>
           <InputField
             label='Last Name:'
-            placeholder={user.LastName || 'LastName'}
-            value={LastName}
+            placeholder={updatedUser.LastName || user.LastName}
             name='LastName'
+            value={updatedUser.LastName}
             onChange={handleChange}
           />
         </div>
@@ -137,27 +100,27 @@ const UpdatePersonalProfile = ({ user, getUserInfo }) => {
         <div>
           <InputField
             label='Email:'
-            placeholder={user.Email || 'name@gmail.com'}
-            value={Email}
+            placeholder={updatedUser.Email || user.Email}
             name='Email'
+            value={updatedUser.Email}
             onChange={handleChange}
           />
         </div>
         <div>
           <InputField
             label='Mobile:'
-            placeholder={user.Mobile || 'Mobile'}
-            value={Mobile}
+            placeholder={updatedUser.Mobile || user.Mobile}
             name='Mobile'
+            value={updatedUser.Mobile}
             onChange={handleChange}
           />
         </div>
         <div>
           <InputField
             label='Languages:'
-            placeholder={user.Languages || 'Languages'}
-            value={Languages}
+            placeholder={updatedUser.Languages || user.Languages}
             name='Languages'
+            value={updatedUser.Languages}
             onChange={handleChange}
           />
         </div>
