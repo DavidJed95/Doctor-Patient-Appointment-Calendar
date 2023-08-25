@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-
-        p, ul, ol {
-            color: #34495e;
-        }
-
-        img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .tech-item {
-            margin: 10px;
-            display: flex;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-
 <h1>A System for Managing Appointments in a Clinic</h1>
 
 <h2>1. Project Overview</h2>
@@ -91,6 +54,3 @@
 <h2>7. APIs</h2>
 <strong>PayPal</strong>
 <strong>FullCalendar</strong>
-
-</body>
-</html>
