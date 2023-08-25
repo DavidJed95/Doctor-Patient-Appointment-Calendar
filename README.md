@@ -52,5 +52,7 @@
 <p><strong>Development Languages Rationale:</strong></p>
 <p>React.JS offers a component-based approach making it ideal for creating efficient and interactive UIs. Coupled with HTML and CSS for the frontend, Node.JS for the backend, and MySQL for data storage, it forms a robust solution for our system needs.</p>
 <h2>7. APIs</h2>
-<strong>PayPal</strong>
-<strong>FullCalendar</strong>
+<ul>
+<li>PayPal</li>
+<li>FullCalendar</li>
+</ul>
