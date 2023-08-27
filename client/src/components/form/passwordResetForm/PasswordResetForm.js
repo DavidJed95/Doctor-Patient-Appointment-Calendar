@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
-import Footer from '../../footer/Footer';
 const PasswordResetForm = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
@@ -23,6 +22,10 @@ const PasswordResetForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
 
+     const requestBody = {
+       id,
+       email,
+     };
     try {
       // Send a password reset request to the server
       const response = await fetch(
@@ -32,7 +35,7 @@ const PasswordResetForm = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id, email }),
+          body: JSON.stringify(requestBody),
         },
       );
 
@@ -51,7 +54,7 @@ const PasswordResetForm = () => {
       // Handle any errors that occurred during the request
       console.error('Error during password reset:', error);
       setMessage(
-        'The given ID or Email do not exist in the system. Please try again!',
+        'The given ID or Email do not exist in the system. Something went wrong (database)',
       );
     }
   };
@@ -88,7 +91,6 @@ const PasswordResetForm = () => {
           </p>
         )}
       </form>
-      <Footer name='David Jedwabsky' />
     </div>
   );
 };

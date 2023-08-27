@@ -78,7 +78,7 @@ const LoginForm = ({
         <div>
           <InputField
             label='ID:'
-            placeholder='ID:'
+            placeholder='Enter Your ID'
             value={id}
             name='id'
             onChange={handleChange}
@@ -88,7 +88,7 @@ const LoginForm = ({
         <div>
           <InputField
             label='Password:'
-            placeholder='Password:'
+            placeholder='Enter Your Password'
             value={password}
             name='password'
             type='password'

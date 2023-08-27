@@ -13,6 +13,7 @@ router.post('/register', registrationController.register);
 router.get('/verify-email/:token', verifyEmail);
 router.post('/login', loginController.login);
 router.post('/password-reset', passwordResetController.forgotPassword);
+router.put('/reset-password/:token',passwordResetController.resetPassword)
 router.put('/profile-update', updateUserProfileController.updateProfile);
 
 router.get('/check-login', (req, res) => {

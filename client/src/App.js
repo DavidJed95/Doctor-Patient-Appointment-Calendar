@@ -10,6 +10,7 @@ import RegistrationForm from './components/form/registrationForm/RegistrationFor
 import PasswordResetForm from './components/form/passwordResetForm/PasswordResetForm';
 import Footer from './components/footer/Footer';
 import EmailVerification from './components/auth/EmailVerification';
+import PasswordReset from './components/auth/PasswordReset';
 import NotFound from './components/pages/NotFound';
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
           </>
         )}
         <Route path='/verify-email/:token' element={<EmailVerification />} />
+        <Route path='/reset-password/:token' element={<PasswordReset />} />
         <Route path='*' element={<NotFound />} />
         {/* Protected routes, only visible if logged in */}
       </Routes>

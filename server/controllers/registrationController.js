@@ -48,7 +48,7 @@ exports.register = async (req, res) => {
     if (result.status === 'success') {
       // Registration successful
       // Generate email verification token
-      const emailVerificationToken = tokenService.generateSessionToken(user);
+      const emailVerificationToken = tokenService.generateEmailVerificationToken(user);
       console.log(
         `emailVerificationToken generated in the registrationController: ${emailVerificationToken}`,
       );
