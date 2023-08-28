@@ -25,7 +25,12 @@ app.use(
     },
   }),
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // Assuming your React app is running on port 3000
+    credentials: true, // This allows cookies to be sent with requests
+  }),
+);
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

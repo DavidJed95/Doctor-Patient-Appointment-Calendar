@@ -13,25 +13,25 @@ router.post('/register', registrationController.register);
 router.get('/verify-email/:token', verifyEmail);
 router.post('/login', loginController.login);
 router.post('/password-reset', passwordResetController.forgotPassword);
-router.put('/reset-password/:token',passwordResetController.resetPassword)
+router.put('/reset-password/:token', passwordResetController.resetPassword);
 router.put('/profile-update', updateUserProfileController.updateProfile);
 
 router.get('/check-login', (req, res) => {
-  console.log('authRoutes: ',req.session.isLoggedIn)
+  console.log('authRoutes: ', req.session.isLoggedIn);
   if (req.session.isLoggedIn) {
-    res.status(200).json({ isLoggedIn: true });
+    res.status(200).json({ isLoggedIn: true, user: req.session.user });
   } else {
-    res.status(200).json({ isLoggedIn: false });
+    res.status(403).json({ isLoggedIn: false });
   }
 });
 
 router.post('/logout', (req, res) => {
   req.session.destroy(); // Clear session data
   res.clearCookie('connect.sid'); // Clear the session cookie
-  res.status(200).json({ message: 'See you again soon'});
+  res.status(200).json({ message: 'See you again soon' });
 });
 
- router.get('*', (req, res) => {
-   res.status(404).redirect('*');
- });
+router.get('*', (req, res) => {
+  res.status(404).redirect('*');
+});
 module.exports = router;

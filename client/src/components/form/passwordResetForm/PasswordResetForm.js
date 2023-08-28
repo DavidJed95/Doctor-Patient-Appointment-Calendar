@@ -45,7 +45,9 @@ const PasswordResetForm = () => {
       if (response.ok) {
         // Password reset was successful
         setMessage(data.message);
-        navigate('/');
+        setTimeout(() => {
+          navigate(data.redirectTo);
+        }, 2000);
       } else {
         // Password reset failed
         setMessage(data.message);

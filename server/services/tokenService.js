@@ -7,11 +7,10 @@ dotenv.config({ path: '../.env' });
 
 // Core token generation function to create a JWT based on the user, type, and expiresIn parameters
 const generateToken = (user, type, expiresIn) => {
-  const { id, email } = user;
   const token = jwt.sign(
     {
-      id,        // User's unique identifier
-      email,     // User's email address
+      id:user.ID,        // User's unique identifier
+      email:user.Email,     // User's email address
       type,      // Type of the token (e.g. session, emailVerification, passwordReset)
     },
     process.env.JWT_SECRET,   // JWT secret to sign the token
@@ -68,7 +67,6 @@ module.exports = {
   generateSessionToken,
   generateEmailVerificationToken,
   generatePasswordResetToken,
-  verifyEmailVerificationToken,
   verifyEmailVerificationToken,
   verifyPasswordResetToken,
 };
