@@ -8,7 +8,7 @@ const tokenService = require('../services/tokenService');
  * @param {*} res - response back to the user
  * @returns status code of success/ failure of decoding the verification email, message and redirection path
  */
-const verifyEmail = async (req, res) => {
+const verifyEmail = async (req, res, next) => {
   const emailVerificationToken = req.params.token;
   console.log('Token received: ', emailVerificationToken);
   try {
@@ -36,10 +36,7 @@ const verifyEmail = async (req, res) => {
         .json({ message: 'Invalid token or expired link.' });
     }
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: 'An error occurred during email verification.' });
+    next(error);
   }
 };
 

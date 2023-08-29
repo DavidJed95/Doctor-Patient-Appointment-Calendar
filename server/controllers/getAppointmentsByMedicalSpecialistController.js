@@ -9,7 +9,7 @@ const {
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function getAppointmentsByMedicalSpecialistController(req, res) {
+async function getAppointmentsByMedicalSpecialistController(req, res, next) {
   const { medicalSpecialistId } = req.params;
 
   try {
@@ -19,10 +19,7 @@ async function getAppointmentsByMedicalSpecialistController(req, res) {
 
     return res.status(200).json(result);
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: 'An error occurred while fetching appointments' });
+    next(error)
   }
 }
 

@@ -36,14 +36,8 @@ async function createPaymentMiddleware(req, res, next) {
     });
     // Attach the payment object to the request for later use
     req.payment = createPayment;
-    // Continue to the next middleware
-    next();
   } catch (error) {
-    console.error(error);
-    // Handle any error that occurred during payment creation
-    res
-      .status(500)
-      .json({ message: 'An error occurred during payment creation' });
+    next(error);
   }
 }
 

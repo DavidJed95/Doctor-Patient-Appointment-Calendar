@@ -7,7 +7,7 @@ const { updateAppointment } = require('../database/queries/all-queries');
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function updateAppointmentController(req, res) {
+async function updateAppointmentController(req, res, next) {
   const { appointmentId, updates } = req.body;
 
   try {
@@ -21,10 +21,7 @@ async function updateAppointmentController(req, res) {
       return res.status(400).json({ message: result.message });
     }
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: 'An error occurred while updating the appointment' });
+    next(error);
   }
 }
 

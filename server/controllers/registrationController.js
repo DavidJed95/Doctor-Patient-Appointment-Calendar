@@ -3,7 +3,7 @@ const createUser = require('../database/queries/create-user');
 const tokenService = require('../services/tokenService');
 const emailService = require('../services/emailService');
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   const {
     userType,
     id,
@@ -48,7 +48,8 @@ exports.register = async (req, res) => {
     if (result.status === 'success') {
       // Registration successful
       // Generate email verification token
-      const emailVerificationToken = tokenService.generateEmailVerificationToken(user);
+      const emailVerificationToken =
+        tokenService.generateEmailVerificationToken(user);
       console.log(
         `emailVerificationToken generated in the registrationController: ${emailVerificationToken}`,
       );
@@ -74,14 +75,10 @@ exports.register = async (req, res) => {
       // Registration failed
       return res
         .status(400)
-        .json({ message: result.message, redirectTo: '/auth/register' });
+        .json({ message: result.message, redirectTo: '/register' });
     }
   } catch (error) {
-    console.error(error);
-    // Handle any other errors that occurred during registration
-    return res.status(500).json({
-      message: 'An error occurred during registration',
-      redirectTo: '/auth/register',
-    });
+    next(error);
   }
 };
+// TODO: add the verify email controller here instead of a different file

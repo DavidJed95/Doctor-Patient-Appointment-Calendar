@@ -7,7 +7,7 @@ const { cancelAppointment } = require('../database/queries/all-queries');
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function cancelAppointmentController(req, res) {
+async function cancelAppointmentController(req, res, next) {
   const { appointmentId } = req.body;
 
   try {
@@ -21,10 +21,7 @@ async function cancelAppointmentController(req, res) {
       return res.status(400).json({ message: result.message });
     }
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: 'An error occurred while canceling the appointment' });
+   next(error)
   }
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 const { login } = require('../database/queries/all-queries');
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   const { id, password } = req.body;
 
   try {
@@ -52,10 +52,6 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: result.message, redirectTo: '/' });
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      message: 'Entered wrong login credentials. Please try again',
-      redirectTo: '/',
-    });
+    next(error);
   }
 };

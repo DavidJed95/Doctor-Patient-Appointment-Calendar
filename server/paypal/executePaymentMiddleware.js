@@ -20,15 +20,8 @@ async function executePaymentMiddleware(req, res, next) {
     });
     // Attach the executed payment object to the request for later use
     req.executedPayment = executePayment;
-
-    // Continue to the next middleware
-    next();
   } catch (error) {
-    console.error(error);
-    // Handle any error that occurred during payment execution
-    res
-      .status(500)
-      .json({ message: 'An error occurred during payment execution' });
+    next(error);
   }
 }
 

@@ -2,7 +2,7 @@
 const { updateUserProfile } = require('../database/queries/all-queries');
 const emailService = require('../services/emailService');
 
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (req, res, next) => {
   const updatedUser = req.body;
   console.log(updatedUser);
   try {
@@ -32,10 +32,6 @@ exports.updateProfile = async (req, res) => {
         .json({ message: result.message, redirectTo: '/home' });
     }
   } catch (error) {
-    console.error(error);
-    // Handle any other errors that occurred during profile update
-    return res
-      .status(500)
-      .json({ message: 'An error occurred during profile update' });
+    next(error);
   }
 };

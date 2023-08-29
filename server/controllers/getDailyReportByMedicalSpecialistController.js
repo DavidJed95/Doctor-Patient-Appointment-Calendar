@@ -9,7 +9,7 @@ const {
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function getDailyReportByMedicalSpecialistController(req, res) {
+async function getDailyReportByMedicalSpecialistController(req, res, next) {
   const { medicalSpecialistId } = req.params;
   const { startDate, endDate } = req.query;
 
@@ -22,10 +22,7 @@ async function getDailyReportByMedicalSpecialistController(req, res) {
 
     return res.status(200).json(result);
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: 'An error occurred while fetching the daily report' });
+    next(error);
   }
 }
 

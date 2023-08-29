@@ -26,10 +26,6 @@ function App() {
     setUser(user);
   };
 
-  const updateUser = userData => {
-    setUser(userData);
-  };
-
   const getUserGreeting = greeting => {
     setUserGreeting(greeting);
   };

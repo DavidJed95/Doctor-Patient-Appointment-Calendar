@@ -3,7 +3,7 @@ const setAppointment = require('../database/queries/all-queries');
 const createPaymentMiddleware = require('../paypal/createPaymentMiddleware');
 const executePaymentMiddleware = require('../paypal/executePaymentMiddleware');
 
-exports.createAppointment = async (req, res) => {
+exports.createAppointment = async (req, res, next) => {
   //  Extract appointment data from request body
   const appointmentData = req.body;
 
@@ -12,7 +12,7 @@ exports.createAppointment = async (req, res) => {
     try {
       // Redirect the user to the PayPal payment approval URL
       const approvalUrl = req.payment.links.find(
-        link => link.rel === approval_url,
+        link => link.rel === approvalUrl,
       ).href;
       console.log(approvalUrl);
       res.redirect(approvalUrl);
@@ -40,16 +40,11 @@ exports.createAppointment = async (req, res) => {
       return res.status(400).json({ message: result.message });
     }
   } catch (error) {
-    console.error(error);
-    // Handle any other errors that occurred during appointment creation
-    // Note: This response will not be reached if the user is redirected to PayPal for Payment
-    return res
-      .status(500)
-      .json({ message: 'An error occurred during appointment creation' });
+    next(error);
   }
 };
 
-exports.executePayment = async (req, res) => {
+exports.executePayment = async (req, res, next) => {
   // Execute payment middleware
   executePaymentMiddleware(req, res, async () => {
     try {
@@ -74,10 +69,7 @@ exports.executePayment = async (req, res) => {
         res.status(400).json({ message: 'Payment execution failed' });
       }
     } catch (error) {
-      // Handle any error that occurred during payment execution
-      res
-        .status(500)
-        .json({ message: 'An error occurred during payment execution' });
+      next(error);
     }
   });
 };
