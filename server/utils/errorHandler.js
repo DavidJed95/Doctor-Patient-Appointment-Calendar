@@ -10,7 +10,7 @@ const errorHandler = (error, req, res, next) => {
 
   // Log the error to a text file (errorLog.txt)
   const logMessage = `${new Date().toISOString()} - Error: ${message}\n`;
-  const logFilePath = path.join(__dirname, 'errorLog.txt'); // Use path.join to create the file path
+  const logFilePath = path.join(__dirname, '..', 'errorLog.txt'); // Use path.join to create the file path
 
   fs.appendFile(logFilePath, logMessage, err => {
     if (err) {

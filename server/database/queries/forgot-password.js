@@ -1,14 +1,14 @@
 'use strict';
 const doQuery = require('../query');
 const getUserByID = require('./get-user-by-id');
-
+const bcrypt = require('bcrypt');
 /**
  * Initiate the password reset process for a user.
  * @param {*} user - information passed from passwordResetController
  * @returns { status, message }
  */
 async function forgotPassword(user) {
-  userExists = await getUserByID(user.id);
+  const userExists = await getUserByID(user.id);
   // Check if the provided ID is an email
   const isEmail = user.email.includes('@');
 
@@ -21,7 +21,7 @@ async function forgotPassword(user) {
     };
   } else {
     return {
-      status: failure,
+      status: 'failure',
       message: 'User not found',
       user: 'undefined',
     };
@@ -36,7 +36,7 @@ const SALT_ROUNDS = 10;
  * @returns {Promise<string>} - The hashed password.
  */
 async function hashPassword(password) {
-    return bcrypt.hash(password, SALT_ROUNDS);
+  return bcrypt.hash(password, SALT_ROUNDS);
 }
 
 /**
@@ -46,8 +46,9 @@ async function hashPassword(password) {
  * @returns {Promise<object>} - An object indicating the result of the operation.
  */
 async function updateUserPassword(userID, newPassword) {
-  try {
-    const hashedPassword = await hashPassword(newPassword, 10);
+  console.log('Attempting to update password for user ID: ', userID);
+  try {console.log('Attempting to update password for user ID:', typeof userID);
+    const hashedPassword = await hashPassword(newPassword);
 
     const passwordUpdateQuery = `UPDATE users SET password = ? WHERE ID = ?`;
     const userParams = [hashedPassword, userID];

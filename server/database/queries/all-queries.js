@@ -9,8 +9,8 @@ const getUserByID = require('./get-user-by-id');
 // 2) Login
 const login = require('./login');
 
-// 3) Forgot password
-const forgotPassword = require('./forgot-password');
+// 3) Forgot password and Reset Password
+const { forgotPassword, updateUserPassword } = require('./forgot-password');
 
 // 4) Update user profile
 const updateUserProfile = require('./update-user-profile');
@@ -41,6 +41,7 @@ module.exports = {
   getUserByID,
   login,
   forgotPassword,
+  updateUserPassword,
   updateUserProfile,
   setAppointment,
   cancelAppointment,

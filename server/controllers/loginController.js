@@ -49,7 +49,7 @@ exports.login = async (req, res, next) => {
       });
     } else {
       // Login failed, sending a response indicating the failure reason
-      return res.status(404).json({ message: result.message, redirectTo: '/' });
+      return res.status(401).json({ message: result.message, redirectTo: '/' });
     }
   } catch (error) {
     next(error);
