@@ -6,6 +6,7 @@ import Button from '../../button/Button';
 
 const UpdatePersonalProfile = ({ user, getUserInformation }) => {
   const [updatedUser, setUpdatedUser] = useState({ ...user });
+  const [changedFields, setChangedFields] = useState({})
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
    */
   const handleChange = event => {
     const { name, value } = event.target;
-    setUpdatedUser(prevUser => ({ ...prevUser, [name]: value }));
+    setChangedFields(prevUser => ({ ...prevUser, [name]: value }));
   };
 
   /**
@@ -27,7 +28,7 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
     event.preventDefault();
 
     try {
-      const updatedUserData = { ...updatedUser, ID: user.ID }
+      const updatedUserData = { ...changedFields, ID: user.ID };
       const response = await fetch(
         'http://localhost:8000/auth/profile-update',
         {
@@ -45,6 +46,11 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
       if (response.ok) {
         setUpdatedUser(data.user);
         getUserInformation(data.user);
+        setTimeout(() => {
+          navigate(data.redirectTo);
+        }, 2000);
+      } else {
+        setMessage(data.message);
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);
@@ -73,7 +79,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             placeholder='Password'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
             name='Password'
-            value={updatedUser.Password}
             type='password'
             onChange={handleChange}
           />
@@ -83,7 +88,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             label='First Name:'
             placeholder={updatedUser.FirstName || user.FirstName}
             name='FirstName'
-            value={updatedUser.FirstName}
             onChange={handleChange}
           />
         </div>
@@ -92,7 +96,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             label='Last Name:'
             placeholder={updatedUser.LastName || user.LastName}
             name='LastName'
-            value={updatedUser.LastName}
             onChange={handleChange}
           />
         </div>
@@ -102,7 +105,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             label='Email:'
             placeholder={updatedUser.Email || user.Email}
             name='Email'
-            value={updatedUser.Email}
             onChange={handleChange}
           />
         </div>
@@ -111,7 +113,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             label='Mobile:'
             placeholder={updatedUser.Mobile || user.Mobile}
             name='Mobile'
-            value={updatedUser.Mobile}
             onChange={handleChange}
           />
         </div>
@@ -120,7 +121,6 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
             label='Languages:'
             placeholder={updatedUser.Languages || user.Languages}
             name='Languages'
-            value={updatedUser.Languages}
             onChange={handleChange}
           />
         </div>

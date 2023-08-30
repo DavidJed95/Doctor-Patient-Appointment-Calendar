@@ -4,7 +4,24 @@ const emailService = require('../services/emailService');
 
 exports.updateProfile = async (req, res, next) => {
   const updatedUser = req.body;
+
+  // Check if user provided any updates (exclude ID)
+  const providedUpdates = Object.keys(updatedUser).filter(
+    key =>
+      key !== 'ID' &&
+      typeof updatedUser[key] === 'string' &&
+      updatedUser[key].trim() !== '',
+  );
+
+  if (providedUpdates.length === 0) {
+    return res.status(400).json({
+      message: 'Please provide at least one field to update',
+      redirectTo: '/profile-update',
+    });
+  }
+
   console.log(updatedUser);
+
   try {
     const result = await updateUserProfile(updatedUser);
 
@@ -26,7 +43,6 @@ exports.updateProfile = async (req, res, next) => {
         .status(200)
         .json({ message: result.message, user: result.user });
     } else {
-      // Profile update failed, you can send a response indicating the failure reason
       return res
         .status(400)
         .json({ message: result.message, redirectTo: '/home' });
