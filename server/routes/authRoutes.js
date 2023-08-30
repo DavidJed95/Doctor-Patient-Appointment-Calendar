@@ -19,7 +19,7 @@ router.get('/check-login', (req, res) => {
   if (req.session.isLoggedIn) {
     res.status(200).json({ isLoggedIn: true, user: req.session.user });
   } else {
-    res.status(403).json({ isLoggedIn: false });
+    res.status(401).json({ isLoggedIn: false });
   }
 });
 
