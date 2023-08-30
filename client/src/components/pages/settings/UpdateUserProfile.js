@@ -6,7 +6,7 @@ import Button from '../../button/Button';
 
 const UpdatePersonalProfile = ({ user, getUserInformation }) => {
   const [updatedUser, setUpdatedUser] = useState({ ...user });
-  const [changedFields, setChangedFields] = useState({})
+  const [changedFields, setChangedFields] = useState({});
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
