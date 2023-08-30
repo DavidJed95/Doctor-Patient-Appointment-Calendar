@@ -1,4 +1,5 @@
 'use strict';
+const doQuery = require('../database/query');
 const createUser = require('../database/queries/create-user');
 const tokenService = require('../services/tokenService');
 const emailService = require('../services/emailService');
@@ -78,7 +79,48 @@ exports.register = async (req, res, next) => {
         .json({ message: result.message, redirectTo: '/register' });
     }
   } catch (error) {
+    console.error(error.message);
+    res.status(400).send({ status: 'failure', message: error.message });
     next(error);
   }
 };
-// TODO: add the verify email controller here instead of a different file
+
+/**
+ * This method decodes the received token and checks if it is the same that the user got
+ * @param {*} req - request of the user
+ * @param {*} res - response back to the user
+ * @returns status code of success/ failure of decoding the verification email, message and redirection path
+ */
+exports.verifyEmail = async (req, res, next) => {
+  const emailVerificationToken = req.params.token;
+  console.log('Token received: ', emailVerificationToken);
+  try {
+    const decodedToken = tokenService.verifyEmailVerificationToken(
+      emailVerificationToken,
+    );
+    console.log('decoded token: ', decodedToken);
+    console.log('decoded user: ', decodedToken.user);
+    if (decodedToken) {
+      const userId = decodedToken.id || decodedToken.ID;
+      console.log(decodedToken);
+      console.log(typeof decodedToken.id);
+      console.log('User ID:', userId, 'Type:', typeof userId);
+
+      // Update user's isUserVerified status to 1 in the database
+      const updateUserSql = `UPDATE users SET isUserVerified = ? WHERE ID = ?`;
+      await doQuery(updateUserSql, [1, userId]);
+
+      return res.status(200).json({
+        message: 'Registration email has been verified',
+        redirectTo: '/',
+      });
+    } else {
+      console.log('Invalid token: ', decodedToken);
+      return res
+        .status(400)
+        .json({ message: 'Invalid token or expired link.' });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

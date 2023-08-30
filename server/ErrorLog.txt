@@ -1,0 +1,22 @@
+
+  2023-08-29T15:29:15.142Z - Error: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\node_modules\mysql2\promise.js
+  Function: PromisePool.query
+  Line: 351
+  ---------------------------------------------------
+  
+  2023-08-29T15:29:46.137Z - Error: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\node_modules\mysql2\promise.js
+  Function: PromisePool.query
+  Line: 351
+  ---------------------------------------------------
+  
+  2023-08-30T13:05:09.141Z - Error: Database query failed: Duplicate entry 'djedwabsky@gmail.com' for key 'Email'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  

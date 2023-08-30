@@ -8,9 +8,32 @@ const errorHandler = (error, req, res, next) => {
   const statusCode = error.statusCode || 500;
   const message = error.message || 'Internal Server Error';
 
-  // Log the error to a text file (errorLog.txt)
-  const logMessage = `${new Date().toISOString()} - Error: ${message}\n`;
-  const logFilePath = path.join(__dirname, '..', 'errorLog.txt'); // Use path.join to create the file path
+  let errorFile, errorFunction, errorLine, errorText
+  
+  if (error.stack) {
+    //Splitting the stack string of the error into lines and pick the relevant line
+    const stackLines = error.stack.split('\n');
+    const errorDetails = stackLines[1] || '';
+
+    const matched = errorDetails.match(/\((.*):(\d+):(\d+)\)/);
+    errorFile = matched[1] || 'unknown';
+    errorLine = matched[2] || 'unknown';
+    errorText = '';
+
+    // Extracting function name from the stack line
+    const funcMatch = errorDetails.match(/at\s+(.*)\s+\(/) || [];
+    errorFunction = funcMatch[1] || 'unknown'
+  }
+  
+  const logMessage = `
+  ${new Date().toISOString()} - Error: ${message}\n
+  File: ${errorFile}
+  Function: ${errorFunction}
+  Line: ${errorLine}
+  ---------------------------------------------------
+  `;
+  
+  const logFilePath = path.join(__dirname, '..', 'ErrorLog.txt'); // Use path.join to create the file path
 
   fs.appendFile(logFilePath, logMessage, err => {
     if (err) {
@@ -18,7 +41,7 @@ const errorHandler = (error, req, res, next) => {
     }
   });
 
-  res.status(statusCode).json({ error: message });
+  res.status(statusCode).json({ message: error.message });
 };
 
 module.exports = errorHandler;

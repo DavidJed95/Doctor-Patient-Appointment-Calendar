@@ -39,7 +39,8 @@ exports.forgotPassword = async (req, res, next) => {
         .json({ message: 'An error occurred during password reset' });
     }
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
+    res.status(400).send({ status: 'failure', message: error.message });
     next(error);
   }
 };
@@ -63,7 +64,8 @@ exports.resetPassword = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({message:'Error updating password!'})
+    console.error(error);
+    res.status(500).json({message:'Error updating password!'})
+    next(error)
   }
 };

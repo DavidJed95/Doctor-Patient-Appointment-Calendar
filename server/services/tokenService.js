@@ -9,8 +9,8 @@ dotenv.config({ path: '../.env' });
 const generateToken = (user, type, expiresIn) => {
   const token = jwt.sign(
     {
-      id:user.ID,        // User's unique identifier
-      email:user.Email,     // User's email address
+      id: user.id || user.ID,        // User's unique identifier
+      email: user.email || user.Email,     // User's email address
       type,      // Type of the token (e.g. session, emailVerification, passwordReset)
     },
     process.env.JWT_SECRET,   // JWT secret to sign the token
