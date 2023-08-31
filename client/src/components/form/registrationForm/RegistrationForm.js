@@ -179,7 +179,7 @@ const RegistrationForm = () => {
         <div>
           <InputField
             label='Specialization:'
-            placeholder='Family Doctor, Physiotherapy, Hydrotherapy, Orthopedics, Occupational Therapy, Eyes, Psychology, Urology'
+            placeholder='Family Doctor, Pediatrician, Orthopedics, Physiotherapy, Hydrotherapy, Occupational Therapy, Eyes, Urology, Psychology, Otorhinolaryngology'
             value={specialization}
             name='specialization'
             onChange={handleChange}
