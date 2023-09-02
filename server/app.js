@@ -39,10 +39,16 @@ app.use(express.json());
 const authRouter = require('./routes/authRoutes');
 app.use('/auth', authRouter);
 
+const shiftRoutes = require('./routes/shiftRoutes');
+app.use('/shift', shiftRoutes);
+
+// const appointmentRoutes = require('./routes/appointmentRoutes')
+// app.use('/appointment', appointmentRoutes)
+
+// const reportRoutes = require('./routes/reportRoutes')
+
 // Error handling middleware
 app.use(errorHandler);
-
-
 
 // Start the server
 const port = process.env.PORT || 8001;

@@ -3,7 +3,13 @@ const doQuery = require('../database/query');
 const createUser = require('../database/queries/create-user');
 const tokenService = require('../services/tokenService');
 const emailService = require('../services/emailService');
-
+/**
+ * This method registers a new user to the system
+ * @param {*} req - request of the user
+ * @param {*} res - response back to the user
+ * @param {*} next - moves the error to the errorHandler if there is one
+ * @returns 
+ */
 exports.register = async (req, res, next) => {
   const {
     userType,
@@ -89,6 +95,7 @@ exports.register = async (req, res, next) => {
  * This method decodes the received token and checks if it is the same that the user got
  * @param {*} req - request of the user
  * @param {*} res - response back to the user
+ * @param {*} next - moves the error to the errorHandler if there is one
  * @returns status code of success/ failure of decoding the verification email, message and redirection path
  */
 exports.verifyEmail = async (req, res, next) => {

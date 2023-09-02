@@ -1,10 +1,18 @@
 .form {
   /* login */
-position: relative;
+  position: relative;
 
-width: 100%;
-min-height: 100vh;
-background: #27262C;
+  width: 100%;
+  min-height: 100vh;
+  background: #27262c;
+}
+
+.div {
+  background-color: var(--black);
+  height: 111.7rem;
+  overflow: hidden;
+  position: relative;
+  
 }
 
 .elipse1 {

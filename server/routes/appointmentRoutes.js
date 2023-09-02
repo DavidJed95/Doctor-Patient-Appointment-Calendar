@@ -1,12 +1,9 @@
 'use strict';
 const express = require('express');
 const createAppointmentController = require('../controllers/createAppointmentController');
-const cancelAppointmentController =
-  require('../controllers/cancelAppointmentController').cancelAppointmentController;
-const getAppointmentsByMedicalSpecialistController =
-  require('../controllers/getAppointmentsByMedicalSpecialistController').getAppointmentsByMedicalSpecialistController;
-const getAppointmentsByPatientController =
-  require('../controllers/getAppointmentsByPatientController').getAppointmentsByPatientController;
+const cancelAppointmentController = require('../controllers/cancelAppointmentController');
+const getAppointmentsByMedicalSpecialistController = require('../controllers/getAppointmentsByMedicalSpecialistController');
+const getAppointmentsByPatientController = require('../controllers/getAppointmentsByPatientController');
 
 const router = express.Router();
 
@@ -15,14 +12,17 @@ router.post(
   '/appointment/create',
   createAppointmentController.createAppointment,
 );
-router.post('/appointment/cancel', cancelAppointmentController);
+router.post(
+  '/appointment/cancel',
+  cancelAppointmentController.cancelAppointmentController,
+);
 router.get(
   '/appointment/medical-specialist/:medicalSpecialistId',
-  getAppointmentsByMedicalSpecialistController,
+  getAppointmentsByMedicalSpecialistController.getAppointmentsByMedicalSpecialistController,
 );
 router.get(
   '/appointment/patient/:patientId',
-  getAppointmentsByPatientController,
+  getAppointmentsByPatientController.getAppointmentsByPatientController,
 );
 
 module.exports = router;

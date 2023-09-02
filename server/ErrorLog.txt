@@ -20,3 +20,17 @@
   Line: 17
   ---------------------------------------------------
   
+  2023-09-01T20:34:55.019Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2023-09-01T20:35:02.015Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  

@@ -72,48 +72,50 @@ const LoginForm = ({
   };
 
   return (
-    <div>
+    
       <form action='/auth/login' className={styles.form}>
-        <h1 className={styles.userAuthHeading}>Login</h1>
-        <div>
-          <InputField
-            label='ID:'
-            placeholder='Enter Your ID'
-            value={id}
-            name='id'
-            onChange={handleChange}
-            required
-          />
+        <div className={`${styles.div}`}>
+          <h1 className={styles.userAuthHeading}>Login</h1>
+          <div>
+            <InputField
+              label='ID:'
+              placeholder='Enter Your ID'
+              value={id}
+              name='id'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <InputField
+              label='Password:'
+              placeholder='Enter Your Password'
+              value={password}
+              name='password'
+              type='password'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <Button text='Login' type='submit' fun={handleSubmit} />
+          <div>
+            <Link to='/register'>Sign Up</Link>
+          </div>
+          <div>
+            <Link to='/password-reset'>Forgot your Password?</Link>
+          </div>
+          {message && (
+            <p
+              className={
+                message.includes('success') ? styles.success : styles.failure
+              }
+            >
+              {message}
+            </p>
+          )}
         </div>
-        <div>
-          <InputField
-            label='Password:'
-            placeholder='Enter Your Password'
-            value={password}
-            name='password'
-            type='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <Button text='Login' type='submit' fun={handleSubmit} />
-        <div>
-          <Link to='/register'>Sign Up</Link>
-        </div>
-        <div>
-          <Link to='/password-reset'>Forgot your Password?</Link>
-        </div>
-        {message && (
-          <p
-            className={
-              message.includes('success') ? styles.success : styles.failure
-            }
-          >
-            {message}
-          </p>
-        )}
       </form>
-    </div>
+    
   );
 };
 

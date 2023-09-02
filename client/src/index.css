@@ -6,9 +6,29 @@
   padding: 0;
 }
 
-html {
+:root {
   box-sizing: border-box;
   font-size: 62.5%;
+
+  /*#region Variables*/
+  --black: rgba(39, 38, 44, 1);
+  --graye: rgba(153, 153, 153, 1);
+  --praimery: rgba(64, 68, 237, 1);
+  --secendry: rgba(147, 223, 255, 1);
+  --subtitel-font-family: 'IRANSansXFaNum-Regular', Helvetica;
+  --subtitel-font-size: 24px;
+  --subtitel-font-style: normal;
+  --subtitel-font-weight: 400;
+  --subtitel-letter-spacing: 0px;
+  --subtitel-line-height: normal;
+  --titel-font-family: 'JKAbode-RegularDemo', Helvetica;
+  --titel-font-size: 96px;
+  --titel-font-style: normal;
+  --titel-font-weight: 400;
+  --titel-letter-spacing: 0px;
+  --titel-line-height: normal;
+  --withe: rgba(255, 255, 255, 1);
+  /*#endregion */
 }
 
 body {
