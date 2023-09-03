@@ -5,7 +5,7 @@ import CustomLink from './CustomLink';
 import Button from '../button/Button';
 import styles from './navbar.module.css';
 
-const Navbar = ({ siteTitle, isLoggedIn, updateLoginStatus }) => {
+const Navbar = ({ siteTitle, isLoggedIn, updateLoginStatus, userType }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -31,6 +31,9 @@ const Navbar = ({ siteTitle, isLoggedIn, updateLoginStatus }) => {
         <CustomLink to='/home'>Home</CustomLink>
         <CustomLink to='/appointments'>Appointments</CustomLink>
         <CustomLink to='/profile-update'>Profile Update</CustomLink>
+        {userType === 'Medical Specialist' && (
+          <CustomLink to='manage-shifts'>Manage Shifts</CustomLink>
+        )}
         <Button
           className={styles.navLogoutButton}
           text='Logout'

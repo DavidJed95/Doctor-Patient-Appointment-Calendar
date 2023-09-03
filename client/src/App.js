@@ -11,6 +11,7 @@ import PasswordResetForm from './components/form/passwordResetForm/PasswordReset
 import Footer from './components/footer/Footer';
 import EmailVerification from './components/auth/EmailVerification';
 import PasswordReset from './components/auth/PasswordReset';
+import ManageShifts from './components/medicalSpecialist/ManageShifts'
 import NotFound from './components/pages/NotFound';
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <Navbar
           siteTitle='Doctor Patient Appointment Calendar'
           isLoggedIn={isLoggedIn}
+          userType={user.UserType}
           updateLoginStatus={updateLoginStatus}
         />
       )}
@@ -91,6 +93,7 @@ function App() {
                 />
               }
             />
+            {user.UserType === 'Medical Specialist' && <Route path ='/manage-shifts' element={<ManageShifts/>}/>}
           </>
         )}
         <Route path='/verify-email/:token' element={<EmailVerification />} />
