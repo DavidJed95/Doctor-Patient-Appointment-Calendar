@@ -33,7 +33,4 @@ router.post('/logout', (req, res, next) => {
   }
 });
 
-router.get('*', (req, res) => {
-  res.status(404).redirect('*');
-});
 module.exports = router;

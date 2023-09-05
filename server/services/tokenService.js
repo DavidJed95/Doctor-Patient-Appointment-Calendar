@@ -36,6 +36,11 @@ const generatePasswordResetToken = user => {
   return generateToken(user, "passwordReset", '1h');  // Password reset tokens often have a short lifespan for security
 };
 
+// Generate a token for keeping the user logged in
+const generateLoginToken = user => {
+  return generateToken(user, "login", '3d')
+}
+
 
 /**
  * Function to verify an email verification token
@@ -67,6 +72,7 @@ module.exports = {
   generateSessionToken,
   generateEmailVerificationToken,
   generatePasswordResetToken,
+  generateLoginToken,
   verifyEmailVerificationToken,
   verifyPasswordResetToken,
 };

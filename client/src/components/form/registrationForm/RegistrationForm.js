@@ -10,18 +10,21 @@ import UserSelector, { UserType } from '../../user/UserSelector';
  * @returns The registration
  */
 const RegistrationForm = () => {
-  const [userType, setUserType] = useState(UserType.Patient);
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [languages, setLanguages] = useState('');
-  const [medicalStatus, setMedicalStatus] = useState('');
-  const [medicalLicense, setMedicalLicense] = useState('');
-  const [specialization, setSpecialization] = useState('');
+  const initialState = {
+    userType: UserType.Patient,
+    id: '',
+    password: '',
+    passwordConfirm: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: '',
+    languages: '',
+    medicalStatus: '',
+    medicalLicense: '',
+    specialization: '',
+  };
+  const [formData, setFormData] = useState(initialState);
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
@@ -32,46 +35,7 @@ const RegistrationForm = () => {
    */
   const handleChange = event => {
     const { name, value } = event.target;
-    switch (name) {
-      case 'userType':
-        setUserType(value);
-        break;
-      case 'id':
-        setId(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      case 'passwordConfirm':
-        setPasswordConfirm(value);
-        break;
-      case 'firstName':
-        setFirstName(value);
-        break;
-      case 'lastName':
-        setLastName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'mobile':
-        setMobile(value);
-        break;
-      case 'languages':
-        setLanguages(value);
-        break;
-      case 'medicalStatus':
-        setMedicalStatus(value);
-        break;
-      case 'medicalLicense':
-        setMedicalLicense(value);
-        break;
-      case 'specialization':
-        setSpecialization(value);
-        break;
-      default:
-        break;
-    }
+    setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
   /**
@@ -82,14 +46,14 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     if (
-      !id ||
-      !password ||
-      !passwordConfirm ||
-      !firstName ||
-      !lastName ||
-      !email ||
-      !mobile ||
-      !languages
+      !formData.id ||
+      !formData.password ||
+      !formData.passwordConfirm ||
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.mobile ||
+      !formData.languages
     ) {
       setMessage('Please enter all required fields.');
       return;
@@ -102,21 +66,28 @@ const RegistrationForm = () => {
       .replace('T', ' ');
 
     const requestBody = {
-      userType,
-      id,
-      password,
-      passwordConfirm,
-      firstName,
-      lastName,
-      email,
-      mobile,
-      languages,
+      userType: formData.userType,
+      id: formData.id,
+      password: formData.password,
+      passwordConfirm: formData.passwordConfirm,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      mobile: formData.mobile,
+      languages: formData.languages,
       creationDate: formattedCreationDate,
-      medicalStatus: userType === UserType.Patient ? medicalStatus : undefined,
+      medicalStatus:
+        formData.userType === UserType.Patient
+          ? formData.medicalStatus
+          : undefined,
       medicalLicense:
-        userType === UserType.MedicalSpecialist ? medicalLicense : undefined,
+        formData.userType === UserType.MedicalSpecialist
+          ? formData.medicalLicense
+          : undefined,
       specialization:
-        userType === UserType.MedicalSpecialist ? specialization : undefined,
+        formData.userType === UserType.MedicalSpecialist
+          ? formData.specialization
+          : undefined,
     };
 
     try {
@@ -141,9 +112,12 @@ const RegistrationForm = () => {
     } catch (error) {
       console.error(
         'An error occurred during registration due to false data insertion:',
-        error
+        error,
       );
-      setMessage(error.message ||'An error occurred during registration due to false data insertion.');
+      setMessage(
+        error.message ||
+          'An error occurred during registration due to false data insertion.',
+      );
     }
   };
 
@@ -153,7 +127,7 @@ const RegistrationForm = () => {
         <InputField
           label='Medical Status:'
           placeholder='Medical Status'
-          value={medicalStatus}
+          value={formData.medicalStatus}
           name='medicalStatus'
           onChange={handleChange}
           required
@@ -169,7 +143,7 @@ const RegistrationForm = () => {
           <InputField
             label='Medical License:'
             placeholder='Medical License'
-            value={medicalLicense}
+            value={formData.medicalLicense}
             name='medicalLicense'
             onChange={handleChange}
             required
@@ -180,7 +154,7 @@ const RegistrationForm = () => {
           <InputField
             label='Specialization:'
             placeholder='Family Doctor, Pediatrician, Orthopedics, Physiotherapy, Hydrotherapy, Occupational Therapy, Eyes, Urology, Psychology, Otorhinolaryngology'
-            value={specialization}
+            value={formData.specialization}
             name='specialization'
             onChange={handleChange}
             required
@@ -190,7 +164,6 @@ const RegistrationForm = () => {
     );
   };
 
-  
   return (
     <div>
       <form action='/auth/register' method='POST' className={styles.form}>
@@ -202,7 +175,7 @@ const RegistrationForm = () => {
             label='ID:'
             placeholder='ID'
             pattern='[0-9]{9}'
-            value={id}
+            value={formData.id}
             name='id'
             onChange={handleChange}
             required
@@ -214,7 +187,7 @@ const RegistrationForm = () => {
             label='Password:'
             placeholder='Password'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={password}
+            value={formData.password}
             name='password'
             type='password'
             onChange={handleChange}
@@ -227,7 +200,7 @@ const RegistrationForm = () => {
             label='Password Confirmation:'
             placeholder='Confirm your password:'
             pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={passwordConfirm}
+            value={formData.passwordConfirm}
             name='passwordConfirm'
             type='password'
             onChange={handleChange}
@@ -238,7 +211,7 @@ const RegistrationForm = () => {
           <InputField
             label='First Name:'
             placeholder='First Name'
-            value={firstName}
+            value={formData.firstName}
             name='firstName'
             onChange={handleChange}
             required
@@ -248,7 +221,7 @@ const RegistrationForm = () => {
           <InputField
             label='Last Name:'
             placeholder='Last Name'
-            value={lastName}
+            value={formData.lastName}
             name='lastName'
             onChange={handleChange}
             required
@@ -259,7 +232,7 @@ const RegistrationForm = () => {
           <InputField
             label='Email:'
             placeholder='name@gmail.com'
-            value={email}
+            value={formData.email}
             name='email'
             onChange={handleChange}
             required
@@ -269,7 +242,7 @@ const RegistrationForm = () => {
           <InputField
             label='Mobile:'
             placeholder='Mobile'
-            value={mobile}
+            value={formData.mobile}
             name='mobile'
             onChange={handleChange}
             required
@@ -279,16 +252,17 @@ const RegistrationForm = () => {
           <InputField
             label='Languages:'
             placeholder='Languages'
-            value={languages}
+            value={formData.languages}
             name='languages'
             onChange={handleChange}
             required
           />
         </div>
 
-        {userType === UserType.Patient && renderPatientFields()}
+        {formData.userType === UserType.Patient && renderPatientFields()}
 
-        {userType === UserType.MedicalSpecialist && renderDoctorFields()}
+        {formData.userType === UserType.MedicalSpecialist &&
+          renderDoctorFields()}
 
         <Button text='Register' type='submit' fun={handleSubmit} />
         {message && (

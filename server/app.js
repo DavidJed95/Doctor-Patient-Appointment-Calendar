@@ -9,6 +9,7 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 
 // Load environment variables from .env file
 dotenv.config({ path: './.env' });
@@ -21,19 +22,19 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: false, // Set to true only if using HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
     },
   }),
 );
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Assuming your React app is running on port 3000
+    origin: 'http://localhost:3000',
     credentials: true, // This allows cookies to be sent with requests
   }),
 );
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
 // API Routes
 const authRouter = require('./routes/authRoutes');
@@ -46,6 +47,10 @@ app.use('/shift', shiftRoutes);
 // app.use('/appointment', appointmentRoutes)
 
 // const reportRoutes = require('./routes/reportRoutes')
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
+});
 
 // Error handling middleware
 app.use(errorHandler);

@@ -1,18 +1,31 @@
 .form {
   /* login */
-  position: relative;
+  /* position: relative;
 
   width: 100%;
   min-height: 100vh;
-  background: #27262c;
+  background: #27262c; */
+  width: 100%;
+  min-height: 100vh;
+  background: var(--background-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
 }
 
 .div {
-  background-color: var(--black);
+  /* background-color: var(--black);
   height: 111.7rem;
   overflow: hidden;
   position: relative;
-  
+   */
+  background-color: var(--black);
+  padding: 2rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  width: 80%;
+  max-width: 80rem;
 }
 
 .elipse1 {
@@ -132,11 +145,19 @@
 .userAuthHeading {
   /* LOGIN */
 
-  position: absolute;
+  /* position: absolute;
   width: 19rem;
   height: 9.6rem;
   left: 59.9rem;
-  top: 28.9rem;
+  top: 28.9rem; */
+  font-family: var(--font-main);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 9.6rem;
+    line-height: 9.6rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 2rem;
 
   /* title */
 

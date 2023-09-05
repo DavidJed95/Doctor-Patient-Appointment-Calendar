@@ -22,7 +22,7 @@ const InputField = ({
   };
 
   return (
-    <div className={styles.InputField}>
+    <div className={styles.inputField}>
       {label && (
         <label htmlFor={name} className={styles.label}>
           {label}

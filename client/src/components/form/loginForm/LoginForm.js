@@ -3,30 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
-// isLoggedIn,
-// updateLoginStatus,
-// userInfo,
-// getUserInformation,
-// userGreeting,
-// getUserGreeting,
+
 const LoginForm = ({
   updateLoginStatus,
   getUserInformation,
   getUserGreeting,
 }) => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [userDetails, setUserDetails] = useState({ id: '', password: '' });
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
 
   const handleChange = event => {
     const { name, value } = event.target;
-    if (name === 'id') {
-      setId(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
+    setUserDetails(prevDetails => ({ ...prevDetails, [name]: value }));
   };
 
   /**
@@ -36,10 +26,7 @@ const LoginForm = ({
   const handleSubmit = async event => {
     event.preventDefault();
 
-    const requestBody = {
-      id,
-      password,
-    };
+    const requestBody = userDetails;
 
     try {
       const response = await fetch('http://localhost:8000/auth/login', {
@@ -48,6 +35,7 @@ const LoginForm = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestBody),
+        credentials: 'include',
       });
 
       const data = await response.json();
@@ -72,50 +60,48 @@ const LoginForm = ({
   };
 
   return (
-    
-      <form action='/auth/login' className={styles.form}>
-        <div className={`${styles.div}`}>
-          <h1 className={styles.userAuthHeading}>Login</h1>
-          <div>
-            <InputField
-              label='ID:'
-              placeholder='Enter Your ID'
-              value={id}
-              name='id'
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <InputField
-              label='Password:'
-              placeholder='Enter Your Password'
-              value={password}
-              name='password'
-              type='password'
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <Button text='Login' type='submit' fun={handleSubmit} />
-          <div>
-            <Link to='/register'>Sign Up</Link>
-          </div>
-          <div>
-            <Link to='/password-reset'>Forgot your Password?</Link>
-          </div>
-          {message && (
-            <p
-              className={
-                message.includes('success') ? styles.success : styles.failure
-              }
-            >
-              {message}
-            </p>
-          )}
+    <form action='/auth/login' className={styles.form}>
+      <div className={`${styles.div}`}>
+        <h1 className={styles.userAuthHeading}>Login</h1>
+        <div>
+          <InputField
+            label='ID:'
+            placeholder='Enter Your ID'
+            value={userDetails.id}
+            name='id'
+            onChange={handleChange}
+            required
+          />
         </div>
-      </form>
-    
+        <div>
+          <InputField
+            label='Password:'
+            placeholder='Enter Your Password'
+            value={userDetails.password}
+            name='password'
+            type='password'
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <Button text='Login' type='submit' fun={handleSubmit} />
+        <div>
+          <Link to='/register'>Sign Up</Link>
+        </div>
+        <div>
+          <Link to='/password-reset'>Forgot your Password?</Link>
+        </div>
+        {message && (
+          <p
+            className={
+              message.includes('success') ? styles.success : styles.failure
+            }
+          >
+            {message}
+          </p>
+        )}
+      </div>
+    </form>
   );
 };
 
