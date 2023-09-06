@@ -21,7 +21,7 @@
   --subtitle-font-weight: 400;
   --subtitle-letter-spacing: 0;
   --subtitle-line-height: normal;
-  --title-font-family: 'JKAbode-RegularDemo', Helvetica;
+  --title-font-family: 'JKAbode-Demo', Helvetica, 'sans-serif';
   --title-font-size: 9.6rem;
   --title-font-style: normal;
   --title-font-weight: 400;
@@ -67,4 +67,12 @@ footer {
 
   /*padding it's distance from others elements*/
   padding: 0.1rem 2rem;
+}
+
+@font-face {
+    font-family: "JKAbode-Demo"; /* You can also use 'JKAbode-Demo' here if you prefer */
+    src: url('./assets/fonts/JKAbode-Demo.ttf') format('truetype');
+    /* Include other formats like woff or woff2 if you have them for better compatibility */
+    font-weight: 900;
+    /* font-style: normal; */
 }

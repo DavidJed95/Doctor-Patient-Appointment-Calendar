@@ -70,6 +70,7 @@ const LoginForm = ({
             alt='Login'
             src={`${login}`}
           />
+          <h1 className={styles.userAuthHeading}>login</h1>
           <div>
             <InputField
               label='ID:'
