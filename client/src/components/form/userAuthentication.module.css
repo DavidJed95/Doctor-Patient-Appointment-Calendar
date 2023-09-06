@@ -1,88 +1,79 @@
 .form {
-  /* login */
-  /* position: relative;
-
   width: 100%;
   min-height: 100vh;
-  background: #27262c; */
-  width: 100%;
-  min-height: 100vh;
-  background: var(--background-dark);
+  background: var(--black);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 2rem 0;
 }
 
-.div {
-  /* background-color: var(--black);
-  height: 111.7rem;
-  overflow: hidden;
-  position: relative;
-   */
+.form .div {
   background-color: var(--black);
-  padding: 2rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  max-height: 111.7rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 80%;
-  max-width: 80rem;
+  max-width: 172.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  margin: 2rem;
+}
+
+.elipse1,
+.elipse2,
+.subtract {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .elipse1 {
   /* Ellipse 1 */
-
-  position: absolute;
-  width: 91.4rem;
-  height: 91.4rem;
-  left: -58.5rem;
-  top: 10.2rem;
-
+  background: var(--primary);
+  border-radius: 50%;
+  width: 45.7rem;
+  height: 45.7rem;
   /* primary */
-
-  background: #4044ed;
 }
 
 .elipse2 {
   /* Ellipse 2 */
-
-  position: absolute;
-  max-width: 7.6rem;
-  max-height: 7.6rem;
-  left: 11.8rem;
-  top: 24.3rem;
-
-  /* secondary */
-
-  background: #93dfff;
+  background: var(--secondary);
+  border-radius: 50%;
+  width: 3.8rem;
+  height: 3.8rem;
   transform: matrix(1, 0, 0, -1, 0, 0);
+  /* secondary */
 }
 
 .subtract {
   /* Subtract */
-
-  position: absolute;
-  width: 107.076rem;
-  height: 101.05rem;
-  left: 109.8rem;
-  top: -14.086rem;
-
-  /* primary */
-
-  background: #4044ed;
+  background: var(--primary);
   transform: rotate(-45deg);
+  width: 53.5rem;
+  height: 50.5rem;
+  /* primary */
+}
+
+.polygon1,
+.polygon2,
+.polygon3 {
+  background: rgba(64, 68, 237, 0.5);
+  transform: rotate(-44.32deg);
 }
 
 .polygon1 {
   /* Polygon 1 */
-
-  position: absolute;
-  width: 336.47px;
+  width: 33.647rem;
   height: 336.47px;
   left: 1248px;
   top: 920.08px;
-
-  background: rgba(64, 68, 237, 0.5);
-  transform: rotate(-44.32deg);
 }
 
 .polygon2 {
@@ -93,9 +84,6 @@
   height: 33.647rem;
   left: 135.314rem;
   top: 101.415rem;
-
-  background: rgba(64, 68, 237, 0.5);
-  transform: rotate(-44.32deg);
 }
 
 .polygon3 {
@@ -106,9 +94,6 @@
   height: 33.647rem;
   left: 146.224rem;
   top: 110.697rem;
-
-  background: rgba(64, 68, 237, 0.5);
-  transform: rotate(-44.32deg);
 }
 
 .usernameInputLine {
@@ -151,13 +136,13 @@
   left: 59.9rem;
   top: 28.9rem; */
   font-family: var(--font-main);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 9.6rem;
-    line-height: 9.6rem;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9.6rem;
+  line-height: 9.6rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 2rem;
 
   /* title */
 
@@ -213,6 +198,16 @@
   color: #999999;
 }
 
+.ellipse {
+  background-color: var(--secondary);
+  border-radius: 38px;
+  height: 76px;
+  left: 703px;
+  position: relative;
+  top: 65px;
+  width: 76px;
+}
+
 .frame {
   /* Frame 1 */
 
@@ -232,9 +227,19 @@
 
   /* primary */
 
-  background: #4044ed;
+  background-color: var(--primary);
 }
-
+.frame .text-wrapper {
+  color: var(--white);
+  font-family: 'IRANSansXFaNum-Regular', Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
 .failure {
   color: red;
 }

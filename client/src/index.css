@@ -16,18 +16,18 @@
   --primary: rgba(64, 68, 237, 1);
   --secondary: rgba(147, 223, 255, 1);
   --subtitle-font-family: 'IRANSansXFaNum-Regular', Helvetica;
-  --subtitle-font-size: 24px;
+  --subtitle-font-size: 2.4rem;
   --subtitle-font-style: normal;
   --subtitle-font-weight: 400;
-  --subtitle-letter-spacing: 0px;
+  --subtitle-letter-spacing: 0;
   --subtitle-line-height: normal;
   --title-font-family: 'JKAbode-RegularDemo', Helvetica;
-  --title-font-size: 96px;
+  --title-font-size: 9.6rem;
   --title-font-style: normal;
   --title-font-weight: 400;
-  --title-letter-spacing: 0px;
+  --title-letter-spacing: 0;
   --title-line-height: normal;
-  --withe: rgba(255, 255, 255, 1);
+  --white: rgba(255, 255, 255, 1);
   /*#endregion */
 }
 
@@ -38,7 +38,7 @@ body {
   line-height: 1.5;
   font-weight: 400;
   background-color: gray;
-  border: 10px solid red;
+  border: 1rem solid red;
   min-height: 100vh;
   flex-direction: column;
 }
