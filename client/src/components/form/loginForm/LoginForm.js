@@ -3,12 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
-import login from '../../../assets/images/login.png'
+
 
 const LoginForm = ({
   updateLoginStatus,
   getUserInformation,
-  getUserGreeting,
 }) => {
   const [userDetails, setUserDetails] = useState({ id: '', password: '' });
   const [message, setMessage] = useState('');
@@ -47,7 +46,7 @@ const LoginForm = ({
         // Update isLoggedIn state in the parent component(APP.js)
         updateLoginStatus(true);
         getUserInformation(data.user);
-        getUserGreeting(data.greeting);
+        
 
         setTimeout(() => {
           navigate(data.redirectTo);
@@ -65,12 +64,7 @@ const LoginForm = ({
       <div className={`${styles.div}`}>
         <div className={styles.overlap}>
           <div className={styles.ellipse} />
-          <img
-            className={styles.userAuthHeading}
-            alt='Login'
-            src={`${login}`}
-          />
-          <h1 className={styles.userAuthHeading}>login</h1>
+          <h1 className={styles.userAuthHeading}>Login</h1>
           <div>
             <InputField
               label='ID:'

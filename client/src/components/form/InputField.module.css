@@ -27,8 +27,16 @@
     border-color: #4080ff;
 }
 
-.errorMessage {
-    color: red;
-    margin-top: 0.8rem;
+@media screen and (max-width: 76.8rem) {
+  .label {
     font-size: 1.2rem;
+  }
+
+  .input {
+    font-size: 1.2rem;
+  }
+
+  .errorMessage {
+    font-size: 1rem;
+  }
 }

@@ -21,7 +21,7 @@
   --subtitle-font-weight: 400;
   --subtitle-letter-spacing: 0;
   --subtitle-line-height: normal;
-  --title-font-family: 'JKAbode-Demo', Helvetica, 'sans-serif';
+  --title-font-family: "JKAbode-RegularDemo", Helvetica, 'sans-serif';
   --title-font-size: 9.6rem;
   --title-font-style: normal;
   --title-font-weight: 400;
@@ -69,10 +69,42 @@ footer {
   padding: 0.1rem 2rem;
 }
 
+/* Smaller screens, usually mobiles */
+@media screen and (max-width: 60rem) {
+    :root {
+        font-size: 55%;  /* Adjusting base font size for mobile */
+    }
+    body {
+        border: 0.5rem solid red;
+    }
+    .app {
+        width: 100%;  /* Using full width for mobile */
+        padding: 0.1rem 1rem;  /* Less padding on sides for mobile */
+    }
+}
+
+/* Medium screens, usually tablets */
+@media screen and (min-width: 60.1rem) and (max-width: 1024px) {
+    :root {
+        font-size: 58%;  /* Adjusting base font size for tablets */
+    }
+    body {
+        border: 0.7rem solid red;
+    }
+    .app {
+        width: 98%;  /* Using slightly less full width for tablets */
+        padding: 0.1rem 1.5rem;  /* Moderate padding on sides for tablets */
+    }
+}
+
+/* Large screens, usually desktops */
+@media screen and (min-width: 102.5rem) {
+    /* This is your default style, so you might not need to repeat it here unless you're overriding previous styles. */
+}
+
+
+
 @font-face {
-    font-family: "JKAbode-Demo"; /* You can also use 'JKAbode-Demo' here if you prefer */
-    src: url('./assets/fonts/JKAbode-Demo.ttf') format('truetype');
-    /* Include other formats like woff or woff2 if you have them for better compatibility */
-    font-weight: 900;
-    /* font-style: normal; */
+  font-family: "JKAbode-RegularDemo";
+  src: url('./assets/fonts/JKAdobeDemo.woff') format('woff');
 }

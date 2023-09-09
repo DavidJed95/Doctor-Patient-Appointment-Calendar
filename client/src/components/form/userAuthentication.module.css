@@ -10,7 +10,7 @@
   padding: 2rem 0;
 }
 
-.form .div {
+.form > .div {
   background-color: var(--black);
   max-height: 111.7rem;
   overflow: hidden;
@@ -73,7 +73,7 @@
   width: 33.647rem;
   height: 33.647rem;
   left: 124.8rem;
-  top: 92.0.08rem;
+  top: 92.08rem;
 }
 
 .polygon2 {
@@ -112,10 +112,10 @@
   /* Line 2 */
 
   position: absolute;
-  width: 531px;
-  height: 0px;
-  left: 599px;
-  top: 659px;
+  width: 53.1rem;
+  height: 0;
+  left: 59.9rem;
+  top: 65.9rem;
 
   border: 0.2rem solid var(--white);
 }
@@ -128,67 +128,21 @@
 }
 
 .userAuthHeading {
-  /* LOGIN */
   font-family: var(--title-font-family);
-  font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 9.6rem;
   line-height: 9.6rem;
   color: var(--white);
   text-align: center;
   margin-bottom: 2rem;
-
-  /* title */
-
-  font-family: 'Inter, sans-serif';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 9.6rem;
-  line-height: 9.6rem;
-  /* identical to box height */
-  color: var(--white);
 }
 
-.username {
-  /* Username */
-
-  position: absolute;
-  width: 10.9rem;
-  height: 3.6rem;
-  left: 59.9rem;
-  top: 51.3rem;
-
-  /* subtitle */
-
+.username, .password {
   font-family: 'IRANSansXFaNum';
   font-style: normal;
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 3.6rem;
-  /* identical to box height */
-
-  /* gray */
-
-  color: #999999;
-}
-
-.password {
-  /* Password */
-
-  position: absolute;
-  width: 10.6rem;
-  height: 3.6rem;
-  left: 59.9rem;
-  top: 61.3rem;
-
-  /* subtitle */
-
-  font-family: 'IRANSansXFaNum';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2.4rem;
-  line-height: 3.6rem;
-  /* identical to box height */
   color: #999999;
 }
 
@@ -203,26 +157,14 @@
 }
 
 .frame {
-  /* Frame 1 */
-
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 1rem 23.9rem;
-  gap: 10px;
-
-  position: absolute;
-  width: 53.1rem;
-  height: 5.6rem;
-  left: 59.9rem;
-  top: 72.3rem;
-
-  /* primary */
-
+  gap: 10;
   background-color: var(--primary);
 }
+
 .frame .text-wrapper {
   color: var(--white);
   font-family: 'IRANSansXFaNum-Regular', Helvetica;
@@ -230,14 +172,24 @@
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
-  margin-top: -1px;
-  position: relative;
-  width: fit-content;
 }
+
 .failure {
   color: red;
 }
 
 .success {
   color: rgb(0, 255, 42);
+}
+
+@media screen and (max-width: 76.8rem) {
+  .userAuthHeading {
+    font-size: 6rem;
+    line-height: 6rem;
+  }
+
+  .username, .password {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
 }

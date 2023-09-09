@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default function Home({ user, userGreeting }) {
-  const [greeting, setGreeting] = useState(userGreeting);
+export default function Home({ user }) {
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     if (user && user.UserType) {

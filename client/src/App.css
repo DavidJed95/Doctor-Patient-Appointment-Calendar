@@ -31,6 +31,12 @@
   color: #61dafb;
 }
 
+@media screen and (max-width: 60rem) {
+  .form input, .form label, .form button {
+    font-size: 2rem;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
