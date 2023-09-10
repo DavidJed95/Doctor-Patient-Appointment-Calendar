@@ -1,18 +1,34 @@
-import React, { Component } from 'react'
-import AppointmentDay from './AppointmentDay'
-import styles from './AppointmentCalendar.module.css';
+import React, { Fragment } from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default class AppointmentCalendar extends Component {
-  render() {
-    return (
-      <div>
-        {/* Render 30 days */}
-        {Array.from({ length: 30 }, (_, index) => {
-          const date = index + 1;
-          const formattedDate = `2023-05-${date < 10 ? '0' + date : date}`; // Maybe my desired date will be replaced and formatted here
-          return <AppointmentDay key={formattedDate} date={formattedDate} />;
-        })}
-      </div>
-    );
-  }
+export default function AppointmentCalendar() {
+  return <Fragment>AppointmentCalendar</Fragment>;
+}
+
+const events = [{ title: 'Meeting', start: new Date() }];
+
+export function Calendar() {
+  return (
+    <div>
+      <h2>Appointment Calendar</h2>
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView='dayGridMonth'
+        weekends={true}
+        events={events}
+        eventContent={renderEventContent}
+      />
+    </div>
+  );
+}
+
+// a custom render function
+function renderEventContent(eventInfo) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  );
 }

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { updateLoginStatus, setUser } from '../../../redux/reducers/userSlice';
+
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
 
-
-const LoginForm = ({
-  updateLoginStatus,
-  getUserInformation,
-}) => {
+const LoginForm = () => {
   const [userDetails, setUserDetails] = useState({ id: '', password: '' });
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -44,9 +45,8 @@ const LoginForm = ({
 
       if (response.ok) {
         // Update isLoggedIn state in the parent component(APP.js)
-        updateLoginStatus(true);
-        getUserInformation(data.user);
-        
+        dispatch(updateLoginStatus(true));
+        dispatch(setUser(data.user));
 
         setTimeout(() => {
           navigate(data.redirectTo);
@@ -90,7 +90,7 @@ const LoginForm = ({
             className={styles.frame}
             text='Login'
             type='submit'
-            fun={handleSubmit}
+            handleClick={handleSubmit}
           />
           <div>
             <Link to='/register'>Sign Up</Link>

@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../../redux/reducers/userSlice';
+
 import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
 
-const UpdatePersonalProfile = ({ user, getUserInformation }) => {
+const UpdatePersonalProfile = () => {
+  const dispatch = useDispatch();
+  
+  const user = useSelector(state => state.user.userInfo);
   const [updatedUser, setUpdatedUser] = useState({ ...user });
   const [changedFields, setChangedFields] = useState({});
   const [message, setMessage] = useState('');
@@ -27,6 +34,11 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
+    if (!Object.keys(changedFields).length) {
+      setMessage('No fields were changed.');
+      return;
+    }
+
     try {
       const updatedUserData = { ...changedFields, ID: user.ID };
       const response = await fetch(
@@ -45,7 +57,7 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
 
       if (response.ok) {
         setUpdatedUser(data.user);
-        getUserInformation(data.user);
+        dispatch(setUser(data.user));
         setTimeout(() => {
           navigate(data.redirectTo);
         }, 2000);
@@ -125,7 +137,7 @@ const UpdatePersonalProfile = ({ user, getUserInformation }) => {
           />
         </div>
 
-        <Button text='Update & Save' type='submit' fun={handleSubmit} />
+        <Button text='Update & Save' type='submit' handleClick={handleSubmit} />
         {message && (
           <p
             className={

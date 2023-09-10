@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/reducers/userSlice';
+
 import CustomLink from './CustomLink';
 import Button from '../button/Button';
 import styles from './navbar.module.css';
 
-const Navbar = ({ siteTitle, isLoggedIn, updateLoginStatus, userType }) => {
+const Navbar = ({ siteTitle, userType }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,7 +21,7 @@ const Navbar = ({ siteTitle, isLoggedIn, updateLoginStatus, userType }) => {
         },
       });
       if (response.ok) {
-        updateLoginStatus(false);
+        dispatch(logoutUser());
         navigate('/');
       }
     } catch (error) {}

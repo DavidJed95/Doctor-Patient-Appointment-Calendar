@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+// React imports
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './redux/store';
 
+// Redux imports
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLoginStatus, setUser } from './redux/reducers/userSlice';
+
+// Components and pages imports
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Appointments from './components/pages/Appointments';
@@ -13,98 +17,65 @@ import PasswordResetForm from './components/form/passwordResetForm/PasswordReset
 import Footer from './components/footer/Footer';
 import EmailVerification from './components/auth/EmailVerification';
 import PasswordReset from './components/auth/PasswordReset';
-import ManageShifts from './components/medicalSpecialist/ManageShifts'
+import ManageShifts from './components/medicalSpecialist/ManageShifts';
 import NotFound from './components/pages/NotFound';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
-  
-
-  const updateLoginStatus = status => {
-    setIsLoggedIn(status);
-  };
-
-  const getUserInformation = user => {
-    setUser(user);
-  };
-
-  
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const user = useSelector(state => state.user.userInfo);
 
   // Simulate checking user's login status
   useEffect(() => {
+    // TODO: do i need this function to be async will it ?
     async function fetchLoginStatus() {
       try {
         const response = await fetch('http://localhost:8000/auth/check-login');
         const data = await response.json();
 
-        setIsLoggedIn(data.isLoggedIn);
-        getUserInformation(data.user);
-        
+        dispatch(updateLoginStatus(data.isLoggedIn));
+        dispatch(setUser(data.user));
       } catch (error) {
         console.error('Error fetching login status:', error);
       }
     }
     fetchLoginStatus();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <Provider store={store}>
-      <Router>
-        {isLoggedIn && (
-          <Navbar
-            siteTitle='Doctor Patient Appointment Calendar'
-            isLoggedIn={isLoggedIn}
-            userType={user.UserType}
-            updateLoginStatus={updateLoginStatus}
-          />
+    <Router>
+      {isLoggedIn && (
+        <Navbar
+          siteTitle='Doctor Patient Appointment Calendar'
+          userType={user.UserType}
+        />
+      )}
+      <Routes>
+        {/* Only show login and registration forms if not logged in */}
+        {!isLoggedIn ? (
+          <>
+            <Route path='/' element={<LoginForm />} />
+            <Route path='/register' element={<RegistrationForm />} />
+            <Route path='/password-reset' element={<PasswordResetForm />} />
+          </>
+        ) : (
+          <>
+            <Route path='/home' element={<Home user={user} />} />
+            <Route path='/appointments' element={<Appointments />} />
+            <Route path='/profile-update' element={<UpdateUserProfile />} />
+            {user.UserType === 'Medical Specialist' && (
+              <Route path='/manage-shifts' element={<ManageShifts />} />
+            )}
+          </>
         )}
-        <Routes>
-          {/* Only show login and registration forms if not logged in */}
-          {!isLoggedIn ? (
-            <>
-              <Route
-                path='/'
-                element={
-                  <LoginForm
-                    updateLoginStatus={updateLoginStatus}
-                    getUserInformation={getUserInformation}
-                    
-                  />
-                }
-              />
-              <Route path='/register' element={<RegistrationForm />} />
-              <Route path='/password-reset' element={<PasswordResetForm />} />
-              <Route path='*' element={<NotFound />} />
-            </>
-          ) : (
-            <>
-              <Route
-                path='/home'
-                element={<Home user={user} />}
-              />
-              <Route path='/appointments' element={<Appointments />} />
-              <Route
-                path='/profile-update'
-                element={
-                  <UpdateUserProfile
-                    user={user}
-                    getUserInformation={getUserInformation}
-                  />
-                }
-              />
-              {user.UserType === 'Medical Specialist' && <Route path ='/manage-shifts' element={<ManageShifts/>}/>}
-            </>
-          )}
-          <Route path='/verify-email/:token' element={<EmailVerification />} />
-          <Route path='/reset-password/:token' element={<PasswordReset />} />
-          <Route path='*' element={<NotFound />} />
-          {/* Protected routes, only visible if logged in */}
-        </Routes>
-  
-        <Footer name='David Jedwabsky' />
-      </Router>
-    </Provider>
+        <Route path='/verify-email/:token' element={<EmailVerification />} />
+        <Route path='/reset-password/:token' element={<PasswordReset />} />
+        <Route path='*' element={<NotFound />} />
+        {/* Protected routes, only visible if logged in */}
+      </Routes>
+
+      <Footer name='David Jedwabsky' />
+    </Router>
   );
 }
 

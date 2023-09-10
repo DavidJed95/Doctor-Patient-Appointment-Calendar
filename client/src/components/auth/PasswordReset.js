@@ -53,7 +53,11 @@ const PasswordReset = () => {
         onChange={handleChange}
         required
       />
-      <Button text='Reset Password' type='submit' fun={handlePasswordReset} />
+      <Button
+        text='Reset Password'
+        type='submit'
+        handleClick={handlePasswordReset}
+      />
       <p
         className={
           statusMessage.includes('success') ? styles.success : styles.failure

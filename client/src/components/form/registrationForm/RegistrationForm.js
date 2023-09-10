@@ -264,7 +264,7 @@ const RegistrationForm = () => {
         {formData.userType === UserType.MedicalSpecialist &&
           renderDoctorFields()}
 
-        <Button text='Register' type='submit' fun={handleSubmit} />
+        <Button text='Register' type='submit' handleClick={handleSubmit} />
         {message && (
           <p
             className={
