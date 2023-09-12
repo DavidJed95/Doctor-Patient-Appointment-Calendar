@@ -181,3 +181,10 @@
   Line: 15
   ---------------------------------------------------
   
+  2023-09-10T22:34:18.264Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  

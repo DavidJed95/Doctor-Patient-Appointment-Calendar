@@ -3,7 +3,6 @@ const { login } = require('../database/queries/all-queries');
 const { generateLoginToken } = require('../services/tokenService');
 exports.login = async (req, res, next) => {
   const userInput = req.body;
-  console.log(userInput);
 
   if (!userInput.id && !userInput.password) {
     return res.status(401).json({
@@ -26,7 +25,6 @@ exports.login = async (req, res, next) => {
   }
   try {
     const result = await login(userInput);
-    console.log(`result is: ${result}`);
 
     if (result.status === 'success') {
       // Check if the user's email is verified

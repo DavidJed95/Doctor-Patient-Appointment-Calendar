@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/reducers/userSlice';
 
 import CustomLink from './CustomLink';
 import Button from '../button/Button';
 import styles from './navbar.module.css';
 
-const Navbar = ({ siteTitle, userType }) => {
+const Navbar = ({ siteTitle }) => {
+  const userType = useSelector(state => state.user.userInfo.UserType);
+  const [message, setMessage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,11 +22,18 @@ const Navbar = ({ siteTitle, userType }) => {
           'Content-Type': 'application/json',
         },
       });
+
+      const data = await response.json();
+      setMessage(data.message);
       if (response.ok) {
-        dispatch(logoutUser());
-        navigate('/');
+        setTimeout(() => {
+          dispatch(logoutUser());
+          navigate('/');
+        }, 2000);
       }
-    } catch (error) {}
+    } catch (error) {
+      setMessage(error.message);
+    }
   };
   return (
     <nav className={styles.nav}>
@@ -41,9 +50,18 @@ const Navbar = ({ siteTitle, userType }) => {
         <Button
           className={styles.navLogoutButton}
           text='Logout'
-          fun={handleLogout}
+          handleClick={handleLogout}
         />
       </ul>
+      {message && (
+        <p
+          className={
+            message.includes('success') ? styles.success : styles.failure
+          }
+        >
+          {message}
+        </p>
+      )}
     </nav>
   );
 };

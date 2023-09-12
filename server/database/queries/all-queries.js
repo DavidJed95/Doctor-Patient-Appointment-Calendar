@@ -15,25 +15,33 @@ const { forgotPassword, updateUserPassword } = require('./forgot-password');
 // 4) Update user profile
 const updateUserProfile = require('./update-user-profile');
 
-// 5) Set an appointment for a patient
+// 5) Medical Specialist Shifts
+const {
+  createShift,
+  updateShift,
+  deleteShift,
+  getShiftsForSpecialist,
+} = require('./medical-specialist-shifts');
+
+// 6) Set an appointment for a patient
 const setAppointment = require('./set-appointment');
 
-// 6) Cancel an existing appointment
+// 7) Cancel an existing appointment
 const cancelAppointment = require('./cancel-appointment');
 
-// 7) Update an existing appointment
+// 8) Update an existing appointment
 const updateAppointment = require('./update-appointment');
 
-// 8) Get appointments for as specific medical specialist
+// 9) Get appointments for as specific medical specialist
 const getAppointmentsByMedicalSpecialist = require('./get-appointments-by-medical-specialist');
 
-// 9) Get appointments for as specific patient
+// 10) Get appointments for as specific patient
 const getAppointmentsByPatient = require('./get-appointments-by-patient');
 
-// 8.1) Get daily report of patients for a medical specialist
+// 9.1) Get daily report of patients for a medical specialist
 const getAppointmentReportByMedicalSpecialist = require('./get-appointment-report-by-medical-specialist');
 
-// 9.1) Get appointment report for a patient
+// 10.1) Get appointment report for a patient
 const getAppointmentReportByPatient = require('./get-appointment-report-by-patient');
 
 module.exports = {
@@ -43,6 +51,10 @@ module.exports = {
   forgotPassword,
   updateUserPassword,
   updateUserProfile,
+  createShift,
+  updateShift,
+  deleteShift,
+  getShiftsForSpecialist,
   setAppointment,
   cancelAppointment,
   updateAppointment,

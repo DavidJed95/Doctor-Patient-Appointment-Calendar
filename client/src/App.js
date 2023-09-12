@@ -27,7 +27,6 @@ function App() {
 
   // Simulate checking user's login status
   useEffect(() => {
-    // TODO: do i need this function to be async will it ?
     async function fetchLoginStatus() {
       try {
         const response = await fetch('http://localhost:8000/auth/check-login');
@@ -44,12 +43,7 @@ function App() {
 
   return (
     <Router>
-      {isLoggedIn && (
-        <Navbar
-          siteTitle='Doctor Patient Appointment Calendar'
-          userType={user.UserType}
-        />
-      )}
+      {isLoggedIn && <Navbar siteTitle='Doctor Patient Appointment Calendar' />}
       <Routes>
         {/* Only show login and registration forms if not logged in */}
         {!isLoggedIn ? (
@@ -60,7 +54,7 @@ function App() {
           </>
         ) : (
           <>
-            <Route path='/home' element={<Home user={user} />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/appointments' element={<Appointments />} />
             <Route path='/profile-update' element={<UpdateUserProfile />} />
             {user.UserType === 'Medical Specialist' && (

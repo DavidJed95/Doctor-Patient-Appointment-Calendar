@@ -4,16 +4,14 @@ const {
   updateUserPassword,
 } = require('../database/queries/all-queries');
 const tokenService = require('../services/tokenService');
-const emailService = require('..//services/emailService');
+const emailService = require('../services/emailService');
 
 exports.forgotPassword = async (req, res, next) => {
   console.log(req.body);
   const user = req.body;
 
   try {
-    console.log('Before calling forgotPassword');
     const result = await forgotPassword(user);
-    console.log('After calling forgotPassword', result);
 
     if (result.status === 'success') {
       // Generate a password reset token
@@ -49,14 +47,13 @@ exports.resetPassword = async (req, res, next) => {
   const { token } = req.params;
   const { newPassword } = req.body;
   try {
-    const decodedToken = tokenService.verifyPasswordResetToken(token)
+    const decodedToken = tokenService.verifyPasswordResetToken(token);
 
     if (decodedToken) {
-      // Here, use your database function to update the user's password
-      // Assuming you have a function updatePassword in your database queries
-      //TO DO: create update Password function in database
       await updateUserPassword(decodedToken.id, newPassword);
-      return res.status(200).json({message:'Password successfully updated!', redirectTo:'/'})
+      return res
+        .status(200)
+        .json({ message: 'Password successfully updated!', redirectTo: '/' });
     } else {
       return res.status(400).json({
         message:
@@ -64,8 +61,7 @@ exports.resetPassword = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({message:'Error updating password!'})
-    next(error)
+    res.status(500).json({ message: 'Error updating password!' });
+    next(error);
   }
 };

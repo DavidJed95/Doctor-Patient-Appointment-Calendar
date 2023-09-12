@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Home({ user }) {
+import { useSelector } from 'react-redux';
+
+export default function Home() {
+  const user = useSelector(state => state.user.userInfo);
   const [greeting, setGreeting] = useState('Welcome');
 
   useEffect(() => {

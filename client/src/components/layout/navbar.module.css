@@ -37,6 +37,14 @@
   background-color: #777;
 }
 
+.failure {
+  color: red;
+}
+
+.success {
+  color: rgb(0, 255, 42);
+}
+
 @media screen and (max-width: 80rem) {
   .nav {
     flex-direction: column;

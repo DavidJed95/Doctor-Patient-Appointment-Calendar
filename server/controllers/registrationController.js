@@ -1,6 +1,6 @@
 'use strict';
 const doQuery = require('../database/query');
-const createUser = require('../database/queries/create-user');
+const { createUser } = require('../database/queries/all-queries');
 const tokenService = require('../services/tokenService');
 const emailService = require('../services/emailService');
 /**
@@ -8,7 +8,7 @@ const emailService = require('../services/emailService');
  * @param {*} req - request of the user
  * @param {*} res - response back to the user
  * @param {*} next - moves the error to the errorHandler if there is one
- * @returns 
+ * @returns
  */
 exports.register = async (req, res, next) => {
   const {
@@ -52,14 +52,12 @@ exports.register = async (req, res, next) => {
 
     const result = await createUser(user);
 
+    // Registration successful
+    // Generate email verification token
     if (result.status === 'success') {
-      // Registration successful
-      // Generate email verification token
       const emailVerificationToken =
         tokenService.generateEmailVerificationToken(user);
-      console.log(
-        `emailVerificationToken generated in the registrationController: ${emailVerificationToken}`,
-      );
+
       // Send email verification email to the user
       const emailContent = `<p>Hi ${firstName} ${lastName},</p>
       <p>Thank you for registering. Please click on the following link to verify your email:</p>
@@ -85,7 +83,6 @@ exports.register = async (req, res, next) => {
         .json({ message: result.message, redirectTo: '/register' });
     }
   } catch (error) {
-    console.error(error.message);
     res.status(400).send({ status: 'failure', message: error.message });
     next(error);
   }
@@ -109,10 +106,6 @@ exports.verifyEmail = async (req, res, next) => {
     console.log('decoded user: ', decodedToken.user);
     if (decodedToken) {
       const userId = decodedToken.id || decodedToken.ID;
-      console.log(decodedToken);
-      console.log(typeof decodedToken.id);
-      console.log('User ID:', userId, 'Type:', typeof userId);
-
       // Update user's isUserVerified status to 1 in the database
       const updateUserSql = `UPDATE users SET isUserVerified = ? WHERE ID = ?`;
       await doQuery(updateUserSql, [1, userId]);
@@ -122,7 +115,6 @@ exports.verifyEmail = async (req, res, next) => {
         redirectTo: '/',
       });
     } else {
-      console.log('Invalid token: ', decodedToken);
       return res
         .status(400)
         .json({ message: 'Invalid token or expired link.' });

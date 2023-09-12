@@ -104,8 +104,6 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         setTimeout(() => {
-          // const emailVerificationLink = `/verify-email?token=${data.emailVerificationToken}`;
-          // navigate(emailVerificationLink);
           navigate(data.redirectTo);
         }, 2000);
       }
