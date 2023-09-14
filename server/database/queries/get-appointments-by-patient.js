@@ -7,7 +7,29 @@ const doQuery = require('../query');
  * @returns { status, message, appointments }
  */
 async function getAppointmentsByPatient(patientId) {
-  const selectSql = 'SELECT * FROM Appointments WHERE PatientID = ?';
+  const selectSql = `SELECT 
+    U.FirstName AS userFirstName, 
+    U.LastName AS userLastName,
+    MSU.FirstName AS specialistFirstName,
+    MSU.LastName AS specialistLastName,
+    MS.Specialization,
+    A.StartTime,
+    A.EndingTime,
+    A.Date,
+    T.TreatmentName,
+    T.TreatmentType
+FROM 
+    Appointments A
+JOIN 
+    Users U ON A.PatientID = U.ID
+JOIN 
+    MedicalSpecialists MS ON A.MedicalSpecialistID = MS.ID
+JOIN 
+    Users MSU ON MS.ID = MSU.ID
+LEFT JOIN 
+    Treatments T ON A.TreatmentID = T.TreatmentID
+WHERE 
+    A.PatientID = ?`;
   const appointments = await doQuery(selectSql, [patientId]);
 
   if (appointments.length === 0) {

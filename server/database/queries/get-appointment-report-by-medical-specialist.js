@@ -13,8 +13,29 @@ async function getAppointmentReportByMedicalSpecialist(
   startDate,
   endDate,
 ) {
-  const selectSql =
-    'SELECT * FROM Appointments WHERE MedicalSpecialistID = ? AND Date BETWEEN ? AND ?';
+  const selectSql = `
+SELECT 
+  Users.FirstName as userFirstName, 
+  Users.LastName as userLastName, 
+  Users.ID as userID,
+  MedicalSpecialists.FirstName as specialistFirstName,
+  MedicalSpecialists.LastName as specialistLastName,
+  MedicalSpecialists.Specialization,
+  Appointments.StartTime,
+  Appointments.EndingTime,
+  Appointments.Date,
+  Treatments.TreatmentName,
+  Treatments.TreatmentType
+FROM 
+  Appointments
+JOIN 
+  Users ON Appointments.PatientID = Users.ID
+JOIN 
+  MedicalSpecialists ON Appointments.MedicalSpecialistID = MedicalSpecialists.ID
+LEFT JOIN
+  Treatments ON Appointments.TreatmentID = Treatments.TreatmentID
+WHERE 
+  Appointments.MedicalSpecialistID = ? AND Appointments.Date BETWEEN ? AND ?`;
   const report = await doQuery(selectSql, [
     medicalSpecialistId,
     startDate,

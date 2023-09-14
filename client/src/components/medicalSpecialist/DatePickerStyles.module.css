@@ -1,4 +1,4 @@
-.react-date-picker__inputGroup__input {
+/* .react-date-picker__inputGroup__input {
   border: 0.1rem solid #ccc;
   padding: 1em;
   font-size: 1.6rem;
@@ -6,8 +6,18 @@
   
 }
 
-/* Disabling and graying out past dates */
 .react-calendar__tile--disabled {
   background-color: darkgray !important;
   cursor: not-allowed !important;
+} */
+.reactDatePicker {
+  
+  margin: 0 auto;
+  
+  width: 60%;
+  border: 1px solid white;
+}
+
+.reactDatePickerDisabled {
+  background-color: darkgray;
 }

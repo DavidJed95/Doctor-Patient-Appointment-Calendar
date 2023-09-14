@@ -1,6 +1,9 @@
 .container {
+    border: blue solid 4px;
+    max-width: 80%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 1rem;
     max-width: 60rem;
     margin: 2rem auto;
@@ -9,7 +12,7 @@
 .radioContainer {
     display: flex;
     gap: 1rem;
-    justify-content: start;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -19,19 +22,19 @@
     gap: 1rem;
     align-items: center;
 }
-
+input{
+    width: 60%;
+}
 input[type="time"] {
-    width: 100%;
+    width: 60%;
 }
 
 .success {
     color: #4CAF50;
-    font-size: 1.2rem;
 }
 
 .failure {
-    color: #F44336;
-    font-size: 1.2rem;
+    color: red;
 }
 
 /* Media Query for smaller screens */

@@ -1,32 +1,42 @@
 'use strict';
-const doQuery = require('../query');
+
+const {
+  getAppointmentReportByPatient,
+} = require('../database/queries/all-queries');
+const generatePDF = require('../utils/generatePDF');
 
 /**
  * Get appointment report for a specific patient within a date range.
- * @param {*} patientId - ID of the patient
- * @param {*} startDate - Start date of the date range
- * @param {*} endDate - End date of the date range
- * @returns { status, message, report }
+ * @param {*} req - Express request object
+ * @param {*} res - Express response object
  */
-async function getAppointmentReportByPatient(patientId, startDate, endDate) {
-  const selectSql =
-    'SELECT * FROM Appointments WHERE PatientID = ? AND Date BETWEEN ? AND ?';
-  const report = await doQuery(selectSql, [patientId, startDate, endDate]);
+async function getAppointmentReportByPatientController(req, res, next) {
+  const { patientId } = req.params;
+  const { startDate, endDate } = req.query;
 
-  if (report.length === 0) {
-    return {
-      status: 'success',
-      message:
-        'No appointments found for the patient within the specified date range',
-      report: [],
-    };
+  try {
+    const result = await getAppointmentReportByPatient(
+      patientId,
+      startDate,
+      endDate,
+    );
+
+    const pdfStream = generatePDF(
+      result.report,
+      "Patient's Appointment Schedule",
+    );
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader(
+      'Content-Disposition',
+      `inline; filename=${patientId}_report.pdf`,
+    );
+
+    pdfStream.pipe(res);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
   }
-
-  return {
-    status: 'success',
-    message: 'Appointment report fetched successfully',
-    report,
-  };
 }
 
-module.exports = getAppointmentReportByPatient;
+module.exports = getAppointmentReportByPatientController;

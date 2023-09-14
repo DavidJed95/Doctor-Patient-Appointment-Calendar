@@ -1,27 +1,28 @@
 .form {
   width: 100%;
-  min-height: 100vh;
-  background: var(--black);
+  min-height: 100dvh;
+  background: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--white);
+  color: var(--black);
   padding: 2rem 0;
 }
 
 .form > .div {
-  background-color: var(--black);
+  background-color: var(--white);
   max-height: 111.7rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 97%;
   max-width: 172.8rem;
   border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
+  height: 50dvh;
   margin: 2rem;
 }
 
@@ -105,7 +106,7 @@
   left: 59.9rem;
   top: 55.9rem;
 
-  border: 0.2rem solid var(--white);
+  border: 0.2rem solid var(--black);
 }
 
 .passwordInputLine {
@@ -117,7 +118,7 @@
   left: 59.9rem;
   top: 65.9rem;
 
-  border: 0.2rem solid var(--white);
+  border: 0.2rem solid var(--black);
 }
 
 .emailAuthHeading {
@@ -132,7 +133,7 @@
   font-weight: normal;
   font-size: 9.6rem;
   line-height: 9.6rem;
-  color: var(--white);
+  color: var(--black);
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -143,7 +144,7 @@
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 3.6rem;
-  color: #999999;
+  color: var(--gray);
 }
 
 .ellipse {
@@ -166,7 +167,7 @@
 }
 
 .frame .text-wrapper {
-  color: var(--white);
+  color: var(--black);
   font-family: 'IRANSansXFaNum-Regular', Helvetica;
   font-size: 24px;
   font-weight: 400;
