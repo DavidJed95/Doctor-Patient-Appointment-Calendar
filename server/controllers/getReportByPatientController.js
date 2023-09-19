@@ -21,6 +21,12 @@ async function getAppointmentReportByPatientController(req, res, next) {
       endDate,
     );
 
+    if (result.status === 'no-data') {
+      return res
+        .status(204)
+        .json({ message: result.message, appointments: result.appointments });
+    }
+
     const pdfStream = generatePDF(
       result.report,
       "Patient's Appointment Schedule",

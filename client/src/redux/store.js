@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/userSlice';
 import eventsReducer from './reducers/eventsSlice'
-// import other reducers as you create them...
+import specialistAvailabilityReducer from './reducers/specialistAvailabilitySlice';
+import notificationsReducer from './reducers/notificationsSlice';
+import patientProfileReducer from './reducers/patientProfileSlice';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     events: eventsReducer,
-    // other reducers...
-    // TODO: medicalSpecialist: medicalSpecialistReducer - containing shift related stuff like seeing patient who created appointments to him
-    // TODO: patient: patientReducer - creating appointments and having reports that show him the appointments he has in range of dates
+    specialistAvailability: specialistAvailabilityReducer,
+    notifications: notificationsReducer,
+    patientProfile: patientProfileReducer,
   },
 });
 

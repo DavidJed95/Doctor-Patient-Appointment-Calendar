@@ -38,12 +38,6 @@ const getAppointmentsByMedicalSpecialist = require('./get-appointments-by-medica
 // 10) Get appointments for as specific patient
 const getAppointmentsByPatient = require('./get-appointments-by-patient');
 
-// 9.1) Get daily report of patients for a medical specialist
-const getAppointmentReportByMedicalSpecialist = require('./get-appointment-report-by-medical-specialist');
-
-// 10.1) Get appointment report for a patient
-const getAppointmentReportByPatient = require('./get-appointment-report-by-patient');
-
 module.exports = {
   createUser,
   getUserByID,
@@ -60,6 +54,4 @@ module.exports = {
   updateAppointment,
   getAppointmentsByMedicalSpecialist,
   getAppointmentsByPatient,
-  getAppointmentReportByMedicalSpecialist,
-  getAppointmentReportByPatient,
 };

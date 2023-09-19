@@ -1,77 +1,125 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../calendar/Calendar';
-import { addEvent, removeEvent, updateEvent } from '../slices/eventsSlice';
+import {
+  setAvailability,
+  removeAvailability,
+  updateAvailability,
+} from '../../redux/reducers/specialistAvailabilitySlice';
+import Modal from '../common/Modal';
+
+
+const fetchShiftsAPI = async () => {
+  const response = await fetch('/shift');
+  if (!response.ok) {
+    throw new Error('Error loading shifts.');
+  }
+  return response.json();
+};
+
+const addShiftAPI = async event => {
+  const response = await fetch('/shift', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(event),
+  });
+  if (!response.ok) {
+    throw new Error('Error adding shift.');
+  }
+};
 
 const ManageShifts = () => {
-  const specialistID = useSelector(state => state.user.userInfo.ID);
-  const dispatch = useDispatch(); // For dispatching Redux actions
-  const [feedback, setFeedback] = useState('');
+  const { ID: specialistID } = useSelector(state => state.user.userInfo);
+  const specialistAvailability = useSelector(
+    state => state.specialistAvailability,
+  );
+  const dispatch = useDispatch();
 
-  // Instead of a local events state, we use the global state from Redux
-  const events = useSelector(state => state.events);
+  const [feedback, setFeedback] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [eventType, setEventType] = useState('Working Hour');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
 
   useEffect(() => {
     const fetchShifts = async () => {
       try {
-        const response = await fetch('/shift');
-        const data = await response.json();
-        data.forEach(shift => dispatch(addEvent(shift))); // Add each shift to the Redux store
+        const data = await fetchShiftsAPI();
+        data.forEach(shift => dispatch(setAvailability(shift)));
       } catch (error) {
-        setFeedback('Error loading shifts.');
+        setFeedback(error.message);
       }
     };
-
     fetchShifts();
   }, [dispatch]);
 
-  const handleEventClick = async clickInfo => {
-    if (window.confirm(`Do you want to delete ${clickInfo.event.title}?`)) {
-      try {
-        const response = await fetch(`/shift/${clickInfo.event.id}`, {
-          method: 'DELETE',
-        });
-        if (response.ok) {
-          dispatch(removeEvent({ id: clickInfo.event.id }));
-        } else {
-          setFeedback('Error deleting shift.');
-        }
-      } catch (error) {
-        setFeedback('Error deleting shift.');
-      }
-    }
+  const handleEventClick = useCallback(clickInfo => {
+    setSelectedDate(clickInfo.event);
+    setModalOpen(true);
+  }, []);
+
+  const handleDateSelect = useCallback(selectInfo => {
+    setSelectedDate({
+      start: selectInfo.start,
+      end: selectInfo.end,
+      allDay: selectInfo.allDay,
+    });
+    setModalOpen(true);
+  }, []);
+
+  const handleModalClose = () => {
+    setSelectedDate(null);
+    setEventTitle('');
+    setModalOpen(false);
   };
 
-  const handleDateSelect = async selectInfo => {
-    const title = prompt('Please enter a new title for your event');
-    if (title) {
-      const newEvent = {
-        id: Date.now(),
-        title: title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-        ShiftDate: format(selectInfo.start, 'yyyy-MM-dd'),
+   const handleModalSubmit = () => {
+     if (eventTitle && startTime && endTime) {
+       const startDateTime = new Date(selectedDate.startStr);
+       const endDateTime = new Date(selectedDate.startStr);
+
+       startDateTime.setHours(parseInt(startTime.split(':')[0]));
+       startDateTime.setMinutes(parseInt(startTime.split(':')[1]));
+
+       endDateTime.setHours(parseInt(endTime.split(':')[0]));
+       endDateTime.setMinutes(parseInt(endTime.split(':')[1]));
+
+       const newEvent = {
+         id: Date.now(),
+         title: eventTitle,
+         start: startDateTime.toISOString(),
+         end: endDateTime.toISOString(),
+         allDay: selectedDate.allDay,
+       };
+
+       dispatch(setAvailability(newEvent));
+       handleModalClose();
+     }
+   };
+
+  const handleEditSubmit = async () => {
+    if (eventTitle && selectedDate) {
+      const updatedEvent = {
+        id: selectedDate.id, // Assuming that your event has id
+        title: eventTitle,
+        start: format(selectedDate.start, 'yyyy-MM-dd'),
+        end: format(selectedDate.end, 'yyyy-MM-dd'),
+        allDay: selectedDate.allDay,
         MedicalSpecialistID: specialistID,
-        Type: 'Working Hour', // This can be modified according to your requirements
+        Type: eventType,
       };
+      dispatch(updateAvailability(updatedEvent)); // Update the event
+    }
+    handleModalClose();
+  };
 
-      try {
-        const response = await fetch('/shift', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newEvent),
-        });
-
-        if (response.ok) {
-          dispatch(addEvent(newEvent));
-        } else {
-          setFeedback('Error adding shift.');
-        }
-      } catch (error) {
-        setFeedback('Error adding shift.');
-      }
+  const handleRemoveShift = () => {
+    if (selectedDate) {
+      dispatch(removeAvailability({ id: selectedDate.id })); // Remove based on id
+      handleModalClose();
     }
   };
 
@@ -80,10 +128,51 @@ const ManageShifts = () => {
       <Calendar
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
-        events={events}
+        events={specialistAvailability}
       />
-      {/* You can also add the rest of your form fields below the calendar as per your needs */}
       {feedback && <p>{feedback}</p>}
+      {isModalOpen && (
+        <Modal
+          show={isModalOpen}
+          onClose={handleModalClose}
+          onSubmit={handleModalSubmit}
+        >
+          <h2>Add Event</h2>
+          <div>
+            <label>
+              Event Title:
+              <input
+                type='text'
+                value={eventTitle}
+                onChange={e => setEventTitle(e.target.value)}
+              />
+            </label>
+          </div>
+          <p>Selected Date: {selectedDate?.startStr}</p>
+
+          <h3>Specialist Hours</h3>
+          <div>
+            <label>
+              Start Time:
+              <input
+                type='time'
+                value={startTime}
+                onChange={e => setStartTime(e.target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              End Time:
+              <input
+                type='time'
+                value={endTime}
+                onChange={e => setEndTime(e.target.value)}
+              />
+            </label>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

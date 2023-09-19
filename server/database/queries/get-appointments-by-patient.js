@@ -34,8 +34,8 @@ WHERE
 
   if (appointments.length === 0) {
     return {
-      status: 'success',
-      message: 'No appointments found for the patient',
+      status: 'no-data',
+      message: 'No appointments found for the medical specialist.',
       appointments: [],
     };
   }
@@ -43,7 +43,7 @@ WHERE
   return {
     status: 'success',
     message: 'Appointments fetched successfully',
-    appointments,
+    appointments: appointments,
   };
 }
 

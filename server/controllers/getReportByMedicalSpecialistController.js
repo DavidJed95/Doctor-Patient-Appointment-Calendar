@@ -22,8 +22,10 @@ async function getDailyReportByMedicalSpecialistController(req, res, next) {
     );
 
     // If there's no report data, just return the result as JSON
-    if (result.status === 'success' && result.report.length === 0) {
-      return res.status(200).json(result);
+    if (result.status === 'no-data') {
+      return res
+        .status(204)
+        .json({ message: result.message, appointments: result.appointments });
     }
 
     const pdfStream = generatePDF(
@@ -38,7 +40,6 @@ async function getDailyReportByMedicalSpecialistController(req, res, next) {
     );
 
     pdfStream.pipe(res);
-
   } catch (error) {
     next(error);
   }
