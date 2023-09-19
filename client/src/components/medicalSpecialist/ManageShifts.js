@@ -10,8 +10,16 @@ import {
 import Modal from '../common/Modal';
 
 
-const fetchShiftsAPI = async () => {
-  const response = await fetch('/shift');
+// const fetchShiftsAPI = async () => {
+//   const response = await fetch('/shift');
+//   if (!response.ok) {
+//     throw new Error('Error loading shifts.');
+//   }
+//   return response.json();
+// };
+
+const fetchShiftsAPI = async specialistID => {
+  const response = await fetch(`/shift?medicalSpecialistID=${specialistID}`);
   if (!response.ok) {
     throw new Error('Error loading shifts.');
   }
@@ -27,7 +35,31 @@ const addShiftAPI = async event => {
   if (!response.ok) {
     throw new Error('Error adding shift.');
   }
+  return response.json();
 };
+
+const updateShiftAPI = async (id, event) => {
+  const response = await fetch(`/shift/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(event),
+  });
+  if (!response.ok) {
+    throw new Error('Error updating shift.');
+  }
+  return response.json();
+};
+
+const deleteShiftAPI = async id => {
+  const response = await fetch(`/shift/${id}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Error deleting shift.');
+  }
+  return response.json();
+};
+
 
 const ManageShifts = () => {
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
@@ -47,14 +79,18 @@ const ManageShifts = () => {
   useEffect(() => {
     const fetchShifts = async () => {
       try {
-        const data = await fetchShiftsAPI();
+        const data = await fetchShiftsAPI(specialistID);
         data.forEach(shift => dispatch(setAvailability(shift)));
       } catch (error) {
         setFeedback(error.message);
       }
     };
     fetchShifts();
-  }, [dispatch]);
+  }, [dispatch, specialistID]);
+
+
+
+
 
   const handleEventClick = useCallback(clickInfo => {
     setSelectedDate(clickInfo.event);
@@ -87,18 +123,23 @@ const ManageShifts = () => {
        endDateTime.setHours(parseInt(endTime.split(':')[0]));
        endDateTime.setMinutes(parseInt(endTime.split(':')[1]));
 
-       const newEvent = {
-         id: Date.now(),
-         title: eventTitle,
-         start: startDateTime.toISOString(),
-         end: endDateTime.toISOString(),
-         allDay: selectedDate.allDay,
-       };
-
-       dispatch(setAvailability(newEvent));
-       handleModalClose();
-     }
-   };
+       try {
+        const response = await addShiftAPI({
+          MedicalSpecialistID: specialistID,
+          DayOfWeek: new Date(startDateTime).getDay(),
+          StartTime: startTime,
+          EndTime: endTime,
+          Type: eventType,
+          ShiftDate: format(startDateTime, 'yyyy-MM-dd')
+        });
+        dispatch(setAvailability(newEvent));
+        setFeedback(response.message);
+        handleModalClose();
+      } catch (error) {
+        setFeedback(error.message);
+      }
+    }
+  };
 
   const handleEditSubmit = async () => {
     if (eventTitle && selectedDate) {
@@ -111,15 +152,27 @@ const ManageShifts = () => {
         MedicalSpecialistID: specialistID,
         Type: eventType,
       };
-      dispatch(updateAvailability(updatedEvent)); // Update the event
+     try {
+        const response = await updateShiftAPI(selectedDate.id, updatedEvent);
+        dispatch(updateAvailability(updatedEvent));
+        setFeedback(response.message);
+        handleModalClose();
+      } catch (error) {
+        setFeedback(error.message);
+      }
     }
-    handleModalClose();
   };
 
-  const handleRemoveShift = () => {
+  const handleRemoveShift = async () => {
     if (selectedDate) {
-      dispatch(removeAvailability({ id: selectedDate.id })); // Remove based on id
-      handleModalClose();
+      try {
+        const response = await deleteShiftAPI(selectedDate.id);
+        dispatch(removeAvailability({ id: selectedDate.id }));
+        setFeedback(response.message);
+        handleModalClose();
+      } catch (error) {
+        setFeedback(error.message);
+      }
     }
   };
 

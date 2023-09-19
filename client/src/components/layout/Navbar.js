@@ -42,11 +42,11 @@ const Navbar = ({ siteTitle }) => {
       </Link>
       <ul>
         <CustomLink to='/home'>Home</CustomLink>
-        <CustomLink to='/appointments'>Appointments</CustomLink>
-        <CustomLink to='/profile-update'>Profile Update</CustomLink>
         {userType === 'Medical Specialist' && (
           <CustomLink to='manage-shifts'>Manage Shifts</CustomLink>
         )}
+        <CustomLink to='/appointments'>Appointments</CustomLink>
+        <CustomLink to='/profile-update'>Profile Update</CustomLink>
         <Button
           className={styles.navLogoutButton}
           text='Logout'
