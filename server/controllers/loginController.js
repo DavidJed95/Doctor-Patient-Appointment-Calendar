@@ -61,6 +61,7 @@ exports.login = async (req, res, next) => {
       return res.status(401).json({ message: result.message, redirectTo: '/' });
     }
   } catch (error) {
+    res.status(500).json({ error: error.message });
     next(error);
   }
 };

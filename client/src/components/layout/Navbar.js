@@ -45,7 +45,9 @@ const Navbar = ({ siteTitle }) => {
         {userType === 'Medical Specialist' && (
           <CustomLink to='manage-shifts'>Manage Shifts</CustomLink>
         )}
-        <CustomLink to='/appointments'>Appointments</CustomLink>
+        {userType === 'Patient' && (
+          <CustomLink to='/appointments'>Appointments</CustomLink>
+        )}
         <CustomLink to='/profile-update'>Profile Update</CustomLink>
         <Button
           className={styles.navLogoutButton}

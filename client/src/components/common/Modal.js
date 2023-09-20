@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './Modal.module.css';
+import Button from '../button/Button';
 
 export default function Modal({
   show,
@@ -22,8 +23,10 @@ export default function Modal({
     };
 
     if (show) {
-      window.addEventListener('click', handleOutsideClick);
-      window.addEventListener('keydown', handleEscPress);
+      setTimeout(() => {
+        window.addEventListener('click', handleOutsideClick);
+        window.addEventListener('keydown', handleEscPress);
+      }, 10);
     }
 
     return () => {
@@ -42,8 +45,8 @@ export default function Modal({
 
         {showSubmit && (
           <>
-            <button onClick={onClose}>Cancel</button>
-            <button onClick={onSubmit}>Save</button>
+            <Button text='Save' handleClick={onSubmit} />
+            <Button text='Cancel' handleClick={onClose} />
           </>
         )}
       </div>

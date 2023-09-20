@@ -27,7 +27,7 @@ router.post('/logout', (req, res, next) => {
   try {
     req.session.destroy(); // Clear session data
     res.clearCookie('connect.sid'); // Clear the session cookie
-    res.status(200).json({ message: 'See you again soon' });
+    res.status(200).json({ message: 'Logout successful. See you again soon' });
   } catch (error) {
     res.status(500).json({ message: 'Failed to logout. Please try again.' });
     next(error);
