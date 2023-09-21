@@ -7,7 +7,7 @@ const { cancelAppointment } = require('../database/queries/all-queries');
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function cancelAppointmentController(req, res, next) {
+exports.cancelAppointments = async (req, res, next) => {
   const { appointmentId } = req.body;
 
   try {
@@ -25,4 +25,4 @@ async function cancelAppointmentController(req, res, next) {
   }
 }
 
-module.exports = cancelAppointmentController;
+

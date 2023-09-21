@@ -7,7 +7,7 @@ const { updateAppointment } = require('../database/queries/all-queries');
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function updateAppointmentController(req, res, next) {
+ exports.updateAppointments = async (req, res, next) => {
   const { appointmentId, updates } = req.body;
 
   try {
@@ -25,4 +25,4 @@ async function updateAppointmentController(req, res, next) {
   }
 }
 
-module.exports = updateAppointmentController;
+

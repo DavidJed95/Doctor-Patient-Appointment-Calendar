@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const patientProfileSlice = createSlice({
-  name: 'patientProfile',
-  initialState: {},
+  name: 'patientAppointments',
+  initialState: [],
   reducers: {
     setPatientProfile: (state, action) => {
       state = action.payload;
@@ -18,6 +18,18 @@ export const patientProfileSlice = createSlice({
         state.appointments = state.appointments.filter(
           appointment => appointment.id !== action.payload.id,
         );
+      }
+    },
+    updateAppointment: (state, action) => {
+      const index = state.findIndex(
+        appointment =>
+          appointment.PatientID === action.payload.PatientID &&
+          appointment.MedicalSpecialistID ===
+            action.payload.MedicalSpecialistID &&
+          appointment.AppointmentID === action.payload.AppointmentID,
+      );
+      if (index !== -1) {
+        state[index] = action.payload;
       }
     },
   },

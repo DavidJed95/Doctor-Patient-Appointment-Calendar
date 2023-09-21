@@ -1,49 +1,42 @@
 import React from 'react';
-import PayPalButton from './PayPalButton';
-const PayPalPayment = ({
-  amount,
-  handlePaymentSuccess,
-  handlePaymentError,
-}) => {
-  const onApprove = async (data, actions) => {
-    try {
-      const paymentResult = await actions.order.capture();
-      const response = await handlePaymentSuccess(paymentResult);
+import { PayPalButtons } from '@paypal/react-paypal-js';
 
-      if (response.status === 'success') {
-        // Display success message to the user
-        console.log('Payment successful:', response.message);
-      } else {
-        // Display failure message to the user
-        console.error('Payment failed:', response.message);
-      }
-    } catch (error) {
-      // Handle any errors that occur during payment capture
-      console.error('Payment capture failed:', error);
-      handlePaymentError();
-    }
+export const PayPalPayment = () => {
+  const createOrder = data => {
+    // Order is created on the server and the order id is returned
+    return fetch('/my-server/create-paypal-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // use the "body" param to optionally pass additional order information
+      // like product skus and quantities
+      body: JSON.stringify({
+        appointment: {
+          description: 'Appointment',
+          cost: '100',
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(order => order.id);
   };
-
+  const onApprove = data => {
+    // Order is captured on the server and the response is returned to the browser
+    return fetch('/my-server/capture-paypal-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        orderID: data.orderID,
+      }),
+    }).then(response => response.json());
+  };
   return (
-    <div>
-      <h3>Pay with PayPal</h3>
-      <p>Amount: ${amount}</p>
-      <PayPalButton
-        createOrder={(data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: amount,
-                },
-              },
-            ],
-          });
-        }}
-        onApprove={onApprove}
-      />
-    </div>
+    <PayPalButtons
+      createOrder={(data, actions) => createOrder(data, actions)}
+      onApprove={(data, actions) => onApprove(data, actions)}
+    />
   );
 };
-
-export default PayPalPayment;

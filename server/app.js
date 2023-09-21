@@ -43,8 +43,8 @@ app.use('/auth', authRouter);
 const shiftRoutes = require('./routes/shiftRoutes');
 app.use('/shift', shiftRoutes);
 
-// const appointmentRoutes = require('./routes/appointmentRoutes')
-// app.use('/appointment', appointmentRoutes)
+const appointmentRoutes = require('./routes/appointmentRoutes')
+app.use('/appointment', appointmentRoutes)
 
 // const reportRoutes = require('./routes/reportRoutes')
 
