@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import userReducer from './reducers/userSlice';
 import eventsReducer from './reducers/eventsSlice'
 import specialistAvailabilityReducer from './reducers/specialistAvailabilitySlice';
@@ -13,6 +13,9 @@ const store = configureStore({
     notifications: notificationsReducer,
     patientAppointments: patientAppointmentsReducer,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 // const store = createStore(rootReducer);

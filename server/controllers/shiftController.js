@@ -1,6 +1,6 @@
 'use strict';
 const {
-  createShiftForSpecialist,
+  createShift,
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
@@ -14,9 +14,9 @@ const {
  */
 exports.createShift = async (req, res, next) => {
   try {
-    const shifts = req.body;
+    const shifts = Array.isArray(req.body) ? req.body : [req.body]; // Ensure that shifts is an array
     for (let shift of shifts) {
-      await createShiftForSpecialist(shift);
+      await createShift(shift);
     }
     res.status(200).json({ message: 'Shifts created successfully.' });
   } catch (error) {
@@ -50,16 +50,16 @@ exports.updateShift = async (req, res, next) => {
  * @param {*} next - moves the error to the errorHandler if there is one
  */
 exports.deleteShift = async (req, res, next) => {
-    try {
-        const shiftID = req.params.id;
-        const result = await deleteShift(shiftID);
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: "Shift not found" });
-        }
-        res.status(200).json({ message: "Shift deleted successfully" });
-    } catch (error) {
-        next(error);
+  try {
+    const shiftID = req.params.id;
+    const result = await deleteShift(shiftID);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Shift not found' });
     }
+    res.status(200).json({ message: 'Shift deleted successfully' });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -70,7 +70,10 @@ exports.deleteShift = async (req, res, next) => {
  */
 exports.getShiftsForSpecialist = async (req, res, next) => {
   try {
-    const medicalSpecialistID = req.query.medicalSpecialistID; // Assuming you're passing it as a query parameter
+    const medicalSpecialistID = req.query.medicalSpecialistID;
+    if (!medicalSpecialistID) {
+      return res.status(400).json({ message: 'Medical Specialist ID is required.' });
+    }
     const shifts = await getShiftsForSpecialist(medicalSpecialistID);
     res.status(200).json(shifts);
   } catch (error) {

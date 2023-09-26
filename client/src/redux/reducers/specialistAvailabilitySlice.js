@@ -9,16 +9,12 @@ export const specialistAvailabilitySlice = createSlice({
     },
     removeAvailability: (state, action) => {
       return state.filter(
-        availability =>
-          availability.MedicalSpecialistID !==
-          action.payload.MedicalSpecialistID,
-      ); //MedicalSpecialistID in the mySQL specialistHours table SpecialistHours(SpecialistHourID, MedicalSpecialistID, DayOfWeek, StartTime, EndTime, Type)
+        availability => availability.id !== action.payload.id
+      );
     },
     updateAvailability: (state, action) => {
       const index = state.findIndex(
-        availability =>
-          availability.MedicalSpecialistID ===
-          action.payload.MedicalSpecialistID,
+        availability => availability.id === action.payload.id
       );
       if (index !== -1) {
         state[index] = action.payload;
@@ -27,6 +23,6 @@ export const specialistAvailabilitySlice = createSlice({
   },
 });
 
-export const { setAvailability, removeAvailability, updateAvailability } =
-  specialistAvailabilitySlice.actions;
+export const { setAvailability, removeAvailability, updateAvailability } = specialistAvailabilitySlice.actions;
+
 export default specialistAvailabilitySlice.reducer;

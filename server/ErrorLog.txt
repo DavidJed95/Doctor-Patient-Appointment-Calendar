@@ -209,3 +209,52 @@
   Line: 15
   ---------------------------------------------------
   
+  2023-09-24T17:54:28.588Z - Error: shifts is not iterable
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.createShift
+  Line: 18
+  ---------------------------------------------------
+  
+  2023-09-24T17:59:19.127Z - Error: shifts is not iterable
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.createShift
+  Line: 18
+  ---------------------------------------------------
+  
+  2023-09-24T18:01:53.235Z - Error: shifts is not iterable
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.createShift
+  Line: 18
+  ---------------------------------------------------
+  
+  2023-09-24T18:16:21.115Z - Error: createShiftForSpecialist is not a function
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.createShift
+  Line: 19
+  ---------------------------------------------------
+  
+  2023-09-24T18:17:34.545Z - Error: createShiftForSpecialist is not a function
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.createShift
+  Line: 19
+  ---------------------------------------------------
+  
+  2023-09-25T15:14:34.102Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  
+  2023-09-25T15:14:37.589Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  

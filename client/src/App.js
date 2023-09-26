@@ -57,9 +57,9 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/appointments' element={<Appointments />} />
             <Route path='/profile-update' element={<UpdateUserProfile />} />
-            {user.UserType === 'Medical Specialist' && (
+            
               <Route path='/manage-shifts' element={<ManageShifts />} />
-            )}
+            
           </>
         )}
         <Route path='/verify-email/:token' element={<EmailVerification />} />

@@ -4,12 +4,12 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  addEvent,
-  updateEvent,
-  removeEvent,
-} from '../../redux/reducers/eventsSlice'; 
+// import { useSelector, useDispatch } from 'react-redux';
+// import {
+//   addEvent,
+//   updateEvent,
+//   removeEvent,
+// } from '../../redux/reducers/eventsSlice';
 
 const Calendar = ({ handleDateSelect, handleEventClick, events }) => {
   const calendarRef = useRef(null);
@@ -27,7 +27,13 @@ const Calendar = ({ handleDateSelect, handleEventClick, events }) => {
         }}
         selectable={true}
         editable={true}
-        events={events}
+        events={events.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: event.start,
+          end: event.end,
+          
+        }))}
         select={handleDateSelect}
         eventClick={handleEventClick}
         height={'90dvh'}

@@ -1,5 +1,9 @@
-export const fetchShiftsAPI = async () => {
-  const response = await fetch('/shift');
+import { BASE_URL } from '../../config';
+
+export const fetchShiftsAPI = async medicalSpecialistID => {
+  const response = await fetch(
+    `${BASE_URL}/shift?medicalSpecialistID=${medicalSpecialistID}`,
+  );
   if (!response.ok) {
     throw new Error('Error loading shifts.');
   }
@@ -7,7 +11,7 @@ export const fetchShiftsAPI = async () => {
 };
 
 export const addShiftAPI = async event => {
-  const response = await fetch('/shift', {
+  const response = await fetch(`${BASE_URL}/shift`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(event),
@@ -19,7 +23,7 @@ export const addShiftAPI = async event => {
 };
 
 export const updateShiftAPI = async (shiftID, updatedShift) => {
-  const response = await fetch(`/shift/${shiftID}`, {
+  const response = await fetch(`${BASE_URL}/shift/${shiftID}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updatedShift),
@@ -31,7 +35,7 @@ export const updateShiftAPI = async (shiftID, updatedShift) => {
 };
 
 export const deleteShiftAPI = async shiftID => {
-  const response = await fetch(`/shift/${shiftID}`, {
+  const response = await fetch(`${BASE_URL}/shift/${shiftID}`, {
     method: 'DELETE',
   });
   if (!response.ok) {

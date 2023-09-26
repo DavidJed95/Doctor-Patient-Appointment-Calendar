@@ -150,7 +150,7 @@ const Appointments = () => {
   return (
     <PayPalScriptProvider options={initialOptions}>
       <div>
-        <PayPalButtons />
+        {/* <PayPalButtons /> */}
         <h1>{h1Heading}</h1>
         <Calendar
           handleDateSelect={handleDateSelect}
