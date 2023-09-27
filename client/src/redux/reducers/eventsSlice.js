@@ -4,8 +4,19 @@ export const eventsSlice = createSlice({
   name: 'events',
   initialState: [],
   reducers: {
-    addEvent: (state, action) => {
-      state.push(action.payload);
+    addSpecialistAvailability: (state, action) => {
+      const newEvent = {
+        ...action.payload,
+        eventType: 'specialistAvailability',
+      };
+      state.push(newEvent);
+    },
+    addPatientAppointment: (state, action) => {
+      const newEvent = {
+        ...action.payload,
+        eventType: 'patientAppointment',
+      };
+      state.push(newEvent);
     },
     removeEvent: (state, action) => {
       return state.filter(event => event.id !== action.payload.id);
@@ -19,6 +30,11 @@ export const eventsSlice = createSlice({
   },
 });
 
-export const { addEvent, removeEvent, updateEvent } = eventsSlice.actions;
+export const {
+  addSpecialistAvailability,
+  addPatientAppointment,
+  removeEvent,
+  updateEvent,
+} = eventsSlice.actions;
 
 export default eventsSlice.reducer;

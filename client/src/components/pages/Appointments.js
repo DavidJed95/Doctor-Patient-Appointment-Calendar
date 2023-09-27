@@ -15,6 +15,9 @@ import Modal from '../common/Modal';
 // deleteAppointmentAPI
 // } from '../patient/AppointmentsAPI';
 const Appointments = () => {
+  const [initiatePayment, setInitiatePayment] = useState(false);
+  const [selectedAppointmentCost, setSelectedAppointmentCost] = useState(null);
+
   const initialOptions = {
     'client-id':
       'AY5d8OdBxfs1C4My3bBlOHzcBHInULIZKK1IM8sje0assoOp-ukCwDqSaOIU3E7wa-Y8OwN-E7ITZ5Sg',
@@ -49,6 +52,17 @@ const Appointments = () => {
   //   fetchShifts();
   // }, [dispatch]);
 
+
+    const handleInitiatePayment = cost => {
+      setSelectedAppointmentCost(cost); // set the cost for the selected appointment
+      setInitiatePayment(true);
+    };
+
+    const handlePaymentFailure = error => {
+      // Handle payment failure, show error to user
+      setInitiatePayment(false); // reset the payment initiation
+      // Show an error message to the user
+    };
   const isPastDate = date => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -65,20 +79,31 @@ const Appointments = () => {
     setModalOpen(true);
   }, []);
 
-  const handleDateSelect = useCallback(selectInfo => {
-    // setShiftDate(format(selectInfo.start, 'yyyy-MM-dd'));
-    setSelectedDate({
-      start: selectInfo.start,
-      end: selectInfo.end,
-      allDay: selectInfo.allDay,
-    });
+  const handleDateSelect = useCallback(
+    selectInfo => {
+      const overlappingEvent = specialistAvailability.find(
+        event =>
+          selectInfo.start >= new Date(event.start) &&
+          selectInfo.end <= new Date(event.end),
+      );
 
-    // Set the start and end times here
-    setStartTime(format(selectInfo.start, 'HH:mm'));
-    setEndTime(format(selectInfo.end, 'HH:mm'));
+      if (!overlappingEvent) {
+        setFeedback('The specialist is not available at this time.');
+        return;
+      }
 
-    setModalOpen(true);
-  }, []);
+      setSelectedDate({
+        start: selectInfo.start,
+        end: selectInfo.end,
+        allDay: selectInfo.allDay,
+      });
+
+      setStartTime(format(selectInfo.start, 'HH:mm'));
+      setEndTime(format(selectInfo.end, 'HH:mm'));
+      setModalOpen(true);
+    },
+    [specialistAvailability],
+  );
 
   const handleModalClose = () => {
     setSelectedDate(null);
@@ -146,13 +171,28 @@ const Appointments = () => {
   //     }
   //     handleModalClose();
   //   };
+
+const handleBookAppointment = (selectedDate, cost) => {
+  handleInitiatePayment(cost);
+  // Any other logic that you wish to implement when booking is clicked
+};
+
+
   const h1Heading = 'Appointments';
   return (
     <PayPalScriptProvider options={initialOptions}>
       <div>
+        {initiatePayment && (
+          <PayPalPayment
+            amount={selectedAppointmentCost}
+            onSuccess={handlePaymentSuccess}
+            onFailure={handlePaymentFailure}
+          />
+        )}
         {/* <PayPalButtons /> */}
         <h1>{h1Heading}</h1>
         <Calendar
+          eventType='patientAppointment'
           handleDateSelect={handleDateSelect}
           handleEventClick={handleEventClick}
           events={specialistAvailability}

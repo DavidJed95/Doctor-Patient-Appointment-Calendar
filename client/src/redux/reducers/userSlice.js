@@ -15,11 +15,6 @@ const userSlice = createSlice({
       state.userInfo = action.payload;
       state.isLoggedIn = true;
     },
-    // logoutUser: () => dispatch => {
-    //   // Reset user information and set isLoggedIn to false
-    //   dispatch(setUser({}));
-    //   dispatch(updateLoginStatus(false));
-    // },
     logoutUser: state => {
       state.userInfo = {};
       state.isLoggedIn = false;

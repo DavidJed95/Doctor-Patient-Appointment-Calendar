@@ -5,7 +5,8 @@ export const fetchShiftsAPI = async medicalSpecialistID => {
     `${BASE_URL}/shift?medicalSpecialistID=${medicalSpecialistID}`,
   );
   if (!response.ok) {
-    throw new Error('Error loading shifts.');
+    const responseData = await response.json();
+    throw new Error(responseData.message || 'Error loading shifts.');
   }
   return response.json();
 };
@@ -17,7 +18,8 @@ export const addShiftAPI = async event => {
     body: JSON.stringify(event),
   });
   if (!response.ok) {
-    throw new Error('Error adding shift.');
+    const responseData = await response.json();
+    throw new Error(responseData.message || 'Error adding shift.');
   }
   return response.json();
 };
@@ -29,7 +31,8 @@ export const updateShiftAPI = async (shiftID, updatedShift) => {
     body: JSON.stringify(updatedShift),
   });
   if (!response.ok) {
-    throw new Error('Error updating shift.');
+    const responseData = await response.json();
+    throw new Error(responseData.message || 'Error updating shift.');
   }
   return response.json();
 };
@@ -39,7 +42,8 @@ export const deleteShiftAPI = async shiftID => {
     method: 'DELETE',
   });
   if (!response.ok) {
-    throw new Error('Error deleting shift.');
+    const responseData = await response.json();
+    throw new Error(responseData.message || 'Error deleting shift.');
   }
   return response.json();
 };

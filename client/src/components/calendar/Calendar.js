@@ -4,15 +4,24 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-// import { useSelector, useDispatch } from 'react-redux';
-// import {
-//   addEvent,
-//   updateEvent,
-//   removeEvent,
-// } from '../../redux/reducers/eventsSlice';
-
-const Calendar = ({ handleDateSelect, handleEventClick, events }) => {
+const Calendar = ({
+  handleDateSelect,
+  handleEventClick,
+  events,
+  eventType,
+}) => {
   const calendarRef = useRef(null);
+
+  const processedEvents = events
+    .filter(event => !eventType || event.eventType === eventType)
+    .map(event => ({
+      id: event.id || event.SpecialistHourID, // use SpecialistHourID if id is undefined
+      title: event.title || event.Type || 'Unknown', // use Type if title is undefined, fallback to 'Unknown'
+      start: new Date(event.start || event.ShiftDate), // use ShiftDate if start is undefined
+      end: event.end,
+    }));
+
+  console.log(`events in the Calendar.js: `, events);
 
   return (
     <div>
@@ -27,13 +36,7 @@ const Calendar = ({ handleDateSelect, handleEventClick, events }) => {
         }}
         selectable={true}
         editable={true}
-        events={events.map(event => ({
-          id: event.id,
-          title: event.title,
-          start: event.start,
-          end: event.end,
-          
-        }))}
+        events={processedEvents}
         select={handleDateSelect}
         eventClick={handleEventClick}
         height={'90dvh'}

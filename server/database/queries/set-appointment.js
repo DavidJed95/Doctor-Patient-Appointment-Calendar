@@ -8,7 +8,7 @@ const getUserByID = require('./get-user-by-id')
  * @param {*} appointment 
  * @returns 
  */
-async function setAppointment(appointment) {
+async function setAppointment(appointment, paymentSuccessful = false) {
   const {
     appointmentId,
     patientId,
@@ -17,7 +17,6 @@ async function setAppointment(appointment) {
     startTime,
     endTime,
     date,
-    paymentSuccessful,
   } = appointment;
 
   if (!paymentSuccessful) {
@@ -25,18 +24,18 @@ async function setAppointment(appointment) {
   }
 
   // Create a new appointment
-  const insertSql =
-    'INSERT INTO Appointments (ID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndingTime, Date, isPayedFor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  await doQuery(insertSql, [
-    appointmentId,
-    patientId,
-    medicalSpecialistId,
-    treatmentId,
-    startTime,
-    endTime,
-    date,
-    true,
-  ]);
+   const insertSql =
+     'INSERT INTO Appointments (ID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndingTime, Date, isPayedFor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+   await doQuery(insertSql, [
+     appointmentId,
+     patientId,
+     medicalSpecialistId,
+     treatmentId,
+     startTime,
+     endTime,
+     date,
+     paymentSuccessful,
+   ]);
 
   // Fetch the newly created appointment details
   const selectSql = 'SELECT * FROM Appointments WHERE ID = ?';

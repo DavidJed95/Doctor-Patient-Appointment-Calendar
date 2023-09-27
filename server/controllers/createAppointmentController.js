@@ -6,6 +6,13 @@ const executePaymentMiddleware = require('../paypal/executePaymentMiddleware');
 exports.createAppointment = async (req, res, next) => {
   //  Extract appointment data from request body
   const appointmentData = req.body;
+  await setAppointment(appointmentData, false);
+
+  // TODO:  Then, initiate the payment process
+  // TODO: ... rest of your current logic ...
+
+  // TODO: After payment is confirmed by PayPal, update the appointment as paid
+  // TODO: This logic might go in another route/function, depending on how you've set it up
 
   // Payment creation middleware
   createPaymentMiddleware(req, res, async () => {

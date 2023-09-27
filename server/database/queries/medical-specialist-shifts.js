@@ -13,7 +13,7 @@ async function createShift(shift) {
     ]);
   } catch (error) {
     console.error('Error creating shift:', error);
-    throw error;
+    return { error: 'Error creating shift.' };
   }
 }
 
@@ -30,7 +30,7 @@ async function updateShift(shiftID, shift) {
     ]);
   } catch (error) {
     console.error('Error updating shift:', error);
-    throw error;
+    return { error: 'Error updating shift.' };
   }
 }
 
@@ -40,7 +40,7 @@ async function deleteShift(shiftID) {
     return await doQuery(sql, [shiftID]);
   } catch (error) {
     console.error('Error deleting shift:', error);
-    throw error;
+    return { error: 'Error deleting shift.' };
   }
 }
 
@@ -50,7 +50,7 @@ async function getShiftsForSpecialist(medicalSpecialistID) {
     return await doQuery(sql, [medicalSpecialistID]);
   } catch (error) {
     console.error('Error fetching shifts for specialist:', error);
-    throw error;
+    return { error: 'Error fetching shifts for specialist.' };
   }
 }
 
