@@ -14,6 +14,7 @@ import {
   updateShiftAPI,
   deleteShiftAPI,
 } from './shiftsAPI';
+import Button from '../button/Button';
 
 const ManageShifts = () => {
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
@@ -36,6 +37,8 @@ const ManageShifts = () => {
   });
 
   const [selectedDate, setSelectedDate] = useState(null);
+  const [reportDates, setReportDates] = useState({start: null,end:null})
+
 
   useEffect(() => {
     const fetchShifts = async () => {

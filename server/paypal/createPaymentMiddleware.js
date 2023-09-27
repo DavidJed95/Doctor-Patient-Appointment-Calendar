@@ -16,8 +16,8 @@ async function createPaymentMiddleware(req, res, next) {
       transactions: [
         {
           amount: {
-            total: '10.00', // Total amount for the appointment (replace with actual amount)
-            currency: 'USD',
+            total: '100.00', // TODO: Total amount for the appointment (replace with actual Treatment Price)
+            currency: 'ILS',
           },
           description: 'Appointment Payment',
         },
