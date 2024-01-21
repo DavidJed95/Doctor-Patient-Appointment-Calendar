@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../calendar/Calendar';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { PayPalButtons, PayPalPayment } from '../payPalPayment';
+import { PayPalPayment } from '../payPalPayment/PayPalPayment';
 
 import {
   addPatientAppointment,
@@ -62,14 +62,16 @@ const Appointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const data = await fetchAppointmentsAPI();
-        data.forEach(shift => dispatch(addAppointmentAPI(shift)));
+        const data = await fetchAppointmentsAPI(PatientID);
+        data.forEach(appointment =>
+          dispatch(addPatientAppointment(appointment)),
+        );
       } catch (error) {
         setFeedback(error.message);
       }
     };
     fetchAppointments();
-  }, [dispatch]);
+  }, [dispatch, PatientID]);
 
   const handleInitiatePayment = cost => {
     setSelectedAppointmentCost(cost); // set the cost for the selected appointment
@@ -195,6 +197,8 @@ const Appointments = () => {
       // Any other logic that you wish to implement when booking is clicked
     };
 
+    const handlePaymentSuccess = () => {};
+
     const h1Heading = 'Appointments';
     return (
       <PayPalScriptProvider options={initialOptions}>
@@ -202,12 +206,10 @@ const Appointments = () => {
           {initiatePayment && (
             <PayPalPayment
               amount={selectedAppointmentCost}
-              // onSuccess={handlePaymentSuccess}
-              onSuccess={handleBookAppointment}
+              onSuccess={handlePaymentSuccess}
               onFailure={handlePaymentFailure}
             />
           )}
-          {/* <PayPalButtons /> */}
           <h1>{h1Heading}</h1>
           <Calendar
             eventType='patientAppointment'
@@ -220,11 +222,7 @@ const Appointments = () => {
             <Modal
               show={isModalOpen}
               onClose={handleModalClose}
-              onSubmit={
-                selectedDate?.SpecialistHourID
-                  ? handleEditSubmit
-                  : handleModalSubmit
-              }
+              onSubmit={handleModalSubmit}
             >
               <h2>
                 {selectedDate?.SpecialistHourID ? 'Edit Event' : 'Add Event'}

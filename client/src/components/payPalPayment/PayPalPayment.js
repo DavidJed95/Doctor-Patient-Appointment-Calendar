@@ -1,7 +1,7 @@
 import React from 'react';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
-export const PayPalPayment = ({ amount, onSuccess, onFailure }) => {
+const PayPalPayment = ({ amount, onSuccess, onFailure }) => {
   const createOrder = data => {
     // Order is created on the server and the order id is returned
     return fetch('/my-server/create-paypal-order', {
@@ -40,3 +40,4 @@ export const PayPalPayment = ({ amount, onSuccess, onFailure }) => {
     />
   );
 };
+export default PayPalPayment;

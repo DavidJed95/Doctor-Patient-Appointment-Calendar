@@ -37,7 +37,7 @@ exports.createAppointment = async (req, res, next) => {
     const result = await setAppointment(appointmentData);
     if (result.status === 'success') {
       // Appointment created successfully, you can send a response indicating success
-      // Note:  this reasons will not be reached if the user is redirected to PayPal for payment
+      // TODO:  this reasons will not be reached if the user is redirected to PayPal for payment
       return res
         .status(200)
         .json({ message: 'Appointment has been created successfully' });
