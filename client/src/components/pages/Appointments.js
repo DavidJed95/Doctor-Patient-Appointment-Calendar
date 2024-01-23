@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../calendar/Calendar';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { PayPalPayment } from '../payPalPayment/PayPalPayment';
+import PayPalPayment from '../payPalPayment/PayPalPayment.js';
 
 import {
   addPatientAppointment,

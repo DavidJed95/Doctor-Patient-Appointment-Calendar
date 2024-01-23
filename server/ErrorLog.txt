@@ -258,3 +258,17 @@
   Line: 15
   ---------------------------------------------------
   
+  2024-01-23T18:45:36.065Z - Error: secret option required for sessions
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\node_modules\express-session\index.js
+  Function: session
+  Line: 200
+  ---------------------------------------------------
+  
+  2024-01-23T18:45:36.661Z - Error: secret option required for sessions
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\node_modules\express-session\index.js
+  Function: session
+  Line: 200
+  ---------------------------------------------------
+  
