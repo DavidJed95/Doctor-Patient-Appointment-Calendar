@@ -24,21 +24,19 @@ const ManageShifts = () => {
   ); // Filter by eventType
   const dispatch = useDispatch();
 
-
   const [feedback, setFeedback] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
-  const [shift, setShift] = useState({
-    MedicalSpecialistID: specialistID,
-    DayOfWeek: null,
-    StartTime: null, // Changed from empty string to null
-    EndTime: null, // Changed from empty string to null
-    Type: 'Working Hour',
-    ShiftDate: format(new Date(), 'yyyy-MM-dd'),
-  });
-
+  // const [shifts, setShifts] = useState({
+  //   MedicalSpecialistID: specialistID,
+  //   DayOfWeek: null,
+  //   StartTime: null, // Changed from empty string to null
+  //   EndTime: null, // Changed from empty string to null
+  //   Type: 'Working Hour',
+  //   ShiftDate: format(new Date(), 'yyyy-MM-dd'),
+  // });
+  const [shifts, setShifts] = useState(() => []);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [reportDates, setReportDates] = useState({start: null,end:null})
-
+  const [reportDates, setReportDates] = useState({ start: null, end: null });
 
   useEffect(() => {
     const fetchShifts = async () => {
@@ -72,12 +70,13 @@ const ManageShifts = () => {
 
     const endDate = new Date(shiftDate);
     endDate.setHours(endHour, endMin);
-
+console.log(`Shift Type line 73: ${shift.Type}`);
     return {
       id: shift.SpecialistHourID,
       title: shift.Type,
       start: startDate,
       end: endDate,
+      eventType: 'specialistAvailability'
     };
   };
 
@@ -97,22 +96,23 @@ const ManageShifts = () => {
         ShiftDate: format(clickInfo.event.start, 'yyyy-MM-dd'),
       };
 
-      setShift(clickedShift);
+      setShifts([...shifts, clickedShift]);
       setSelectedDate(clickInfo.event);
       setModalOpen(true);
     },
-    [specialistID],
+    [specialistID, shifts],
   );
 
-  const isOverlapping = (start, end) => {
-    return specialistAvailability.some(event => {
-      return (
-        (start >= event.start && start < event.end) ||
-        (end > event.start && end <= event.end) ||
-        (start <= event.start && end >= event.end)
-      );
-    });
-  };
+  const isOverlapping = useCallback(
+    (start, end) =>
+      specialistAvailability.some(
+        event =>
+          (start >= event.start && start < event.end) ||
+          (end > event.start && end <= event.end) ||
+          (start <= event.start && end >= event.end),
+      ),
+    [specialistAvailability],
+  );
 
   const handleDateSelect = useCallback(
     selectInfo => {
@@ -122,14 +122,14 @@ const ManageShifts = () => {
       }
 
       const selectedShift = {
-        ...shift,
+        ...shifts,
         DayOfWeek: selectInfo.start.getDay(),
         StartTime: selectInfo.start, // Use the Date directly
         EndTime: selectInfo.end, // Use the Date directly
         ShiftDate: format(selectInfo.start, 'yyyy-MM-dd'),
       };
 
-      setShift(selectedShift);
+      setShifts(selectedShift);
       setSelectedDate({
         start: selectInfo.start,
         end: selectInfo.end,
@@ -138,9 +138,8 @@ const ManageShifts = () => {
 
       setModalOpen(true);
     },
-    [shift, isOverlapping],
+    [shifts, isOverlapping],
   );
-
 
   const handleModalClose = () => {
     setSelectedDate(null);
@@ -148,17 +147,17 @@ const ManageShifts = () => {
   };
 
   const handleModalSubmit = async () => {
-    if (isNaN(shift.StartTime) || isNaN(shift.EndTime)) {
+    if (isNaN(shifts.StartTime) || isNaN(shifts.EndTime)) {
       setFeedback('Issue with date values. Please try again.');
       return;
     }
-    if (isOverlapping(new Date(shift.StartTime), new Date(shift.EndTime))) {
+    if (isOverlapping(new Date(shifts.StartTime), new Date(shifts.EndTime))) {
       setFeedback('This time overlaps with another event.');
       return;
     }
 
     try {
-      const response = await addShiftAPI(shift);
+      const response = await addShiftAPI(shifts);
       setFeedback(response.message);
       dispatch(addSpecialistAvailability(response.shift));
       handleModalClose();
@@ -168,14 +167,14 @@ const ManageShifts = () => {
   };
 
   const handleEditSubmit = async () => {
-    if (shift.Type && selectedDate) {
+    if (shifts.Type && selectedDate) {
       const updatedEvent = {
         MedicalSpecialistID: specialistID,
-        Type: shift.Type,
+        Type: shifts.Type,
         DayOfWeek: new Date(selectedDate.start).getDay(),
-        StartTime: format(new Date(shift.StartTime), 'HH:mm'),
-        EndTime: format(new Date(shift.EndTime), 'HH:mm'),
-        ShiftDate: shift.ShiftDate,
+        StartTime: format(new Date(shifts.StartTime), 'HH:mm'),
+        EndTime: format(new Date(shifts.EndTime), 'HH:mm'),
+        ShiftDate: shifts.ShiftDate,
       };
 
       try {
@@ -202,6 +201,9 @@ const ManageShifts = () => {
     handleModalClose();
   };
 
+  console.log(
+    `The events in the ManageShifts component before sending them to the Calendar component: ${shifts}`,
+  );
   return (
     <div>
       <Calendar
@@ -210,7 +212,7 @@ const ManageShifts = () => {
         handleEventClick={handleEventClick}
         events={specialistAvailability.map(event => ({
           ...event,
-          title: event.Type || 'Unkown',
+          title: event.Type || 'Unknown',
         }))}
       />
       {feedback && <p>{feedback}</p>}
@@ -230,9 +232,9 @@ const ManageShifts = () => {
               Shift Date:
               <input
                 type='date'
-                value={shift.ShiftDate}
+                value={shifts.ShiftDate}
                 onChange={e =>
-                  setShift(prev => ({ ...prev, ShiftDate: e.target.value }))
+                  setShifts(prev => ({ ...prev, ShiftDate: e.target.value }))
                 }
               />
             </label>
@@ -242,9 +244,9 @@ const ManageShifts = () => {
               Shift Type:
               <select
                 name='Type'
-                value={shift.Type}
+                value={shifts.Type}
                 onChange={e =>
-                  setShift(prev => ({ ...prev, Type: e.target.value }))
+                  setShifts(prev => ({ ...prev, Type: e.target.value }))
                 }
               >
                 <option value='Working Hour'>Working Hour</option>
@@ -261,15 +263,15 @@ const ManageShifts = () => {
               <input
                 type='time'
                 value={
-                  shift.StartTime instanceof Date
-                    ? format(shift.StartTime, 'HH:mm')
+                  shifts.StartTime instanceof Date
+                    ? format(shifts.StartTime, 'HH:mm')
                     : ''
                 }
                 onChange={e => {
                   const [hours, minutes] = e.target.value.split(':');
                   const newStartTime = new Date();
                   newStartTime.setHours(hours, minutes, 0, 0);
-                  setShift(prev => ({ ...prev, StartTime: newStartTime }));
+                  setShifts(prev => ({ ...prev, StartTime: newStartTime }));
                 }}
               />
             </label>
@@ -280,15 +282,15 @@ const ManageShifts = () => {
               <input
                 type='time'
                 value={
-                  shift.EndTime instanceof Date
-                    ? format(shift.EndTime, 'HH:mm')
+                  shifts.EndTime instanceof Date
+                    ? format(shifts.EndTime, 'HH:mm')
                     : ''
                 }
                 onChange={e => {
                   const [hours, minutes] = e.target.value.split(':');
                   const newEndTime = new Date();
                   newEndTime.setHours(hours, minutes, 0, 0);
-                  setShift(prev => ({ ...prev, EndTime: newEndTime }));
+                  setShifts(prev => ({ ...prev, EndTime: newEndTime }));
                 }}
               />
             </label>

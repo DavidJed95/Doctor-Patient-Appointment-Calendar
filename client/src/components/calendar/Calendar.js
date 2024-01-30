@@ -16,12 +16,12 @@ const Calendar = ({
     .filter(event => !eventType || event.eventType === eventType)
     .map(event => ({
       id: event.id || event.SpecialistHourID, // use SpecialistHourID if id is undefined
-      title: event.title || event.Type || 'Unknown', // use Type if title is undefined, fallback to 'Unknown'
+      title: event.title,
       start: new Date(event.start || event.ShiftDate), // use ShiftDate if start is undefined
       end: event.end,
     }));
 
-  console.log(`events in the Calendar.js: `, events);
+  console.log(`Processed events in the Calendar.js: `, processedEvents);
 
   return (
     <div>
