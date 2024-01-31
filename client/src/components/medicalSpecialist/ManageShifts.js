@@ -47,13 +47,17 @@ const ManageShifts = () => {
         formattedShifts.forEach(shift =>
           dispatch(addSpecialistAvailability(shift)),
         );
+        setShifts(formattedShifts)
       } catch (error) {
         setFeedback(error.message);
       }
     };
     fetchShifts();
   }, [dispatch, specialistID]);
-
+console.log(`shifts variable contains: ${shifts}`)
+console.log(`specialistAvailability contains: ${specialistAvailability}`);
+shifts.map(shift => console.log(`each shift contains ${shift}`));
+console.log(`events contains: ${events}`);
   const isPastDate = date => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -210,10 +214,7 @@ console.log(`Shift Type line 73: ${shift.Type}`);
         eventType='specialistAvailability'
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
-        events={specialistAvailability.map(event => ({
-          ...event,
-          title: event.Type || 'Unknown',
-        }))}
+        events={shifts}
       />
       {feedback && <p>{feedback}</p>}
       {isModalOpen && (
