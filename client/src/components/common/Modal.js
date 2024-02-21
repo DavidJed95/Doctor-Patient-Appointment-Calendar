@@ -33,11 +33,11 @@ export default function Modal({
       window.removeEventListener('click', handleOutsideClick);
       window.removeEventListener('keydown', handleEscPress);
     };
-  }, [show, onClose, styles.modalContent]);
+  }, [show, onClose]);
 
   return (
-    <div className={styles.modalBackdrop}>
-      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+    <section className={styles.modalBackdrop}>
+      <section className={styles.modalContent} onClick={e => e.stopPropagation()}>
         <button className={styles.modalCloseButton} onClick={onClose}>
           &times;
         </button>
@@ -49,7 +49,7 @@ export default function Modal({
             <Button text='Cancel' handleClick={onClose} />
           </>
         )}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

@@ -8,9 +8,11 @@
 
 :root {
   box-sizing: border-box;
-  font-size: 62.5%;
+  font-size: var(--root-text-size);
 
   /*#region Variables*/
+  --root-text-size: 62.5%
+  --primary-text-size: 1.6rem
   --black: rgba(39, 38, 44, 1);
   --gray: rgba(153, 153, 153, 1);
   --primary: rgba(64, 68, 237, 1);
@@ -35,10 +37,15 @@
 body {
   display: flex;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 1.6rem;
+  font-size: var(--root-text-size);
   line-height: 1.5;
   font-weight: 400;
-  background-color: var(--white);
+  /* background-color: var(--white); */
+  background-image: url(./assets/images/istockphoto-1447388979-612x612.jpg);
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   /* border: 1rem solid red; */
   min-height: 100dvh;
   flex-direction: column;
@@ -75,9 +82,9 @@ footer {
     :root {
         font-size: 55%;  /* Adjusting base font size for mobile */
     }
-    body {
-        /* border: 0.5rem solid red; */
-    }
+    /* body {
+        border: 0.5rem solid red;
+    } */
     .app {
         width: 100%;  /* Using full width for mobile */
         padding: 0.1rem 1rem;  /* Less padding on sides for mobile */
@@ -85,18 +92,18 @@ footer {
 }
 
 /* Medium screens, usually tablets */
-@media screen and (min-width: 60.1rem) and (max-width: 1024px) {
-    :root {
-        font-size: 58%;  /* Adjusting base font size for tablets */
-    }
-    body {
+/* @media screen and (60.1rem<=max-width<= 102.4rem) { */
+    /* :root { */
+        /* font-size: 58%;  Adjusting base font size for tablets */
+    /* } */
+    /* body {
         border: 0.7rem solid red;
-    }
-    .app {
-        width: 98%;  /* Using slightly less full width for tablets */
-        padding: 0.1rem 1.5rem;  /* Moderate padding on sides for tablets */
-    }
-}
+    } */
+    /* .app { */
+        /* width: 98%;  Using slightly less full width for tablets */
+        /* padding: 0.1rem 1.5rem;  Moderate padding on sides for tablets */
+    /* } */
+/* } */
 
 /* Large screens, usually desktops */
 @media screen and (min-width: 102.5rem) {

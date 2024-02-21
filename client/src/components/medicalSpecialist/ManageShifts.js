@@ -14,11 +14,16 @@ import {
   updateShiftAPI,
   deleteShiftAPI,
 } from './shiftsAPI';
-import Button from '../button/Button';
+// import Button from '../button/Button';
 
 const ManageShifts = () => {
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
-  const events = useSelector(state => state.events);
+  const events = useSelector(state => state.events.SpecialistAvailability);
+  console.log('The events in the shifts management component from redux:', events)
+  console.log(
+    'The events type in the shifts management component from redux:',
+    typeof events
+  );
   const specialistAvailability = events.filter(
     event => event.eventType === 'specialistAvailability',
   ); // Filter by eventType
@@ -26,38 +31,31 @@ const ManageShifts = () => {
 
   const [feedback, setFeedback] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [shifts, setShifts] = useState({
-  //   MedicalSpecialistID: specialistID,
-  //   DayOfWeek: null,
-  //   StartTime: null, // Changed from empty string to null
-  //   EndTime: null, // Changed from empty string to null
-  //   Type: 'Working Hour',
-  //   ShiftDate: format(new Date(), 'yyyy-MM-dd'),
-  // });
   const [shifts, setShifts] = useState(() => []);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [reportDates, setReportDates] = useState({ start: null, end: null });
+  // const [reportDates, setReportDates] = useState({ start: null, end: null });
+
+  // useEffect(() => {
+  //   const fetchShifts = async () => {
+  //     try {
+  //       const data = await fetchShiftsAPI(specialistID);
+  //       console.log('Shift Data:', data);
+  //       const formattedShifts = data.map(shift => convertToEventFormat(shift));
+  //       formattedShifts.forEach(shift =>
+  //         dispatch(addSpecialistAvailability(shift)),
+  //       );
+  //       setShifts(formattedShifts)
+  //     } catch (error) {
+  //       setFeedback(error.message);
+  //     }
+  //   };
+  //   fetchShifts();
+  // }, [dispatch, specialistID]);
 
   useEffect(() => {
-    const fetchShifts = async () => {
-      try {
-        const data = await fetchShiftsAPI(specialistID);
-        console.log('Shift Data:', data);
-        const formattedShifts = data.map(shift => convertToEventFormat(shift));
-        formattedShifts.forEach(shift =>
-          dispatch(addSpecialistAvailability(shift)),
-        );
-        setShifts(formattedShifts)
-      } catch (error) {
-        setFeedback(error.message);
-      }
-    };
-    fetchShifts();
-  }, [dispatch, specialistID]);
-console.log(`shifts variable contains: ${shifts}`)
-console.log(`specialistAvailability contains: ${specialistAvailability}`);
-shifts.map(shift => console.log(`each shift contains ${shift}`));
-console.log(`events contains: ${events}`);
+    dispatch(fetchShiftsAPI(specialistID))
+  }, [dispatch, specialistID])
+
   const isPastDate = date => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -74,7 +72,7 @@ console.log(`events contains: ${events}`);
 
     const endDate = new Date(shiftDate);
     endDate.setHours(endHour, endMin);
-console.log(`Shift Type line 73: ${shift.Type}`);
+
     return {
       id: shift.SpecialistHourID,
       title: shift.Type,
@@ -91,20 +89,20 @@ console.log(`Shift Type line 73: ${shift.Type}`);
         return;
       }
 
+      // Extracting details from the clicked event
       const clickedShift = {
         MedicalSpecialistID: specialistID,
-        DayOfWeek: clickInfo.event.start.getDay(),
+        DayOfWeek: format(clickInfo.event.start, 'i'), // Adjusting to ISO day format
         StartTime: format(clickInfo.event.start, 'HH:mm'),
         EndTime: format(clickInfo.event.end, 'HH:mm'),
-        Type: clickInfo.event.title,
+        Type: clickInfo.event.extendedProps.Type, // Ensure the Type is correctly accessed
         ShiftDate: format(clickInfo.event.start, 'yyyy-MM-dd'),
       };
 
-      setShifts([...shifts, clickedShift]);
-      setSelectedDate(clickInfo.event);
+      setSelectedDate(clickedShift); // Using the clicked event's details
       setModalOpen(true);
     },
-    [specialistID, shifts],
+    [specialistID],
   );
 
   const isOverlapping = useCallback(
@@ -125,31 +123,32 @@ console.log(`Shift Type line 73: ${shift.Type}`);
         return;
       }
 
-      const selectedShift = {
-        ...shifts,
-        DayOfWeek: selectInfo.start.getDay(),
-        StartTime: selectInfo.start, // Use the Date directly
-        EndTime: selectInfo.end, // Use the Date directly
+      // Preparing the shift object from the selected time range
+      const newShift = {
+        MedicalSpecialistID: specialistID,
+        DayOfWeek: format(selectInfo.start, 'i'), // 'i' stands for ISO day of the week (1-7)
+        StartTime: format(selectInfo.start, 'HH:mm'),
+        EndTime: format(selectInfo.end, 'HH:mm'),
+        Type: 'Working Hour', // Default type, adjust as necessary
         ShiftDate: format(selectInfo.start, 'yyyy-MM-dd'),
       };
 
-      setShifts(selectedShift);
-      setSelectedDate({
-        start: selectInfo.start,
-        end: selectInfo.end,
-        allDay: selectInfo.allDay,
-      });
-
+      setSelectedDate(newShift); // Storing the new shift as the selectedDate
       setModalOpen(true);
     },
-    [shifts, isOverlapping],
+    [isOverlapping, specialistID],
   );
+
 
   const handleModalClose = () => {
     setSelectedDate(null);
     setModalOpen(false);
   };
-
+console.log(
+  'Shifts before passing to Calendar:',
+  Array.isArray(shifts),
+  shifts,
+);
   const handleModalSubmit = async () => {
     if (isNaN(shifts.StartTime) || isNaN(shifts.EndTime)) {
       setFeedback('Issue with date values. Please try again.');
@@ -204,17 +203,13 @@ console.log(`Shift Type line 73: ${shift.Type}`);
     }
     handleModalClose();
   };
-
-  console.log(
-    `The events in the ManageShifts component before sending them to the Calendar component: ${shifts}`,
-  );
+console.log('Are the shifts passed to the calendar are as an array object?: ',Array.isArray(shifts), shifts);
   return (
-    <div>
+    <section>
       <Calendar
         eventType='specialistAvailability'
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
-        events={shifts}
       />
       {feedback && <p>{feedback}</p>}
       {isModalOpen && (
@@ -301,7 +296,7 @@ console.log(`Shift Type line 73: ${shift.Type}`);
           )}
         </Modal>
       )}
-    </div>
+    </section>
   );
 };
 

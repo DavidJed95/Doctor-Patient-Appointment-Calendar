@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
 import InputField from '../InputField';
 import Button from '../../button/Button';
+
 const PasswordResetForm = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
@@ -22,10 +23,10 @@ const PasswordResetForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-     const requestBody = {
-       id,
-       email,
-     };
+    const requestBody = {
+      id,
+      email,
+    };
     try {
       // Send a password reset request to the server
       const response = await fetch(
@@ -62,42 +63,36 @@ const PasswordResetForm = () => {
   };
 
   return (
-    <div>
-      <form action='auth/password-reset' method='POST' className={styles.form}>
-        <h1 className={styles.userAuthHeading}>Password Reset</h1>
-        <InputField
-          label='ID:'
-          pattern='[0-9]{9}'
-          placeholder='ID'
-          value={id}
-          name='id'
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          label='Email:'
-          placeholder='name@gmail.com'
-          value={email}
-          name='email'
-          onChange={handleChange}
-          required
-        />
-        <Button
-          type='submit'
-          text='Reset Password'
-          handleClick={handleSubmit}
-        />
-        {message && (
-          <p
-            className={
-              message.includes('success') ? styles.success : styles.failure
-            }
-          >
-            {message}
-          </p>
-        )}
-      </form>
-    </div>
+    <form action='auth/password-reset' method='POST' className={styles.form}>
+      <h1 className={styles.userAuthHeading}>Password Reset</h1>
+      <InputField
+        label='ID:'
+        pattern='[0-9]{9}'
+        placeholder='ID'
+        value={id}
+        name='id'
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label='Email:'
+        placeholder='name@gmail.com'
+        value={email}
+        name='email'
+        onChange={handleChange}
+        required
+      />
+      <Button type='submit' text='Reset Password' handleClick={handleSubmit} />
+      {message && (
+        <p
+          className={
+            message.includes('success') ? styles.success : styles.failure
+          }
+        >
+          {message}
+        </p>
+      )}
+    </form>
   );
 };
 

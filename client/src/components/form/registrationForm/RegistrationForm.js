@@ -163,117 +163,114 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
-      <form action='/auth/register' method='POST' className={styles.form}>
-        <h1 className={styles.userAuthHeading}>Register</h1>
+    <form action='/auth/register' method='POST' className={styles.form}>
+      <h1 className={styles.userAuthHeading}>Register</h1>
 
-        <UserSelector onChange={handleChange} />
-        <div>
-          <InputField
-            label='ID:'
-            placeholder='ID'
-            pattern='[0-9]{9}'
-            value={formData.id}
-            name='id'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
-          <InputField
-            label='Password:'
-            placeholder='Password'
-            pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={formData.password}
-            name='password'
-            type='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
-          <InputField
-            label='Password Confirmation:'
-            placeholder='Confirm your password:'
-            pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
-            value={formData.passwordConfirm}
-            name='passwordConfirm'
-            type='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <InputField
-            label='First Name:'
-            placeholder='First Name'
-            value={formData.firstName}
-            name='firstName'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <InputField
-            label='Last Name:'
-            placeholder='Last Name'
-            value={formData.lastName}
-            name='lastName'
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <UserSelector onChange={handleChange} />
+      <div>
+        <InputField
+          label='ID:'
+          placeholder='ID'
+          pattern='[0-9]{9}'
+          value={formData.id}
+          name='id'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
+        <InputField
+          label='Password:'
+          placeholder='Password'
+          pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
+          value={formData.password}
+          name='password'
+          type='password'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
+        <InputField
+          label='Password Confirmation:'
+          placeholder='Confirm your password:'
+          pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
+          value={formData.passwordConfirm}
+          name='passwordConfirm'
+          type='password'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <InputField
+          label='First Name:'
+          placeholder='First Name'
+          value={formData.firstName}
+          name='firstName'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <InputField
+          label='Last Name:'
+          placeholder='Last Name'
+          value={formData.lastName}
+          name='lastName'
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-        <div>
-          <InputField
-            label='Email:'
-            placeholder='name@gmail.com'
-            value={formData.email}
-            name='email'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <InputField
-            label='Mobile:'
-            placeholder='Mobile'
-            value={formData.mobile}
-            name='mobile'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <InputField
-            label='Languages:'
-            placeholder='Languages'
-            value={formData.languages}
-            name='languages'
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <div>
+        <InputField
+          label='Email:'
+          placeholder='name@gmail.com'
+          value={formData.email}
+          name='email'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <InputField
+          label='Mobile:'
+          placeholder='Mobile'
+          value={formData.mobile}
+          name='mobile'
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <InputField
+          label='Languages:'
+          placeholder='Languages'
+          value={formData.languages}
+          name='languages'
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-        {formData.userType === UserType.Patient && renderPatientFields()}
+      {formData.userType === UserType.Patient && renderPatientFields()}
 
-        {formData.userType === UserType.MedicalSpecialist &&
-          renderDoctorFields()}
+      {formData.userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
-        <Button text='Register' type='submit' handleClick={handleSubmit} />
-        {message && (
-          <p
-            className={
-              message.includes('success') ? styles.success : styles.failure
-            }
-          >
-            {message}
-          </p>
-        )}
-      </form>
-    </div>
+      <Button text='Register' type='submit' handleClick={handleSubmit} />
+      {message && (
+        <p
+          className={
+            message.includes('success') ? styles.success : styles.failure
+          }
+        >
+          {message}
+        </p>
+      )}
+    </form>
   );
 };
 export default RegistrationForm;
