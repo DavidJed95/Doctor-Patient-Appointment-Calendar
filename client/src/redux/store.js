@@ -11,11 +11,11 @@ const store = configureStore({
     events: eventsReducer,
     medicalSpecialists: medicalSpecialistsSlice,
     notifications: notificationsReducer,
-    
   },
-  middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

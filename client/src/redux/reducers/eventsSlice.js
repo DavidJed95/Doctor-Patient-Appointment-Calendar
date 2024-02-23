@@ -1,71 +1,112 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as shiftsAPI from '../../components/medicalSpecialist/shiftsAPI';
 
+/**
+ * fetchShifts thunk
+ */
 export const fetchShifts = createAsyncThunk(
   'events/fetchShifts',
-  async (specialistID, { rejectWithValue }) => {
+  async (medicalSpecialistID, { rejectWithValue }) => {
     try {
-      const response = await shiftsAPI.fetchShiftsAPI(specialistID);
-      return response.map(shift => ({
-        ...shift,
-        start: new Date(shift.start),
-        end: new Date(shift.end),
-        eventType: 'specialistAvailability',
-      }));
+      const response = await shiftsAPI.fetchShiftsAPI(medicalSpecialistID);
+      return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   },
 );
 
+/**
+ * Add Shift thunk
+ */
+export const addShift = createAsyncThunk(
+  'events/addShift',
+  async (shiftDetails, { rejectWithValue }) => {
+    try {
+      const response = await shiftsAPI.addShiftAPI(shiftDetails);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+/**
+ * Update Shift thunk
+ */
+export const updateShift = createAsyncThunk(
+  'events/updateShift',
+  async ({ shiftID, shiftDetails }, { rejectWithValue }) => {
+    try {
+      const response = await shiftsAPI.updateShiftAPI(shiftID, shiftDetails);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+/**
+ * Delete Shift thunk
+ */
+export const deleteShift = createAsyncThunk(
+  'events/deleteShift',
+  async (shiftID, { rejectWithValue }) => {
+    try {
+      const response = await shiftsAPI.deleteShiftAPI(shiftID);
+      return { shiftID, response }; // Include shiftID to identify which shift was deleted
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+// Events slice
 export const eventsSlice = createSlice({
   name: 'events',
   initialState: { SpecialistAvailability: [], loading: false, error: null },
   reducers: {
-    addSpecialistAvailability: (state, action) => {
-      const newEvent = {
-        ...action.payload,
-        eventType: 'specialistAvailability',
-      };
-      state.push(newEvent);
-    },
-    addPatientAppointment: (state, action) => {
-      const newEvent = {
-        ...action.payload,
-        eventType: 'patientAppointment',
-      };
-      state.push(newEvent);
-    },
-    removeEvent: (state, action) => {
-      return state.filter(event => event.id !== action.payload.id);
-    },
-    updateEvent: (state, action) => {
-      const index = state.findIndex(event => event.id === action.payload.id);
-      if (index !== -1) {
-        state[index] = action.payload;
-      }
-    },
+    // Reducers for synchronous actions
   },
-  extraReducers: {
-    [fetchShifts.pending]: state => {
-      state.loading = true;
-    },
-    [fetchShifts.fulfilled]: (state, action) => {
-      state.specialistAvailability = action.payload;
-      state.loading = false;
-    },
-    [fetchShifts.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
+  extraReducers: builder => {
+    builder
+      // Handling fetchShifts
+      .addCase(fetchShifts.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchShifts.fulfilled, (state, action) => {
+        state.SpecialistAvailability = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchShifts.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      // Handling addShift
+      .addCase(addShift.fulfilled, (state, action) => {
+        state.SpecialistAvailability.push(action.payload);
+        // You may need to adjust this based on the response structure
+      })
+      // Handling updateShift
+      .addCase(updateShift.fulfilled, (state, action) => {
+        const index = state.SpecialistAvailability.findIndex(
+          event => event.id === action.meta.arg.shiftID,
+        );
+        if (index !== -1) {
+          state.SpecialistAvailability[index] = {
+            ...state.SpecialistAvailability[index],
+            ...action.payload,
+          };
+          // Adjust based on your actual response structure
+        }
+      })
+      // Handling deleteShift
+      .addCase(deleteShift.fulfilled, (state, action) => {
+        state.SpecialistAvailability = state.SpecialistAvailability.filter(
+          event => event.id !== action.meta.arg.shiftID,
+        );
+      });
   },
 });
-
-export const {
-  addSpecialistAvailability,
-  addPatientAppointment,
-  removeEvent,
-  updateEvent,
-} = eventsSlice.actions;
 
 export default eventsSlice.reducer;
