@@ -55,11 +55,10 @@ function App() {
         ) : (
           <>
             <Route path='/home' element={<Home />} />
-            <Route path='/appointments' element={<Appointments />} />
+            {/* <Route path='/appointments' element={<Appointments />} /> */}
             <Route path='/profile-update' element={<UpdateUserProfile />} />
-            
-              <Route path='/manage-shifts' element={<ManageShifts />} />
-            
+
+            <Route path='/manage-shifts' element={<ManageShifts />} />
           </>
         )}
         <Route path='/verify-email/:token' element={<EmailVerification />} />

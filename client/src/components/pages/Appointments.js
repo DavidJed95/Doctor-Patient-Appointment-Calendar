@@ -179,18 +179,18 @@ const Appointments = () => {
       handleModalClose();
     };
 
-    //   const handleRemoveShift = async () => {
-    //     if (selectedDate) {
-    //       try {
-    //         await deleteShiftAPI(selectedDate.id);
-    //         dispatch(removeAvailability({ id: selectedDate.id })); // Remove the event from local state
-    //         setFeedback('Shift deleted successfully.');
-    //       } catch (error) {
-    //         setFeedback(error.message);
-    //       }
-    //     }
-    //     handleModalClose();
-    //   };
+      const handleRemoveShift = async () => {
+        if (selectedDate) {
+          try {
+            // await deleteShiftAPI(selectedDate.id);
+            // dispatch(removeAvailability({ id: selectedDate.id })); // Remove the event from local state
+            setFeedback('Shift deleted successfully.');
+          } catch (error) {
+            setFeedback(error.message);
+          }
+        }
+        handleModalClose();
+      };
 
     const handleBookAppointment = (selectedDate, cost) => {
       handleInitiatePayment(cost);
@@ -227,16 +227,16 @@ const Appointments = () => {
               <h2>
                 {selectedDate?.SpecialistHourID ? 'Edit Event' : 'Add Event'}
               </h2>
-              {/* <div>
+              <div>
                 <label>
                   Shift Date:
                   <input
                     type='date'
-                    value={shiftDate}
-                    onChange={e => setShiftDate(e.target.value)}
+                    // value={shiftDate}
+                    // onChange={e => setShiftDate(e.target.value)}
                   />
                 </label>
-              </div> */}
+              </div>
               <div>
                 <label>
                   Shift Type:
@@ -273,9 +273,9 @@ const Appointments = () => {
                   />
                 </label>
               </div>
-              {/* {selectedDate?.SpecialistHourID && (
+              {selectedDate?.SpecialistHourID && (
                 <button onClick={handleRemoveShift}>Remove</button>
-              )} */}
+              )}
             </Modal>
           )}
         </div>

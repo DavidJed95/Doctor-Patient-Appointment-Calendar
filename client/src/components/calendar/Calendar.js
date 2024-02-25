@@ -9,14 +9,15 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const calendarRef = useRef(null);
   // Assuming state.events.specialistAvailability correctly fetches the needed events
   const events = useSelector(state => state.events.specialistAvailability);
-  console.log('Events in Calendar:', events); // Debugging log
+  console.log('Events in Calendar:', events, 'events Type: ', typeof events); // Debugging log
   // Simplified mapping, since all events are assumed to be of the correct type
-  const processedEvents = events?.map(event => ({
-    id: event.id || event.SpecialistHourID, // use SpecialistHourID if id is undefined
-    title: event.title,
-    start: new Date(event.start || event.ShiftDate), // use ShiftDate if start is undefined
-    end: new Date(event.end),
-  })) || [];
+  const processedEvents =
+    events?.map(event => ({
+      id: event.id || event.SpecialistHourID, // use SpecialistHourID if id is undefined
+      title: event.title,
+      start: new Date(event.start || event.ShiftDate), // use ShiftDate if start is undefined
+      end: new Date(event.end),
+    })) || [];
 
   return (
     <Fullcalendar
