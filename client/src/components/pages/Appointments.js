@@ -6,7 +6,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import PayPalPayment from '../payPalPayment/PayPalPayment.js';
 
 import {
-  addPatientAppointment,
+  // addPatientAppointment,
   removeEvent,
   updateEvent,
 } from '../../redux/reducers/eventsSlice.js';
@@ -63,9 +63,9 @@ const Appointments = () => {
     const fetchAppointments = async () => {
       try {
         const data = await fetchAppointmentsAPI(PatientID);
-        data.forEach(appointment =>
-          dispatch(addPatientAppointment(appointment)),
-        );
+        // data.forEach(appointment =>
+        //   dispatch(addPatientAppointment(appointment)),
+        // );
       } catch (error) {
         setFeedback(error.message);
       }
@@ -149,10 +149,10 @@ const Appointments = () => {
         isPayedFor: false, // Set this after successful payment
       };
       try {
-        const response = await addAppointmentAPI(newAppointment);
-        setFeedback(response.message);
-        dispatch(addPatientAppointment(response.appointment));
-        handleModalClose();
+        // const response = await addAppointmentAPI(newAppointment);
+        // setFeedback(response.message);
+        // dispatch(addPatientAppointment(response.appointment));
+        // handleModalClose();
       } catch (error) {
         setFeedback(error.message);
       }
