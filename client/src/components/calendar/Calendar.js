@@ -12,11 +12,16 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   console.log('Events in Calendar:', events, 'events Type: ', typeof events); // Debugging log
   // Simplified mapping, since all events are assumed to be of the correct type
   const processedEvents =
-    events?.map(event => ({
-      id: event.id || event.SpecialistHourID, // use SpecialistHourID if id is undefined
+    events.map(event => ({
+      id: event.SpecialistHourID, // use SpecialistHourID if id is undefined
       title: event.Type,
-      start: new Date(event.start || event.ShiftDate), // use ShiftDate if start is undefined
-      end: new Date(event.end),
+      // Ensures dates are treated as UTC to prevent timezone shifts
+      start: new Date(
+        event.ShiftDate + 'T' + event.StartTime
+      ), // Append time and 'Z' to indicate UTC
+      end: new Date(
+        event.ShiftDate + 'T' + event.EndTime
+      ), // Use end of day for the event's end date
     })) || [];
 
   return (
@@ -30,6 +35,7 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
         center: 'title',
         end: 'timeGridDay,timeGridWeek,dayGridMonth',
       }}
+      
       selectable={true}
       editable={true}
       events={processedEvents}

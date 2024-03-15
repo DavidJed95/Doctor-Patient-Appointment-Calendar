@@ -82,7 +82,7 @@ const PasswordResetForm = () => {
         onChange={handleChange}
         required
       />
-      <Button type='submit' text='Reset Password' handleClick={handleSubmit} />
+      <Button type='submit' label='Reset Password' handleClick={handleSubmit} />
       {message && (
         <p
           className={

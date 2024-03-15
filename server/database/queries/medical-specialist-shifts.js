@@ -1,16 +1,26 @@
 const doQuery = require('../query');
 
+const { format, parseISO } = require('date-fns')
+
+// Additional functions
+function getDayOfWeekEnum(dateString) {
+  const dayName = format(parseISO(dateString), 'EEEE'); // 'Monday', 'Tuesday', ...
+  return dayName
+}
+
 async function createShift(shift) {
   try {
-    const sql = `INSERT INTO SpecialistHours (MedicalSpecialistID, DayOfWeek, StartTime, EndTime, Type, ShiftDate) VALUES (?, ?, ?, ?, ?, ?)`;
-    return await doQuery(sql, [
+    const dayOfWeek = getDayOfWeekEnum(shift.ShiftDate);
+    const shiftSql = `INSERT INTO SpecialistHours (MedicalSpecialistID, DayOfWeek, StartTime, EndTime, Type, ShiftDate) VALUES (?, ?, ?, ?, ?, ?)`;
+    const shiftDetails = [
       shift.MedicalSpecialistID,
-      shift.DayOfWeek,
+      dayOfWeek,
       shift.StartTime,
       shift.EndTime,
       shift.Type,
       shift.ShiftDate,
-    ]);
+    ];
+    return await doQuery(shiftSql, shiftDetails);
   } catch (error) {
     console.error('Error creating shift:', error);
     return { error: 'Error creating shift.' };

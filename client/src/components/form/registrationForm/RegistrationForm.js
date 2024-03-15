@@ -260,7 +260,7 @@ const RegistrationForm = () => {
 
       {formData.userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
-      <Button text='Register' type='submit' handleClick={handleSubmit} />
+      <Button label='Register' type='submit' handleClick={handleSubmit} />
       {message && (
         <p
           className={

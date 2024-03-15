@@ -51,7 +51,7 @@ const Navbar = ({ siteTitle }) => {
         <CustomLink to='/profile-update'>Profile Update</CustomLink>
         <Button
           className={styles.navLogoutButton}
-          text='Logout'
+          label='Logout'
           handleClick={handleLogout}
         />
       </ul>

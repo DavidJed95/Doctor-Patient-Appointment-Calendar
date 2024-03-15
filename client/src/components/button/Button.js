@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './button.module.css';
 
-const Button = ({ text, type, handleClick }) => {
+const Button = ({ label, type, handleClick }) => {
   return (
     <button type={type} className={styles.button} onClick={handleClick}>
-      {text}
+      {label}
     </button>
   );
 };

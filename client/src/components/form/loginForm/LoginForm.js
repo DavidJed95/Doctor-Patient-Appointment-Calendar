@@ -88,7 +88,7 @@ const LoginForm = () => {
           </div>
           <Button
             className={styles.frame}
-            text='Login'
+            label='Login'
             type='submit'
             handleClick={handleSubmit}
           />
