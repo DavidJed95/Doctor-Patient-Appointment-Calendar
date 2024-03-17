@@ -11,18 +11,26 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const events = useSelector(state => state.events.SpecialistAvailability);
   console.log('Events in Calendar:', events, 'events Type: ', typeof events); // Debugging log
   // Simplified mapping, since all events are assumed to be of the correct type
-  const processedEvents =
-    events.map(event => ({
-      id: event.SpecialistHourID, // use SpecialistHourID if id is undefined
+  const processedEvents = events.map(event => {
+    const datePart = event.ShiftDate.split('T')[0];
+
+    const startDateTime = datePart + 'T' + event.StartTime;
+    const endDateTime = datePart + 'T' + event.EndTime;
+console.log('datePart: ', datePart);
+    console.log('startDateTime: ', startDateTime);
+    console.log('endDateTime: ', endDateTime);
+
+    console.log('event.StartTime: ',event.StartTime)
+    console.log('event.EndTime: ' ,event.EndTime)
+    console.log('event.ShiftDate: ', event.ShiftDate);
+console.log(event.ShiftDate);
+    return {
+      id: event.SpecialistHourID,
       title: event.Type,
-      // Ensures dates are treated as UTC to prevent timezone shifts
-      start: new Date(
-        event.ShiftDate + 'T' + event.StartTime
-      ), // Append time and 'Z' to indicate UTC
-      end: new Date(
-        event.ShiftDate + 'T' + event.EndTime
-      ), // Use end of day for the event's end date
-    })) || [];
+      start: startDateTime,
+      end: endDateTime,
+    };
+  });
 
   return (
     <Fullcalendar
@@ -35,7 +43,6 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
         center: 'title',
         end: 'timeGridDay,timeGridWeek,dayGridMonth',
       }}
-      
       selectable={true}
       editable={true}
       events={processedEvents}
