@@ -85,6 +85,9 @@ exports.deleteShift = async (req, res, next) => {
 exports.getShiftsForSpecialist = async (req, res, next) => {
   try {
     const medicalSpecialistID = req.query.medicalSpecialistID;
+    console.log(
+      `medicalSpecialistID req.query.medicalSpecialistID for getting shifts from database: ${medicalSpecialistID}`,
+    );
     if (!medicalSpecialistID) {
       return res
         .status(400)

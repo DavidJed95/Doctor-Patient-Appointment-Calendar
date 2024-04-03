@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+
+import { format, parseISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
+
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -8,6 +11,7 @@ import {
   updateShift,
   deleteShift,
 } from '../../redux/reducers/eventsSlice';
+
 import Modal from '../common/Modal';
 
 // import Button from '../button/Button';
@@ -15,7 +19,7 @@ import Modal from '../common/Modal';
 const ManageShifts = () => {
   const dispatch = useDispatch();
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
-  const events = useSelector(state => state.events.SpecialistAvailability);
+  
   const loading = useSelector(state => state.events.loading);
   const [feedback, setFeedback] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -36,12 +40,12 @@ const ManageShifts = () => {
   const handleEventClick = clickInfo => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const eventStart = new Date(clickInfo.event.start);
+    // const eventStart = new Date(clickInfo.event.start);
 
-    if (eventStart < today) {
-      setFeedback("Can't modify past shifts");
-      return;
-    }
+    // if (eventStart < today) {
+    //   setFeedback("Can't modify past shifts");
+    //   return;
+    // }
 
     setSelectedShift({
       id: clickInfo.event.id,
@@ -51,24 +55,25 @@ const ManageShifts = () => {
   };
 
   const handleDateSelect = selectInfo => {
-    const startDate = selectInfo.start;
-    const endDate = selectInfo.end;
+    const timeZone = 'UTC';
 
-    // Format the dates for the input fields in the modal
-    const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
-    const formattedStartTime = format(startDate, 'HH:mm');
-    const formattedEndTime = format(endDate, 'HH:mm');
+  const startDate = selectInfo.start;
+  const endDate = selectInfo.end;
 
-    // Update the shiftDetails state to populate the modal inputs
-    setShiftDetails({
-      ...shiftDetails,
-      ShiftDate: formattedShiftDate,
-      StartTime: formattedStartTime,
-      EndTime: formattedEndTime,
-      Type: 'Working Hour', // Default type, can adjust as needed
-    });
+  // Format the dates for the input fields in the modal
+  const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
+  const formattedStartTime = format(startDate, 'HH:mm');
+  const formattedEndTime = format(endDate, 'HH:mm');
 
-    // Open the modal after setting the state
+  // Update the shiftDetails state to populate the modal inputs
+  setShiftDetails({
+    ...shiftDetails,
+    ShiftDate: formattedShiftDate,
+    StartTime: formattedStartTime,
+    EndTime: formattedEndTime,
+    Type: 'Working Hour', // Default type, can adjust as neededManam
+  });
+
     setModalOpen(true);
   };
 
@@ -101,7 +106,7 @@ const ManageShifts = () => {
   };
 
   return (
-    <section>
+    <article>
       <Calendar
         eventType='specialistAvailability'
         handleDateSelect={handleDateSelect}
@@ -115,7 +120,7 @@ const ManageShifts = () => {
           onSubmit={handleModalSubmit}
         >
           <h2>{selectedShift?.id ? 'Edit Shift' : 'Add Shift'}</h2>
-          <div>
+          <section>
             <label>
               Shift Date:
               <input
@@ -129,8 +134,8 @@ const ManageShifts = () => {
                 }
               />
             </label>
-          </div>
-          <div>
+          </section>
+          <section>
             <label>
               Shift Type:
               <select
@@ -144,8 +149,8 @@ const ManageShifts = () => {
                 <option value='Break'>Break</option>
               </select>
             </label>
-          </div>
-          <div>
+          </section>
+          <section>
             <label>
               Start Time:
               <input
@@ -159,8 +164,8 @@ const ManageShifts = () => {
                 }
               />
             </label>
-          </div>
-          <div>
+          </section>
+          <section>
             <label>
               End Time:
               <input
@@ -174,13 +179,13 @@ const ManageShifts = () => {
                 }
               />
             </label>
-          </div>
+          </section>
           {selectedShift?.id && (
             <button onClick={handleRemoveShift}>Remove Shift</button>
           )}
         </Modal>
       )}
-    </section>
+    </article>
   );
 };
 

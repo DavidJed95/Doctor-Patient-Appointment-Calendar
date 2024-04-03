@@ -54,7 +54,7 @@ const PasswordReset = () => {
         required
       />
       <Button
-        text='Reset Password'
+        label='Reset Password'
         type='submit'
         handleClick={handlePasswordReset}
       />

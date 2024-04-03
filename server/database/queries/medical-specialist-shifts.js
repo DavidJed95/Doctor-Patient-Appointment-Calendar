@@ -1,13 +1,17 @@
 const doQuery = require('../query');
 
-const { format, parseISO } = require('date-fns')
+const { format, parseISO } = require('date-fns');
 
 // Additional functions
 function getDayOfWeekEnum(dateString) {
   const dayName = format(parseISO(dateString), 'EEEE'); // 'Monday', 'Tuesday', ...
-  return dayName
+  return dayName;
 }
-
+/**
+ * Method creates a new shift
+ * @param {*} shift - shift parameter which is created
+ * @returns 
+ */
 async function createShift(shift) {
   try {
     const dayOfWeek = getDayOfWeekEnum(shift.ShiftDate);
@@ -20,13 +24,20 @@ async function createShift(shift) {
       shift.Type,
       shift.ShiftDate,
     ];
-    return await doQuery(shiftSql, shiftDetails);
+    const newShift = await doQuery(shiftSql, shiftDetails);
+    return newShift;
   } catch (error) {
     console.error('Error creating shift:', error);
     return { error: 'Error creating shift.' };
   }
 }
 
+/**
+ * Method updates/ modifies the shift which already exists 
+ * @param {*} shiftID - the id of the shift which being modified
+ * @param {*} shift - the whole parameters of the shift to modify
+ * @returns a modified shift
+ */
 async function updateShift(shiftID, shift) {
   try {
     const sql = `UPDATE SpecialistHours SET DayOfWeek=?, StartTime=?, EndTime=?, Type=?, ShiftDate=? WHERE SpecialistHourID=?`;
@@ -44,20 +55,31 @@ async function updateShift(shiftID, shift) {
   }
 }
 
+/**
+ * Method deletes a shift which already exists
+ * @param {*} shiftID the id of the shift to delete
+ */
 async function deleteShift(shiftID) {
   try {
     const sql = `DELETE FROM SpecialistHours WHERE SpecialistHourID=?`;
-    return await doQuery(sql, [shiftID]);
+    await doQuery(sql, [shiftID]);
   } catch (error) {
     console.error('Error deleting shift:', error);
     return { error: 'Error deleting shift.' };
   }
 }
 
+/**
+ * Method fetches all the shifts of the medical specialist with his id
+ * @param {*} medicalSpecialistID id of the specialist
+ * @returns all the shift of the medical specialist with his uniq ID
+ */
 async function getShiftsForSpecialist(medicalSpecialistID) {
   try {
     const sql = `SELECT * FROM SpecialistHours WHERE MedicalSpecialistID=?`;
-    return await doQuery(sql, [medicalSpecialistID]);
+    const result = await doQuery(sql, [medicalSpecialistID]);
+    console.log('Fetched events from database in the server query:', result);
+    return result; // This should be an array if doQuery is implemented correctly.
   } catch (error) {
     console.error('Error fetching shifts for specialist:', error);
     return { error: 'Error fetching shifts for specialist.' };

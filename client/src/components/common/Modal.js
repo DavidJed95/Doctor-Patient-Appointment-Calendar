@@ -37,7 +37,10 @@ export default function Modal({
 
   return (
     <section className={styles.modalBackdrop}>
-      <section className={styles.modalContent} onClick={e => e.stopPropagation()}>
+      <section
+        className={styles.modalContent}
+        onClick={e => e.stopPropagation()}
+      >
         <button className={styles.modalCloseButton} onClick={onClose}>
           &times;
         </button>
@@ -45,8 +48,13 @@ export default function Modal({
 
         {showSubmit && (
           <>
-            <Button text='Save' handleClick={onSubmit} />
-            <Button text='Cancel' handleClick={onClose} />
+            <Button label='Save' type='submit' handleClick={onSubmit} />
+            <Button
+              className={styles.modalCloseButton}
+              type='submit'
+              label='Cancel'
+              handleClick={onClose}
+            />
           </>
         )}
       </section>

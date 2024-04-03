@@ -426,3 +426,73 @@
   Line: 17
   ---------------------------------------------------
   
+  2024-03-21T16:17:54.474Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T11:37:47.779Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T11:37:48.654Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T11:37:54.416Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T11:59:09.755Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T11:59:17.446Z - Error: Database query failed: connect ECONNREFUSED ::1:3306
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-03-25T12:12:08.484Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  
+  2024-03-25T12:12:20.264Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  
+  2024-03-25T12:12:33.856Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  
+  2024-03-27T06:41:13.325Z - Error: Cannot read properties of undefined (reading 'Password')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\queries\login.js
+  Function: login
+  Line: 15
+  ---------------------------------------------------
+  
