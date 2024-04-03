@@ -1,6 +1,8 @@
 .App {
-  max-width: 100%;
   text-align: center;
+  min-height: 100dvh; /* Unlocking the flexbox functionality making the page extend to the root element which is 100 percent view port*/
+  display: flex;
+  flex-direction: column;
 }
 
 .form {

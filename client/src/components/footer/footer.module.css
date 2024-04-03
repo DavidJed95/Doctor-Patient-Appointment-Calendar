@@ -1,11 +1,12 @@
 .footer {
   display: flex;
-  height: 10rem;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgba(255,255,255,0.1);
   margin-top: auto;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  /* flex-direction: column; */
+  background-color: rgba(255,255,255,0.1);
+  padding: 2.5rem 0;
 }
 
 .pText {

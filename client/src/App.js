@@ -20,6 +20,8 @@ import PasswordReset from './components/auth/PasswordReset';
 import ManageShifts from './components/medicalSpecialist/ManageShifts';
 import NotFound from './components/pages/NotFound';
 
+import './App.css';
+
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
@@ -42,33 +44,36 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
-      {isLoggedIn && <Navbar siteTitle='Doctor Patient Appointment Calendar' />}
-      <Routes>
-        {/* Only show login and registration forms if not logged in */}
-        {!isLoggedIn ? (
-          <>
-            <Route path='/' element={<LoginForm />} />
-            <Route path='/register' element={<RegistrationForm />} />
-            <Route path='/password-reset' element={<PasswordResetForm />} />
-          </>
-        ) : (
-          <>
-            <Route path='/home' element={<Home />} />
-            {/* <Route path='/appointments' element={<Appointments />} /> */}
-            <Route path='/profile-update' element={<UpdateUserProfile />} />
 
-            <Route path='/manage-shifts' element={<ManageShifts />} />
-          </>
-        )}
-        <Route path='/verify-email/:token' element={<EmailVerification />} />
-        <Route path='/reset-password/:token' element={<PasswordReset />} />
-        <Route path='*' element={<NotFound />} />
-        {/* Protected routes, only visible if logged in */}
-      </Routes>
-
-      <Footer name='David Jedwabsky' />
-    </Router>
+    <div className='App'>
+      <Router>
+        {isLoggedIn && <Navbar siteTitle='Doctor Patient Appointment Calendar' />}
+        <Routes>
+          {/* Only show login and registration forms if not logged in */}
+          {!isLoggedIn ? (
+            <>
+              <Route path='/' element={<LoginForm />} />
+              <Route path='/register' element={<RegistrationForm />} />
+              <Route path='/password-reset' element={<PasswordResetForm />} />
+            </>
+          ) : (
+            <>
+              <Route path='/home' element={<Home />} />
+              {/* <Route path='/appointments' element={<Appointments />} /> */}
+              <Route path='/profile-update' element={<UpdateUserProfile />} />
+  
+              <Route path='/manage-shifts' element={<ManageShifts />} />
+            </>
+          )}
+          <Route path='/verify-email/:token' element={<EmailVerification />} />
+          <Route path='/reset-password/:token' element={<PasswordReset />} />
+          <Route path='*' element={<NotFound />} />
+          {/* Protected routes, only visible if logged in */}
+        </Routes>
+  
+        <Footer name='David Jedwabsky' />
+      </Router>
+    </div>
   );
 }
 
