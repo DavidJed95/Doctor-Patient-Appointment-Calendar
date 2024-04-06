@@ -19,7 +19,7 @@ import Modal from '../common/Modal';
 const ManageShifts = () => {
   const dispatch = useDispatch();
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
-  
+
   const loading = useSelector(state => state.events.loading);
   const [feedback, setFeedback] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -38,42 +38,46 @@ const ManageShifts = () => {
   if (loading) return <div>Loading...</div>;
 
   const handleEventClick = clickInfo => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    // const eventStart = new Date(clickInfo.event.start);
+    // Assuming clickInfo.event.start and clickInfo.event.end are Date objects
+    const formattedShiftDate = format(clickInfo.event.start, 'yyyy-MM-dd');
+    const formattedStartTime = format(clickInfo.event.start, 'HH:mm');
+    const formattedEndTime = format(clickInfo.event.end, 'HH:mm');
 
-    // if (eventStart < today) {
-    //   setFeedback("Can't modify past shifts");
-    //   return;
-    // }
+    // Populate the shiftDetails state with the clicked event's details
+    setShiftDetails({
+      ShiftDate: formattedShiftDate,
+      StartTime: formattedStartTime,
+      EndTime: formattedEndTime,
+      Type: clickInfo.event.extendedProps.type, // Ensure this matches your event object structure
+    });
 
+    // Set the selected shift for identification, and open the modal for editing
     setSelectedShift({
       id: clickInfo.event.id,
-      ...clickInfo.event.extendedProps,
+      ...clickInfo.event.extendedProps, // This might include other properties you need
     });
     setModalOpen(true);
   };
 
   const handleDateSelect = selectInfo => {
-    const timeZone = 'UTC';
+    const startDate = selectInfo.start;
+    const endDate = selectInfo.end;
 
-  const startDate = selectInfo.start;
-  const endDate = selectInfo.end;
+    // Format the dates for the input fields in the modal for a new shift
+    const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
+    const formattedStartTime = format(startDate, 'HH:mm');
+    const formattedEndTime = format(endDate, 'HH:mm');
 
-  // Format the dates for the input fields in the modal
-  const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
-  const formattedStartTime = format(startDate, 'HH:mm');
-  const formattedEndTime = format(endDate, 'HH:mm');
+    // Prepare the shiftDetails state for a new shift
+    setShiftDetails({
+      ShiftDate: formattedShiftDate,
+      StartTime: formattedStartTime,
+      EndTime: formattedEndTime,
+      Type: 'Working Hour', // Default type, adjust as needed
+    });
 
-  // Update the shiftDetails state to populate the modal inputs
-  setShiftDetails({
-    ...shiftDetails,
-    ShiftDate: formattedShiftDate,
-    StartTime: formattedStartTime,
-    EndTime: formattedEndTime,
-    Type: 'Working Hour', // Default type, can adjust as neededManam
-  });
-
+    // Reset selectedShift to ensure we're in "add new" mode
+    setSelectedShift(null);
     setModalOpen(true);
   };
 
@@ -81,16 +85,19 @@ const ManageShifts = () => {
     setSelectedShift(null);
     setModalOpen(false);
   };
-
+  // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
+  // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
   const handleModalSubmit = () => {
     if (selectedShift && selectedShift.id) {
+      // Editing an existing shift
       dispatch(
         updateShift({
-          shiftID: selectedShift.id,
+          shiftID: selectedShift.shiftID,
           shiftDetails: { ...shiftDetails, MedicalSpecialistID: specialistID },
         }),
       );
     } else {
+      // Adding a new shift
       dispatch(
         addShift({ ...shiftDetails, MedicalSpecialistID: specialistID }),
       );
