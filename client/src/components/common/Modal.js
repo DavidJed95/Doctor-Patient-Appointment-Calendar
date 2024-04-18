@@ -23,10 +23,11 @@ export default function Modal({
     };
 
     if (show) {
-      setTimeout(() => {
-        window.addEventListener('click', handleOutsideClick);
-        window.addEventListener('keydown', handleEscPress);
-      }, 10);
+      document.addEventListener('click', handleOutsideClick);
+      document.addEventListener('keydown', handleEscPress);
+    } else {
+      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscPress);
     }
 
     return () => {

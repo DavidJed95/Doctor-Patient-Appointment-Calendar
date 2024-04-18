@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { format, parseISO } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { utcToZonedTime ,zonedTimeToUtc } from ',date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,6 +29,7 @@ const ManageShifts = () => {
     StartTime: '',
     EndTime: '',
   });
+
   const [selectedShift, setSelectedShift] = useState(null);
 
   useEffect(() => {
@@ -38,23 +39,26 @@ const ManageShifts = () => {
   if (loading) return <div>Loading...</div>;
 
   const handleEventClick = clickInfo => {
-    // Assuming clickInfo.event.start and clickInfo.event.end are Date objects
-    const formattedShiftDate = format(clickInfo.event.start, 'yyyy-MM-dd');
-    const formattedStartTime = format(clickInfo.event.start, 'HH:mm');
-    const formattedEndTime = format(clickInfo.event.end, 'HH:mm');
-
-    // Populate the shiftDetails state with the clicked event's details
+    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+  
+    // Convert UTC to local time
+    const startLocal = utcToZonedTime(clickInfo.event.start, timeZone);
+    const endLocal = utcToZonedTime(clickInfo.event.end, timeZone);
+  
+    const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
+    const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
+    const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
+  
     setShiftDetails({
       ShiftDate: formattedShiftDate,
       StartTime: formattedStartTime,
       EndTime: formattedEndTime,
-      Type: clickInfo.event.extendedProps.type, // Ensure this matches your event object structure
+      Type: clickInfo.event.extendedProps.type,
     });
-
-    // Set the selected shift for identification, and open the modal for editing
+  
     setSelectedShift({
       id: clickInfo.event.id,
-      ...clickInfo.event.extendedProps, // This might include other properties you need
+      ...clickInfo.event.extendedProps,
     });
     setModalOpen(true);
   };
@@ -78,13 +82,25 @@ const ManageShifts = () => {
 
     // Reset selectedShift to ensure we're in "add new" mode
     setSelectedShift(null);
-    setModalOpen(true);
+    handleModalOpen();
   };
 
-  const handleModalClose = () => {
+  /**
+   * Reset the selected shift upon closing modal
+   */
+  const resetSelectedShift = () => {
     setSelectedShift(null);
+  }
+
+  const handleModalClose = () => {
     setModalOpen(false);
+    resetSelectedShift();
   };
+
+  
+const handleModalOpen = () => {
+  setModalOpen(true);
+};
   // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
   // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
   const handleModalSubmit = () => {
