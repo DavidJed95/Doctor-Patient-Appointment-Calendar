@@ -85,15 +85,14 @@ exports.deleteShift = async (req, res, next) => {
 exports.getShiftsForSpecialist = async (req, res, next) => {
   try {
     const medicalSpecialistID = req.query.medicalSpecialistID;
-    console.log(
-      `medicalSpecialistID req.query.medicalSpecialistID for getting shifts from database: ${medicalSpecialistID}`,
-    );
     if (!medicalSpecialistID) {
       return res
         .status(400)
         .json({ message: 'Medical Specialist ID is required.' });
     }
     const shifts = await getShiftsForSpecialist(medicalSpecialistID);
+    console.log(`Fetched events from server are of type: ${typeof shifts}.
+    and these are the shifts: ${shifts}`);
     res.status(200).json(shifts);
   } catch (error) {
     res

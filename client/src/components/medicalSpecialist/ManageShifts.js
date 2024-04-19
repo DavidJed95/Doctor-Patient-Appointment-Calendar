@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-import { format, parseISO } from 'date-fns';
-import { utcToZonedTime ,zonedTimeToUtc } from ',date-fns-tz';
+import { format, parseISO, isValid } from 'date-fns';
+import { utcToZonedTime ,zonedTimeToUtc } from 'date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,74 +36,75 @@ const ManageShifts = () => {
     dispatch(fetchShifts(specialistID));
   }, [dispatch, specialistID]);
 
-  if (loading) return <div>Loading...</div>;
-
-  const handleEventClick = clickInfo => {
-    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
   
+  const handleEventClick = useCallback((clickInfo) => {
+    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+    
     // Convert UTC to local time
     const startLocal = utcToZonedTime(clickInfo.event.start, timeZone);
     const endLocal = utcToZonedTime(clickInfo.event.end, timeZone);
-  
+    
     const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
     const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
     const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
-  
+    
     setShiftDetails({
       ShiftDate: formattedShiftDate,
       StartTime: formattedStartTime,
       EndTime: formattedEndTime,
       Type: clickInfo.event.extendedProps.type,
     });
-  
+    
     setSelectedShift({
       id: clickInfo.event.id,
       ...clickInfo.event.extendedProps,
     });
     setModalOpen(true);
-  };
-
-  const handleDateSelect = selectInfo => {
-    const startDate = selectInfo.start;
-    const endDate = selectInfo.end;
-
-    // Format the dates for the input fields in the modal for a new shift
-    const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
-    const formattedStartTime = format(startDate, 'HH:mm');
-    const formattedEndTime = format(endDate, 'HH:mm');
-
-    // Prepare the shiftDetails state for a new shift
-    setShiftDetails({
-      ShiftDate: formattedShiftDate,
-      StartTime: formattedStartTime,
-      EndTime: formattedEndTime,
-      Type: 'Working Hour', // Default type, adjust as needed
-    });
-
-    // Reset selectedShift to ensure we're in "add new" mode
-    setSelectedShift(null);
-    handleModalOpen();
-  };
-
+  },[]);
+  
+  const handleDateSelect = useCallback((selectInfo) => {
+    const startDate = new Date(selectInfo.start);
+    const endDate = new Date(selectInfo.end);
+    
+    if (isValid(startDate) && isValid(endDate)) {
+      const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
+      const formattedStartTime = format(startDate, 'HH:mm');
+      const formattedEndTime = format(endDate, 'HH:mm');
+      
+      setShiftDetails({
+        ShiftDate: formattedShiftDate,
+        StartTime: formattedStartTime,
+        EndTime: formattedEndTime,
+        Type: 'Working Hour', // Default type, adjust as needed
+      });
+      
+      setSelectedShift(null);
+      handleModalOpen();
+    } else {
+      console.error('Selected dates are invalid:', selectInfo);
+    }
+  },[]);
+  
   /**
    * Reset the selected shift upon closing modal
    */
-  const resetSelectedShift = () => {
+  const resetSelectedShift = useCallback(() => {
     setSelectedShift(null);
-  }
-
-  const handleModalClose = () => {
+  }, [])
+  
+  const handleModalClose = useCallback(() => {
     setModalOpen(false);
     resetSelectedShift();
-  };
-
+  }, [resetSelectedShift]);
   
-const handleModalOpen = () => {
-  setModalOpen(true);
-};
+  
+  const handleModalOpen = useCallback(() => {
+    setModalOpen(true);
+  }, []);
+
   // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
   // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
-  const handleModalSubmit = () => {
+  const handleModalSubmit = useCallback(() => {
     if (selectedShift && selectedShift.id) {
       // Editing an existing shift
       dispatch(
@@ -119,19 +120,20 @@ const handleModalOpen = () => {
       );
     }
     handleModalClose();
-  };
+  }, [selectedShift, shiftDetails, specialistID, dispatch, handleModalClose]);
 
-  const handleRemoveShift = () => {
+  const handleRemoveShift = useCallback(() => {
     if (selectedShift && selectedShift.id) {
       dispatch(deleteShift(selectedShift.id));
     }
     handleModalClose();
-  };
+  }, [selectedShift, dispatch, handleModalClose]);
+  
+  if (loading) return <div>Loading...</div>;
 
   return (
     <article>
       <Calendar
-        eventType='specialistAvailability'
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
       />

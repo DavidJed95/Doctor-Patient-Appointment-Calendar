@@ -2,13 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './Modal.module.css';
 import Button from '../button/Button';
 
-export default function Modal({
-  show,
-  onClose,
-  onSubmit,
-  children,
-  showSubmit = true,
-}) {
+const Modal = ({ show, onClose, onSubmit, children, showSubmit = true }) => {
   useEffect(() => {
     const handleOutsideClick = e => {
       if (!e.target.closest(`.${styles.modalContent}`)) {
@@ -62,3 +56,4 @@ export default function Modal({
     </section>
   );
 }
+export default Modal;

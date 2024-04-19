@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as shiftsAPI from '../../components/medicalSpecialist/shiftsAPI';
-const mapConsoleLog = events =>
-  events.map(event =>
-    console.log(
-      `Events fetched from the database in the server, event: ${event} are of type: ${typeof events}`,
-    ),
-  );
 /**
  * fetchShifts thunk
  */
@@ -14,8 +8,6 @@ export const fetchShifts = createAsyncThunk(
   async (medicalSpecialistID, { rejectWithValue }) => {
     try {
       const response = await shiftsAPI.fetchShiftsAPI(medicalSpecialistID);
-
-      mapConsoleLog(response);
       console.log(response);
       return response;
     } catch (error) {

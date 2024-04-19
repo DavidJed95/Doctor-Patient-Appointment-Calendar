@@ -78,7 +78,8 @@ async function getShiftsForSpecialist(medicalSpecialistID) {
   try {
     const sql = `SELECT * FROM SpecialistHours WHERE MedicalSpecialistID=?`;
     const result = await doQuery(sql, [medicalSpecialistID]);
-    console.log('Fetched events from database in the server query:', result);
+    console.log(`Fetched events from database in the server query are of type: ${typeof result}.
+    and this is these are the shifts: ${result}`);
     return result; // This should be an array if doQuery is implemented correctly.
   } catch (error) {
     console.error('Error fetching shifts for specialist:', error);
