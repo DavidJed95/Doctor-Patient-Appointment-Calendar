@@ -517,3 +517,94 @@
   Line: 15
   ---------------------------------------------------
   
+  2024-04-22T15:39:15.098Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T15:39:17.690Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T15:39:34.576Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:02:16.252Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:02:34.915Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:02:43.120Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:04:39.945Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:09:12.190Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:09:23.804Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:22:08.891Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:24:34.750Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:29:51.665Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  
+  2024-04-22T16:30:06.183Z - Error: Cannot set properties of undefined (setting 'loginToken')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\loginController.js
+  Function: exports.login
+  Line: 52
+  ---------------------------------------------------
+  

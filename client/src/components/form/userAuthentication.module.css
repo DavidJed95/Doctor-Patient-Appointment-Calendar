@@ -26,6 +26,10 @@
   margin: 2rem;
 }
 
+.form .input {
+  display: flex;
+}
+
 .overlap {
   margin-top: 50%;
   margin-bottom: 50%;

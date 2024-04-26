@@ -62,29 +62,36 @@ const ManageShifts = () => {
     setModalOpen(true);
   },[]);
   
+
   const handleDateSelect = useCallback((selectInfo) => {
-    const startDate = new Date(selectInfo.start);
-    const endDate = new Date(selectInfo.end);
-    
-    if (isValid(startDate) && isValid(endDate)) {
-      const formattedShiftDate = format(startDate, 'yyyy-MM-dd');
-      const formattedStartTime = format(startDate, 'HH:mm');
-      const formattedEndTime = format(endDate, 'HH:mm');
-      
-      setShiftDetails({
-        ShiftDate: formattedShiftDate,
-        StartTime: formattedStartTime,
-        EndTime: formattedEndTime,
-        Type: 'Working Hour', // Default type, adjust as needed
-      });
-      
-      setSelectedShift(null);
-      handleModalOpen();
-    } else {
-      console.error('Selected dates are invalid:', selectInfo);
-    }
-  },[]);
+  const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+
+  // Convert selected time to local timezone
+  const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
+  const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
+
+  console.log(`line 73: ${selectInfo.endStr}`)
+
+  // Format the times for display
+  const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
+  const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
+  const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
+  console.log(`formattedShiftsDate: ${formattedShiftDate}`)
+  console.log(`formattedStartTime: ${formattedStartTime}`)
+  console.log(`formattedEndTime: ${formattedEndTime}`)
+
+  setShiftDetails({
+    ShiftDate: formattedShiftDate,
+    StartTime: formattedStartTime,
+    EndTime: formattedEndTime,
+    Type: 'Working Hour', // Default type, adjust as needed
+  });
+
+  resetSelectedShift();
+  handleModalOpen();
+}, []);
   
+
   /**
    * Reset the selected shift upon closing modal
    */
@@ -92,47 +99,61 @@ const ManageShifts = () => {
     setSelectedShift(null);
   }, [])
   
+  /**
+   * Closes the selected shift upon closing modal
+   */
   const handleModalClose = useCallback(() => {
     setModalOpen(false);
     resetSelectedShift();
   }, [resetSelectedShift]);
   
-  
+  /**
+   * Opens the edition/ creation/ deletion request of shift upon opening modal
+   */
   const handleModalOpen = useCallback(() => {
     setModalOpen(true);
   }, []);
 
   // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
   // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
-  const handleModalSubmit = useCallback(() => {
-    if (selectedShift && selectedShift.id) {
-      // Editing an existing shift
-      dispatch(
-        updateShift({
-          shiftID: selectedShift.shiftID,
-          shiftDetails: { ...shiftDetails, MedicalSpecialistID: specialistID },
-        }),
-      );
-    } else {
-      // Adding a new shift
-      dispatch(
-        addShift({ ...shiftDetails, MedicalSpecialistID: specialistID }),
-      );
+  const handleModalSubmit = useCallback(async () => {
+    try {
+        if (selectedShift && selectedShift.id) {
+            await dispatch(updateShift({
+                shiftID: selectedShift.shiftID,
+                shiftDetails: { ...shiftDetails, MedicalSpecialistID: specialistID },
+            })).unwrap();
+        } else {
+            await dispatch(addShift({ ...shiftDetails, MedicalSpecialistID: specialistID })).unwrap();
+        }
+        dispatch(fetchShifts(specialistID));
+        handleModalClose();  // Close after submit
+        setFeedback("Shift updated successfully!");  // Set feedback
+        // If you want to re-open the modal here, call handleModalOpen();
+    } catch (error) {
+        console.error('Error submitting shift:', error);
+        setFeedback("Error updating shift: " + error.message);
     }
-    handleModalClose();
-  }, [selectedShift, shiftDetails, specialistID, dispatch, handleModalClose]);
+}, [selectedShift, shiftDetails, specialistID, dispatch, handleModalClose, handleModalOpen]);
 
-  const handleRemoveShift = useCallback(() => {
-    if (selectedShift && selectedShift.id) {
-      dispatch(deleteShift(selectedShift.id));
+  const handleRemoveShift = useCallback(async (event) => {
+    event.preventDefault();
+    try {
+      await dispatch(deleteShift(selectedShift.id)).unwrap();
+      dispatch(fetchShifts(specialistID)); // Refetch to update the list
+      handleModalClose();
+      setFeedback("Shift deleted successfully!");
+    } catch (error) {
+      console.error('Error deleting shift:', error);
+      setFeedback("Error deleting shift: " + error.message);
     }
-    handleModalClose();
-  }, [selectedShift, dispatch, handleModalClose]);
+  }, [selectedShift, dispatch, specialistID, handleModalClose]);
   
   if (loading) return <div>Loading...</div>;
 
   return (
     <article>
+      {feedback && <p>{feedback}</p>}
       <Calendar
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}

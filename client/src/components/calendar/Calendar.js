@@ -22,12 +22,25 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
 
  // Simplified mapping, now converting to and assuming local time zone
 const processedEvents = events.map(event => {
-  
+  if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime) return null;
+
+  console.log("Calendar.js line 27 - Original Shift Date: ", event.ShiftDate); // Debugging log
 
   const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
+
+  if (isNaN(shiftDateTime)) {
+    console.error("Invalid shift date time: ", event.ShiftDate);
+    return null; // Skip this event if the date is invalid
+  }
+
   const startDate = format(shiftDateTime, 'yyyy-MM-dd', { timeZone });
   const startDateTime = `${startDate}T${event.StartTime}`;
   const endDateTime = `${startDate}T${event.EndTime}`;
+
+  if (isNaN(new Date(startDateTime)) || isNaN(new Date(endDateTime))) {
+    console.error("Invalid start or end date time", startDateTime, endDateTime);
+    return null; // Skip this event if start or end times are invalid
+  }
 
   return {
     id: event.SpecialistHourID,
@@ -35,7 +48,11 @@ const processedEvents = events.map(event => {
     start: startDateTime,
     end: endDateTime,
   };
-})
+}).filter(event => event !== null);
+
+if (!processedEvents.length) {
+  console.log("No valid events processed");
+}
 
   return (
     <Fullcalendar
@@ -66,7 +83,7 @@ const processedEvents = events.map(event => {
         month: 'numeric', // Numeric month (without leading zeros)
         omitCommas: true, // Omit commas in the format
       }}
-      locale='en-GB'
+      locale='en-IL'
     />
   );
 };

@@ -75,8 +75,8 @@ const LoginForm = () => {
               required
             />
           </div>
-          <div>
-            <InputField
+          <div className={styles.form.input}>
+            <InputField className={styles.form.input}
               label='Password:'
               placeholder='Enter Your Password'
               value={userDetails.password}
