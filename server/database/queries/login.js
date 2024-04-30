@@ -8,6 +8,7 @@ const getUserByID = require('./get-user-by-id');
  * @returns A status code for success/failure logging in, informative message, user information for greeting
  */
 async function login(user) {
+  try {
   const { id, password } = user;
   const foundUser = await getUserByID(id);
 
@@ -24,6 +25,10 @@ async function login(user) {
   } else {
     return { status: 'failure', message: 'Invalid password', user: null };
   }
+}
+catch (error) {
+  return {message: 'Connection failed: Database disconnected/ network unstable'}
+}
 }
 
 module.exports = login;

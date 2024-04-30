@@ -55,7 +55,7 @@ const LoginForm = () => {
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error('Error during login:', error);
-      setMessage(error.message || 'Login failed. Server or Database are disabled.');
+      setMessage(error.message);
     }
   };
 
