@@ -31,11 +31,8 @@ const Modal = ({ show, onClose, onSubmit, children, showSubmit = true }) => {
   }, [show, onClose]);
 
   return (
-    <section className={styles.modalBackdrop}>
-      <section
-        className={styles.modalContent}
-        onClick={e => e.stopPropagation()}
-      >
+    <section className={`${styles.modalBackdrop} ${show ? '' : styles.hidden}`}>
+      <section className={styles.modalContent}>
         <button className={styles.modalCloseButton} onClick={onClose}>
           &times;
         </button>
@@ -55,5 +52,5 @@ const Modal = ({ show, onClose, onSubmit, children, showSubmit = true }) => {
       </section>
     </section>
   );
-}
+};
 export default Modal;

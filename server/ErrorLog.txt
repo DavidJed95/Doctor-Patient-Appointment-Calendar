@@ -671,3 +671,10 @@
   Line: 17
   ---------------------------------------------------
   
+  2024-05-07T21:59:59.010Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  

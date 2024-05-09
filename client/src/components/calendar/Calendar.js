@@ -15,16 +15,10 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
 
   const timeZone = 'Asia/Jerusalem';
 
-  console.log('line 18 Events in Calendar SpecialistAvailability:', events, 'events Type: ', typeof events); // Debugging log
-  // Inside your useEffect or wherever you fetch the events
-
-  console.log(` line 21 typeof SpecialistAvailability: ${typeof events},SpecialistAvailability Array.isArray(events): ${Array.isArray(events)? 'the shifts events is an array': 'the shifts events is an object instead of array'}, ${Array.isArray(events)}`);
-
  // Simplified mapping, now converting to and assuming local time zone
 const processedEvents = events.map(event => {
   if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime) return null;
 
-  console.log("Calendar.js line 27 - Original Shift Date: ", event.ShiftDate); // Debugging log
 
   const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
 
@@ -50,9 +44,7 @@ const processedEvents = events.map(event => {
   };
 }).filter(event => event !== null);
 
-if (!processedEvents.length) {
-  console.log("No valid events processed");
-}
+
 
   return (
     <Fullcalendar

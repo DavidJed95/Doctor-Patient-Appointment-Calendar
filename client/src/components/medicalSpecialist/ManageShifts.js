@@ -36,60 +36,76 @@ const ManageShifts = () => {
     dispatch(fetchShifts(specialistID));
   }, [dispatch, specialistID]);
 
+  const toggleModal = useCallback(open => {
+    setModalOpen(open);
+    console.log(`Modal suppose to be ${open=== true?'open = true':'closed = false'}`)
+  }, []);
+
+  const handleEventClick = useCallback(
+    clickInfo => {
+      console.log('Event clicked line 41', clickInfo); // Check if this logs when an event is clicked
+      const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+
+      // Convert UTC to local time
+      const startLocal = utcToZonedTime(clickInfo.event.start, timeZone);
+      const endLocal = utcToZonedTime(clickInfo.event.end, timeZone);
+
+      const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
+      const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
+      const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
+
+      setShiftDetails({
+        ShiftDate: formattedShiftDate,
+        StartTime: formattedStartTime,
+        EndTime: formattedEndTime,
+        Type: clickInfo.event.extendedProps.type,
+      });
+
+      setSelectedShift({
+        id: clickInfo.event.id,
+        ...clickInfo.event.extendedProps,
+      });
+
+      // clickInfo.jsEvent.preventDefault(); // Prevent default action
+      // clickInfo.jsEvent.stopPropagation(); // Stop event bubbling
+      toggleModal(true);
+      console.log('Modal should open', isModalOpen);
+    },
+    [toggleModal],
+  );
   
-  const handleEventClick = useCallback((clickInfo) => {
-    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
-    
-    // Convert UTC to local time
-    const startLocal = utcToZonedTime(clickInfo.event.start, timeZone);
-    const endLocal = utcToZonedTime(clickInfo.event.end, timeZone);
-    
-    const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
-    const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
-    const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
-    
-    setShiftDetails({
-      ShiftDate: formattedShiftDate,
-      StartTime: formattedStartTime,
-      EndTime: formattedEndTime,
-      Type: clickInfo.event.extendedProps.type,
-    });
-    
-    setSelectedShift({
-      id: clickInfo.event.id,
-      ...clickInfo.event.extendedProps,
-    });
-    setModalOpen(true);
-  },[]);
-  
 
-  const handleDateSelect = useCallback((selectInfo) => {
-  const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+  const handleDateSelect = useCallback(
+    selectInfo => {
+      const timeZone = 'Asia/Jerusalem'; // your preferred timezone
 
-  // Convert selected time to local timezone
-  const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
-  const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
+      // Convert selected time to local timezone
+      const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
+      const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
 
-  console.log(`line 73: ${selectInfo.endStr}`)
+      console.log(`line 73: ${selectInfo.endStr}`);
 
-  // Format the times for display
-  const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
-  const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
-  const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
-  console.log(`formattedShiftsDate: ${formattedShiftDate}`)
-  console.log(`formattedStartTime: ${formattedStartTime}`)
-  console.log(`formattedEndTime: ${formattedEndTime}`)
+      // Format the times for display
+      const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
+      const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
+      const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
+      console.log(`formattedShiftsDate: ${formattedShiftDate}`);
+      console.log(`formattedStartTime: ${formattedStartTime}`);
+      console.log(`formattedEndTime: ${formattedEndTime}`);
 
-  setShiftDetails({
-    ShiftDate: formattedShiftDate,
-    StartTime: formattedStartTime,
-    EndTime: formattedEndTime,
-    Type: 'Working Hour', // Default type, adjust as needed
-  });
+      setShiftDetails({
+        ShiftDate: formattedShiftDate,
+        StartTime: formattedStartTime,
+        EndTime: formattedEndTime,
+        Type: 'Working Hour', // Default type, adjust as needed
+      });
 
-  resetSelectedShift();
-  handleModalOpen();
-}, []);
+      resetSelectedShift();
+      toggleModal(true);
+      console.log('Modal should open', isModalOpen);
+    },
+    [toggleModal],
+  );
   
 
   /**
@@ -103,15 +119,15 @@ const ManageShifts = () => {
    * Closes the selected shift upon closing modal
    */
   const handleModalClose = useCallback(() => {
-    setModalOpen(false);
-    resetSelectedShift();
-  }, [resetSelectedShift]);
+    toggleModal(false);
+    setSelectedShift(null);
+  }, [toggleModal]);
   
   /**
    * Opens the edition/ creation/ deletion request of shift upon opening modal
    */
-  const handleModalOpen = useCallback(() => {
-    setModalOpen(true);
+  const handleModalOpen = useCallback((open) => {
+    setModalOpen(open);
   }, []);
 
   // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
@@ -158,7 +174,6 @@ const ManageShifts = () => {
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
       />
-      {feedback && <p>{feedback}</p>}
       {isModalOpen && (
         <Modal
           show={isModalOpen}
