@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { format, parseISO, isValid } from 'date-fns';
-import { utcToZonedTime ,zonedTimeToUtc } from 'date-fns-tz';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ import {
 
 import Modal from '../common/Modal';
 
-// import Button from '../button/Button';
+import Button from '../button/Button';
 
 const ManageShifts = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ManageShifts = () => {
 
   const loading = useSelector(state => state.events.loading);
   const [feedback, setFeedback] = useState('');
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [shiftDetails, setShiftDetails] = useState({
     ShiftDate: '',
     Type: '',
@@ -36,9 +36,14 @@ const ManageShifts = () => {
     dispatch(fetchShifts(specialistID));
   }, [dispatch, specialistID]);
 
+  useEffect(() => {
+    console.log('Modal state changed', isModalOpen)
+  }, [isModalOpen])
   const toggleModal = useCallback(open => {
-    setModalOpen(open);
-    console.log(`Modal suppose to be ${open=== true?'open = true':'closed = false'}`)
+    setIsModalOpen(open);
+    console.log(
+      `Modal suppose to be ${open === true ? 'open = true' : 'closed = false'}`,
+    );
   }, []);
 
   const handleEventClick = useCallback(
@@ -66,14 +71,13 @@ const ManageShifts = () => {
         ...clickInfo.event.extendedProps,
       });
 
-      // clickInfo.jsEvent.preventDefault(); // Prevent default action
-      // clickInfo.jsEvent.stopPropagation(); // Stop event bubbling
+      clickInfo.jsEvent.preventDefault(); // Prevent default action
+      clickInfo.jsEvent.stopPropagation(); // Stop event bubbling
       toggleModal(true);
-      console.log('Modal should open', isModalOpen);
+      console.log('Modal should open in handleDateClick', isModalOpen);
     },
     [toggleModal],
   );
-  
 
   const handleDateSelect = useCallback(
     selectInfo => {
@@ -83,7 +87,7 @@ const ManageShifts = () => {
       const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
       const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
 
-      console.log(`line 73: ${selectInfo.endStr}`);
+      console.log(`line 85(87) endDate: ${selectInfo.endStr}`);
 
       // Format the times for display
       const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
@@ -102,19 +106,18 @@ const ManageShifts = () => {
 
       resetSelectedShift();
       toggleModal(true);
-      console.log('Modal should open', isModalOpen);
+      console.log('Modal should open in handleDateSelect', isModalOpen);
     },
     [toggleModal],
   );
-  
 
   /**
    * Reset the selected shift upon closing modal
    */
   const resetSelectedShift = useCallback(() => {
     setSelectedShift(null);
-  }, [])
-  
+  }, []);
+
   /**
    * Closes the selected shift upon closing modal
    */
@@ -122,49 +125,62 @@ const ManageShifts = () => {
     toggleModal(false);
     setSelectedShift(null);
   }, [toggleModal]);
-  
+
   /**
    * Opens the edition/ creation/ deletion request of shift upon opening modal
    */
-  const handleModalOpen = useCallback((open) => {
-    setModalOpen(open);
+  const handleModalOpen = useCallback(open => {
+    setIsModalOpen(open);
   }, []);
 
   // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
   // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
-  const handleModalSubmit = useCallback(async () => {
+  const handleModalSubmit = async () => {
     try {
-        if (selectedShift && selectedShift.id) {
-            await dispatch(updateShift({
-                shiftID: selectedShift.shiftID,
-                shiftDetails: { ...shiftDetails, MedicalSpecialistID: specialistID },
-            })).unwrap();
-        } else {
-            await dispatch(addShift({ ...shiftDetails, MedicalSpecialistID: specialistID })).unwrap();
-        }
-        dispatch(fetchShifts(specialistID));
-        handleModalClose();  // Close after submit
-        setFeedback("Shift updated successfully!");  // Set feedback
-        // If you want to re-open the modal here, call handleModalOpen();
+      if (selectedShift && selectedShift.id) {
+        console.log(
+          ` line 137 selectedShift: ${selectedShift}, selectedShift.id: ${selectedShift.id}`,
+        );
+        await dispatch(
+          updateShift({
+            shiftID: selectedShift.shiftID,
+            shiftDetails: {
+              ...shiftDetails,
+              MedicalSpecialistID: specialistID,
+            },
+          }),
+        ).unwrap();
+      } else {
+        await dispatch(
+          addShift({ ...shiftDetails, MedicalSpecialistID: specialistID }),
+        ).unwrap();
+      }
+      dispatch(fetchShifts(specialistID));
+      handleModalClose(); // Close after submit
+      setFeedback('Shift updated successfully!'); // Set feedback
+      // If you want to re-open the modal here, call handleModalOpen();
     } catch (error) {
-        console.error('Error submitting shift:', error);
-        setFeedback("Error updating shift: " + error.message);
+      console.error('Error submitting shift:', error);
+      setFeedback('Error updating shift: ' + error.message);
     }
-}, [selectedShift, shiftDetails, specialistID, dispatch, handleModalClose, handleModalOpen]);
+  };
 
-  const handleRemoveShift = useCallback(async (event) => {
-    event.preventDefault();
-    try {
-      await dispatch(deleteShift(selectedShift.id)).unwrap();
-      dispatch(fetchShifts(specialistID)); // Refetch to update the list
-      handleModalClose();
-      setFeedback("Shift deleted successfully!");
-    } catch (error) {
-      console.error('Error deleting shift:', error);
-      setFeedback("Error deleting shift: " + error.message);
-    }
-  }, [selectedShift, dispatch, specialistID, handleModalClose]);
-  
+  const handleRemoveShift = useCallback(
+    async event => {
+      event.preventDefault();
+      try {
+        await dispatch(deleteShift(selectedShift.id)).unwrap();
+        dispatch(fetchShifts(specialistID)); // Refetch to update the list
+        handleModalClose();
+        setFeedback('Shift deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting shift:', error);
+        setFeedback('Error deleting shift: ' + error.message);
+      }
+    },
+    [selectedShift, dispatch, specialistID, handleModalClose],
+  );
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -175,11 +191,12 @@ const ManageShifts = () => {
         handleEventClick={handleEventClick}
       />
       {isModalOpen && (
-        <Modal
-          show={isModalOpen}
-          onClose={handleModalClose}
-          onSubmit={handleModalSubmit}
-        >
+        <Modal open={isModalOpen} onClose={() => handleModalClose}>
+          <Button
+            label={'Save'}
+            type={'submit'}
+            handleClick={handleModalSubmit}
+          />
           <h2>{selectedShift?.id ? 'Edit Shift' : 'Add Shift'}</h2>
           <section>
             <label>

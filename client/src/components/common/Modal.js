@@ -1,56 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 import Button from '../button/Button';
 
-const Modal = ({ show, onClose, onSubmit, children, showSubmit = true }) => {
+const Modal = ({ open, onClose, children }) => {
+  const modalRef = useRef();
+
+  /**
+   * Close th e modal if clicked outside the content area
+   */
   useEffect(() => {
-    const handleOutsideClick = e => {
-      if (!e.target.closest(`.${styles.modalContent}`)) {
+    const handleClickOutside = event => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
         onClose();
       }
     };
 
-    const handleEscPress = e => {
-      if (e.key === 'Escape') {
+    const handleEscPress = event => {
+      if (event.key === 'Escape') {
         onClose();
       }
     };
 
-    if (show) {
-      document.addEventListener('click', handleOutsideClick);
-      document.addEventListener('keydown', handleEscPress);
-    } else {
-      document.removeEventListener('click', handleOutsideClick);
-      document.removeEventListener('keydown', handleEscPress);
-    }
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscPress);
 
     return () => {
-      window.removeEventListener('click', handleOutsideClick);
-      window.removeEventListener('keydown', handleEscPress);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscPress);
     };
-  }, [show, onClose]);
+  }, [onClose]);
 
-  return (
-    <section className={`${styles.modalBackdrop} ${show ? '' : styles.hidden}`}>
-      <section className={styles.modalContent}>
-        <button className={styles.modalCloseButton} onClick={onClose}>
-          &times;
-        </button>
-        {children}
-
-        {showSubmit && (
-          <>
-            <Button label='Save' type='submit' handleClick={onSubmit} />
-            <Button
-              className={styles.modalCloseButton}
-              type='submit'
-              label='Cancel'
-              handleClick={onClose}
-            />
-          </>
-        )}
+  return ReactDOM.createPortal(
+    open ? (
+      <section
+        className={`${styles.modalBackdrop} ${open ? '' : styles.hidden}`}
+      >
+        <section className={styles.modalContent} ref={modalRef}>
+          <Button
+            className={styles.modalCloseButton}
+            label={'&times;'}
+            handleClick={onClose}
+          />
+          <Button
+            className={styles.modalCloseButton}
+            label={'Close'}
+            handleClick={onClose}
+          />
+          {children}
+        </section>
       </section>
-    </section>
+    ) : null,
+    document.getElementById('modal-root'),
   );
 };
 export default Modal;

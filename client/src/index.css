@@ -82,9 +82,7 @@ footer {
     :root {
         font-size: 55%;  /* Adjusting base font size for mobile */
     }
-    /* body {
-        border: 0.5rem solid red;
-    } */
+    
     .app {
         width: 100%;  /* Using full width for mobile */
         padding: 0.1rem 1rem;  /* Less padding on sides for mobile */
