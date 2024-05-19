@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { format, parseISO, isValid } from 'date-fns';
-import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
+import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,80 +36,60 @@ const ManageShifts = () => {
     dispatch(fetchShifts(specialistID));
   }, [dispatch, specialistID]);
 
-  useEffect(() => {
-    console.log('Modal state changed', isModalOpen)
-  }, [isModalOpen])
-  const toggleModal = useCallback(open => {
+  const toggleModal = open => {
     setIsModalOpen(open);
-    console.log(
-      `Modal suppose to be ${open === true ? 'open = true' : 'closed = false'}`,
-    );
-  }, []);
+  };
 
-  const handleEventClick = useCallback(
-    clickInfo => {
-      console.log('Event clicked line 41', clickInfo); // Check if this logs when an event is clicked
-      const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+  const handleEventClick = clickInfo => {
+    console.log('Event clicked line 41', clickInfo); // Check if this logs when an event is clicked
+    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
 
-      // Convert UTC to local time
-      const startLocal = utcToZonedTime(clickInfo.event.start, timeZone);
-      const endLocal = utcToZonedTime(clickInfo.event.end, timeZone);
+    // Convert UTC to local time
+    const startLocal = utcToZonedTime(clickInfo.event.startStr, timeZone);
+    const endLocal = utcToZonedTime(clickInfo.event.endStr, timeZone);
 
-      const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
-      const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
-      const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
+    const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
+    const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
+    const formattedEndTime = format(endLocal, 'HH:mm', { timeZone });
 
-      setShiftDetails({
-        ShiftDate: formattedShiftDate,
-        StartTime: formattedStartTime,
-        EndTime: formattedEndTime,
-        Type: clickInfo.event.extendedProps.type,
-      });
+    setShiftDetails({
+      ShiftDate: formattedShiftDate,
+      StartTime: formattedStartTime,
+      EndTime: formattedEndTime,
+      Type: clickInfo.event.extendedProps.type,
+    });
 
-      setSelectedShift({
-        id: clickInfo.event.id,
-        ...clickInfo.event.extendedProps,
-      });
+    setSelectedShift({
+      id: clickInfo.event.id,
+      ...clickInfo.event.extendedProps,
+    });
 
-      clickInfo.jsEvent.preventDefault(); // Prevent default action
-      clickInfo.jsEvent.stopPropagation(); // Stop event bubbling
-      toggleModal(true);
-      console.log('Modal should open in handleDateClick', isModalOpen);
-    },
-    [toggleModal],
-  );
+    toggleModal(true);
+    console.log('Modal should open in handleDateClick', isModalOpen);
+  };
 
-  const handleDateSelect = useCallback(
-    selectInfo => {
-      const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+  const handleDateSelect = selectInfo => {
+    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
 
-      // Convert selected time to local timezone
-      const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
-      const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
+    // Convert selected time to local timezone
+    const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
+    const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
 
-      console.log(`line 85(87) endDate: ${selectInfo.endStr}`);
+    // Format the times for display
+    const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
+    const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
+    const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
 
-      // Format the times for display
-      const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
-      const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
-      const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
-      console.log(`formattedShiftsDate: ${formattedShiftDate}`);
-      console.log(`formattedStartTime: ${formattedStartTime}`);
-      console.log(`formattedEndTime: ${formattedEndTime}`);
+    setShiftDetails({
+      ShiftDate: formattedShiftDate,
+      StartTime: formattedStartTime,
+      EndTime: formattedEndTime,
+      Type: 'Working Hour', // Default type, adjust as needed
+    });
 
-      setShiftDetails({
-        ShiftDate: formattedShiftDate,
-        StartTime: formattedStartTime,
-        EndTime: formattedEndTime,
-        Type: 'Working Hour', // Default type, adjust as needed
-      });
-
-      resetSelectedShift();
-      toggleModal(true);
-      console.log('Modal should open in handleDateSelect', isModalOpen);
-    },
-    [toggleModal],
-  );
+    resetSelectedShift();
+    toggleModal(true);
+  };
 
   /**
    * Reset the selected shift upon closing modal
@@ -124,24 +104,12 @@ const ManageShifts = () => {
   const handleModalClose = useCallback(() => {
     toggleModal(false);
     setSelectedShift(null);
-  }, [toggleModal]);
-
-  /**
-   * Opens the edition/ creation/ deletion request of shift upon opening modal
-   */
-  const handleModalOpen = useCallback(open => {
-    setIsModalOpen(open);
   }, []);
 
-  // TODO: This function shouldn't use updateShift function because it should be called from eventsSlice.js correctly first
-  // TODO: Continue looking at the update function in server for passing correct values because of getting undefined without the ability to update
   const handleModalSubmit = async () => {
     try {
       if (selectedShift && selectedShift.id) {
-        console.log(
-          ` line 137 selectedShift: ${selectedShift}, selectedShift.id: ${selectedShift.id}`,
-        );
-        await dispatch(
+        const updatedShift = await dispatch(
           updateShift({
             shiftID: selectedShift.shiftID,
             shiftDetails: {
@@ -150,14 +118,15 @@ const ManageShifts = () => {
             },
           }),
         ).unwrap();
+        setFeedback(updatedShift.message);
       } else {
-        await dispatch(
+        const createdNewShift = await dispatch(
           addShift({ ...shiftDetails, MedicalSpecialistID: specialistID }),
         ).unwrap();
+        setFeedback(createdNewShift.message);
       }
       dispatch(fetchShifts(specialistID));
       handleModalClose(); // Close after submit
-      setFeedback('Shift updated successfully!'); // Set feedback
       // If you want to re-open the modal here, call handleModalOpen();
     } catch (error) {
       console.error('Error submitting shift:', error);
@@ -169,10 +138,12 @@ const ManageShifts = () => {
     async event => {
       event.preventDefault();
       try {
-        await dispatch(deleteShift(selectedShift.id)).unwrap();
+        const shiftDeleted = await dispatch(
+          deleteShift(selectedShift.id),
+        ).unwrap();
         dispatch(fetchShifts(specialistID)); // Refetch to update the list
         handleModalClose();
-        setFeedback('Shift deleted successfully!');
+        setFeedback(shiftDeleted.message);
       } catch (error) {
         console.error('Error deleting shift:', error);
         setFeedback('Error deleting shift: ' + error.message);
@@ -192,11 +163,6 @@ const ManageShifts = () => {
       />
       {isModalOpen && (
         <Modal open={isModalOpen} onClose={() => handleModalClose}>
-          <Button
-            label={'Save'}
-            type={'submit'}
-            handleClick={handleModalSubmit}
-          />
           <h2>{selectedShift?.id ? 'Edit Shift' : 'Add Shift'}</h2>
           <section>
             <label>
@@ -258,8 +224,13 @@ const ManageShifts = () => {
               />
             </label>
           </section>
+          <Button
+            label={'Save'}
+            type={'submit'}
+            handleClick={handleModalSubmit}
+          />
           {selectedShift?.id && (
-            <button onClick={handleRemoveShift}>Remove Shift</button>
+            <Button label={'Remove Shift'} handleClick={handleRemoveShift} />
           )}
         </Modal>
       )}

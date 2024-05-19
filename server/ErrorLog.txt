@@ -678,3 +678,38 @@
   Line: 73
   ---------------------------------------------------
   
+  2024-05-19T15:55:15.423Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  
+  2024-05-19T15:55:59.118Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  
+  2024-05-19T15:57:53.591Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  
+  2024-05-19T15:58:02.460Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  
+  2024-05-19T15:58:27.886Z - Error: Cannot read properties of undefined (reading 'affectedRows')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.deleteShift
+  Line: 73
+  ---------------------------------------------------
+  

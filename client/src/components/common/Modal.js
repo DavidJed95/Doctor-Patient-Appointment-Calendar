@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 import Button from '../button/Button';
 
@@ -31,27 +30,20 @@ const Modal = ({ open, onClose, children }) => {
     };
   }, [onClose]);
 
-  return ReactDOM.createPortal(
-    open ? (
-      <section
-        className={`${styles.modalBackdrop} ${open ? '' : styles.hidden}`}
-      >
-        <section className={styles.modalContent} ref={modalRef}>
-          <Button
-            className={styles.modalCloseButton}
-            label={'&times;'}
-            handleClick={onClose}
-          />
-          <Button
-            className={styles.modalCloseButton}
-            label={'Close'}
-            handleClick={onClose}
-          />
-          {children}
-        </section>
+  return open ? (
+    <section className={`${styles.modalBackdrop}`}>
+      <section className={styles.modalContent} ref={modalRef}>
+        <button className={styles.modalCloseButton} onClick={onClose()}>
+          &#x2715;
+        </button>
+        {children}
+        <Button
+          className={styles.modalCloseButton}
+          label={'Close'}
+          handleClick={onClose()}
+        />
       </section>
-    ) : null,
-    document.getElementById('modal-root'),
-  );
+    </section>
+  ) : null;
 };
 export default Modal;
