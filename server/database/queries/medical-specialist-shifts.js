@@ -3,7 +3,7 @@ const doQuery = require('../query');
 const { format, parseISO } = require('date-fns');
 
 // Additional functions
-function getDayOfWeekEnum(dateString) {
+function getDayOfWeek(dateString) {
   const dayName = format(parseISO(dateString), 'EEEE'); // 'Monday', 'Tuesday', ...
   return dayName;
 }
@@ -14,7 +14,7 @@ function getDayOfWeekEnum(dateString) {
  */
 async function createShift(shift) {
   try {
-    const dayOfWeek = getDayOfWeekEnum(shift.ShiftDate);
+    const dayOfWeek = getDayOfWeek(shift.ShiftDate);
     const shiftSql = `INSERT INTO SpecialistHours (MedicalSpecialistID, DayOfWeek, StartTime, EndTime, Type, ShiftDate) VALUES (?, ?, ?, ?, ?, ?)`;
     const shiftDetails = [
       shift.MedicalSpecialistID,
@@ -40,15 +40,18 @@ async function createShift(shift) {
  */
 async function updateShift(shiftID, shift) {
   try {
+    const dayOfWeek = getDayOfWeek(shift.ShiftDate);
     const sql = `UPDATE SpecialistHours SET DayOfWeek=?, StartTime=?, EndTime=?, Type=?, ShiftDate=? WHERE SpecialistHourID=?`;
-    return await doQuery(sql, [
-      shift.DayOfWeek,
+    const shiftDetails = [
+      dayOfWeek,
       shift.StartTime,
       shift.EndTime,
       shift.Type,
       shift.ShiftDate,
       shiftID,
-    ]);
+    ];
+    const updatedShift = await doQuery(sql, shiftDetails)
+    return updatedShift;
   } catch (error) {
     console.error('Error updating shift:', error);
     return { error: 'Error updating shift.' };
@@ -62,7 +65,8 @@ async function updateShift(shiftID, shift) {
 async function deleteShift(shiftID) {
   try {
     const sql = `DELETE FROM SpecialistHours WHERE SpecialistHourID=?`;
-    await doQuery(sql, [shiftID]);
+    const result = await doQuery(sql, [shiftID]);
+    return result;
   } catch (error) {
     console.error('Error deleting shift:', error);
     return { error: 'Error deleting shift.' };

@@ -70,14 +70,17 @@ exports.deleteShift = async (req, res, next) => {
   try {
     const shiftID = req.params.id;
     const result = await deleteShift(shiftID);
+
+    if (result.error) {
+      return res.status(500).json({message:'Error deleting shift. Please try again'})
+    }
+
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Shift not found' });
     }
+    
     res.status(200).json({ message: 'Shift deleted successfully' });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Error deleting shift. Please try again.' });
     next(error);
   }
 };

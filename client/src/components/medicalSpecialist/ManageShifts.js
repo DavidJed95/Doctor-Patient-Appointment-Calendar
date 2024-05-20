@@ -25,7 +25,7 @@ const ManageShifts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shiftDetails, setShiftDetails] = useState({
     ShiftDate: '',
-    Type: '',
+    Type: 'Working Hour',
     StartTime: '',
     EndTime: '',
   });
@@ -36,15 +36,14 @@ const ManageShifts = () => {
     dispatch(fetchShifts(specialistID));
   }, [dispatch, specialistID]);
 
-  const toggleModal = open => {
+  const toggleModal = useCallback(open => {
+    setFeedback('')
     setIsModalOpen(open);
-  };
+  }, []);
 
   const handleEventClick = clickInfo => {
-    console.log('Event clicked line 41', clickInfo); // Check if this logs when an event is clicked
-    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+    const timeZone = 'Asia/Jerusalem';
 
-    // Convert UTC to local time
     const startLocal = utcToZonedTime(clickInfo.event.startStr, timeZone);
     const endLocal = utcToZonedTime(clickInfo.event.endStr, timeZone);
 
@@ -56,7 +55,7 @@ const ManageShifts = () => {
       ShiftDate: formattedShiftDate,
       StartTime: formattedStartTime,
       EndTime: formattedEndTime,
-      Type: clickInfo.event.extendedProps.type,
+      Type: clickInfo.event.extendedProps.type || 'Working Hour',
     });
 
     setSelectedShift({
@@ -65,17 +64,14 @@ const ManageShifts = () => {
     });
 
     toggleModal(true);
-    console.log('Modal should open in handleDateClick', isModalOpen);
   };
 
   const handleDateSelect = selectInfo => {
-    const timeZone = 'Asia/Jerusalem'; // your preferred timezone
+    const timeZone = 'Asia/Jerusalem';
 
-    // Convert selected time to local timezone
     const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
     const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
 
-    // Format the times for display
     const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
     const formattedStartTime = format(startDate, 'HH:mm', { timeZone });
     const formattedEndTime = format(endDate, 'HH:mm', { timeZone });
@@ -84,34 +80,29 @@ const ManageShifts = () => {
       ShiftDate: formattedShiftDate,
       StartTime: formattedStartTime,
       EndTime: formattedEndTime,
-      Type: 'Working Hour', // Default type, adjust as needed
+      Type: 'Working Hour',
     });
 
     resetSelectedShift();
     toggleModal(true);
   };
 
-  /**
-   * Reset the selected shift upon closing modal
-   */
   const resetSelectedShift = useCallback(() => {
     setSelectedShift(null);
   }, []);
 
-  /**
-   * Closes the selected shift upon closing modal
-   */
   const handleModalClose = useCallback(() => {
     toggleModal(false);
     setSelectedShift(null);
-  }, []);
+  }, [toggleModal]);
 
-  const handleModalSubmit = async () => {
+  const handleModalSubmit = async (event) => {
+    event.preventDefault()
     try {
       if (selectedShift && selectedShift.id) {
         const updatedShift = await dispatch(
           updateShift({
-            shiftID: selectedShift.shiftID,
+            shiftID: selectedShift.id,
             shiftDetails: {
               ...shiftDetails,
               MedicalSpecialistID: specialistID,
@@ -120,14 +111,15 @@ const ManageShifts = () => {
         ).unwrap();
         setFeedback(updatedShift.message);
       } else {
-        const createdNewShift = await dispatch(
+        const creatingNewShift = await dispatch(
           addShift({ ...shiftDetails, MedicalSpecialistID: specialistID }),
         ).unwrap();
-        setFeedback(createdNewShift.message);
+        setFeedback(creatingNewShift.message);
       }
       dispatch(fetchShifts(specialistID));
-      handleModalClose(); // Close after submit
-      // If you want to re-open the modal here, call handleModalOpen();
+      setTimeout(() => {
+        handleModalClose();
+      }, 3000);
     } catch (error) {
       console.error('Error submitting shift:', error);
       setFeedback('Error updating shift: ' + error.message);
@@ -141,9 +133,11 @@ const ManageShifts = () => {
         const shiftDeleted = await dispatch(
           deleteShift(selectedShift.id),
         ).unwrap();
-        dispatch(fetchShifts(specialistID)); // Refetch to update the list
-        handleModalClose();
-        setFeedback(shiftDeleted.message);
+        dispatch(fetchShifts(specialistID));
+        setFeedback(shiftDeleted.message); // Update feedback with the message
+        setTimeout(() => {
+          handleModalClose();
+        }, 3000);
       } catch (error) {
         console.error('Error deleting shift:', error);
         setFeedback('Error deleting shift: ' + error.message);
@@ -156,13 +150,13 @@ const ManageShifts = () => {
 
   return (
     <article>
-      {feedback && <p>{feedback}</p>}
+      
       <Calendar
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
       />
       {isModalOpen && (
-        <Modal open={isModalOpen} onClose={() => handleModalClose}>
+        <Modal open={isModalOpen} onClose={handleModalClose}>
           <h2>{selectedShift?.id ? 'Edit Shift' : 'Add Shift'}</h2>
           <section>
             <label>
@@ -176,7 +170,7 @@ const ManageShifts = () => {
                     ShiftDate: e.target.value,
                   }))
                 }
-              />
+                />
             </label>
           </section>
           <section>
@@ -188,7 +182,7 @@ const ManageShifts = () => {
                 onChange={e =>
                   setShiftDetails(prev => ({ ...prev, Type: e.target.value }))
                 }
-              >
+                >
                 <option value='Working Hour'>Working Hour</option>
                 <option value='Break'>Break</option>
               </select>
@@ -206,7 +200,7 @@ const ManageShifts = () => {
                     StartTime: e.target.value,
                   }))
                 }
-              />
+                />
             </label>
           </section>
           <section>
@@ -221,17 +215,21 @@ const ManageShifts = () => {
                     EndTime: e.target.value,
                   }))
                 }
-              />
+                />
             </label>
           </section>
           <Button
             label={'Save'}
             type={'submit'}
             handleClick={handleModalSubmit}
-          />
+            />
           {selectedShift?.id && (
-            <Button label={'Remove Shift'} handleClick={handleRemoveShift} />
+            <Button
+            label={'Remove Shift'}
+            handleClick={handleRemoveShift}
+            />
           )}
+          {feedback && <p>{feedback}</p>}
         </Modal>
       )}
     </article>

@@ -1,13 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Modal.module.css';
-import Button from '../button/Button';
 
 const Modal = ({ open, onClose, children }) => {
   const modalRef = useRef();
 
-  /**
-   * Close th e modal if clicked outside the content area
-   */
   useEffect(() => {
     const handleClickOutside = event => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -30,20 +26,18 @@ const Modal = ({ open, onClose, children }) => {
     };
   }, [onClose]);
 
-  return open ? (
-    <section className={`${styles.modalBackdrop}`}>
+  if (!open) return null;
+
+  return (
+    <section className={styles.modalBackdrop}>
       <section className={styles.modalContent} ref={modalRef}>
-        <button className={styles.modalCloseButton} onClick={onClose()}>
-          &#x2715;
+        <button className={styles.modalCloseButton} onClick={onClose}>
+          &times;
         </button>
         {children}
-        <Button
-          className={styles.modalCloseButton}
-          label={'Close'}
-          handleClick={onClose()}
-        />
       </section>
     </section>
-  ) : null;
+  );
 };
+
 export default Modal;

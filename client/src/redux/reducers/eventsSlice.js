@@ -54,7 +54,7 @@ export const deleteShift = createAsyncThunk(
   async (shiftID, { rejectWithValue }) => {
     try {
       const response = await shiftsAPI.deleteShiftAPI(shiftID);
-      return { shiftID, response }; // Include shiftID to identify which shift was deleted
+      return { shiftID, message: response.message }; // Include shiftID to identify which shift was deleted
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -103,9 +103,9 @@ export const eventsSlice = createSlice({
       // Handling deleteShift
       .addCase(deleteShift.fulfilled, (state, action) => {
         state.SpecialistAvailability = state.SpecialistAvailability.filter(
-          event => event.id !== action.meta.arg.shiftID,
+          event => event.id !== action.payload.shiftID,
         );
-      });
+      });   
   },
 });
 
