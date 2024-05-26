@@ -1,13 +1,16 @@
 .form {
-  width: 100%;
-  min-height: 100dvh;
-  /* background: var(--white); */
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100dvh;
   justify-content: center;
   align-items: center;
   color: var(--black);
-  padding: 2rem 0;
+  padding: 2rem 2rem;
+  flex: 1 0 13rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .form > .div {
@@ -24,110 +27,13 @@
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
   height: 78dvh;
   margin: 2rem;
-}
-
-.form .input {
-  display: flex;
+  flex: 1 0 13rem;
+  flex-wrap: wrap;
 }
 
 .overlap {
   margin-top: 50%;
   margin-bottom: 50%;
-}
-
-.elipse1,
-.elipse2,
-.subtract {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.elipse1 {
-  /* Ellipse 1 */
-  background: var(--primary);
-  border-radius: 50%;
-  width: 45.7rem;
-  height: 45.7rem;
-  /* primary */
-}
-
-.elipse2 {
-  /* Ellipse 2 */
-  background: var(--secondary);
-  border-radius: 50%;
-  height: 3.8rem;
-  transform: matrix(1, 0, 0, -1, 0, 0);
-  /* secondary */
-}
-
-.subtract {
-  /* Subtract */
-  background: var(--primary);
-  transform: rotate(-45deg);
-  width: 53.5rem;
-  height: 50.5rem;
-  /* primary */
-}
-
-.polygon1,
-.polygon2,
-.polygon3 {
-  background: rgba(64, 68, 237, 0.5);
-  transform: rotate(-44.32deg);
-}
-
-.polygon1 {
-  /* Polygon 1 */
-  width: 33.647rem;
-  height: 33.647rem;
-  left: 124.8rem;
-  top: 92.08rem;
-}
-
-.polygon2 {
-  /* Polygon 2 */
-
-  position: absolute;
-  width: 33.647rem;
-  height: 33.647rem;
-  left: 135.314rem;
-  top: 101.415rem;
-}
-
-.polygon3 {
-  /* Polygon 3 */
-
-  position: absolute;
-  width: 33.647rem;
-  height: 33.647rem;
-  left: 146.224rem;
-  top: 110.697rem;
-}
-
-.usernameInputLine {
-  /* Line 1 */
-
-  position: absolute;
-  width: 53.1rem;
-  height: 0rem;
-  left: 59.9rem;
-  top: 55.9rem;
-
-  border: 0.2rem solid var(--black);
-}
-
-.passwordInputLine {
-  /* Line 2 */
-
-  position: absolute;
-  width: 53.1rem;
-  height: 0;
-  left: 59.9rem;
-  top: 65.9rem;
-
-  border: 0.2rem solid var(--black);
 }
 
 .emailAuthHeading {
@@ -147,23 +53,14 @@
   margin-bottom: 2rem;
 }
 
-.username, .password {
+.username,
+.password {
   font-family: 'IRANSansXFaNum';
   font-style: normal;
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 3.6rem;
   color: var(--gray);
-}
-
-.ellipse {
-  background-color: var(--secondary);
-  border-radius: 38px;
-  height: 76px;
-  left: 703px;
-  position: relative;
-  top: 65px;
-  width: 76px;
 }
 
 .frame {
@@ -198,7 +95,8 @@
     line-height: 6rem;
   }
 
-  .username, .password {
+  .username,
+  .password {
     font-size: 1.8rem;
     line-height: 2.8rem;
   }

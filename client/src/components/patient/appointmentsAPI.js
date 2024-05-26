@@ -10,7 +10,7 @@ export const fetchAppointmentsAPI = async patientID => {
 };
 
 export const addAppointmentAPI = async event => {
-  const response = await fetch('/appointment/create-appointment', {
+  const response = await fetch(`${BASE_URL}/appointment/create-appointment`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(event),
@@ -25,7 +25,7 @@ export const updateAppointmentAPI = async (
   appointmentID,
   updatedAppointment,
 ) => {
-  const response = await fetch(`/appointment/${appointmentID}`, {
+  const response = await fetch(`${BASE_URL}/appointment/${appointmentID}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updatedAppointment),
@@ -37,7 +37,7 @@ export const updateAppointmentAPI = async (
 };
 
 export const deleteAppointmentAPI = async appointmentID => {
-  const response = await fetch(`/appointment/${appointmentID}`, {
+  const response = await fetch(`${BASE_URL}/appointment/${appointmentID}`, {
     method: 'DELETE',
   });
   if (!response.ok) {

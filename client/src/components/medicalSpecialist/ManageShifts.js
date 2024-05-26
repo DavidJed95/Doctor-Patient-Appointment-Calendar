@@ -119,7 +119,7 @@ const ManageShifts = () => {
       dispatch(fetchShifts(specialistID));
       setTimeout(() => {
         handleModalClose();
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error('Error submitting shift:', error);
       setFeedback('Error updating shift: ' + error.message);
@@ -137,7 +137,7 @@ const ManageShifts = () => {
         setFeedback(shiftDeleted.message); // Update feedback with the message
         setTimeout(() => {
           handleModalClose();
-        }, 3000);
+        }, 1000);
       } catch (error) {
         console.error('Error deleting shift:', error);
         setFeedback('Error deleting shift: ' + error.message);
@@ -150,7 +150,6 @@ const ManageShifts = () => {
 
   return (
     <article>
-      
       <Calendar
         handleDateSelect={handleDateSelect}
         handleEventClick={handleEventClick}
@@ -170,7 +169,7 @@ const ManageShifts = () => {
                     ShiftDate: e.target.value,
                   }))
                 }
-                />
+              />
             </label>
           </section>
           <section>
@@ -182,7 +181,7 @@ const ManageShifts = () => {
                 onChange={e =>
                   setShiftDetails(prev => ({ ...prev, Type: e.target.value }))
                 }
-                >
+              >
                 <option value='Working Hour'>Working Hour</option>
                 <option value='Break'>Break</option>
               </select>
@@ -200,7 +199,7 @@ const ManageShifts = () => {
                     StartTime: e.target.value,
                   }))
                 }
-                />
+              />
             </label>
           </section>
           <section>
@@ -215,19 +214,17 @@ const ManageShifts = () => {
                     EndTime: e.target.value,
                   }))
                 }
-                />
+              />
             </label>
           </section>
           <Button
             label={'Save'}
             type={'submit'}
             handleClick={handleModalSubmit}
-            />
+          />
+          <Button label={'Cancel'} handleClick={handleModalClose} />
           {selectedShift?.id && (
-            <Button
-            label={'Remove Shift'}
-            handleClick={handleRemoveShift}
-            />
+            <Button label={'Remove Shift'} handleClick={handleRemoveShift} />
           )}
           {feedback && <p>{feedback}</p>}
         </Modal>

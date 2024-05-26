@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const paypal = require('paypal-rest-sdk');
 const dotenv = require('dotenv');
 dotenv.config({ path: '../.env' });

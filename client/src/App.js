@@ -10,14 +10,15 @@ import { updateLoginStatus, setUser } from './redux/reducers/userSlice';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Appointments from './components/pages/Appointments';
+import AppointmentManagement from './components/patient/AppointmentManagement';
 import UpdateUserProfile from './components/pages/settings/UpdateUserProfile';
-import LoginForm from './components/form/loginForm/LoginForm';
-import RegistrationForm from './components/form/registrationForm/RegistrationForm';
-import PasswordResetForm from './components/form/passwordResetForm/PasswordResetForm';
+import LoginPage from './components/pages/LoginPage';
+import RegistrationPage from './components/pages/RegistrationPage';
+import PasswordResetPage from './components/pages/PasswordResetPage';
 import Footer from './components/footer/Footer';
 import EmailVerification from './components/auth/EmailVerification';
 import PasswordReset from './components/auth/PasswordReset';
-import ManageShifts from './components/medicalSpecialist/ManageShifts';
+import DoctorShiftManagement from './components/pages/DoctorShiftManagement';
 import NotFound from './components/pages/NotFound';
 
 import './App.css';
@@ -44,25 +45,29 @@ function App() {
   }, [dispatch]);
 
   return (
-
     <div className='App'>
       <Router>
-        {isLoggedIn && <Navbar siteTitle='Doctor Patient Appointment Calendar' />}
+        {isLoggedIn && (
+          <Navbar siteTitle='Doctor Patient Appointment Calendar' />
+        )}
         <Routes>
           {/* Only show login and registration forms if not logged in */}
           {!isLoggedIn ? (
             <>
-              <Route path='/' element={<LoginForm />} />
-              <Route path='/register' element={<RegistrationForm />} />
-              <Route path='/password-reset' element={<PasswordResetForm />} />
+              <Route path='/' element={<LoginPage />} />
+              <Route path='/register' element={<RegistrationPage />} />
+              <Route path='/password-reset' element={<PasswordResetPage />} />
             </>
           ) : (
             <>
               <Route path='/home' element={<Home />} />
-              {/* <Route path='/appointments' element={<Appointments />} /> */}
+              <Route path='/appointments' element={<AppointmentManagement />} />
               <Route path='/profile-update' element={<UpdateUserProfile />} />
-  
-              <Route path='/manage-shifts' element={<ManageShifts />} />
+
+              <Route
+                path='/manage-shifts'
+                element={<DoctorShiftManagement />}
+              />
             </>
           )}
           <Route path='/verify-email/:token' element={<EmailVerification />} />
@@ -70,7 +75,7 @@ function App() {
           <Route path='*' element={<NotFound />} />
           {/* Protected routes, only visible if logged in */}
         </Routes>
-  
+
         <Footer name='David Jedwabsky' />
       </Router>
     </div>

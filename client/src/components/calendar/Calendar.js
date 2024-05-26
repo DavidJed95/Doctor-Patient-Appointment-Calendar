@@ -15,36 +15,40 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
 
   const timeZone = 'Asia/Jerusalem';
 
- // Simplified mapping, now converting to and assuming local time zone
-const processedEvents = events.map(event => {
-  if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime) return null;
+  // Simplified mapping, now converting to and assuming local time zone
+  const processedEvents = events
+    .map(event => {
+      if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime)
+        return null;
 
+      const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
 
-  const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
+      if (isNaN(shiftDateTime)) {
+        console.error('Invalid shift date time: ', event.ShiftDate);
+        return null; // Skip this event if the date is invalid
+      }
 
-  if (isNaN(shiftDateTime)) {
-    console.error("Invalid shift date time: ", event.ShiftDate);
-    return null; // Skip this event if the date is invalid
-  }
+      const startDate = format(shiftDateTime, 'yyyy-MM-dd', { timeZone });
+      const startDateTime = `${startDate}T${event.StartTime}`;
+      const endDateTime = `${startDate}T${event.EndTime}`;
 
-  const startDate = format(shiftDateTime, 'yyyy-MM-dd', { timeZone });
-  const startDateTime = `${startDate}T${event.StartTime}`;
-  const endDateTime = `${startDate}T${event.EndTime}`;
+      if (isNaN(new Date(startDateTime)) || isNaN(new Date(endDateTime))) {
+        console.error(
+          'Invalid start or end date time',
+          startDateTime,
+          endDateTime,
+        );
+        return null; // Skip this event if start or end times are invalid
+      }
 
-  if (isNaN(new Date(startDateTime)) || isNaN(new Date(endDateTime))) {
-    console.error("Invalid start or end date time", startDateTime, endDateTime);
-    return null; // Skip this event if start or end times are invalid
-  }
-
-  return {
-    id: event.SpecialistHourID,
-    title: event.Type,
-    start: startDateTime,
-    end: endDateTime,
-  };
-}).filter(event => event !== null);
-
-
+      return {
+        id: event.SpecialistHourID,
+        title: event.Type,
+        start: startDateTime,
+        end: endDateTime,
+      };
+    })
+    .filter(event => event !== null);
 
   return (
     <Fullcalendar
@@ -63,7 +67,7 @@ const processedEvents = events.map(event => {
       events={processedEvents}
       select={handleDateSelect}
       eventClick={handleEventClick}
-      height='90vh'
+      height='59dvh'
       slotLabelFormat={{
         hour: '2-digit', // 2-digit hour representation
         minute: '2-digit', // 2-digit minute representation

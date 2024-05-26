@@ -60,57 +60,59 @@ const LoginForm = () => {
   };
 
   return (
-    <form action='/auth/login' className={styles.form}>
-      <div className={`${styles.div}`}>
-        <div className={styles.overlap}>
-          <div className={styles.ellipse} />
-          <h1 className={styles.userAuthHeading}>Login</h1>
-          <div>
-            <InputField
-              label='ID:'
-              placeholder='Enter Your ID'
-              value={userDetails.id}
-              name='id'
-              onChange={handleChange}
-              required
+    <div className='container'>
+      <form action='/auth/login' className={styles.form}>
+        <div className={`${styles.div}`}>
+          <div className={styles.overlap}>
+            <h1 className={styles.userAuthHeading}>Login</h1>
+            <div>
+              <InputField
+                label='ID:'
+                placeholder='Enter Your ID'
+                value={userDetails.id}
+                name='id'
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.form.input}>
+              <InputField className={styles.form.input}
+                label='Password:'
+                placeholder='Enter Your Password'
+                value={userDetails.password}
+                name='password'
+                type='password'
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <Button
+              className={styles.frame}
+              label='Login'
+              type='submit'
+              handleClick={handleSubmit}
             />
+            <div>
+              <Link to='/register'>Sign Up</Link>
+            </div>
+            <div>
+              <Link to='/password-reset'>Forgot your Password?</Link>
+            </div>
+            {message && (
+              <p
+                className={
+                  message.includes('success') ? styles.success : styles.failure
+                }
+              >
+                {message}
+              </p>
+            )}
           </div>
-          <div className={styles.form.input}>
-            <InputField className={styles.form.input}
-              label='Password:'
-              placeholder='Enter Your Password'
-              value={userDetails.password}
-              name='password'
-              type='password'
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <Button
-            className={styles.frame}
-            label='Login'
-            type='submit'
-            handleClick={handleSubmit}
-          />
-          <div>
-            <Link to='/register'>Sign Up</Link>
-          </div>
-          <div>
-            <Link to='/password-reset'>Forgot your Password?</Link>
-          </div>
-          {message && (
-            <p
-              className={
-                message.includes('success') ? styles.success : styles.failure
-              }
-            >
-              {message}
-            </p>
-          )}
+          
         </div>
-      </div>
-    </form>
-  );
+      </form>
+    </div>
+    );
 };
 
 export default LoginForm;

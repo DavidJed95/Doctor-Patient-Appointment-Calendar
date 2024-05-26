@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../calendar/Calendar';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import PayPalPayment from '../payPalPayment/PayPalPayment.js';
-
+import PayPalPayment from '../payPalPayment/PayPalPayment';
+// TODO: to copy and paste the ShiftManagement and adapt it to the appointments first without payment
 import {
   // addPatientAppointment,
   removeEvent,

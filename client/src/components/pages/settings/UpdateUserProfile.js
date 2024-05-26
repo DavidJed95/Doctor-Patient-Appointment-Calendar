@@ -8,7 +8,7 @@ import styles from '../../form/userAuthentication.module.css';
 import InputField from '../../form/InputField';
 import Button from '../../button/Button';
 
-const UpdatePersonalProfile = () => {
+const UpdateUserProfile = () => {
   const dispatch = useDispatch();
   
   const user = useSelector(state => state.user.userInfo);
@@ -137,7 +137,7 @@ const UpdatePersonalProfile = () => {
           />
         </div>
 
-        <Button text='Update & Save' type='submit' handleClick={handleSubmit} />
+        <Button label='Update & Save' type='submit' handleClick={handleSubmit} />
         {message && (
           <p
             className={
@@ -151,4 +151,4 @@ const UpdatePersonalProfile = () => {
     </div>
   );
 };
-export default UpdatePersonalProfile;
+export default UpdateUserProfile;

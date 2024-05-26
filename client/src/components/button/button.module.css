@@ -1,26 +1,28 @@
 .button {
-  width: 15%;
+  width: 50%;
+  /* flex-wrap: wrap; */
   border: none;
   background-color: cadetblue;
   padding: 0.1rem;
   font-size: 1rem;
   color: white;
   margin: 1rem;
-  border-radius: 5rem;
+  border-radius: 2rem;
   border: solid black 0.1rem;
+  outline: 8px ridge rgba(50, 129, 220, 0.6);
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+}
+
+.button:focus,
+.button:hover {
+  border-bottom: 0.2rem solid black;
 }
 
 @media (max-width: 70rem) {
   .button {
-    width: 33%;
-    font-size: 1rem;
-    margin: 0;
+    margin-bottom: 1rem;
   }
 }
 
-@media screen and (max-width: 76.8rem) {
-  .button {
-    width: 60%;
-    font-size: 0.9rem;
-  }
-}
+
