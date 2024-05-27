@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+// import { utcToZonedTime } from 'date-fns-tz';
 import { useSelector, useDispatch } from 'react-redux';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import Calendar from '../calendar/Calendar';
 import Modal from '../common/Modal';
 import Button from '../button/Button';
@@ -13,7 +13,8 @@ import {
   updateAppointment,
   deleteAppointment,
 } from '../../redux/reducers/AppointmentsSlice';
-import { YOUR_PAYPAL_CLIENT_ID } from '../../config';
+import PayPalPayment from '../payPalPayment/PayPalPayment';
+import { MY_PAYPAL_CLIENT_ID } from '../../config';
 
 const AppointmentManagement = () => {
   const dispatch = useDispatch();
@@ -26,19 +27,14 @@ const AppointmentManagement = () => {
     Date: '',
     StartTime: '',
     EndTime: '',
-    isPayed: false,
+    isPayedFor: false,
   });
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [paymentInProgress, setPaymentInProgress] = useState(false);
-  // TODO: need to do the initialOptions of the account
-  // const initialOptions = {
-  //   clientId: 'test',
-  //   currency: 'USD',
-  //   intent: 'capture',
-  // };
+  const [treatmentCost, setTreatmentCost] = useState(0);
 
-  const initalOptions = {
-    'client-id': YOUR_PAYPAL_CLIENT_ID,
+  const initialOptions = {
+    'client-id': MY_PAYPAL_CLIENT_ID,
     currency: 'ILS',
     intent: 'capture',
   };
@@ -50,7 +46,7 @@ const AppointmentManagement = () => {
   const toggleModal = useCallback(open => {
     setFeedback('');
     setIsModalOpen(open);
-  });
+  }, []);
 
   const handleEventClick = clickInfo => {
     // TODO: if startLocal and end Local are wrong we will use the formation from ManageShifts.js with 'Str'
@@ -168,30 +164,32 @@ const AppointmentManagement = () => {
   if (loading) return <div>Loading...</div>;
 
   const handleSearch = query => {
-    // TODO: Implement search functionality to find medical specialists based on the query
+    // TODO: Implement search functionality to find medical specialists based on the query if he is available
     console.log(`Search query: ${query}`);
   };
 
   const searchBarsStyle = {
     display: 'flex',
+    justifyContent:'space-around'
   };
+
   return (
-    <PayPalScriptProvider options={initalOptions}>
+    <PayPalScriptProvider options={initialOptions}>
       <article>
-        <div style={{ display: 'flex' }}>
+        <section style={searchBarsStyle}>
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Search for medical specialists'}
+            placeholder={'Medical specialists name'}
           />
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Search for medical specialist by spoken language'}
+            placeholder={'Medical specialist spoken language'}
           />
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Search for medical specialist by spoken language'}
+            placeholder={'Medical specialist Specialization'}
           />
-        </div>
+        </section>
         <Calendar
           handleDateSelect={handleDateSelect}
           handleEventClick={handleEventClick}
@@ -249,27 +247,11 @@ const AppointmentManagement = () => {
                 />
               </label>
             </section>
-            {!appointmentDetails && (
-              <PayPalButtons
-                style={{ layout: 'horizontal' }}
-                createOrder={(date, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: '100',
-                        },
-                      },
-                    ],
-                  });
-                }}
-                onApprove={(data, actions) => {
-                  return actions.order.capture().then(() => {
-                    handlePaymentSuccess();
-                  });
-                }}
-                onError={handlePaymentError}
-              />
+            {!appointmentDetails.isPayedFor && (
+              <PayPalPayment
+              amount = {treatmentCost}
+              onSuccess={handlePaymentSuccess}
+              onFailure={handlePaymentError}/>
             )}
             <Button
               label={'Save'}

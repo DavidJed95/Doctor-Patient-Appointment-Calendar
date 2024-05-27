@@ -6,8 +6,8 @@ dotenv.config({ path: '../.env' });
 // Set up PayPal configuration
 paypal.configure({
   mode: 'sandbox', // 'sandbox' or 'live' depending on your environment
-  client_id: process.env.Client_ID,
-  client_secret: process.env.Secret_Key,
+  client_id: process.env.PAYPAL_CLIENT_ID,
+  client_secret: process.env.PAYPAL_SECRET_KEY,
 });
 
 module.exports = paypal;

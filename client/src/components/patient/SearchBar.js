@@ -13,15 +13,21 @@ const SearchBar = ({ onSearch, placeholder }) => {
     onSearch(query);
   };
 
+  const searchBarSpacing = {
+    margin: '2rem'
+  }
+  const searchBarInputWidth = {width: '24rem'}
+  const searchBarButtonMargin = {marginLeft:'.1rem'}
+  
   return (
-    <div>
-      <input
+    <div style={searchBarSpacing}>
+      <input style={searchBarInputWidth}
         type={'text'}
         value={query}
         onChange={handleInputChange}
         placeholder={placeholder}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button style={searchBarButtonMargin} onClick={handleSearch}>Search</button>
     </div>
   );
 };
