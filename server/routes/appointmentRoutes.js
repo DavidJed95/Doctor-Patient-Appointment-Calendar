@@ -5,13 +5,14 @@ const cancelAppointmentController = require('../controllers/cancelAppointmentCon
 const updateAppointmentController = require('../controllers/updateAppointmentController')
 // const getAppointmentsByMedicalSpecialistController = require('../controllers/getAppointmentsByMedicalSpecialistController');
 const getAppointmentsByPatientController = require('../controllers/getAppointmentsByPatientController');
-
+const treatmentController = require('../controllers/treatmentController')
 const router = express.Router();
 
-
+router.post('/execute-payment', createAppointmentController.executePayment);
 router.post('/create-appointment', createAppointmentController.createAppointment)
 router.put('/update-appointment:id', updateAppointmentController.updateAppointments);
 router.delete('/:id', cancelAppointmentController.cancelAppointments);
 router.get('/', getAppointmentsByPatientController)
+router.get('/treatment/:treatmentID', treatmentController.getTreatment)
 
 module.exports = router;

@@ -1,3 +1,4 @@
+'use strict'
 const doQuery = require('../query');
 
 const { format, parseISO } = require('date-fns');
