@@ -22,7 +22,7 @@ const AppointmentManagement = () => {
   const { ID: patientID } = useSelector((state) => state.user.userInfo);
   const appointments = useSelector((state) => state.appointments.appointments);
   const loading = useSelector((state) => state.appointments.loading);
-  // const treatmentPrice = useSelector(state => state.treatments.price);
+  
   const [feedback, setFeedback] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState({

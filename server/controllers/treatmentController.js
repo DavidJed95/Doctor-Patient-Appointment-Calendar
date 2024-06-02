@@ -1,11 +1,16 @@
 "use strict";
 
-const { getTreatmentByID } = require("../database/queries/all-queries");
-exports.getTreatment = async (req, res, next) => {
-  const { treatmentID } = req.params;
+const { getTreatments } = require("../database/queries/all-queries");
+/**
+ * This method fetches a treatments from the Treatments table
+ * @param {*} req - the request for treatments
+ * @param {*} res - response with treatments
+ * @param {*} next - passes down the log of failed request to fetch treatments
+ */
+exports.getTreatments = async (req, res, next) => {
   try {
-    const treatment = await getTreatmentByID(treatmentID);
-    res.status(200).json(treatment);
+    const treatments = await getTreatments();
+    res.status(200).json(treatments);
   } catch (error) {
     res
       .status(500)

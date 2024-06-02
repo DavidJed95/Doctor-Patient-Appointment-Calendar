@@ -24,7 +24,7 @@ const {
 } = require("./medical-specialist-shifts");
 
 // Fetching Treatment details
-const { getTreatmentByID } = require("./treatment-queries");
+const { getTreatments } = require("./treatment-queries");
 
 // 6) Set an appointment for a patient
 const setAppointment = require("./set-appointment");
@@ -52,7 +52,7 @@ module.exports = {
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
-  getTreatmentByID,
+  getTreatments,
   setAppointment,
   cancelAppointment,
   updateAppointment,

@@ -13,6 +13,6 @@ router.post('/create-appointment', createAppointmentController.createAppointment
 router.put('/update-appointment:id', updateAppointmentController.updateAppointments);
 router.delete('/:id', cancelAppointmentController.cancelAppointments);
 router.get('/', getAppointmentsByPatientController)
-router.get('/treatment/:treatmentID', treatmentController.getTreatment)
+router.get('/treatment', treatmentController.getTreatments)
 
 module.exports = router;

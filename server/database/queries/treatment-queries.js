@@ -2,14 +2,13 @@
 const doQuery = require('../query');
 
 /**
- * This method fetches a treatment from the Treatments table
- * @param {*} treatmentID - the treatment ID to be fetched
+ * This method fetches a treatments from the Treatments table
  * @returns the treatment by the given treatmentID
  */
-async function getTreatmentByID(treatmentID) {
+async function getTreatments() {
     try {
-      const treatmentSQL = `SELECT * FROM Treatments WHERE TreatmentID=?`;
-      const result = await doQuery(treatmentSQL, [treatmentID]);
+      const treatmentSQL = `SELECT * FROM Treatments`;
+      const result = await doQuery(treatmentSQL);
       console.log(`Fetched treatment by id from database in the server query are of type: ${typeof result}.
       and this is the treatment: ${result}`);
       return result;
@@ -19,4 +18,4 @@ async function getTreatmentByID(treatmentID) {
     }
 }
 
-module.exports = { getTreatmentByID };
+module.exports = { getTreatments };
