@@ -68,6 +68,7 @@ const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
       .capture()
       .then((details) => {
         onSuccess(details);
+        console.log('Payment successful, and the description is ', description);
       })
       .catch((error) => {
         onFailure(error);

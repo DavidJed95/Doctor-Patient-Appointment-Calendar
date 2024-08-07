@@ -35,6 +35,7 @@
 }
 
 body {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -79,8 +80,8 @@ footer {
 
 /* Smaller screens, usually mobiles */
 @media screen and (max-width: 60rem) {
-    :root {
-        font-size: 55%;  /* Adjusting base font size for mobile */
+    html {
+        font-size: 50%;  /* Adjusting base font size for mobile */
     }
     
     .app {

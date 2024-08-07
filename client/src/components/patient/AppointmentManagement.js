@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { format } from "date-fns";
-// import { utcToZonedTime } from 'date-fns-tz';
+import { format, addMinutes } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Calendar from "../calendar/Calendar";
@@ -14,38 +13,102 @@ import {
   deleteAppointment,
 } from "../../redux/reducers/AppointmentsSlice";
 import PayPalPayment from "../payPalPayment/PayPalPayment";
+import TreatmentSelector from "../treatments/TreatmentSelector";
 import { fetchTreatmentAPI } from "../treatments/treatmentsAPI";
+import { fetchAvailableSpecialists } from "./appointmentsAPI";
 import { MY_PAYPAL_CLIENT_ID } from "../../config";
+
+/**
+ * Utility function to convert HH:MM:SS to total minutes
+ * @param {*} duration - to convert to minutes
+ * @returns the converted String representation to minutes
+ */
+const durationToMinutes = (duration) => {
+  const [hours, minutes, seconds] = duration.split(":").map(Number);
+  return hours * 60 + minutes + Math.floor(seconds / 60);
+};
+
+/**
+ * Utility function to add minutes to a date
+ * @param {*} date - the date to add time to
+ * @param {*} minutes - the minutes that are added to the date
+ * @returns a new date time with minutes addition
+ */
+const addMinutesToDate = (date, minutes) => {
+  return new Date(date.getTime() + minutes * 60000);
+};
+
+/**
+ * Utility function to format a date to HH:MM:SS
+ * @param {*} date - the date to format
+ * @returns the formatted String representation to HH:MM:SS
+ */
+const formatToHHMMSS = (date) => {
+  return date.toTimeString().split(' ')[0];
+};
 
 const AppointmentManagement = () => {
   const dispatch = useDispatch();
   const { ID: patientID } = useSelector((state) => state.user.userInfo);
   const appointments = useSelector((state) => state.appointments.appointments);
   const loading = useSelector((state) => state.appointments.loading);
-  
+
   const [feedback, setFeedback] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState({
-    Date: "",
+    PatientID: patientID,
+    MedicalSpecialistID: "",
+    TreatmentID: "",
     StartTime: "",
     EndTime: "",
+    Date: "",
     isPayedFor: false,
-    TreatmentID: "",
   });
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [paymentInProgress, setPaymentInProgress] = useState(false);
-  const [treatmentPrice, setTreatmentPrice] = useState(0);
-  const [treatmentDescription, setTreatmentDescription] = useState("");
+  const [treatments, setTreatments] = useState([]);
+  const [availableSpecialists, setAvailableSpecialists] = useState([]);
+
+  const [treatmentDetails, setTreatmentDetails] = useState({
+    TreatmentID: "",
+    TreatmentName: "",
+    Duration: "",
+    Price: "",
+    TreatmentType: "",
+  });
 
   const initialOptions = {
     "client-id": MY_PAYPAL_CLIENT_ID,
     currency: "ILS",
-    intent: "capture",
+    intent: "CAPTURE",
   };
 
   useEffect(() => {
     dispatch(fetchAppointments(patientID));
   }, [dispatch, patientID]);
+
+  useEffect(() => {
+    const fetchTreatments = async () => {
+      try {
+        const data = await fetchTreatmentAPI();
+        setTreatments(data);
+      } catch (error) {
+        setFeedback(error.message);
+      }
+    };
+
+    const fetchSpecialists = async () => {
+      try {
+        const data = await fetchAvailableSpecialists();
+        setAvailableSpecialists(data.specialists);
+      } catch (error) {
+        setFeedback(error.message);
+      }
+    };
+
+    fetchTreatments();
+    fetchSpecialists();
+  }, []);
 
   const toggleModal = useCallback((open) => {
     setFeedback("");
@@ -53,29 +116,39 @@ const AppointmentManagement = () => {
   }, []);
 
   const handleEventClick = (clickInfo) => {
-    // TODO: if startLocal and end Local are wrong we will use the formation from ManageShifts.js with 'Str'
-    const startLocal = new Date(clickInfo.event.startStr);
-    const endLocal = new Date(clickInfo.event.endStr);
+    const { event } = clickInfo;
+    if (!event) return;
+
+    const startLocal = new Date(event.startStr);
+    const endLocal = new Date(event.endStr);
 
     const formattedDate = format(startLocal, "yyyy-MM-dd");
     const formattedStartTime = format(startLocal, "HH:mm");
     const formattedEndTime = format(endLocal, "HH:mm");
 
+    const extendedProps = event.extendedProps || {};
+
     setAppointmentDetails({
-      Date: formattedDate,
+      MedicalSpecialistID: extendedProps.MedicalSpecialistID || "",
+      TreatmentID: extendedProps.TreatmentID || "",
       StartTime: formattedStartTime,
       EndTime: formattedEndTime,
-      isPayedFor: clickInfo.event.extendedProps.isPayedFor,
-      TreatmentID: clickInfo.event.extendedProps.TreatmentID || "",
+      Date: formattedDate,
+      isPayedFor: extendedProps.isPayedFor || false,
+      PatientID: patientID,
     });
 
     setSelectedAppointment({
-      id: clickInfo.event.id,
-      ...clickInfo.event.extendedProps,
+      AppointmentID: event.id,
+      ...extendedProps,
     });
 
-    if (clickInfo.event.extendedProps.TreatmentID) {
-      fetchTreatmentAPI(clickInfo.event.extendedProps.TreatmentID);
+    const treatment = treatments.find(
+      (t) => t.TreatmentID === extendedProps.TreatmentID
+    );
+
+    if (treatment) {
+      setTreatmentDetails(treatment);
     }
 
     toggleModal(true);
@@ -90,14 +163,24 @@ const AppointmentManagement = () => {
     const formattedEndTime = format(endDate, "HH:mm");
 
     setAppointmentDetails({
-      Date: formattedDate,
+      MedicalSpecialistID: "",
+      TreatmentID: "",
       StartTime: formattedStartTime,
+      Date: formattedDate,
       EndTime: formattedEndTime,
       isPayedFor: false,
-      TreatmentID: "",
+      PatientID: patientID,
     });
 
     resetSelectedAppointment();
+    setTreatmentDetails({
+      TreatmentID: "",
+      TreatmentName: "",
+      Duration: 0,
+      Price: 0,
+      TreatmentType: "",
+    });
+
     toggleModal(true);
   };
 
@@ -110,57 +193,45 @@ const AppointmentManagement = () => {
     setSelectedAppointment(null);
   }, [toggleModal]);
 
-  // const handleModalSubmit = async event => {
-  //   event.preventDefault();
-  //   try {
-  //     if (selectedAppointment && selectedAppointment.id) {
-  //       const updatedAppointment = await dispatch(
-  //         updateAppointment({
-  //           appointmentID: selectedAppointment.id,
-  //           appointmentDetails: {
-  //             ...appointmentDetails,
-  //             PatientID: patientID,
-  //           },
-  //         }),
-  //       ).unwrap();
-  //       setFeedback(updatedAppointment.message);
-  //     } else {
-  //       const newAppointment = await dispatch(
-  //         addAppointment({ ...appointmentDetails, PatientID: patientID }),
-  //       ).unwrap();
-  //       setFeedback(newAppointment.message);
-  //     }
-  //     dispatch(fetchAppointments(patientID));
-  //     setTimeout(() => {
-  //       handleModalClose();
-  //     }, 2000);
-  //   } catch (error) {
-  //     console.error('Error submitting appointment:', error);
-  //     setFeedback('Error updating appointment: ' + error.message);
-  //   }
-  // };
+  const dateValidation = (wrongDateFeedback) => {
+    const appointmentDate = new Date(
+      `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
+    );
+    const now = new Date();
+
+    if (appointmentDate - now < 24 * 60 * 60 * 1000) {
+      setFeedback(wrongDateFeedback);
+      return false;
+    }
+    return true;
+  };
 
   const handleModalSubmit = async (event) => {
     event.preventDefault();
+
+    if (
+      !dateValidation("Cannot modify an appointment less than 1 day before.")
+    ) {
+      return;
+    }
+
     if (!appointmentDetails.isPayedFor) {
       setPaymentInProgress(true);
       return;
     }
+
     try {
-      if (selectedAppointment && selectedAppointment.id) {
+      if (selectedAppointment && selectedAppointment.AppointmentID) {
         const updatedAppointment = await dispatch(
           updateAppointment({
-            appointmentID: selectedAppointment.id,
-            appointmentDetails: {
-              ...appointmentDetails,
-              PatientID: patientID,
-            },
+            AppointmentID: selectedAppointment.AppointmentID,
+            appointmentDetails: appointmentDetails,
           })
         ).unwrap();
         setFeedback(updatedAppointment.message);
       } else {
         const newAppointment = await dispatch(
-          addAppointment({ ...appointmentDetails, PatientID: patientID })
+          addAppointment(appointmentDetails)
         ).unwrap();
         setFeedback(newAppointment.message);
       }
@@ -169,40 +240,23 @@ const AppointmentManagement = () => {
         handleModalClose();
       }, 2000);
     } catch (error) {
-      console.error("Error submitting appointment:", error);
       setFeedback("Error updating appointment: " + error.message);
     }
   };
 
-  // const handleModalSubmit = async event => {
-  //   event.preventDefault();
-  //   try {
-  //     if (selectedAppointment && selectedAppointment.id) {
-  //       const updatedAppointment = await dispatch(
-  //         updateAppointment({
-  //           appointmentID: selectedAppointment.id,
-  //           appointmentDetails: {
-  //             ...appointmentDetails,
-  //             PatientID: patientID,
-  //           },
-  //         }),
-  //       ).unwrap();
-  //       setFeedback(updatedAppointment.message);
-  //     } else {
-  //       setPaymentInProgress(true);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting appointment:', error);
-  //     setFeedback('Error updating appointment: ' + error.message);
-  //   }
-  // };
-
   const handleRemoveAppointment = useCallback(
     async (event) => {
       event.preventDefault();
+
+      if (
+        !dateValidation("Cannot delete an appointment less than 1 day before.")
+      ) {
+        return;
+      }
+
       try {
         const appointmentDeleted = await dispatch(
-          deleteAppointment(selectedAppointment.id)
+          deleteAppointment(selectedAppointment.AppointmentID)
         ).unwrap();
         dispatch(fetchAppointments(patientID));
         setFeedback(appointmentDeleted.message);
@@ -210,26 +264,11 @@ const AppointmentManagement = () => {
           handleModalClose();
         }, 1000);
       } catch (error) {
-        console.error("Error deleting appointment:", error);
         setFeedback("Error deleting appointment: " + error.message);
       }
     },
     [selectedAppointment, dispatch, patientID, handleModalClose]
   );
-
-  // const handlePaymentSuccess = async details => {
-  //   try {
-  //     const newAppointment = await dispatch(
-  //       addAppointment({ ...appointmentDetails, PatientID: patientID }),
-  //     ).unwrap();
-  //     setFeedback('Payment successful! ' + newAppointment.message);
-  //     dispatch(fetchAppointments(patientID));
-  //     handleModalClose();
-  //   } catch (error) {
-  //     console.error('Error creating appointment:', error);
-  //     setFeedback('Error creating appointment: ' + error.message);
-  //   }
-  // };
 
   const handlePaymentSuccess = (details) => {
     setFeedback("Payment successful!");
@@ -238,30 +277,59 @@ const AppointmentManagement = () => {
       isPayedFor: true,
     }));
     setPaymentInProgress(false);
-    handleModalSubmit(); // Proceed with appointment creation after successful payment
   };
 
   const handlePaymentError = (error) => {
-    console.error("Payment Error:", error);
     setFeedback("Payment failed. Please try again.");
     setPaymentInProgress(false);
   };
 
-  const fetchTreatmentPrice = async (treatmentID) => {
-    try {
-      const treatment = await fetchTreatmentAPI(treatmentID);
-      setTreatmentPrice(treatment.Price);
-      setTreatmentDescription(treatment.TreatmentName);
-    } catch (error) {
-      console.error("Error fetching treatment price:", error);
-      setFeedback("Error fetching treatment price");
+  const handleTreatmentSelect = (selectedTreatment) => {
+    if (!selectedTreatment) {
+      setTreatmentDetails({
+        TreatmentID: "",
+        TreatmentName: "",
+        Duration: "",
+        Price: "",
+        TreatmentType: "",
+      });
+      setFeedback("Must provide a Treatment name to submit the appointment");
+      return;
     }
+    setFeedback("");
+
+    const [hours, minutes, seconds] = selectedTreatment.Duration.split(":").map(Number);
+
+    const startTime = new Date(
+      `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
+    );
+    
+    const endTime = new Date(startTime);
+    endTime.setHours(endTime.getHours() + hours);
+    endTime.setMinutes(endTime.getMinutes() + minutes);
+    endTime.setSeconds(endTime.getSeconds() + seconds);
+    const formattedEndTime = formatToHHMMSS(endTime);
+
+
+    setAppointmentDetails((prev) => ({
+      ...prev,
+      TreatmentID: selectedTreatment.TreatmentID,
+      EndTime: formattedEndTime,
+    }));
+    setTreatmentDetails(selectedTreatment);
   };
 
-  if (loading) return <div>Loading...</div>;
+  const handleSpecialistSelect = (event) => {
+    const specialistId = event.target.value;
+    setAppointmentDetails((prev) => ({
+      ...prev,
+      MedicalSpecialistID: specialistId,
+    }));
+  };
 
+  //: TODO: 1) handle calling the api's for the search field
+  //: TODO: 2) we will need to Do a JOIN on medical specialists table, Users(information: first,last names. Id's), treatments (Treatments.TreatmentName = MedicalSpecialist.specialization)
   const handleSearch = (query) => {
-    // TODO: Implement search functionality to find medical specialists based on the query if he is available
     console.log(`Search query: ${query}`);
   };
 
@@ -270,43 +338,63 @@ const AppointmentManagement = () => {
     justifyContent: "space-around",
   };
 
+  // Ensure unique keys and proper filtering
+  // const availableSpecialistsOptions = [...new Set(availableSpecialists
+  //   .filter(
+  //     (specialist) =>
+  //       specialist.Specialization === treatmentDetails.TreatmentName
+  //   )
+  //   .map((specialist) => (
+  //     <option key={specialist.ID} value={specialist.ID}>
+  //       Dr. {specialist.FirstName} {specialist.LastName}
+  //     </option>
+  //   )))];
+
+  const availableSpecialistsOptions = availableSpecialists
+  .filter((specialist) => specialist.Specialization === treatmentDetails.TreatmentName)
+  .map((specialist, index) => (
+    <option key={`${specialist.ID}-${index}`} value={specialist.ID}>
+      Dr. {specialist.FirstName} {specialist.LastName}
+    </option>
+  ));
+  if (loading) return <div>Loading...</div>;
+
   return (
     <PayPalScriptProvider options={initialOptions}>
       <article>
-        <div style={searchBarsStyle}>
+        <section style={searchBarsStyle}>
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Medical specialists name'}
+            placeholder={"Medical specialists name"}
           />
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Medical specialist spoken language'}
+            placeholder={"Medical specialist spoken language"}
           />
           <SearchBar
             onSearch={handleSearch}
-            placeholder={'Medical specialist Specialization'}
+            placeholder={"Medical specialist Specialization"}
           />
-        </div>
+        </section>
         <Calendar
           handleDateSelect={handleDateSelect}
           handleEventClick={handleEventClick}
-          events={appointments}
         />
         {isModalOpen && (
           <Modal open={isModalOpen} onClose={handleModalClose}>
             <h2>
-              {selectedAppointment?.id
-                ? 'Edit Appointment'
-                : 'Create Appointment'}
+              {selectedAppointment?.AppointmentID
+                ? "Edit Appointment"
+                : "Create Appointment"}
             </h2>
             <section>
               <label>
                 Date:
                 <input
-                  type='date'
+                  type="date"
                   value={appointmentDetails.Date}
-                  onChange={e =>
-                    setAppointmentDetails(prev => ({
+                  onChange={(e) =>
+                    setAppointmentDetails((prev) => ({
                       ...prev,
                       Date: e.target.value,
                     }))
@@ -318,10 +406,10 @@ const AppointmentManagement = () => {
               <label>
                 Start Time:
                 <input
-                  type='time'
+                  type="time"
                   value={appointmentDetails.StartTime}
-                  onChange={e =>
-                    setAppointmentDetails(prev => ({
+                  onChange={(e) =>
+                    setAppointmentDetails((prev) => ({
                       ...prev,
                       StartTime: e.target.value,
                     }))
@@ -333,10 +421,10 @@ const AppointmentManagement = () => {
               <label>
                 End Time:
                 <input
-                  type='time'
+                  type="time"
                   value={appointmentDetails.EndTime}
-                  onChange={e =>
-                    setAppointmentDetails(prev => ({
+                  onChange={(e) =>
+                    setAppointmentDetails((prev) => ({
                       ...prev,
                       EndTime: e.target.value,
                     }))
@@ -347,43 +435,62 @@ const AppointmentManagement = () => {
             <section>
               <label>
                 Treatment:
-                <select
-                  value={appointmentDetails.TreatmentID}
-                  onChange={e => {
-                    const treatmentID = e.target.value;
-                    setAppointmentDetails(prev => ({
-                      ...prev,
-                      TreatmentID: treatmentID,
-                    }));
-                    fetchTreatmentPrice(treatmentID);
-                  }}
-                >
-                  <option value="">Select Treatment</option>
-                  {/* Populate options with treatments from your database */}
-                </select>
+                <TreatmentSelector
+                  treatments={treatments}
+                  onTreatmentSelect={handleTreatmentSelect}
+                />
               </label>
+              {treatmentDetails.TreatmentName && (
+                <div>
+                  <p>
+                    <strong>Price:</strong> {treatmentDetails.Price} ILS
+                  </p>
+                  <p>
+                    <strong>Duration:</strong> {treatmentDetails.Duration}{" "}
+                    minutes
+                  </p>
+                  <p>
+                    <strong>Treatment Name:</strong>{" "}
+                    {treatmentDetails.TreatmentName}
+                  </p>
+                </div>
+              )}
             </section>
-            {paymentInProgress && (
-              <PayPalPayment
-                amount={treatmentPrice}
-                description={treatmentDescription}
-                onSuccess={handlePaymentSuccess}
-                onFailure={handlePaymentError}
-              />
+            {treatmentDetails.TreatmentName && (
+              <section>
+                <label>
+                  Specialist:
+                  <select onChange={handleSpecialistSelect} defaultValue="">
+                    <option value="" disabled>
+                      Select a specialist
+                    </option>
+                    {availableSpecialistsOptions}
+                  </select>
+                </label>
+              </section>
             )}
+            {treatmentDetails.TreatmentName &&
+              appointmentDetails.MedicalSpecialistID && (
+                <PayPalPayment
+                  amount={treatmentDetails.Price}
+                  description={`Appointment for ${treatmentDetails.TreatmentName}`}
+                  onSuccess={handlePaymentSuccess}
+                  onFailure={handlePaymentError}
+                />
+              )}
             {!paymentInProgress && (
               <>
                 <Button
-                  label={'Save'}
-                  type={'submit'}
+                  label={"Save"}
+                  type={"submit"}
                   handleClick={handleModalSubmit}
                 />
-                <Button label={'Cancel'} handleClick={handleModalClose} />
+                <Button label={"Cancel"} handleClick={handleModalClose} />
               </>
             )}
-            {selectedAppointment?.id && (
+            {selectedAppointment?.AppointmentID && (
               <Button
-                label={'Remove Appointment'}
+                label={"Remove Appointment"}
                 handleClick={handleRemoveAppointment}
               />
             )}
@@ -394,4 +501,33 @@ const AppointmentManagement = () => {
     </PayPalScriptProvider>
   );
 };
+
 export default AppointmentManagement;
+// {treatmentDetails.TreatmentName &&
+  //               appointmentDetails.MedicalSpecialistID && (
+  //                 <PayPalPayment
+  //                   amount={treatmentDetails.Price}
+  //                   description={`Appointment for ${treatmentDetails.TreatmentName}`}
+  //                   onSuccess={handlePaymentSuccess}
+  //                   onFailure={handlePaymentError}
+  //                 />
+  //               )}
+  //             {!paymentInProgress && (
+  //               <>
+  //                 <Button
+  //                   label={"Save"}
+  //                   type={"submit"}
+  //                   handleClick={handleModalSubmit}
+  //                 />
+  //                 <Button label={"Cancel"} handleClick={handleModalClose} />
+  //               </>
+  //             )}
+  //             {selectedAppointment?.AppointmentID && (
+  //               <Button
+  //                 label={"Remove Appointment"}
+  //                 handleClick={handleRemoveAppointment}
+  //               />
+  //             )}
+  //             {feedback && <p>{feedback}</p>}
+  //           </Modal>
+          // )}

@@ -734,3 +734,213 @@
   Line: 73
   ---------------------------------------------------
   
+  2024-06-18T16:13:33.140Z - Error: getAppointmentReportByPatient is not a function
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\getAppointmentsByPatientController.js
+  Function: getAppointmentReportByPatientController
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-07-15T16:50:27.489Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T16:50:47.457Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T16:52:47.431Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T16:53:07.419Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:06.348Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:26.360Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:27.766Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:27.796Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:40.939Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-15T17:37:40.968Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-16T15:51:51.956Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T13:37:26.578Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T13:37:46.587Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T13:37:48.365Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T13:37:48.389Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:27:27.647Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:27:47.676Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:30:15.756Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:30:15.777Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:30:49.934Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:31:09.969Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:31:14.168Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:31:14.197Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:39:59.642Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:40:30.149Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:40:50.154Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:40:55.436Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-17T14:40:55.462Z - Error: Invalid status code: Available specialists fetched successfully
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 352
+  ---------------------------------------------------
+  
+  2024-07-23T16:20:57.281Z - Error: Failed to send email: getaddrinfo ENOTFOUND smtp.gmail.com
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\services\emailService.js
+  Function: Object.sendEmail
+  Line: 39
+  ---------------------------------------------------
+  

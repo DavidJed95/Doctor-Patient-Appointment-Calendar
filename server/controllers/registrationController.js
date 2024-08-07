@@ -62,7 +62,7 @@ exports.register = async (req, res, next) => {
       const emailContent = `<p>Hi ${firstName} ${lastName},</p>
       <p>Thank you for registering. Please click on the following link to verify your email:</p>
       <p><a href="http://localhost:3000/verify-email/${emailVerificationToken}">Verify Email</a></p>
-      <p>Best regards,<br>The Team</p>`;
+      <p>Best regards,<br>Doctor Patient Appointment Calendar</p>`;
 
       await emailService.sendEmail(
         email,

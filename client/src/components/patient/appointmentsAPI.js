@@ -45,3 +45,12 @@ export const deleteAppointmentAPI = async appointmentID => {
   }
   return response.json();
 };
+
+export const fetchAvailableSpecialists = async () => {
+  const response = await fetch(`${BASE_URL}/appointment/available-specialists`)
+  if (!response.ok) {
+    const responseData = await response.json();
+    throw new Error(responseData.message || 'Error loading available specialists.');
+  }
+  return response.json();
+}

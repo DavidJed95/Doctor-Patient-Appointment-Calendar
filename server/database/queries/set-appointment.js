@@ -1,12 +1,11 @@
 'use strict';
 const doQuery = require('../query');
-const emailService = require('../../services/emailService');
-const getUserByID = require('./get-user-by-id')
 
 /**
- * Create an appointment
- * @param {*} appointment 
- * @returns 
+ * Create an appointment in the database
+ * @param {*} appointment - The appointment details to create
+ * @param {*} paymentSuccessful - a boolean indicating whether the appointment was successful
+ * @returns status of the appointment creation and a feedback to the user
  */
 async function setAppointment(appointment, paymentSuccessful = false) {
   const {
@@ -24,42 +23,20 @@ async function setAppointment(appointment, paymentSuccessful = false) {
   }
 
   // Create a new appointment
-   const insertSql =
-     'INSERT INTO Appointments (ID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndingTime, Date, isPayedFor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-   await doQuery(insertSql, [
-     appointmentId,
-     patientId,
-     medicalSpecialistId,
-     treatmentId,
-     startTime,
-     endTime,
-     date,
-     paymentSuccessful,
-   ]);
+  const insertSql =
+    'INSERT INTO Appointments (ID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndingTime, Date, isPayedFor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  await doQuery(insertSql, [
+    appointmentId,
+    patientId,
+    medicalSpecialistId,
+    treatmentId,
+    startTime,
+    endTime,
+    date,
+    paymentSuccessful,
+  ]);
 
-  // Fetch the newly created appointment details
-  const selectSql = 'SELECT * FROM Appointments WHERE ID = ?';
-  const [createdAppointment] = await doQuery(selectSql, [appointmentId]);
-
-  // Fetch the user details of the patient and medical specialist
-  const patient = await getUserByID(patientId);
-  const specialist = await getUserByID(medicalSpecialistId);
-
-  // Send email with appointment details to the user
-  const emailContent = `Appointment details:\nDate: ${createdAppointment.Date}\nTime: ${createdAppointment.StartTime}-${createdAppointment.EndingTime}\nTreatment: ${createdAppointment.TreatmentID}`;
-
-  emailService.sendEmail(
-    patient.Email,
-    'Appointment Confirmation',
-    emailContent,
-  );
-  emailService.sendEmail(
-    specialist.Email,
-    'Appointment Confirmation',
-    emailContent,
-  );
-
-  return { status: 'success', message: 'Appointment set successfully' };
+  return { status: 'success', message: 'Appointment created successfully' };
 }
 
 module.exports = setAppointment;

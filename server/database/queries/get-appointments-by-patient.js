@@ -35,7 +35,7 @@ WHERE
   if (appointments.length === 0) {
     return {
       status: 'no-data',
-      message: 'No appointments found for the medical specialist.',
+      message: 'No appointments found for the patient.',
       appointments: [],
     };
   }

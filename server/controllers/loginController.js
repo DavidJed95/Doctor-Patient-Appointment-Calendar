@@ -1,37 +1,30 @@
-'use strict';
-const { login } = require('../database/queries/all-queries');
-const { generateLoginToken } = require('../services/tokenService');
+"use strict";
+const { login } = require("../database/queries/all-queries");
+const { generateLoginToken } = require("../services/tokenService");
 exports.login = async (req, res, next) => {
   const userInput = req.body;
 
   if (!userInput.id && !userInput.password) {
     return res.status(401).json({
-      message: 'You must enter both id and password to login',
+      message: "You must enter both id and password, in order to login",
     });
   }
 
-  if (!userInput.id) {
+  if (!userInput.id || !userInput.password) {
     return res.status(401).json({
-      message:
-        'You forgot to enter your user id correctly as when you registered',
+      message: "Missing user id or password",
     });
   }
 
-  if (!userInput.password) {
-    return res.status(401).json({
-      message:
-        'You forgot to enter your user password correctly as when you registered',
-    });
-  }
   try {
     const result = await login(userInput);
 
-    if (result.status === 'success') {
+    if (result.status === "success") {
       // Check if the user's email is verified
       if (result.user.isUserVerified === 0) {
         return res.status(401).json({
-          message: 'Email not verified. Please verify your email first.',
-          redirectTo: '/',
+          message: "Email not verified. Please verify your email first.",
+          redirectTo: "/",
         });
       }
 
@@ -54,11 +47,11 @@ exports.login = async (req, res, next) => {
       return res.status(200).json({
         message: result.message,
         user: { ...req.session.user },
-        redirectTo: '/home', // Redirect to the home page after successful login
+        redirectTo: "/home", // Redirect to the home page after successful login
       });
     } else {
       // Login failed, sending a response indicating the failure reason
-      return res.status(401).json({ message: result.message, redirectTo: '/' });
+      return res.status(401).json({ message: result.message, redirectTo: "/" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

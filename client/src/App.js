@@ -1,3 +1,5 @@
+import { BASE_URL } from './config';
+
 // React imports
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -32,7 +34,7 @@ function App() {
   useEffect(() => {
     async function fetchLoginStatus() {
       try {
-        const response = await fetch('http://localhost:8000/auth/check-login');
+        const response = await fetch(`${BASE_URL}/auth/check-login`);
         const data = await response.json();
 
         dispatch(updateLoginStatus(data.isLoggedIn));

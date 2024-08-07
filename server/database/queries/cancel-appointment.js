@@ -1,6 +1,5 @@
-'use strict';
-const doQuery = require('../query');
-const sendCancellationEmail  = require('../../services/emailService');
+"use strict";
+const doQuery = require("../query");
 
 /**
  * Cancel an existing appointment.
@@ -10,50 +9,37 @@ const sendCancellationEmail  = require('../../services/emailService');
 async function cancelAppointment(appointmentId) {
   // Check if the appointment exists
   const appointmentCancelQuery =
-    'SELECT * FROM appointments WHERE appointmentId = ?';
+    "SELECT * FROM appointments WHERE AppointmentID = ?";
   const [appointment] = await doQuery(appointmentCancelQuery, [appointmentId]);
 
   if (!appointment) {
-    return { status: 'failure', message: 'Appointment not found' };
+    return { status: "failure", message: "Appointment not found" };
   }
 
   // Check if the appointment can be canceled (at least one day before the appointment)
   const today = new Date();
-  const appointmentDate = new Date(appointment.date);
+  const appointmentDate = new Date(appointment.Date);
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours
   const differenceInDays = Math.floor(
-    (appointmentDate - today) / oneDayInMilliseconds,
+    (appointmentDate - today) / oneDayInMilliseconds
   );
 
   if (differenceInDays < 1) {
     return {
-      status: 'failure',
-      message: 'Appointment cannot be canceled less than one day before',
+      status: "failure",
+      message: "Appointment cannot be canceled less than one day before",
     };
   }
 
-  // Fetch the user details of the patient and medical specialist
-  const patient = await getUserByID(appointment.PatientId);
-  const specialist = await getUserByID(appointment.MedicalSpecialistId);
+  // Delete the appointment
+  const deleteQuery = "DELETE FROM appointments WHERE AppointmentID = ?";
+  await doQuery(deleteQuery, [appointmentId]);
 
-  // Update the necessary fields to indicate cancellation (e.g., isCanceled flag or canceledDate field)
-  const updateQuery =
-    'UPDATE appointments SET isCanceled = ? WHERE appointmentId = ?';
-  await doQuery(updateQuery, [true, appointmentId]);
-
-  // Send cancellation emails to the patient and medical specialist
-  sendCancellationEmail.sendEmail(
-    patient.Email,
-    'Appointment Cancellation',
+  return {
+    status: "success",
+    message: "Appointment canceled successfully",
     appointment,
-  );
-  sendCancellationEmail.sendEmail(
-    specialist.Email,
-    'Appointment Cancellation',
-    appointment,
-  );
-
-  return { status: 'success', message: 'Appointment canceled successfully' };
+  };
 }
 
 module.exports = cancelAppointment;

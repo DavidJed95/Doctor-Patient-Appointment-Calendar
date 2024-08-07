@@ -22,7 +22,7 @@ const SearchBar = ({ onSearch, placeholder }) => {
   return (
     <div style={searchBarSpacing}>
       <input style={searchBarInputWidth}
-        type={'text'}
+        type={'search'}
         value={query}
         onChange={handleInputChange}
         placeholder={placeholder}

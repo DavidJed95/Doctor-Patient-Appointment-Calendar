@@ -1,17 +1,17 @@
-'use strict'
-const doQuery = require('../query');
+"use strict";
+const doQuery = require("../query");
 
-const { format, parseISO } = require('date-fns');
+const { format, parseISO } = require("date-fns");
 
 // Additional functions
 function getDayOfWeek(dateString) {
-  const dayName = format(parseISO(dateString), 'EEEE'); // 'Monday', 'Tuesday', ...
+  const dayName = format(parseISO(dateString), "EEEE"); // 'Monday', 'Tuesday', ...
   return dayName;
 }
 /**
  * Method creates a new shift
  * @param {*} shift - shift parameter which is created
- * @returns 
+ * @returns
  */
 async function createShift(shift) {
   try {
@@ -28,13 +28,13 @@ async function createShift(shift) {
     const newShift = await doQuery(shiftSql, shiftDetails);
     return newShift;
   } catch (error) {
-    console.error('Error creating shift:', error);
-    return { error: 'Error creating shift.' };
+    console.error("Error creating shift:", error);
+    return { error: "Error creating shift." };
   }
 }
 
 /**
- * Method updates/ modifies the shift which already exists 
+ * Method updates/ modifies the shift which already exists
  * @param {*} shiftID - the id of the shift which being modified
  * @param {*} shift - the whole parameters of the shift to modify
  * @returns a modified shift
@@ -51,11 +51,11 @@ async function updateShift(shiftID, shift) {
       shift.ShiftDate,
       shiftID,
     ];
-    const updatedShift = await doQuery(sql, shiftDetails)
+    const updatedShift = await doQuery(sql, shiftDetails);
     return updatedShift;
   } catch (error) {
-    console.error('Error updating shift:', error);
-    return { error: 'Error updating shift.' };
+    console.error("Error updating shift:", error);
+    return { error: "Error updating shift." };
   }
 }
 
@@ -69,8 +69,8 @@ async function deleteShift(shiftID) {
     const result = await doQuery(sql, [shiftID]);
     return result;
   } catch (error) {
-    console.error('Error deleting shift:', error);
-    return { error: 'Error deleting shift.' };
+    console.error("Error deleting shift:", error);
+    return { error: "Error deleting shift." };
   }
 }
 
@@ -87,9 +87,38 @@ async function getShiftsForSpecialist(medicalSpecialistID) {
     and this is these are the shifts: ${result}`);
     return result; // This should be an array if doQuery is implemented correctly.
   } catch (error) {
-    console.error('Error fetching shifts for specialist:', error);
-    return { error: 'Error fetching shifts for specialist.' };
+    console.error("Error fetching shifts for specialist:", error);
+    return { error: "Error fetching shifts for specialist." };
   }
+}
+
+/**
+ * Get available specialists
+ * @returns { status, message, specialists }
+ */
+async function getAvailableSpecialists() {
+  const selectSql = `
+    SELECT MS.ID, U.FirstName, U.LastName, MS.Specialization, SH.ShiftDate, SH.StartTime, SH.EndTime
+    FROM MedicalSpecialists MS
+    JOIN Users U ON MS.ID = U.ID
+    JOIN SpecialistHours SH ON MS.ID = SH.MedicalSpecialistID
+  `;
+
+  const specialists = await doQuery(selectSql);
+
+  if (specialists.length === 0) {
+    return {
+      status: "no-data",
+      message: "No available specialists found.",
+      specialists: [],
+    };
+  }
+
+  return {
+    status: "success",
+    message: "Available specialists fetched successfully",
+    specialists: specialists,
+  };
 }
 
 module.exports = {
@@ -97,4 +126,5 @@ module.exports = {
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
+  getAvailableSpecialists,
 };

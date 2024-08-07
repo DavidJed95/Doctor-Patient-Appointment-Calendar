@@ -3,7 +3,8 @@ const paypal = require('./paypal');
 
 async function createPaymentMiddleware(req, res, next) {
   try {
-    // Create a Paypal  payment object
+    const { amount, description } = req.body;
+
     const payment = {
       intent: 'sale',
       payer: {
@@ -16,15 +17,14 @@ async function createPaymentMiddleware(req, res, next) {
       transactions: [
         {
           amount: {
-            total: '100.00', // TODO: Total amount for the appointment (replace with actual Treatment Price)
+            total: amount,
             currency: 'ILS',
           },
-          description: 'Appointment Payment',
+          description: description,
         },
       ],
     };
 
-    // Create the PayPal payment
     const createPayment = await new Promise((resolve, reject) => {
       paypal.payment.create(payment, (error, payment) => {
         if (error) {
@@ -34,8 +34,9 @@ async function createPaymentMiddleware(req, res, next) {
         }
       });
     });
-    // Attach the payment object to the request for later use
+
     req.payment = createPayment;
+    next();
   } catch (error) {
     next(error);
   }

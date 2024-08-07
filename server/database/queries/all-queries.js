@@ -21,6 +21,7 @@ const {
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
+  getAvailableSpecialists
 } = require("./medical-specialist-shifts");
 
 // Fetching Treatment details
@@ -52,6 +53,7 @@ module.exports = {
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
+  getAvailableSpecialists,
   getTreatments,
   setAppointment,
   cancelAppointment,

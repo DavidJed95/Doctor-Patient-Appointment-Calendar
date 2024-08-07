@@ -1,13 +1,12 @@
 import React, { useRef } from "react";
-
 import { useSelector } from "react-redux";
-
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
 import { utcToZonedTime, format } from "date-fns-tz";
+// import { getDay } from 'date-fns';
+import "./Calendar.module.css";
 
 const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const calendarRef = useRef(null);
@@ -16,37 +15,23 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const user = useSelector((state) => state.user.userInfo);
   const timeZone = "Asia/Jerusalem";
 
-  // Simplified mapping, now converting to and assuming local time zone
   const processedEvents = events
     .map((event) => {
       if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime)
         return null;
 
       const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
-
-      if (isNaN(shiftDateTime)) {
-        console.error("Invalid shift date time: ", event.ShiftDate);
-        return null; // Skip this event if the date is invalid
-      }
-
       const startDate = format(shiftDateTime, "yyyy-MM-dd", { timeZone });
       const startDateTime = `${startDate}T${event.StartTime}`;
       const endDateTime = `${startDate}T${event.EndTime}`;
-
-      if (isNaN(new Date(startDateTime)) || isNaN(new Date(endDateTime))) {
-        console.error(
-          "Invalid start or end date time",
-          startDateTime,
-          endDateTime
-        );
-        return null; // Skip this event if start or end times are invalid
-      }
 
       return {
         id: event.SpecialistHourID,
         title: event.Type,
         start: startDateTime,
         end: endDateTime,
+        extendedProps: { ...event },
+        className: event.isAvailable ? "available" : "unavailable", // Color coding for availability
       };
     })
     .filter((event) => event !== null);
@@ -56,7 +41,9 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
       id: appointment.id,
       title: appointment.TreatmentName,
       start: `${appointment.Date}T${appointment.StartTime}`,
-      end: `${appointment.Date}T${appointment.EndingTime}`,
+      end: `${appointment.Date}T${appointment.EndTime}`,
+      extendedProps: { ...appointment },
+      className: "appointment", // Color coding for booked appointments
     }))
     .filter((appointment) => appointment !== null);
 
@@ -71,6 +58,9 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
       ref={calendarRef}
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       initialView="timeGridWeek"
+      validRange={(nowDate) => {
+        return { start: nowDate };
+      }}
       nowIndicator
       headerToolbar={{
         start: "today prev,next",
@@ -79,20 +69,21 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
       }}
       selectable={true}
       editable={true}
+      allDaySlot={false}
       events={displayEvents}
       select={handleDateSelect}
       eventClick={handleEventClick}
-      height="59dvh"
+      height="90dvh"
       slotLabelFormat={{
-        hour: "2-digit", // 2-digit hour representation
-        minute: "2-digit", // 2-digit minute representation
-        hour12: false, // Use 24-hour format
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
       }}
       dayHeaderFormat={{
-        weekday: "long", // Full name of the day of the week
-        day: "2-digit", // 2-digit day of the month
-        month: "numeric", // Numeric month (without leading zeros)
-        omitCommas: true, // Omit commas in the format
+        weekday: "long",
+        day: "2-digit",
+        month: "numeric",
+        omitCommas: true,
       }}
       locale="en-IL"
     />

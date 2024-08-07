@@ -28,7 +28,7 @@ exports.updateProfile = async (req, res, next) => {
       // Send email verification email to the user
       const emailContent = `<p>Hi ${result.user.FirstName} ${result.user.LastName},</p>
       <p>You have updated your user profile successfully.</p>
-      <p>Best regards,<br>The Team</p>`;
+      <p>Best regards,<br>Doctor Patient Appointment Calendar</p>`;
       await emailService.sendEmail(
         result.user.Email,
         'Updated User Profile',

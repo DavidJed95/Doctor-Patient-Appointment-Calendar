@@ -1,24 +1,19 @@
 'use strict';
 
 const {
-  getAppointmentReportByPatient,
+  getAppointmentsByPatient,
 } = require('../database/queries/all-queries');
 
 /**
- * Get appointment report for a specific patient within a date range.
+ * Get appointments of a specific patient with patientId.
  * @param {*} req - Express request object
  * @param {*} res - Express response object
  */
-async function getAppointmentReportByPatientController(req, res, next) {
+async function getAppointmentsByPatientController(req, res, next) {
   const { patientId } = req.params;
-  const { startDate, endDate } = req.query;
 
   try {
-    const result = await getAppointmentReportByPatient(
-      patientId,
-      startDate,
-      endDate,
-    );
+    const result = await getAppointmentsByPatient(patientId);
 
     return res.status(200).json(result);
   } catch (error) {
@@ -26,4 +21,4 @@ async function getAppointmentReportByPatientController(req, res, next) {
   }
 }
 
-module.exports = getAppointmentReportByPatientController;
+module.exports = getAppointmentsByPatientController;
