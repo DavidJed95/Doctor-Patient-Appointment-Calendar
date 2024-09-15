@@ -61,6 +61,8 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
       validRange={(nowDate) => {
         return { start: nowDate };
       }}
+      slotMinTime="08:00"
+      slotMaxTime="17:00"
       nowIndicator
       headerToolbar={{
         start: "today prev,next",
@@ -86,6 +88,7 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
         omitCommas: true,
       }}
       locale="en-IL"
+      selectMirror
     />
   );
 };

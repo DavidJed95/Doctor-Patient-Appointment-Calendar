@@ -1,7 +1,4 @@
 {
   "cSpell.words": ["Jedwabsky"],
-  "git.ignoreLimitWarning": true,
-  "accessibility.signalOptions": {
-    "volume": 0
-  }
+  "git.ignoreLimitWarning": true
 }

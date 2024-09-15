@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { format, addMinutes } from "date-fns";
+import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Calendar from "../calendar/Calendar";
 import Modal from "../common/Modal";
-import Button from "../button/Button";
+import Button from "../common/Button";
 import SearchBar from "./SearchBar";
 import {
   fetchAppointments,
@@ -14,6 +14,7 @@ import {
 } from "../../redux/reducers/AppointmentsSlice";
 import PayPalPayment from "../payPalPayment/PayPalPayment";
 import TreatmentSelector from "../treatments/TreatmentSelector";
+import TimeInput from '../common/TimeInput';
 import { fetchTreatmentAPI } from "../treatments/treatmentsAPI";
 import { fetchAvailableSpecialists } from "./appointmentsAPI";
 import { MY_PAYPAL_CLIENT_ID } from "../../config";
@@ -44,10 +45,15 @@ const addMinutesToDate = (date, minutes) => {
  * @returns the formatted String representation to HH:MM:SS
  */
 const formatToHHMMSS = (date) => {
-  return date.toTimeString().split(' ')[0];
+  return date.toTimeString().split(" ")[0];
 };
 
 const AppointmentManagement = () => {
+  const today = new Date();
+const minDate = new Date(today.setDate(today.getDate())); // Disable today and past dates
+const minTime = new Date().setHours(8, 0, 0, 0); // Start times from 08:00
+const maxStartTime = new Date().setHours(16, 30, 0, 0); // Start times up to 16:30
+const maxEndTime = new Date().setHours(17, 0, 0, 0); // End times up to 17:00
   const dispatch = useDispatch();
   const { ID: patientID } = useSelector((state) => state.user.userInfo);
   const appointments = useSelector((state) => state.appointments.appointments);
@@ -114,6 +120,7 @@ const AppointmentManagement = () => {
     setFeedback("");
     setIsModalOpen(open);
   }, []);
+
 
   const handleEventClick = (clickInfo) => {
     const { event } = clickInfo;
@@ -298,18 +305,18 @@ const AppointmentManagement = () => {
     }
     setFeedback("");
 
-    const [hours, minutes, seconds] = selectedTreatment.Duration.split(":").map(Number);
+    const [hours, minutes, seconds] =
+      selectedTreatment.Duration.split(":").map(Number);
 
     const startTime = new Date(
       `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
     );
-    
+
     const endTime = new Date(startTime);
     endTime.setHours(endTime.getHours() + hours);
     endTime.setMinutes(endTime.getMinutes() + minutes);
     endTime.setSeconds(endTime.getSeconds() + seconds);
     const formattedEndTime = formatToHHMMSS(endTime);
-
 
     setAppointmentDetails((prev) => ({
       ...prev,
@@ -325,6 +332,8 @@ const AppointmentManagement = () => {
       ...prev,
       MedicalSpecialistID: specialistId,
     }));
+    //: TODO:  Modify handleSpecialistSelect to fetch the available shifts for the selected specialist and update the available dates. from medicalspecialist shiftsAPI.js
+  
   };
 
   //: TODO: 1) handle calling the api's for the search field
@@ -338,25 +347,23 @@ const AppointmentManagement = () => {
     justifyContent: "space-around",
   };
 
-  // Ensure unique keys and proper filtering
-  // const availableSpecialistsOptions = [...new Set(availableSpecialists
-  //   .filter(
-  //     (specialist) =>
-  //       specialist.Specialization === treatmentDetails.TreatmentName
-  //   )
-  //   .map((specialist) => (
-  //     <option key={specialist.ID} value={specialist.ID}>
-  //       Dr. {specialist.FirstName} {specialist.LastName}
-  //     </option>
-  //   )))];
+  const uniqueSpecialists = Array.from(
+    new Set(availableSpecialists.map((specialist) => specialist.ID))
+  ).map((id) => {
+    return availableSpecialists.find((specialist) => specialist.ID === id);
+  });
 
-  const availableSpecialistsOptions = availableSpecialists
-  .filter((specialist) => specialist.Specialization === treatmentDetails.TreatmentName)
-  .map((specialist, index) => (
-    <option key={`${specialist.ID}-${index}`} value={specialist.ID}>
-      Dr. {specialist.FirstName} {specialist.LastName}
-    </option>
-  ));
+  const availableSpecialistsOptions = uniqueSpecialists
+    .filter(
+      (specialist) =>
+        specialist.Specialization === treatmentDetails.TreatmentName
+    )
+    .map((specialist) => (
+      <option key={specialist.ID} value={specialist.ID}>
+        Dr. {specialist.FirstName} {specialist.LastName}
+      </option>
+    ));
+console.log(`Available Specialists: ${availableSpecialists.map((specialist) => console.log(specialist))}`)
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -388,49 +395,34 @@ const AppointmentManagement = () => {
                 : "Create Appointment"}
             </h2>
             <section>
-              <label>
-                Date:
-                <input
-                  type="date"
-                  value={appointmentDetails.Date}
-                  onChange={(e) =>
-                    setAppointmentDetails((prev) => ({
-                      ...prev,
-                      Date: e.target.value,
-                    }))
-                  }
-                />
-              </label>
-            </section>
-            <section>
-              <label>
-                Start Time:
-                <input
-                  type="time"
-                  value={appointmentDetails.StartTime}
-                  onChange={(e) =>
-                    setAppointmentDetails((prev) => ({
-                      ...prev,
-                      StartTime: e.target.value,
-                    }))
-                  }
-                />
-              </label>
-            </section>
-            <section>
-              <label>
-                End Time:
-                <input
-                  type="time"
-                  value={appointmentDetails.EndTime}
-                  onChange={(e) =>
-                    setAppointmentDetails((prev) => ({
-                      ...prev,
-                      EndTime: e.target.value,
-                    }))
-                  }
-                />
-              </label>
+            <label>Date:</label>
+      <TimeInput
+        selected={appointmentDetails.Date ? new Date(appointmentDetails.Date) : null}
+        onChange={date => setAppointmentDetails(prev => ({ ...prev, Date: format(date, 'yyyy-MM-dd')}))}
+        includeDate={true}
+        minDate={minDate}
+      />
+    </section>
+
+    <section>
+      <label>Start Time:</label>
+      <TimeInput
+        selected={appointmentDetails.StartTime ? new Date(`${appointmentDetails.Date}T${appointmentDetails.StartTime}`) : null}
+        onChange={time => setAppointmentDetails(prev => ({ ...prev, StartTime: format(time, 'HH:mm')}))}
+        includeTime={true}
+        minTime={minTime}
+        maxTime={maxStartTime}
+      />
+    </section>
+    <section>
+      <label>End Time:</label>
+      <TimeInput
+        selected={appointmentDetails.EndTime ? new Date(`${appointmentDetails.Date}T${appointmentDetails.EndTime}`) : null}
+        onChange={time => setAppointmentDetails(prev => ({ ...prev, EndTime: format(time, 'HH:mm')}))}
+        includeTime={true}
+        minTime={new Date(`${appointmentDetails.Date}T${appointmentDetails.StartTime}`)}
+        maxTime={maxEndTime}
+      />
             </section>
             <section>
               <label>
@@ -503,31 +495,4 @@ const AppointmentManagement = () => {
 };
 
 export default AppointmentManagement;
-// {treatmentDetails.TreatmentName &&
-  //               appointmentDetails.MedicalSpecialistID && (
-  //                 <PayPalPayment
-  //                   amount={treatmentDetails.Price}
-  //                   description={`Appointment for ${treatmentDetails.TreatmentName}`}
-  //                   onSuccess={handlePaymentSuccess}
-  //                   onFailure={handlePaymentError}
-  //                 />
-  //               )}
-  //             {!paymentInProgress && (
-  //               <>
-  //                 <Button
-  //                   label={"Save"}
-  //                   type={"submit"}
-  //                   handleClick={handleModalSubmit}
-  //                 />
-  //                 <Button label={"Cancel"} handleClick={handleModalClose} />
-  //               </>
-  //             )}
-  //             {selectedAppointment?.AppointmentID && (
-  //               <Button
-  //                 label={"Remove Appointment"}
-  //                 handleClick={handleRemoveAppointment}
-  //               />
-  //             )}
-  //             {feedback && <p>{feedback}</p>}
-  //           </Modal>
-          // )}
+

@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { updateLoginStatus, setUser } from "../../../redux/reducers/userSlice";
 
 import styles from "../userAuthentication.module.css";
-import InputField from "../InputField";
-import Button from "../../button/Button";
+import InputField from "../../common/InputField";
+import Button from "../../common/Button";
 import LoadingSpinner from "../LoadingSpinner";
 
 const LoginForm = () => {
@@ -21,7 +21,6 @@ const LoginForm = () => {
     const { name, value } = event.target;
     setUserDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
-
 
   /**
    * Function that handles the submission of the login information
@@ -111,7 +110,7 @@ const LoginForm = () => {
             {message && (
               <p
                 className={
-                  message.includes('success') ? styles.success : styles.failure
+                  message.includes("success") ? styles.success : styles.failure
                 }
               >
                 {message}

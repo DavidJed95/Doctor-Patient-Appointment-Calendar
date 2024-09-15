@@ -14,7 +14,7 @@ import {
 
 import Modal from '../common/Modal';
 
-import Button from '../button/Button';
+import Button from '../common/Button';
 
 const ManageShifts = () => {
   const dispatch = useDispatch();

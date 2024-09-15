@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from '../userAuthentication.module.css';
-import InputField from '../InputField';
-import Button from '../../button/Button';
-import UserSelector, { UserType } from '../../user/UserSelector';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "../userAuthentication.module.css";
+import InputField from "../../common/InputField";
+import Button from "../../common/Button";
+import UserSelector, { UserType } from "../../user/UserSelector";
 
 /**
  * Registration form page component
@@ -12,20 +12,20 @@ import UserSelector, { UserType } from '../../user/UserSelector';
 const RegistrationForm = () => {
   const initialState = {
     userType: UserType.Patient,
-    id: '',
-    password: '',
-    passwordConfirm: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    mobile: '',
-    languages: '',
-    medicalStatus: '',
-    medicalLicense: '',
-    specialization: '',
+    id: "",
+    password: "",
+    passwordConfirm: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+    languages: "",
+    medicalStatus: "",
+    medicalLicense: "",
+    specialization: "",
   };
   const [formData, setFormData] = useState(initialState);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,16 +33,16 @@ const RegistrationForm = () => {
    * This method handles the change of the input values
    * @param {*} event - event target to change
    */
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   /**
    * This method handles the Submission of the form
    * @param {*} event event target to change for submission
    */
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (
@@ -55,7 +55,7 @@ const RegistrationForm = () => {
       !formData.mobile ||
       !formData.languages
     ) {
-      setMessage('Please enter all required fields.');
+      setMessage("Please enter all required fields.");
       return;
     }
 
@@ -63,7 +63,7 @@ const RegistrationForm = () => {
     const formattedCreationDate = creationDate
       .toISOString()
       .slice(0, 19)
-      .replace('T', ' ');
+      .replace("T", " ");
 
     const requestBody = {
       userType: formData.userType,
@@ -91,10 +91,10 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/auth/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
       });
@@ -109,12 +109,12 @@ const RegistrationForm = () => {
       }
     } catch (error) {
       console.error(
-        'An error occurred during registration due to false data insertion:',
-        error,
+        "An error occurred during registration due to false data insertion:",
+        error
       );
       setMessage(
         error.message ||
-          'An error occurred during registration due to false data insertion.',
+          "An error occurred during registration due to false data insertion."
       );
     }
   };
@@ -123,10 +123,10 @@ const RegistrationForm = () => {
     return (
       <div>
         <InputField
-          label='Medical Status:'
-          placeholder='Medical Status'
+          label="Medical Status:"
+          placeholder="Medical Status"
           value={formData.medicalStatus}
-          name='medicalStatus'
+          name="medicalStatus"
           onChange={handleChange}
           required
         />
@@ -139,10 +139,10 @@ const RegistrationForm = () => {
       <>
         <div>
           <InputField
-            label='Medical License:'
-            placeholder='Medical License'
+            label="Medical License:"
+            placeholder="Medical License"
             value={formData.medicalLicense}
-            name='medicalLicense'
+            name="medicalLicense"
             onChange={handleChange}
             required
           />
@@ -150,10 +150,10 @@ const RegistrationForm = () => {
 
         <div>
           <InputField
-            label='Specialization:'
-            placeholder='Family Doctor, Pediatrician, Orthopedics, Physiotherapy, Hydrotherapy, Occupational Therapy, Eyes, Urology, Psychology, Otorhinolaryngology'
+            label="Specialization:"
+            placeholder="Family Doctor, Pediatrician, Orthopedics, Physiotherapy, Hydrotherapy, Occupational Therapy, Eyes, Urology, Psychology, Otorhinolaryngology"
             value={formData.specialization}
-            name='specialization'
+            name="specialization"
             onChange={handleChange}
             required
           />
@@ -163,17 +163,17 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form action='/auth/register' method='POST' className={styles.form}>
+    <form action="/auth/register" method="POST" className={styles.form}>
       <h1 className={styles.userAuthHeading}>Register</h1>
 
       <UserSelector onChange={handleChange} />
       <div>
         <InputField
-          label='ID:'
-          placeholder='ID'
-          pattern='[0-9]{9}'
+          label="ID:"
+          placeholder="ID"
+          pattern="[0-9]{9}"
           value={formData.id}
-          name='id'
+          name="id"
           onChange={handleChange}
           required
         />
@@ -181,12 +181,12 @@ const RegistrationForm = () => {
       <div>
         {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
         <InputField
-          label='Password:'
-          placeholder='Password'
-          pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
+          label="Password:"
+          placeholder="Password"
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}"
           value={formData.password}
-          name='password'
-          type='password'
+          name="password"
+          type="password"
           onChange={handleChange}
           required
         />
@@ -194,32 +194,32 @@ const RegistrationForm = () => {
       <div>
         {/* Minimum eight and maximum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
         <InputField
-          label='Password Confirmation:'
-          placeholder='Confirm your password:'
-          pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}'
+          label="Password Confirmation:"
+          placeholder="Confirm your password:"
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}"
           value={formData.passwordConfirm}
-          name='passwordConfirm'
-          type='password'
+          name="passwordConfirm"
+          type="password"
           onChange={handleChange}
           required
         />
       </div>
       <div>
         <InputField
-          label='First Name:'
-          placeholder='First Name'
+          label="First Name:"
+          placeholder="First Name"
           value={formData.firstName}
-          name='firstName'
+          name="firstName"
           onChange={handleChange}
           required
         />
       </div>
       <div>
         <InputField
-          label='Last Name:'
-          placeholder='Last Name'
+          label="Last Name:"
+          placeholder="Last Name"
           value={formData.lastName}
-          name='lastName'
+          name="lastName"
           onChange={handleChange}
           required
         />
@@ -227,30 +227,30 @@ const RegistrationForm = () => {
 
       <div>
         <InputField
-          label='Email:'
-          placeholder='name@gmail.com'
+          label="Email:"
+          placeholder="name@gmail.com"
           value={formData.email}
-          name='email'
+          name="email"
           onChange={handleChange}
           required
         />
       </div>
       <div>
         <InputField
-          label='Mobile:'
-          placeholder='Mobile'
+          label="Mobile:"
+          placeholder="Mobile"
           value={formData.mobile}
-          name='mobile'
+          name="mobile"
           onChange={handleChange}
           required
         />
       </div>
       <div>
         <InputField
-          label='Languages:'
-          placeholder='Languages'
+          label="Languages:"
+          placeholder="Languages"
           value={formData.languages}
-          name='languages'
+          name="languages"
           onChange={handleChange}
           required
         />
@@ -260,11 +260,11 @@ const RegistrationForm = () => {
 
       {formData.userType === UserType.MedicalSpecialist && renderDoctorFields()}
 
-      <Button label='Register' type='submit' handleClick={handleSubmit} />
+      <Button label="Register" type="submit" handleClick={handleSubmit} />
       {message && (
         <p
           className={
-            message.includes('success') ? styles.success : styles.failure
+            message.includes("success") ? styles.success : styles.failure
           }
         >
           {message}

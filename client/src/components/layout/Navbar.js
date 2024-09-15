@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/reducers/userSlice';
 
 import CustomLink from './CustomLink';
-import Button from '../button/Button';
+import Button from '../common/Button';
 import styles from './navbar.module.css';
 
 const Navbar = ({ siteTitle }) => {

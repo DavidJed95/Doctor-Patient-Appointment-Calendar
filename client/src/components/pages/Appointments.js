@@ -18,7 +18,7 @@ import {
   deleteAppointmentAPI,
 } from '../patient/appointmentsAPI';
 
-import Button from '../button/Button';
+import Button from '../common/Button';
 
 const Appointments = () => {
   const [initiatePayment, setInitiatePayment] = useState(false);

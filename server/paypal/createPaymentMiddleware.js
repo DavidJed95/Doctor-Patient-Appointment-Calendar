@@ -12,7 +12,7 @@ async function createPaymentMiddleware(req, res, next) {
       },
       redirect_urls: {
         return_url: 'http://your-app.com/appointment/success',
-        cancel_url: 'http://your-app.com/appointment',
+        cancel_url: 'http://your-app.com/appointment/cancel',
       },
       transactions: [
         {

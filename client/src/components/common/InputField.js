@@ -10,6 +10,7 @@ const InputField = ({
   required,
   pattern,
   errorMessage,
+  children
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import InputField from '../form/InputField';
-import Button from '../button/Button';
+import InputField from '../common/InputField';
+import Button from '../common/Button';
 import styles from '../form/userAuthentication.module.css';
 
 const PasswordReset = () => {

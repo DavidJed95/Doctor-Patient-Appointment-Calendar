@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../userAuthentication.module.css';
-import InputField from '../InputField';
-import Button from '../../button/Button';
+import InputField from '../../common/InputField';
+import Button from '../../common/Button';
 
 const PasswordResetForm = () => {
   const [id, setId] = useState('');

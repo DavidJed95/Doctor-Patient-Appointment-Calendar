@@ -105,7 +105,7 @@ async function getAvailableSpecialists() {
   `;
 
   const specialists = await doQuery(selectSql);
-
+console.log('the amount of specialists',specialists.length)
   if (specialists.length === 0) {
     return {
       status: "no-data",

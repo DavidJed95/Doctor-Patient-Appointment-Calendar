@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../../redux/reducers/userSlice';
 
 import styles from '../../form/userAuthentication.module.css';
-import InputField from '../../form/InputField';
-import Button from '../../button/Button';
+import InputField from '../../common/InputField';
+import Button from '../../common/Button';
 
 const UpdateUserProfile = () => {
   const dispatch = useDispatch();
