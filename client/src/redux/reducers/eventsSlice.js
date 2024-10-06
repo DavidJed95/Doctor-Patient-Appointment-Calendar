@@ -3,11 +3,11 @@ import * as shiftsAPI from '../../components/medicalSpecialist/shiftsAPI';
 /**
  * fetchShifts thunk
  */
-export const fetchShifts = createAsyncThunk(
-  'events/fetchShifts',
+export const fetchShiftsForSpecialist = createAsyncThunk(
+  'events/fetchShiftsForSpecialist',
   async (medicalSpecialistID, { rejectWithValue }) => {
     try {
-      const response = await shiftsAPI.fetchShiftsAPI(medicalSpecialistID);
+      const response = await shiftsAPI.fetchShiftsForSpecialist(medicalSpecialistID);
       console.log(response);
       return response;
     } catch (error) {
@@ -71,14 +71,14 @@ export const eventsSlice = createSlice({
   extraReducers: builder => {
     builder
       // Handling fetchShifts
-      .addCase(fetchShifts.pending, state => {
+      .addCase(fetchShiftsForSpecialist.pending, state => {
         state.loading = true;
       })
-      .addCase(fetchShifts.fulfilled, (state, action) => {
+      .addCase(fetchShiftsForSpecialist.fulfilled, (state, action) => {
         state.SpecialistAvailability = action.payload;
         state.loading = false;
       })
-      .addCase(fetchShifts.rejected, (state, action) => {
+      .addCase(fetchShiftsForSpecialist.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       })

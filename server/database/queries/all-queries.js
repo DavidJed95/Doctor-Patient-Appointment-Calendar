@@ -21,7 +21,7 @@ const {
   updateShift,
   deleteShift,
   getShiftsForSpecialist,
-  getAvailableSpecialists
+  getAvailableSpecialists,
 } = require("./medical-specialist-shifts");
 
 // Fetching Treatment details

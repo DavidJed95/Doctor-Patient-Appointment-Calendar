@@ -5,8 +5,9 @@ import { utcToZonedTime } from 'date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
+import usePageTitle from '../../hooks/usePageTitle';
 import {
-  fetchShifts,
+  fetchShiftsForSpecialist,
   addShift,
   updateShift,
   deleteShift,
@@ -17,6 +18,7 @@ import Modal from '../common/Modal';
 import Button from '../common/Button';
 
 const ManageShifts = () => {
+  usePageTitle('Doctor Shift Management')
   const dispatch = useDispatch();
   const { ID: specialistID } = useSelector(state => state.user.userInfo);
 
@@ -33,7 +35,7 @@ const ManageShifts = () => {
   const [selectedShift, setSelectedShift] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchShifts(specialistID));
+    dispatch(fetchShiftsForSpecialist(specialistID));
   }, [dispatch, specialistID]);
 
   const toggleModal = useCallback(open => {
@@ -116,7 +118,7 @@ const ManageShifts = () => {
         ).unwrap();
         setFeedback(creatingNewShift.message);
       }
-      dispatch(fetchShifts(specialistID));
+      dispatch(fetchShiftsForSpecialist(specialistID));
       setTimeout(() => {
         handleModalClose();
       }, 2000);
@@ -133,7 +135,7 @@ const ManageShifts = () => {
         const shiftDeleted = await dispatch(
           deleteShift(selectedShift.id),
         ).unwrap();
-        dispatch(fetchShifts(specialistID));
+        dispatch(fetchShiftsForSpecialist(specialistID));
         setFeedback(shiftDeleted.message); // Update feedback with the message
         setTimeout(() => {
           handleModalClose();

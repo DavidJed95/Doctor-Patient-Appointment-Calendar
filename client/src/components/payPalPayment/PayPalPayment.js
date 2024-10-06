@@ -9,35 +9,6 @@ const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
    * Creates an order for the appointment
    */
   const createOrder = (data, actions) => {
-    // Order is created on the server and the order id is returned
-    // return fetch('/my-server/create-paypal-order', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   // TODO:  use the "body" param to optionally pass additional order information
-    //   // like product skus and quantities
-    //   body: JSON.stringify({
-    //     appointment: {
-    //       description: 'Appointment',
-    //       cost: '100',
-    //     },
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(order => order.id);
-
-    // const payload = {
-    //   intent: "CAPTURE",
-    //   purchase_units: [
-    //     {
-    //       amount: {
-    //         currency_code: "USD",
-    //         value: "110.00",
-    //       },
-    //     },
-    //   ],
-    // };
     return actions.order.create({
       purchase_units: [
         {
@@ -54,21 +25,11 @@ const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
    * Captures an order for the appointment
    */
   const onApprove = (data, actions) => {
-    // Order is captured on the server and the response is returned to the browser
-    // return fetch('/my-server/capture-paypal-order', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     orderID: data.orderID,
-    //   }),
-    // }).then(response => response.json());
     return actions.order
       .capture()
       .then((details) => {
         onSuccess(details);
-        console.log('Payment successful, and the description is ', description);
+        console.log("Payment successful, and the description is ", description);
       })
       .catch((error) => {
         onFailure(error);

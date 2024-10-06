@@ -90,13 +90,15 @@ exports.deleteShift = async (req, res, next) => {
 
 exports.getShiftsForSpecialist = async (req, res, next) => {
   try {
-    const medicalSpecialistID = req.query.medicalSpecialistID;
+    const { medicalSpecialistID, date } = req.query;
     if (!medicalSpecialistID) {
       return res
         .status(400)
         .json({ message: "Medical Specialist ID is required." });
     }
-    const shifts = await getShiftsForSpecialist(medicalSpecialistID);
+    const today = new Date().toISOString().slice(0, 10);
+    const shifts = await getShiftsForSpecialist(medicalSpecialistID, today);
+
     console.log(`Fetched events from server are of type: ${typeof shifts}.
     and these are the shifts: ${shifts}`);
     res.status(200).json(shifts);
@@ -111,13 +113,17 @@ exports.getShiftsForSpecialist = async (req, res, next) => {
 exports.getAvailableSpecialists = async (req, res, next) => {
   try {
     const result = await getAvailableSpecialists();
-    if (result.status === 'success') {
-    return res.status(200).json({ message: result.message, specialists: result.specialists });
+    if (result.status === "success") {
+      return res
+        .status(200)
+        .json({ message: result.message, specialists: result.specialists });
     } else {
       return res.status(400).json({ message: result.message });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error fetching available specialists. Please try again." });
+    res.status(500).json({
+      message: "Error fetching available specialists. Please try again.",
+    });
     next(error);
   }
 };

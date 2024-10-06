@@ -15,26 +15,21 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const user = useSelector((state) => state.user.userInfo);
   const timeZone = "Asia/Jerusalem";
 
-  const processedEvents = events
-    .map((event) => {
-      if (!event || !event.ShiftDate || !event.StartTime || !event.EndTime)
-        return null;
-
-      const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
-      const startDate = format(shiftDateTime, "yyyy-MM-dd", { timeZone });
-      const startDateTime = `${startDate}T${event.StartTime}`;
-      const endDateTime = `${startDate}T${event.EndTime}`;
-
-      return {
-        id: event.SpecialistHourID,
-        title: event.Type,
-        start: startDateTime,
-        end: endDateTime,
-        extendedProps: { ...event },
-        className: event.isAvailable ? "available" : "unavailable", // Color coding for availability
-      };
-    })
-    .filter((event) => event !== null);
+  const processedEvents = events.map((event) => {
+    const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
+    const startDate = format(shiftDateTime, "yyyy-MM-dd", { timeZone });
+    const startDateTime = `${startDate}T${event.StartTime}`;
+    const endDateTime = `${startDate}T${event.EndTime}`;
+  
+    return {
+      id: event.SpecialistHourID,
+      title: event.Type,
+      start: startDateTime,
+      end: endDateTime,
+      extendedProps: { ...event },
+      className: event.isAvailable ? "available" : "unavailable",
+    };
+  });
 
   const processedAppointments = appointments
     .map((appointment) => ({
@@ -53,43 +48,45 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
       : processedAppointments;
 
   return (
-    <Fullcalendar
-      timeZone={timeZone}
-      ref={calendarRef}
-      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-      initialView="timeGridWeek"
-      validRange={(nowDate) => {
-        return { start: nowDate };
-      }}
-      slotMinTime="08:00"
-      slotMaxTime="17:00"
-      nowIndicator
-      headerToolbar={{
-        start: "today prev,next",
-        center: "title",
-        end: "timeGridDay,timeGridWeek,dayGridMonth",
-      }}
-      selectable={true}
-      editable={true}
-      allDaySlot={false}
-      events={displayEvents}
-      select={handleDateSelect}
-      eventClick={handleEventClick}
-      height="90dvh"
-      slotLabelFormat={{
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }}
-      dayHeaderFormat={{
-        weekday: "long",
-        day: "2-digit",
-        month: "numeric",
-        omitCommas: true,
-      }}
-      locale="en-IL"
-      selectMirror
-    />
+    <div style={{ border: "red solid 2px", marginTop: "20px" }}>
+      <Fullcalendar
+        timeZone={timeZone}
+        ref={calendarRef}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="timeGridWeek"
+        validRange={(nowDate) => {
+          return { start: nowDate };
+        }}
+        slotMinTime="08:00"
+        slotMaxTime="17:00"
+        nowIndicator
+        headerToolbar={{
+          start: "today prev,next",
+          center: "title",
+          end: "timeGridDay,timeGridWeek,dayGridMonth",
+        }}
+        selectable={true}
+        editable={true}
+        allDaySlot={false}
+        events={displayEvents}
+        select={handleDateSelect}
+        eventClick={handleEventClick}
+        contentHeight={"auto"}
+        slotLabelFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        dayHeaderFormat={{
+          weekday: "long",
+          day: "2-digit",
+          month: "numeric",
+          omitCommas: true,
+        }}
+        locale="en-IL"
+        selectMirror
+      />
+    </div>
   );
 };
 

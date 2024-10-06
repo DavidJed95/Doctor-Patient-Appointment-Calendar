@@ -6,7 +6,10 @@ const updateAppointmentController = require("../controllers/updateAppointmentCon
 // const getAppointmentsByMedicalSpecialistController = require('../controllers/getAppointmentsByMedicalSpecialistController');
 const getAppointmentsByPatientController = require("../controllers/getAppointmentsByPatientController");
 const treatmentController = require("../controllers/treatmentController");
-const shiftController = require("../controllers/shiftController");
+const {
+  getAvailableSpecialists,
+  getShiftsForSpecialist,
+} = require("../controllers/shiftController");
 const router = express.Router();
 
 router.post("/execute-payment", createAppointmentController.executePayment);
@@ -21,7 +24,7 @@ router.put(
 router.delete("/:id", cancelAppointmentController.cancelAppointments);
 router.get("/", getAppointmentsByPatientController);
 router.get("/treatments", treatmentController.getTreatments);
-router.get('/available-specialists', shiftController.getAvailableSpecialists)
-
+router.get("/shifts", getShiftsForSpecialist); // TODO: in appointmentAPI the path for this starts with http://localhost:8000/appointment/shifts/... which is http://BASE_URL/...
+router.get("/available-specialists", getAvailableSpecialists);
 
 module.exports = router;

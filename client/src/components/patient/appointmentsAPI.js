@@ -46,8 +46,8 @@ export const deleteAppointmentAPI = async (appointmentID) => {
   return response.json();
 };
 
-export const fetchAvailableSpecialists = async () => {
-  const response = await fetch(`${BASE_URL}/appointment/available-specialists`);
+export const fetchAvailableSpecialists = async (selectedDate) => {
+  const response = await fetch(`${BASE_URL}/shift/available-specialists?date=${selectedDate}`);
   if (!response.ok) {
     const responseData = await response.json();
     throw new Error(
@@ -67,4 +67,13 @@ export const fetchAvailableDatesForSpecialist = async (specialistId) => {
     );
   }
   return response.json();
+};
+
+// Fetch available shifts for a specific specialist
+export const fetchShiftsForSpecialist = async (specialistID) => {
+  const response = await fetch(`${BASE_URL}/appointment/shifts?medicalSpecialistID=${specialistID}`);
+  if (!response.ok) {
+    throw new Error('Error fetching shifts');
+  }
+  return response.json(); // Assuming the server returns JSON formatted shifts
 };

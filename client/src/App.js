@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     async function fetchLoginStatus() {
       try {
-        const response = await fetch(`${BASE_URL}/auth/check-login`);
+        const response = await fetch(`${BASE_URL}/auth/check-login`, {credentials: 'include'});
         const data = await response.json();
 
         dispatch(updateLoginStatus(data.isLoggedIn));

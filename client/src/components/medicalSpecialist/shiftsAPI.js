@@ -1,6 +1,6 @@
 import { BASE_URL } from '../../config';
 
-export const fetchShiftsAPI = async medicalSpecialistID => {
+export const fetchShiftsForSpecialist = async medicalSpecialistID => {
   const response = await fetch(
     `${BASE_URL}/shift?medicalSpecialistID=${medicalSpecialistID}`,
   );

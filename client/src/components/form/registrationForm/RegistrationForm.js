@@ -4,6 +4,7 @@ import styles from "../userAuthentication.module.css";
 import InputField from "../../common/InputField";
 import Button from "../../common/Button";
 import UserSelector, { UserType } from "../../user/UserSelector";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 /**
  * Registration form page component
@@ -28,7 +29,7 @@ const RegistrationForm = () => {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-
+  usePageTitle('SignUp')
   /**
    * This method handles the change of the input values
    * @param {*} event - event target to change

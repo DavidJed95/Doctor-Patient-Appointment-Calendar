@@ -77,12 +77,15 @@ async function deleteShift(shiftID) {
 /**
  * Method fetches all the shifts of the medical specialist with his id
  * @param {*} medicalSpecialistID id of the specialist
+ * @param {*} fromDate the date to fetch from
  * @returns all the shift of the medical specialist with his uniq ID
  */
-async function getShiftsForSpecialist(medicalSpecialistID) {
+async function getShiftsForSpecialist(medicalSpecialistID, fromDate) {
   try {
-    const sql = `SELECT * FROM SpecialistHours WHERE MedicalSpecialistID=?`;
-    const result = await doQuery(sql, [medicalSpecialistID]);
+    console.log("Getting date from: ", fromDate)
+    const sql = `SELECT * FROM SpecialistHours WHERE MedicalSpecialistID=? AND ShiftDate >= ? ORDER BY ShiftDate ASC`;
+    const shiftsToGet = [medicalSpecialistID, fromDate]
+    const result = await doQuery(sql, shiftsToGet);
     console.log(`Fetched events from database in the server query are of type: ${typeof result}.
     and this is these are the shifts: ${result}`);
     return result; // This should be an array if doQuery is implemented correctly.

@@ -1,6 +1,9 @@
 import { BASE_URL } from "../../config";
-
-export const fetchTreatmentAPI = async () => {
+/**
+ * fetches treatments from the server url `${BASE_URL}/appointment/treatments`
+ * @returns 
+ */
+export const fetchTreatments = async () => {
   try {
     const response = await fetch(`${BASE_URL}/appointment/treatments`);
     if (!response.ok) {

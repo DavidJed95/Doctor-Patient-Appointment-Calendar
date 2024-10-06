@@ -5,7 +5,7 @@ const {
 } = require("../database/queries/all-queries");
 const createPaymentMiddleware = require("../paypal/createPaymentMiddleware");
 const executePaymentMiddleware = require("../paypal/executePaymentMiddleware");
-const emailService = require("../database/queries/all-queries");
+const emailService = require("../services/emailService");
 
 exports.createAppointment = async (req, res, next) => {
   const appointmentData = req.body;
@@ -39,14 +39,14 @@ exports.executePayment = async (req, res, next) => {
           // Send email notifications to the patient and medical specialist
           emailService.sendEmail(
             patient.Email,
-            "Appointment confirmation",
+            "Appointment Creation Confirmation",
             `<p>Appointment details:\nDate: ${appointmentData.Date}\nTime: ${appointmentData.StartTime}-${appointmentData.EndTime}\nTreatment id: ${appointmentData.TreatmentID}</p>
             <p>Best regards,<br>Doctor Patient Appointment Calendar</p>`
           );
 
           emailService.sendEmail(
             specialist.Email,
-            "Appointment confirmation",
+            "Appointment Creation Confirmation",
             `<p>Appointment details:\nDate: ${appointmentData.Date}\nTime: ${appointmentData.StartTime}-${appointmentData.EndTime}\nTreatment id: ${appointmentData.TreatmentID}</p>
             <p>Best regards,<br>Doctor Patient Appointment Calendar</p>`
           );

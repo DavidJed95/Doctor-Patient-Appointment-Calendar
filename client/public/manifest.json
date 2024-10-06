@@ -1,0 +1,25 @@
+{
+  "short_name": "DPAC",
+  "name": "Doctor Patient Appointment Calendar",
+  "icons": [
+    {
+      "src": "doctor_patient_appointment_icon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "doctor_patient_appointment_icon192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "doctor_patient_appointment_icon512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

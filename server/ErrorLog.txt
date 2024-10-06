@@ -944,3 +944,24 @@
   Line: 39
   ---------------------------------------------------
   
+  2024-09-19T01:13:43.569Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-09-19T01:14:07.464Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-09-28T22:03:05.827Z - Error: Cannot destructure property 'medicalSpecialistID' of 'req.query.medicalSpecialistID' as it is undefined.
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\shiftController.js
+  Function: exports.getShiftsForSpecialist
+  Line: 93
+  ---------------------------------------------------
+  

@@ -3,20 +3,20 @@
   /* flex-wrap: wrap; */
   border: none;
   background-color: cadetblue;
-  padding: 0.1rem;
+  padding: 0.1rem .3rem;
   font-size: 1rem;
   color: white;
   margin: 1rem;
-  border-radius: 2rem;
-  border: solid black 0.1rem;
-  outline: 8px ridge rgba(50, 129, 220, 0.6);
-  border-radius: 2rem;
+  /* border: solid black 0.1rem; */
+  /* outline: 8px ridge rgba(50, 129, 220, 0.6); */
+  border-radius: .3rem;
   margin-bottom: 1rem;
+  transition: opacity 0.2s;
 }
 
 .button:focus,
 .button:hover {
-  border-bottom: 0.2rem solid black;
+  opacity: 0.7;
 }
 
 @media (max-width: 70rem) {

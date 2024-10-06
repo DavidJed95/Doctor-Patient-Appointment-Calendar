@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { updateLoginStatus, setUser } from "../../../redux/reducers/userSlice";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 import styles from "../userAuthentication.module.css";
 import InputField from "../../common/InputField";
@@ -14,6 +15,7 @@ const LoginForm = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  usePageTitle('Login')
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

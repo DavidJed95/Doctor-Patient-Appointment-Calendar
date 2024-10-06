@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
-
+import usePageTitle from '../../hooks/usePageTitle'
 export default function Home() {
+  usePageTitle(Home.name)
   const user = useSelector(state => state.user.userInfo);
   const [greeting, setGreeting] = useState('Welcome');
 
