@@ -7,7 +7,7 @@ const {
 const paypal = require("../paypal/paypal");
 const emailService = require("../services/emailService");
 
-exports.cancelAppointments = async (req, res, next) => {
+exports.cancelAppointment = async (req, res, next) => {
   const { appointmentId, paymentId, price } = req.body;
 
   try {

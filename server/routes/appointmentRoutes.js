@@ -12,19 +12,20 @@ const {
 } = require("../controllers/shiftController");
 const router = express.Router();
 
-router.post("/execute-payment", createAppointmentController.executePayment);
 router.post(
   "/create-appointment",
   createAppointmentController.createAppointment
 );
+router.post("/execute-payment", createAppointmentController.executePayment);
+router.get('/refund/:AppointmentID', cancelAppointmentController.cancelAppointment)
 router.put(
-  "/update-appointment:id",
+  "/update-appointment/:id",
   updateAppointmentController.updateAppointments
 );
-router.delete("/:id", cancelAppointmentController.cancelAppointments);
+router.delete("/:id", cancelAppointmentController.cancelAppointment);
 router.get("/", getAppointmentsByPatientController);
 router.get("/treatments", treatmentController.getTreatments);
-router.get("/shifts", getShiftsForSpecialist); // TODO: in appointmentAPI the path for this starts with http://localhost:8000/appointment/shifts/... which is http://BASE_URL/...
+// router.get("/shifts", getShiftsForSpecialist); // TODO: in appointmentAPI the path for this starts with http://localhost:8000/appointment/shifts/... which is http://BASE_URL/...
 router.get("/available-specialists", getAvailableSpecialists);
 
 module.exports = router;

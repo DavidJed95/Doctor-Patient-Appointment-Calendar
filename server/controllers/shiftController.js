@@ -90,7 +90,7 @@ exports.deleteShift = async (req, res, next) => {
 
 exports.getShiftsForSpecialist = async (req, res, next) => {
   try {
-    const { medicalSpecialistID, date } = req.query;
+    const { medicalSpecialistID } = req.query;
     if (!medicalSpecialistID) {
       return res
         .status(400)
@@ -112,7 +112,15 @@ exports.getShiftsForSpecialist = async (req, res, next) => {
 
 exports.getAvailableSpecialists = async (req, res, next) => {
   try {
-    const result = await getAvailableSpecialists();
+    console.log(`req.body: ${req.body}`);
+    console.log(`req.query: ${req.query}`);
+    console.log(`req.params: ${req.params}`);
+    const { treatmentName } = req.query || req.params || req.body;
+    console.log(`Getting treatmentName from frontend: ${treatmentName}`);
+    const result = await getAvailableSpecialists(treatmentName);
+    console.log(
+      `Fetched shifts available from server are of type: ${typeof result}`
+    );
     if (result.status === "success") {
       return res
         .status(200)

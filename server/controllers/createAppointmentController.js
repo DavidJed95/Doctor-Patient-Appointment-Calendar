@@ -16,7 +16,7 @@ exports.createAppointment = async (req, res, next) => {
       const approvalUrl = req.payment.links.find(
         (link) => link.rel === "approval_url"
       ).href;
-      res.json({ approvalUrl });
+      res.json({ approvalUrl,appointmentData });
     } catch (error) {
       next(error);
     }
@@ -28,7 +28,8 @@ exports.executePayment = async (req, res, next) => {
     try {
       if (req.executedPayment.state === "approved") {
         const appointmentData = req.body;
-        const result = await setAppointment(appointmentData, true);
+        const captureId = req.captureId;
+        const result = await setAppointment({ ...appointmentData, AppointmentID: captureId }, true);
 
         if (result.status === "success") {
           const patient = await getUserByID(appointmentData.PatientID);

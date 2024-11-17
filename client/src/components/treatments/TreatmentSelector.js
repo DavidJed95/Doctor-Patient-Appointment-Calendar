@@ -1,4 +1,3 @@
-import React from "react";
 
 const TreatmentSelector = ({ treatments, onTreatmentSelect }) => {
   /**
@@ -12,15 +11,11 @@ const TreatmentSelector = ({ treatments, onTreatmentSelect }) => {
     onTreatmentSelect(selectedTreatment);
   };
 
-  console.log(
-    "The treatments in the TreatmentSelector.js line 13: ",
-    treatments
-  );
   return (
     <>
       <label>Treatment:</label>
-      <select onChange={handleSelectChange} name="treatmentSelector">
-        <option value="">Select a Treatment</option>
+      <select onChange={handleSelectChange} name="treatmentSelector" defaultValue="">
+        <option value="" disabled>Select a Treatment</option>
         {treatments.map((treatment) => (
           <option key={treatment.TreatmentID} value={treatment.TreatmentID}>
             {treatment.TreatmentName}

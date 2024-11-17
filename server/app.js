@@ -21,10 +21,13 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // Set to true only if using HTTPS
+      secure: false, // Set to true only if using HTTPS (on production)
+      httpOnly: true, // Helps prevent XSS attacks
+      maxAge: 1000 * 3600 * 24,
     },
   })
 );
+app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -34,7 +37,6 @@ app.use(
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
 
 // API Routes
 const authRouter = require("./routes/authRoutes");

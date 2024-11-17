@@ -11,8 +11,8 @@ async function createPaymentMiddleware(req, res, next) {
         payment_method: 'paypal',
       },
       redirect_urls: {
-        return_url: 'http://your-app.com/appointment/success',
-        cancel_url: 'http://your-app.com/appointment/cancel',
+        return_url: 'http://localhost:8000/appointment/success',
+        cancel_url: 'http://localhost:8000/appointment/cancel',
       },
       transactions: [
         {

@@ -20,6 +20,7 @@ async function executePaymentMiddleware(req, res, next) {
     });
 
     req.executedPayment = executePayment;
+    req.captureId = executePayment.transactions[0].related_resources[0].sale.id;
     next();
   } catch (error) {
     next(error);

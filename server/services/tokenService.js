@@ -60,6 +60,7 @@ const verifyToken = (token, expectedType) => {
     throw new Error('Token verification failed');
   }
 };
+
 const verifyEmailVerificationToken = token => {
   return verifyToken(token, 'emailVerification');
 };

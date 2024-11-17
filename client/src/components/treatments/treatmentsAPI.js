@@ -1,7 +1,7 @@
 import { BASE_URL } from "../../config";
 /**
- * fetches treatments from the server url `${BASE_URL}/appointment/treatments`
- * @returns 
+ * Fetches treatments from the server url `${BASE_URL}/appointment/treatments`
+ * @returns all the treatments from the server
  */
 export const fetchTreatments = async () => {
   try {
@@ -10,10 +10,8 @@ export const fetchTreatments = async () => {
       throw new Error(`Error: ${response.statusText}`);
     }
     const data = await response.json();
-    console.log("Fetched treatments in API: ", data); // Debug log
     return data;
   } catch (error) {
-    console.error("Error in fetchTreatmentAPI: ", error); // Debug log
     throw error;
   }
 };

@@ -4,6 +4,7 @@ export const fetchShiftsForSpecialist = async medicalSpecialistID => {
   const response = await fetch(
     `${BASE_URL}/shift?medicalSpecialistID=${medicalSpecialistID}`,
   );
+  console.log('medical specialistID in shiftsAPI.js: ',medicalSpecialistID);
   if (!response.ok) {
     const responseData = await response.json();
     throw new Error(responseData.message || 'Error loading shifts.');

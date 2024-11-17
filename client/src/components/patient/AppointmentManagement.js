@@ -1,61 +1,45 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchAppointments,
-  addAppointment,
-  updateAppointment,
-  deleteAppointment,
-} from "../../redux/reducers/AppointmentsSlice";
-import { fetchTreatments } from "../../redux/reducers/treatmentSlice";
-// import { fetchTreatments } from "../treatments/treatmentsAPI";
-import { fetchShiftsForSpecialist } from "../../redux/reducers/eventsSlice";
 import { format } from "date-fns";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { useSelector, useDispatch } from "react-redux";
 import Calendar from "../calendar/Calendar";
 import Modal from "../common/Modal";
 import Button from "../common/Button";
+import {
+  fetchAppointments,
+  addAppointment,
+  initiatePayPalPayment,
+  initiatePayPalRefund,
+  updateAppointment,
+  deleteAppointment,
+  fetchSpecialistsForTreatment,
+} from "../../redux/reducers/AppointmentsSlice";
+import { fetchShiftsForSpecialist } from "../../redux/reducers/eventsSlice";
+import { fetchTreatments as fetchTreatmentsAPI } from "../../redux/reducers/treatmentSlice";
+import PayPalPayment from "../payPalPayment/PayPalPayment";
 import TreatmentSelector from "../treatments/TreatmentSelector";
 import SpecialistSelector from "./SpecialistSelector";
 import TimeInput from "../common/TimeInput";
-import PayPalPayment from "../payPalPayment/PayPalPayment";
-import { fetchAvailableSpecialists } from "./appointmentsAPI";
-import usePageTitle from "../../hooks/usePageTitle";
 import {
   addMinutesToDate,
-  durationToMinutes,
   formatToHHMMSS,
-  exatctAvailableDates,
+  extractAvailableDates,
   extractAvailableTimes,
 } from "../../utils/dateTimeUtils";
-import { BASE_URL, MY_PAYPAL_CLIENT_ID } from "../../config";
-import SearchBar from "./SearchBar";
 
-/**
- * AppointmentManagement component for managing patient appointments.
- * Includes appointment creation, update, deletion, and PayPal payment handling.
- * @returns {JSX.Element} AppointmentManagement component.
- */
 const AppointmentManagement = () => {
   const dispatch = useDispatch();
-
-  const today = new Date();
-  const minDate = new Date(today.setDate(today.getDate())); // Disable today and past dates
-  const minTime = new Date().setHours(8, 0, 0, 0); // Start times from 08:00
-  const maxStartTime = new Date().setHours(16, 30, 0, 0); // Start times up to 16:30
-  const maxEndTime = new Date().setHours(17, 0, 0, 0); // End times up to 17:00
-
   const { ID: patientID } = useSelector((state) => state.user.userInfo);
-  const appointments = useSelector((state) => state.appointments.appointments);
   const treatments = useSelector((state) => state.treatments.treatments);
-  console.log("Treatments in AppointmentManagement:", treatments); // Add this log
-  // const [treatments, setTreatments] = useState([])
+  const appointments = useSelector((state) => state.appointments.appointments);
   const loading = useSelector((state) => state.appointments.loading);
 
   const [feedback, setFeedback] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [specialistShifts, setSpecialistShifts] = useState([]); // Store shifts for the selected specialist
-  const [availableDates, setAvailableDates] = useState([]); // Store available dates
-  const [availableTimes, setAvailableTimes] = useState([]); // Store available times for the selected date
+  const [availableSpecialists, setAvailableSpecialists] = useState([]);
+  const [treatmentDetails, setTreatmentDetails] = useState({});
+  const [selectedSpecialist, setSelectedSpecialist] = useState(null);
+  const [availableDates, setAvailableDates] = useState([]);
+  const [availableTimes, setAvailableTimes] = useState([]);
   const [appointmentDetails, setAppointmentDetails] = useState({
     PatientID: patientID,
     MedicalSpecialistID: "",
@@ -65,41 +49,91 @@ const AppointmentManagement = () => {
     Date: "",
     isPayedFor: false,
   });
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [specialistShifts, setSpecialistShifts] = useState([]);
+
   const [paymentInProgress, setPaymentInProgress] = useState(false);
-  const [availableSpecialists, setAvailableSpecialists] = useState([]);
-  const [treatmentDetails, setTreatmentDetails] = useState({});
+  const [selectedDateTime, setSelectedDateTime] = useState(new Date());
 
-  // console.log(`treatments in the appointment manager: ${treatments}`);
-
-  const initialOptions = {
-    "client-id": MY_PAYPAL_CLIENT_ID,
-    currency: "ILS",
-    intent: "CAPTURE",
-  };
-
-  usePageTitle("Appointment Management");
-
-  // Fetch appointments and treatments on component mount
   useEffect(() => {
-    dispatch(fetchAppointments(patientID));
-    dispatch(fetchTreatments());
-  }, [dispatch, patientID, fetchTreatments]);
-  // console.log(`specialists in the appointment manager: ${specialists}`)
+    patientID && dispatch(fetchAppointments(patientID));
+    dispatch(fetchTreatmentsAPI());
+  }, [dispatch, patientID]);
 
-  /**
-   * Toggle the modal open or close.
-   * @param {Boolean} open - Whether to open or close the modal.
-   */
+  useEffect(() => {
+    treatmentDetails.TreatmentName &&
+      dispatch(fetchSpecialistsForTreatment(treatmentDetails.TreatmentName));
+  }, [dispatch, treatmentDetails.TreatmentName]);
+
   const toggleModal = useCallback((open) => {
     setFeedback("");
     setIsModalOpen(open);
   }, []);
 
-  /**
-   * Handle event click in the calendar (edit an appointment).
-   * @param {Object} clickInfo - Information about the clicked event.
-   */
+  const handleTreatmentSelect = (selectedTreatment) => {
+    if (!selectedTreatment) {
+      setFeedback("Please select a treatment.");
+      return;
+    }
+
+    const [hours, minutes] = selectedTreatment.Duration.split(":").map(Number);
+    const startTime = new Date(
+      `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
+    );
+    const endTime = addMinutesToDate(startTime, hours * 60 + minutes);
+    const formattedEndTime = formatToHHMMSS(endTime);
+
+    setAppointmentDetails((prev) => ({
+      ...prev,
+      TreatmentID: selectedTreatment.TreatmentID,
+      EndTime: formattedEndTime,
+    }));
+    setTreatmentDetails(selectedTreatment);
+  };
+
+  const handleSpecialistSelect = async (specialist) => {
+    if (!specialist) {
+      console.error("No specialist selected");
+      setFeedback("No Specialist selected, please select a special");
+      return;
+    }
+    setAppointmentDetails((prev) => ({
+      ...prev,
+      MedicalSpecialistID: specialist.ID,
+    }));
+
+    setSelectedSpecialist(specialist);
+    console.log(`Selected Specialist in appointment management:`, specialist);
+    console.log(
+      `Selected Specialist in appointmentDetails specialist ID:`,
+      appointmentDetails.MedicalSpecialistID
+    ); // TODO: This is the specialist properties which are passed from the specialist selector: Selected Specialist in appointment management: {ID: 123456788, FirstName: 'Lilian', LastName: 'Shefer', Specialization: 'Family Doctor', ShiftDate: '2024-11-07T22:00:00.000Z', …} for some reason when we click the date 8/11 we get 7/11
+    const shifts = await dispatch(
+      fetchShiftsForSpecialist(specialist.ID)
+    ).unwrap();
+    setAvailableDates(extractAvailableDates(shifts));
+    setAvailableTimes(extractAvailableTimes(shifts, appointmentDetails.Date));
+    console.log("Selected date-time:", selectedDateTime);
+  };
+
+  const handleTimeSelect = (selectedTime) => {
+    if (!(selectedTime instanceof Date && !isNaN(selectedTime))) {
+      console.error("Invalid selectedTime:", selectedTime);
+      return;
+    }
+    const [hours, minutes] = treatmentDetails.Duration.split(":").map(Number);
+    const endTime = addMinutesToDate(selectedTime, hours * 60 + minutes);
+    const formattedEndTime = formatToHHMMSS(endTime);
+
+    setSelectedDateTime(selectedTime);
+    console.log(`selectedTime: ${selectedTime}`);
+
+    setAppointmentDetails((prev) => ({
+      ...prev,
+      StartTime: format(selectedTime, "HH:mm"),
+      EndTime: formattedEndTime,
+    }));
+  };
+
   const handleEventClick = (clickInfo) => {
     const { event } = clickInfo;
     if (!event) return;
@@ -123,11 +157,6 @@ const AppointmentManagement = () => {
       PatientID: patientID,
     });
 
-    setSelectedAppointment({
-      AppointmentID: event.id,
-      ...extendedProps,
-    });
-
     const treatment = treatments.find(
       (t) => t.TreatmentID === extendedProps.TreatmentID
     );
@@ -139,10 +168,6 @@ const AppointmentManagement = () => {
     toggleModal(true);
   };
 
-  /**
-   * Handle date selection in the calendar (create a new appointment).
-   * @param {Object} selectInfo - Information about the selected date.
-   */
   const handleDateSelect = (selectInfo) => {
     const startDate = new Date(selectInfo.startStr);
     const endDate = new Date(selectInfo.endStr);
@@ -151,48 +176,30 @@ const AppointmentManagement = () => {
     const formattedStartTime = format(startDate, "HH:mm");
     const formattedEndTime = format(endDate, "HH:mm");
 
-    setAppointmentDetails({
-      MedicalSpecialistID: "",
-      TreatmentID: "",
+    setAppointmentDetails((prev) => ({
+      ...prev,
       StartTime: formattedStartTime,
       Date: formattedDate,
       EndTime: formattedEndTime,
       isPayedFor: false,
       PatientID: patientID,
-    });
-
-    resetSelectedAppointment();
+    }));
+    setSelectedDateTime(startDate);
     setTreatmentDetails({
       TreatmentID: "",
       TreatmentName: "",
       Duration: 0,
-      Price: 0,
+      Price: null,
       TreatmentType: "",
     });
 
     toggleModal(true);
   };
 
-  /**
-   * Reset the selected appointment state.
-   */
-  const resetSelectedAppointment = useCallback(() => {
-    setSelectedAppointment(null);
-  }, []);
-
-  /**
-   * Close the modal and reset appointment state.
-   */
   const handleModalClose = useCallback(() => {
     toggleModal(false);
-    setSelectedAppointment(null);
   }, [toggleModal]);
 
-  /**
-   * Validate if the selected date is more than 1 day away.
-   * @param {String} wrongDateFeedback - Feedback message to show if validation fails.
-   * @returns {Boolean} Whether the date is valid.
-   */
   const dateValidation = (wrongDateFeedback) => {
     const appointmentDate = new Date(
       `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
@@ -206,10 +213,6 @@ const AppointmentManagement = () => {
     return true;
   };
 
-  /**
-   * Handle form submission to create or update an appointment.
-   * @param {Object} event - The form submission event.
-   */
   const handleModalSubmit = async (event) => {
     event.preventDefault();
 
@@ -220,15 +223,23 @@ const AppointmentManagement = () => {
     }
 
     if (!appointmentDetails.isPayedFor) {
-      setPaymentInProgress(true);
-      return;
+      // Initiate PayPal payment if appointment not paid yet
+      const result = await dispatch(initiatePayPalPayment(appointmentDetails));
+      if (result.payload && result.payload.approvalUrl) {
+        window.location.href = result.payload.approvalUrl; // Redirect to PayPal for approval
+        return;
+      } else {
+        setFeedback("Error initiating payment. Please try again.");
+        return;
+      }
     }
 
+    // If already paid, proceed with saving or updating appointment
     try {
-      if (selectedAppointment && selectedAppointment.AppointmentID) {
+      if (appointmentDetails && appointmentDetails.AppointmentID) {
         const updatedAppointment = await dispatch(
           updateAppointment({
-            AppointmentID: selectedAppointment.AppointmentID,
+            AppointmentID: appointmentDetails.AppointmentID,
             appointmentDetails: appointmentDetails,
           })
         ).unwrap();
@@ -258,9 +269,18 @@ const AppointmentManagement = () => {
         return;
       }
 
+      if (appointmentDetails.isPayedFor) {
+        const refundResult = await dispatch(initiatePayPalRefund(appointmentDetails.AppointmentID));
+        if (refundResult.error) {
+          setFeedback("Error processing refund. Please try again.");
+          return;
+        }
+        setFeedback("Refund processed successfully!");
+      }
+
       try {
         const appointmentDeleted = await dispatch(
-          deleteAppointment(selectedAppointment.AppointmentID)
+          deleteAppointment(appointmentDetails.AppointmentID)
         ).unwrap();
         dispatch(fetchAppointments(patientID));
         setFeedback(appointmentDeleted.message);
@@ -271,14 +291,15 @@ const AppointmentManagement = () => {
         setFeedback("Error deleting appointment: " + error.message);
       }
     },
-    [selectedAppointment, dispatch, patientID, handleModalClose]
+    [appointmentDetails, dispatch, patientID, handleModalClose]
   );
 
-  const handlePaymentSuccess = (details) => {
+  const handlePaymentSuccess = (captureId) => {
     setFeedback("Payment successful!");
     setAppointmentDetails((prev) => ({
       ...prev,
       isPayedFor: true,
+      AppointmentID: captureId,
     }));
     setPaymentInProgress(false);
   };
@@ -288,196 +309,90 @@ const AppointmentManagement = () => {
     setPaymentInProgress(false);
   };
 
-  const handleTreatmentSelect = (selectedTreatment) => {
-    if (!selectedTreatment) {
-      setTreatmentDetails({
-        TreatmentID: "",
-        TreatmentName: "",
-        Duration: "",
-        Price: "",
-        TreatmentType: "",
-      });
-      setFeedback("Must provide a Treatment name to submit the appointment");
-      return;
-    }
-    setFeedback("");
-
-    const [hours, minutes, seconds] =
-      selectedTreatment.Duration.split(":").map(Number);
-
-    const startTime = new Date(
-      `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
-    );
-
-    const endTime = new Date(startTime);
-    endTime.setHours(endTime.getHours() + hours);
-    endTime.setMinutes(endTime.getMinutes() + minutes);
-    endTime.setSeconds(endTime.getSeconds() + seconds);
-    const formattedEndTime = formatToHHMMSS(endTime);
-
-    setAppointmentDetails((prev) => ({
-      ...prev,
-      TreatmentID: selectedTreatment.TreatmentID,
-      EndTime: formattedEndTime,
-    }));
-    setTreatmentDetails(selectedTreatment);
-  };
-
-  // const fetchShifts = async (specialistId) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${BASE_URL}/appointment/shifts?medicalSpecialistID=${specialistId}`
-  //     );
-  //     const data = await response.json;
-  //     setAvailableShifts(data);
-  //   } catch (error) {
-  //     setFeedback("Error loading specialist shifts.");
-  //   }
-  // };
-
-  const handleSpecialistSelect = async (event) => {
-    const specialistId = event.target.value;
-    setAppointmentDetails((prev) => ({
-      ...prev,
-      MedicalSpecialistID: specialistId,
-    }));
-    try {
-      const shifts = await dispatch(
-        fetchShiftsForSpecialist(appointmentDetails.MedicalSpecialistID)
-      ).unwrap(); // Fetch specialist shifts
-      setSpecialistShifts(shifts); // Store shifts
-      // setAvailableDates(extractAvailableDates(shifts)); // Extract available dates
-    } catch (error) {
-      setFeedback(error.message);
-    }
-  };
-
-  const handleTimeSelect = (selectedTime) => {
-    setAppointmentDetails((prev) => ({
-      ...prev,
-      StartTime: format(selectedTime, "HH:mm"),
-    }));
-  };
-  //: TODO: 1) handle calling the api's for the search field
-  //: TODO: 2) we will need to Do a JOIN on medical specialists table, Users(information: first,last names. Id's), treatments (Treatments.TreatmentName = MedicalSpecialist.specialization)
-  const handleSearch = (query) => {
-    console.log(`Search query: ${query}`);
-  };
-
   if (loading) return <div>Loading...</div>;
 
-  const searchBarsStyle = {
-    display: "flex",
-    justifyContent: "space-around",
-  };
   return (
-    <PayPalScriptProvider options={initialOptions}>
-      <article>
-        <section style={searchBarsStyle}>
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder={"Medical specialists name"}
-          />
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder={"Medical specialist spoken language"}
-          />
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder={"Medical specialist Specialization"}
-          />
-        </section>
-        <Calendar
-          handleDateSelect={handleDateSelect}
-          handleEventClick={handleEventClick}
-        />
-        {isModalOpen && (
-          <Modal open={isModalOpen} onClose={handleModalClose}>
-            <h2>
-              {selectedAppointment?.AppointmentID
-                ? "Edit Appointment"
-                : "Create Appointment"}
-            </h2>
-            <section>
-              <label>Date:</label>
-              <TimeInput
-                selected={
-                  appointmentDetails.Date
-                    ? new Date(appointmentDetails.Date)
-                    : null
-                }
-                onChange={(date) =>
-                  setAppointmentDetails((prev) => ({
-                    ...prev,
-                    Date: format(date, "yyyy-MM-dd"),
-                  }))
-                }
-                includeDate={true}
-                availableDates={availableDates}
-              />
-            </section>
+    <article>
+      <Calendar
+        handleDateSelect={handleDateSelect}
+        handleEventClick={handleEventClick}
+      />
+      {isModalOpen && (
+        <Modal open={isModalOpen} onClose={handleModalClose}>
+          <h2>
+            {appointmentDetails.AppointmentID
+              ? "Edit Appointment"
+              : "Create Appointment"}
+          </h2>
 
-            {availableTimes.length > 0 && (
-              <section>
-                <label>Start Time:</label>
-                <TimeInput
-                  selected={
-                    appointmentDetails.StartTime
-                      ? new Date(
-                          `${appointmentDetails.Date}T${appointmentDetails.StartTime}`
-                        )
-                      : null
-                  }
-                  onChange={handleTimeSelect}
-                  includeTime={true}
-                  availableTimes={availableTimes}
-                />
-              </section>
+          <section>
+            <TreatmentSelector
+              treatments={treatments}
+              onTreatmentSelect={handleTreatmentSelect}
+            />
+            {treatmentDetails.TreatmentName && (
+              <div>
+                <p>
+                  <strong>Treatment Name:</strong>{" "}
+                  {treatmentDetails.TreatmentName}
+                </p>
+                <p>
+                  <strong>Duration:</strong> {treatmentDetails.Duration} minutes
+                </p>
+                <p>
+                  <strong>Price:</strong> {treatmentDetails.Price} ILS
+                </p>
+              </div>
             )}
-            {treatments.length > 0 && (
-              <section>
-                <TreatmentSelector
-                  treatments={treatments}
-                  onTreatmentSelect={handleTreatmentSelect}
-                />
-              </section>
-            )}
+          </section>
 
+          {treatmentDetails.TreatmentName && (
             <section>
               <SpecialistSelector
-                availableSpecialists={availableSpecialists}
                 treatmentDetails={treatmentDetails}
                 onSpecialistSelect={handleSpecialistSelect}
               />
             </section>
+          )}
 
-            {appointmentDetails.MedicalSpecialistID && (
-              <PayPalPayment
-                amount={treatmentDetails.Price}
-                description={`Appointment for ${treatmentDetails.TreatmentName}`}
-                onSuccess={handlePaymentSuccess}
-                onFailure={handlePaymentError}
+          {selectedSpecialist && treatmentDetails && (
+            <section>
+              <TimeInput
+                selected={selectedDateTime}
+                onChange={handleTimeSelect}
+                availableDates={availableDates}
+                availableTimes={availableTimes}
               />
-            )}
-
-            {!paymentInProgress && (
-              <>
-                <Button label={"Save"} handleClick={handleModalSubmit} />
-                <Button label={"Cancel"} handleClick={handleModalClose} />
-              </>
-            )}
-
-            {selectedAppointment?.AppointmentID && (
+            </section>
+          )}
+          {treatmentDetails && appointmentDetails.MedicalSpecialistID && treatmentDetails.Price && (
+            <PayPalPayment
+              amount={treatmentDetails.Price}
+              description={`Appointment for ${treatmentDetails.TreatmentName} with Dr. ${selectedSpecialist.FirstName} ${selectedSpecialist.LastName}`}
+              onSuccess={handlePaymentSuccess}
+              onFailure={handlePaymentError}
+            />
+          )}
+          {!paymentInProgress && (
+            <>
               <Button
-                label={"Remove Appointment"}
-                handleClick={handleRemoveAppointment}
+                label={"Save"}
+                type={"submit"}
+                handleClick={handleModalSubmit}
               />
-            )}
-            {feedback && <p>{feedback}</p>}
-          </Modal>
-        )}
-      </article>
-    </PayPalScriptProvider>
+              <Button label={"Cancel"} handleClick={handleModalClose} />
+            </>
+          )}
+          {appointmentDetails.AppointmentID && (
+            <Button
+              label={"Remove Appointment"}
+              handleClick={handleRemoveAppointment}
+            />
+          )}
+          {feedback && <p>{feedback}</p>}
+        </Modal>
+      )}
+    </article>
   );
 };
 

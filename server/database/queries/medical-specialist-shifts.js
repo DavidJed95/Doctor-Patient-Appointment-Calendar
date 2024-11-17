@@ -82,9 +82,9 @@ async function deleteShift(shiftID) {
  */
 async function getShiftsForSpecialist(medicalSpecialistID, fromDate) {
   try {
-    console.log("Getting date from: ", fromDate)
+    console.log("Getting date from: ", fromDate);
     const sql = `SELECT * FROM SpecialistHours WHERE MedicalSpecialistID=? AND ShiftDate >= ? ORDER BY ShiftDate ASC`;
-    const shiftsToGet = [medicalSpecialistID, fromDate]
+    const shiftsToGet = [medicalSpecialistID, fromDate];
     const result = await doQuery(sql, shiftsToGet);
     console.log(`Fetched events from database in the server query are of type: ${typeof result}.
     and this is these are the shifts: ${result}`);
@@ -95,33 +95,42 @@ async function getShiftsForSpecialist(medicalSpecialistID, fromDate) {
   }
 }
 
+// TODO: I might need medical specialist ID for this procedure
 /**
  * Get available specialists
  * @returns { status, message, specialists }
  */
-async function getAvailableSpecialists() {
-  const selectSql = `
+async function getAvailableSpecialists(treatmentName) {
+  try {
+    const selectSql = `
     SELECT MS.ID, U.FirstName, U.LastName, MS.Specialization, SH.ShiftDate, SH.StartTime, SH.EndTime
     FROM MedicalSpecialists MS
     JOIN Users U ON MS.ID = U.ID
     JOIN SpecialistHours SH ON MS.ID = SH.MedicalSpecialistID
+    WHERE MS.Specialization = ? 
+    AND SH.ShiftDate >= CURDATE()
+    AND SH.Type = 'Working Hour'
+    ORDER BY SH.ShiftDate ASC
   `;
 
-  const specialists = await doQuery(selectSql);
-console.log('the amount of specialists',specialists.length)
-  if (specialists.length === 0) {
-    return {
-      status: "no-data",
-      message: "No available specialists found.",
-      specialists: [],
-    };
-  }
+    const specialists = await doQuery(selectSql, treatmentName);
+    if (specialists.length === 0) {
+      return {
+        status: "no-data",
+        message: "No available specialists found.",
+        specialists: [],
+      };
+    }
 
-  return {
-    status: "success",
-    message: "Available specialists fetched successfully",
-    specialists: specialists,
-  };
+    return {
+      status: "success",
+      message: "Available specialists fetched successfully",
+      specialists: specialists,
+    };
+  } catch (error) {
+    console.error("Error fetching available specialists:", error);
+    return { error: "Error fetching available specialists." };
+  }
 }
 
 module.exports = {

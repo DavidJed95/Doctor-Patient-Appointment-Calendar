@@ -39,15 +39,62 @@ export const extractAvailableDates = (shifts) => {
   return [...new Set(dates)];
 };
 
+// Function to convert time strings (HH:MM:SS) into date objects
+const createTimeObj = (dateStr, timeStr) => {
+  const [hours, minutes, seconds] = timeStr.split(":").map(Number);
+  const date = new Date(dateStr);
+  date.setHours(hours, minutes, seconds || 0);
+  return date;
+};
+
 /**
  * Extract available times from a list of shifts for a selected date.
+ * Returns individual `Date` objects for each available time slot.
+ *
  * @param {Array} shifts - Array of shifts.
  * @param {Date} selectedDate - The selected date.
- * @returns {Array} Available start and end times.
+ * @returns {Array} Available times as Date objects.
  */
 export const extractAvailableTimes = (shifts, selectedDate) => {
-  const times = shifts
-    .filter((shift) => shift.ShiftDate === format(selectedDate, "yyyy-MM-dd"))
-    .map((shift) => ({ startTime: shift.StartTime, endTime: shift.EndTime }));
-  return times;
+  const workingShifts = shifts.filter((shift) => shift.Type === "Working Hour");
+  const breakShifts = shifts.filter((shift) => shift.Type === "Break");
+  const availableTimes = [];
+
+  workingShifts.forEach((shift) => {
+    let currentStart = createTimeObj(shift.ShiftDate, shift.StartTime);
+    const workEndTime = createTimeObj(shift.ShiftDate, shift.EndTime);
+
+    // If the shift is on the selected date, process times
+    if (currentStart.toDateString() === new Date(selectedDate).toDateString()) {
+      breakShifts.forEach((breakShift) => {
+        const breakStartTime = createTimeObj(
+          breakShift.ShiftDate,
+          breakShift.StartTime
+        );
+        const breakEndTime = createTimeObj(
+          breakShift.ShiftDate,
+          breakShift.EndTime
+        );
+
+        // If break is within current working shift, push times up to break start
+        while (currentStart < workEndTime && currentStart < breakStartTime) {
+          availableTimes.push(new Date(currentStart));
+          currentStart = addMinutesToDate(currentStart, 15); // Add 15-minute intervals
+        }
+
+        // Skip the break period by setting currentStart to breakEndTime
+        if (breakStartTime >= currentStart && breakEndTime <= workEndTime) {
+          currentStart = breakEndTime;
+        }
+      });
+
+      // Add remaining working time after breaks
+      while (currentStart < workEndTime) {
+        availableTimes.push(new Date(currentStart));
+        currentStart = addMinutesToDate(currentStart, 15);
+      }
+    }
+  });
+
+  return availableTimes;
 };

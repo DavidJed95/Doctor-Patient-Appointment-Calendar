@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -15,21 +15,25 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
   const user = useSelector((state) => state.user.userInfo);
   const timeZone = "Asia/Jerusalem";
 
-  const processedEvents = events.map((event) => {
-    const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
-    const startDate = format(shiftDateTime, "yyyy-MM-dd", { timeZone });
-    const startDateTime = `${startDate}T${event.StartTime}`;
-    const endDateTime = `${startDate}T${event.EndTime}`;
-  
-    return {
-      id: event.SpecialistHourID,
-      title: event.Type,
-      start: startDateTime,
-      end: endDateTime,
-      extendedProps: { ...event },
-      className: event.isAvailable ? "available" : "unavailable",
-    };
-  });
+  const processedEvents = useMemo(
+    () =>
+      events.map((event) => {
+        const shiftDateTime = utcToZonedTime(event.ShiftDate, timeZone);
+        const startDate = format(shiftDateTime, "yyyy-MM-dd", { timeZone });
+        const startDateTime = `${startDate}T${event.StartTime}`;
+        const endDateTime = `${startDate}T${event.EndTime}`;
+
+        return {
+          id: event.SpecialistHourID,
+          title: event.Type,
+          start: startDateTime,
+          end: endDateTime,
+          extendedProps: { ...event },
+          className: event.isAvailable ? "available" : "unavailable",
+        };
+      }),
+    [events, timeZone]
+  );
 
   const processedAppointments = appointments
     .map((appointment) => ({
@@ -42,13 +46,22 @@ const Calendar = ({ handleDateSelect, handleEventClick }) => {
     }))
     .filter((appointment) => appointment !== null);
 
-  const displayEvents =
-    user.UserType === "Medical Specialist"
-      ? processedEvents
-      : processedAppointments;
+  const displayEvents = useMemo(
+    () =>
+      user.UserType === "Medical Specialist"
+        ? processedEvents
+        : processedAppointments,
+    [user.UserType, processedEvents, processedAppointments]
+  );
 
   return (
-    <div style={{ border: "red solid 2px", marginTop: "20px" }}>
+    <div
+      style={{
+        border: "cyan solid .2rem",
+        borderStyle: "ridge",
+        marginTop: "2rem",
+      }}
+    >
       <Fullcalendar
         timeZone={timeZone}
         ref={calendarRef}

@@ -32,7 +32,6 @@ export const treatmentsSlice = createSlice({
       })
       // Handle fulfilled state with the fetched treatments
       .addCase(fetchTreatments.fulfilled, (state, action) => {
-        console.log("Fetched treatments from Redux: ", action.payload); // Add this log
         state.treatments = action.payload;
         state.loading = false;
       })

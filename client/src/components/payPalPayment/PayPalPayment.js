@@ -1,10 +1,17 @@
 import React from "react";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { MY_PAYPAL_CLIENT_ID } from "../../config";
 
 /**
- * This component manages the payment of the appointment
+ * PayPalPayment component to handle payment for appointments.
+ * Integrates with PayPal API to create and capture orders.
  */
 const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
+  const initialOptions = {
+    "client-id": MY_PAYPAL_CLIENT_ID,
+    currency: "ILS",
+    intent: "CAPTURE",
+  };
   /**
    * Creates an order for the appointment
    */
@@ -13,9 +20,7 @@ const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
       purchase_units: [
         {
           description: description,
-          amount: {
-            value: amount,
-          },
+          amount: { value: amount },
         },
       ],
     });
@@ -24,30 +29,34 @@ const PayPalPayment = ({ amount, description, onSuccess, onFailure }) => {
   /**
    * Captures an order for the appointment
    */
-  const onApprove = (data, actions) => {
-    return actions.order
-      .capture()
-      .then((details) => {
-        onSuccess(details);
-        console.log("Payment successful, and the description is ", description);
-      })
-      .catch((error) => {
-        onFailure(error);
-      });
+  const onApprove = async (data, actions) => {
+    try {
+      const details = await actions.order.capture();
+      const captureId = details.purchase_units[0].payments.captures[0].id;
+      onSuccess({ details, captureId });
+      console.log("Payment successful, with capture ID:", captureId);
+    } catch (error) {
+      onFailure(error);
+    }
   };
+  const onError = (error) => {
+    console.error(`PayPal checkout onError: ${error}`)
+  }
 
   return (
-    <PayPalButtons
-      style={{
-        shape: "rect",
-        layout: "vertical",
-        color: "gold",
-        label: "paypal",
-      }}
-      createOrder={createOrder}
-      onApprove={onApprove}
-      onError={onFailure}
-    />
+    <PayPalScriptProvider options={initialOptions}>
+      <PayPalButtons
+        style={{
+          shape: "rect",
+          layout: "vertical",
+          color: "gold",
+          label: "paypal",
+        }}
+        createOrder={createOrder}
+        onApprove={onApprove}
+        onError={onError}
+      />
+    </PayPalScriptProvider>
   );
 };
 export default PayPalPayment;
