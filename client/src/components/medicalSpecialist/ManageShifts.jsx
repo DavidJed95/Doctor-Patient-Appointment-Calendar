@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { format } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 
 import Calendar from '../calendar/Calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,8 +46,8 @@ const ManageShifts = () => {
   const handleEventClick = clickInfo => {
     const timeZone = 'Asia/Jerusalem';
 
-    const startLocal = utcToZonedTime(clickInfo.event.startStr, timeZone);
-    const endLocal = utcToZonedTime(clickInfo.event.endStr, timeZone);
+    const startLocal = toZonedTime(clickInfo.event.startStr, timeZone);
+    const endLocal = toZonedTime(clickInfo.event.endStr, timeZone);
 
     const formattedShiftDate = format(startLocal, 'yyyy-MM-dd', { timeZone });
     const formattedStartTime = format(startLocal, 'HH:mm', { timeZone });
@@ -71,8 +71,8 @@ const ManageShifts = () => {
   const handleDateSelect = selectInfo => {
     const timeZone = 'Asia/Jerusalem';
 
-    const startDate = utcToZonedTime(selectInfo.startStr, timeZone);
-    const endDate = utcToZonedTime(selectInfo.endStr, timeZone);
+    const startDate = toZonedTime(selectInfo.startStr, timeZone);
+    const endDate = toZonedTime(selectInfo.endStr, timeZone);
 
     const formattedShiftDate = format(startDate, 'yyyy-MM-dd', { timeZone });
     const formattedStartTime = format(startDate, 'HH:mm', { timeZone });

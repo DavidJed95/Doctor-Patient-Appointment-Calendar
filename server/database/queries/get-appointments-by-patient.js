@@ -1,23 +1,26 @@
-'use strict';
-const doQuery = require('../query');
+"use strict";
+const doQuery = require("../query");
 
 /**
  * Get appointments for a specific patient.
- * @param {*} patientId - ID of the patient
+ * @param {*} patientID - ID of the patient
  * @returns { status, message, appointments }
  */
-async function getAppointmentsByPatient(patientId) {
+async function getAppointmentsByPatient(patientID) {
+  console.log("getAppointmentsByPatient ");
   const selectSql = `SELECT 
+    A.AppointmentID,
     U.FirstName AS userFirstName, 
     U.LastName AS userLastName,
     MSU.FirstName AS specialistFirstName,
     MSU.LastName AS specialistLastName,
     MS.Specialization,
     A.StartTime,
-    A.EndingTime,
+    A.EndTime,
     A.Date,
     T.TreatmentName,
-    T.TreatmentType
+    T.TreatmentType,
+    A.MedicalSpecialistID
 FROM 
     Appointments A
 JOIN 
@@ -29,20 +32,21 @@ JOIN
 LEFT JOIN 
     Treatments T ON A.TreatmentID = T.TreatmentID
 WHERE 
-    A.PatientID = ?`;
-  const appointments = await doQuery(selectSql, [patientId]);
+    A.PatientID = ?
+    AND A.Date >= CURDATE()`;
+  const appointments = await doQuery(selectSql, [patientID]);
 
   if (appointments.length === 0) {
     return {
-      status: 'no-data',
-      message: 'No appointments found for the patient.',
+      status: "no-data",
+      message: "No appointments found for the patient.",
       appointments: [],
     };
   }
 
   return {
-    status: 'success',
-    message: 'Appointments fetched successfully',
+    status: "success",
+    message: "Appointments fetched successfully",
     appointments: appointments,
   };
 }

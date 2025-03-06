@@ -2,8 +2,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const TimeInput = ({ selected, onChange, availableTimes, availableDates }) => {
-  console.log("Available Dates:", availableDates);
-  console.log("Available Times:", availableTimes);
   const mappedAvailableDates = availableDates
     .map((date) => new Date(date))
     .filter((date) => date instanceof Date && !isNaN(date));

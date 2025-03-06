@@ -1,13 +1,13 @@
-'use strict';
-const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
+"use strict";
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 
 // Load environment variables from .env file
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: "../.env" });
 
 // Create a transporter for sending email
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (email, subject, content) => {
   // Compose the email options
   const mailOptions = {
-    from: 'DoctorPatientAppointmentSystem@gmail.com',
+    from: "DoctorPatientAppointmentSystem@gmail.com",
     to: email,
     subject: subject,
     html: content,
@@ -40,6 +40,4 @@ const sendEmail = async (email, subject, content) => {
   }
 };
 
-module.exports = {
-  sendEmail,
-};
+module.exports = { sendEmail };

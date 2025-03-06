@@ -18,7 +18,7 @@
   min-height: 65vh;
   background-color: #fff;
   border-radius: 0.8rem;
-  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.6);
 }
 
 .modalCloseButton {

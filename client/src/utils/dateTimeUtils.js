@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-
 /**
  * Converts HH:MM:SS to total minutes.
  * @param {string} duration - The duration in HH:MM:SS format.

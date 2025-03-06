@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
 export default function CustomLink({ to, children, ...props }) {

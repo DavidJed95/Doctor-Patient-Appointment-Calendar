@@ -30,8 +30,8 @@ app.use(
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true, // This allows cookies to be sent with requests
+    origin: ["http://localhost:5173", "https://www.sandbox.paypal.com"],
+    credentials: true, // This allows cookies to be sent with requests,
   })
 );
 app.use(express.static(path.join(__dirname, "../client/public")));

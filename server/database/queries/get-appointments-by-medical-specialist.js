@@ -7,7 +7,8 @@ const doQuery = require('../query');
  * @returns { status, message, appointments }
  */
 async function getAppointmentsByMedicalSpecialist(medicalSpecialistId) {
-  const selectSql = `SELECT 
+  const selectSql = `SELECT
+    A.AppointmentID,
     P.FirstName AS patientFirstName, 
     P.LastName AS patientLastName,
     MSU.FirstName AS specialistFirstName,
@@ -29,7 +30,8 @@ JOIN
 LEFT JOIN 
     Treatments T ON A.TreatmentID = T.TreatmentID
 WHERE 
-    A.MedicalSpecialistID = ?`;
+    A.MedicalSpecialistID = ?
+    And A.Date >= CURDATE()`;
   const appointments = await doQuery(selectSql, [medicalSpecialistId]);
 
   if (appointments.length === 0) {

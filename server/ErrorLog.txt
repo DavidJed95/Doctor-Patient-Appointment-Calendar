@@ -965,3 +965,2754 @@
   Line: 93
   ---------------------------------------------------
   
+  2024-12-02T20:29:08.498Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-02T20:29:08.525Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-02T20:29:10.597Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-02T20:29:10.614Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-03T02:41:13.491Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-03T02:41:13.539Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T04:20:42.271Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T04:20:42.291Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T04:51:31.161Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T04:51:31.196Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T05:54:24.503Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T05:54:24.564Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:01:46.709Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:01:46.744Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:13.476Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:13.543Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:15.392Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:15.441Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:21.041Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:21.088Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:24.739Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:24.792Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:26.313Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:02:26.347Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:03:30.096Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:03:30.153Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:03:40.307Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:03:40.343Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:10.265Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:10.307Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:13.271Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:13.325Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:16.553Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:16.588Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:36.893Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:36.927Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:46.614Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:46.667Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:48.981Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-04T06:04:49.013Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-05T22:10:54.675Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-05T22:10:54.721Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:45:21.288Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:45:21.314Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:45:40.255Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:45:40.273Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:49:40.731Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:49:40.778Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:52:45.999Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:52:46.018Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:54:59.998Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:55:00.037Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:55:02.223Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:55:02.239Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:58:21.608Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-06T23:58:21.631Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-09T03:57:47.666Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-09T03:57:47.691Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:04.947Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:04.970Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:08.102Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:08.127Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:26.729Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:12:26.765Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:48:40.457Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:48:40.485Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:49:31.778Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:49:31.796Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:57:09.493Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:57:09.516Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:57:14.793Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:57:14.823Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:59:54.489Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T01:59:54.502Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:01:53.234Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:01:53.256Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:11:21.757Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:11:21.781Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:20:18.810Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:20:18.860Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:20:24.892Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:20:24.915Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:29:31.748Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:29:31.805Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:29:34.140Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T02:29:34.166Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T08:38:34.030Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-10T08:38:34.068Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T15:09:29.359Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T15:09:29.381Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:21:44.705Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:21:44.730Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:21:49.534Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:21:49.558Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:24:04.578Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:24:04.597Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:25:45.338Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:25:45.390Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:26:37.656Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:26:37.676Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:38:12.263Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T20:38:12.300Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T22:22:54.010Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T22:22:54.036Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T22:34:44.271Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T22:34:44.298Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:29:18.028Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:29:18.066Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:29.167Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:29.210Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:33.441Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:33.478Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:35.657Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:35.687Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:40.260Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:40.283Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:42.692Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:42.743Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:44.360Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:31:44.412Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:32:54.949Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:32:54.968Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:32:56.394Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:32:56.436Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:25.537Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:25.589Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:26.952Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:27.008Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:29.353Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:43:29.397Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:51:25.824Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:51:25.860Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:58:51.283Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:58:51.388Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:59:00.970Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-16T23:59:01.004Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:27:03.959Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:27:03.984Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:29:26.295Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:29:26.331Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:44:58.933Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:44:58.961Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:45:31.863Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:45:31.884Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:13.616Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:13.672Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:15.230Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:15.262Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:20.981Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:21.005Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:23.760Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:23.789Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:28.336Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:47:28.357Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:48:16.863Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:48:16.894Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:50:51.791Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:50:51.816Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:50:53.554Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:50:53.583Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:52:07.763Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:52:07.786Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:52:29.100Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:52:29.127Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:53:45.588Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:53:45.602Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:55:01.928Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:55:01.954Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:55:53.412Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:55:53.431Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:17.218Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:17.237Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:20.286Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:20.304Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:57.347Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T02:56:57.365Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:05:59.352Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:05:59.385Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:08.964Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:08.993Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:24.542Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:24.557Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:27.047Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:07:27.091Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:12.902Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:12.937Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:14.615Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:14.642Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:15.864Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:15.893Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:25.420Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:08:25.437Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:37:56.552Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:37:56.568Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:38:30.426Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:38:30.456Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:38:34.285Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:38:34.312Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:39:04.063Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:39:04.109Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:39:56.660Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:39:56.698Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:03.070Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:03.094Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:09.483Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:09.518Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:35.120Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:35.143Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:38.912Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:38.944Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:55.173Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:40:55.199Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:12.571Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:12.611Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:14.350Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:14.392Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:24.370Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:41:24.417Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:42:14.903Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:42:14.934Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:44:41.227Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:44:41.248Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:44:51.173Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-18T03:44:51.210Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-19T23:29:31.685Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-19T23:29:31.697Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:48:54.694Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:48:54.716Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:49:23.359Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:49:23.402Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:49:24.938Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:49:24.962Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:51:42.088Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:51:42.120Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:51:43.896Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T00:51:43.934Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:10.076Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:10.096Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:11.979Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:11.999Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:33.714Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:26:33.745Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:27:03.826Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:27:03.872Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:27:16.939Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:27:16.980Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:29:58.825Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:29:58.852Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:30:57.655Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:30:57.681Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:31:14.867Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:31:14.882Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:37:28.015Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T02:37:28.039Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T03:10:35.793Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T03:10:35.830Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:22:15.899Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:22:15.928Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:22:23.737Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:22:23.751Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:41:55.127Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T04:41:55.155Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:08:56.493Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:08:56.518Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:08:58.744Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:08:58.771Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:11:14.118Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:11:14.136Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:16:20.445Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-20T11:16:20.466Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:47:26.188Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:47:26.202Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:48:47.398Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:48:47.426Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:50:27.124Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:50:27.149Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:51:09.938Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:51:09.956Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:58:24.857Z - Error: Failed to capture PayPal payment
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\services\paypalServices.js
+  Function: Object.capturePayment
+  Line: 64
+  ---------------------------------------------------
+  
+  2024-12-21T16:58:25.257Z - Error: Failed to capture PayPal payment
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\services\paypalServices.js
+  Function: Object.capturePayment
+  Line: 64
+  ---------------------------------------------------
+  
+  2024-12-21T16:59:35.290Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T16:59:35.306Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T17:00:45.172Z - Error: Failed to capture PayPal payment
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\services\paypalServices.js
+  Function: Object.capturePayment
+  Line: 64
+  ---------------------------------------------------
+  
+  2024-12-21T18:22:56.817Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:23:55.759Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:10.747Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:12.727Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:17.722Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:32.722Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:47.736Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T18:24:51.719Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:48:35.877Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:48:35.889Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:48:47.817Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:48:47.821Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:05.816Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:05.818Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:24.810Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:24.813Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:33.815Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:49:33.818Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:51:54.591Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:51:54.606Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:08.172Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:17.019Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:18.211Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:21.737Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:30.891Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:30.904Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:44.062Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:48.527Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:48.536Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:52:56.482Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:53:02.868Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:53:02.887Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:53:43.628Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:53:44.790Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:55:12.444Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:55:12.453Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:57:29.733Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:57:29.751Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:57:32.501Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T19:57:32.515Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:19:44.708Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:19:44.721Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:19:46.699Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:19:46.711Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:07.907Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:07.928Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:16.193Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:16.215Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:19.484Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-21T20:22:19.520Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T17:51:03.595Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T17:51:03.616Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:07:26.849Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:07:43.809Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:07:43.827Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:07:56.185Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:09:01.922Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:12:33.077Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:14:46.876Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T18:25:14.446Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:14:52.823Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:14:52.844Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:14:55.423Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:14:55.443Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:25:40.803Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:25:40.827Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:26:43.214Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:26:59.667Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:27:07.158Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:27:08.706Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:27:28.986Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:27:29.072Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:28:42.786Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:29:34.100Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:29:36.613Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:29:44.211Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:29:46.836Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:30:16.926Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:30:41.888Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:31:08.226Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:31:10.053Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:31:14.681Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:43:13.889Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:43:18.126Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:44:21.042Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:44:21.053Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:44:38.638Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:44:38.646Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:49:28.032Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2024-12-22T19:49:28.042Z - Error: Database query failed: Unknown column 'A.EndingTime' in 'field list'
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 17
+  ---------------------------------------------------
+  
+  2025-01-10T12:24:50.874Z - Error: Database query failed: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\database\query.js
+  Function: doQuery
+  Line: 15
+  ---------------------------------------------------
+  
+  2025-01-27T07:45:30.243Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-27T07:45:33.199Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-27T07:46:28.507Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-27T19:03:00.234Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-27T19:05:26.484Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-27T19:16:45.660Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-01-28T16:29:47.989Z - Error: Cannot read properties of undefined (reading 'links')
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-02-02T04:44:24.966Z - Error: Cannot destructure property 'jsonResponse' of '(intermediate value)' as it is undefined.
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 18
+  ---------------------------------------------------
+  
+  2025-02-02T07:49:13.605Z - Error: Cannot destructure property 'jsonResponse' of '(intermediate value)' as it is undefined.
+
+  File: C:\Users\djedw\Desktop\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-02-20T15:56:40.491Z - Error: Cannot destructure property 'jsonResponse' of '(intermediate value)' as it is undefined.
+
+  File: G:\C- Desktop 10.2.2025 - Lenovo\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-02-20T17:51:15.586Z - Error: Cannot destructure property 'jsonResponse' of '(intermediate value)' as it is undefined.
+
+  File: G:\C- Desktop 10.2.2025 - Lenovo\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 23
+  ---------------------------------------------------
+  
+  2025-02-20T18:57:24.639Z - Error: Cannot destructure property 'jsonResponse' of '(intermediate value)' as it is undefined.
+
+  File: G:\C- Desktop 10.2.2025 - Lenovo\Doctor-Patient-Appointment-Calendar\server\controllers\appointmentController.js
+  Function: exports.createOrder
+  Line: 28
+  ---------------------------------------------------
+  
+  2025-02-20T20:46:21.616Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-23T18:59:48.282Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-25T02:39:34.048Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-25T02:52:01.103Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-25T03:10:26.971Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-25T03:13:09.877Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  
+  2025-02-25T03:19:03.684Z - Error: Invalid status code: undefined
+
+  File: node:_http_server
+  Function: ServerResponse.writeHead
+  Line: 358
+  ---------------------------------------------------
+  

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../config";
 
 import { useDispatch } from "react-redux";
 import { updateLoginStatus, setUser } from "../../../redux/reducers/userSlice";
@@ -35,7 +36,7 @@ const LoginForm = () => {
     const requestBody = userDetails;
 
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

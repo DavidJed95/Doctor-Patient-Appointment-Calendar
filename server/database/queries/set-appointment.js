@@ -1,5 +1,5 @@
-'use strict';
-const doQuery = require('../query');
+"use strict";
+const doQuery = require("../query");
 
 /**
  * Create an appointment in the database
@@ -7,36 +7,34 @@ const doQuery = require('../query');
  * @param {*} paymentSuccessful - a boolean indicating whether the appointment was successful
  * @returns status of the appointment creation and a feedback to the user
  */
-async function setAppointment(appointment, paymentSuccessful = false) {
-  const {
-    appointmentId,
-    patientId,
-    medicalSpecialistId,
-    treatmentId,
-    startTime,
-    endTime,
-    date,
-  } = appointment;
-
-  if (!paymentSuccessful) {
-    return { status: 'failure', message: 'Payment failed' };
+async function setAppointment(appointment) {
+  if (!appointment.isPayedFor) {
+    return { status: "failure", message: "Payment failed" };
   }
 
-  // Create a new appointment
-  const insertSql =
-    'INSERT INTO Appointments (ID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndingTime, Date, isPayedFor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  await doQuery(insertSql, [
-    appointmentId,
-    patientId,
-    medicalSpecialistId,
-    treatmentId,
-    startTime,
-    endTime,
-    date,
-    paymentSuccessful,
-  ]);
+  const insertAppointmentToDB = `
+    INSERT INTO Appointments 
+    (AppointmentID, PatientID, MedicalSpecialistID, TreatmentID, StartTime, EndTime, Date, isPayedFor) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  return { status: 'success', message: 'Appointment created successfully' };
+  try {
+    await doQuery(insertAppointmentToDB, [
+      appointment.AppointmentID,
+      appointment.PatientID,
+      appointment.MedicalSpecialistID,
+      appointment.TreatmentID,
+      appointment.StartTime,
+      appointment.EndTime,
+      appointment.Date,
+      appointment.isPayedFor,
+    ]);
+    return { status: "success", message: "Appointment created successfully" };
+  } catch (error) {
+    console.error("Error saving appointment to DB:", error);
+    return {
+      status: "failure",
+      message: "Error saving appointment to database",
+    };
+  }
 }
-
 module.exports = setAppointment;

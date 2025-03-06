@@ -1,0 +1,1 @@
+* Children components which we pass down to parent component don't rerender: like passing prop in component as type PropsWithChildren

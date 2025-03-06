@@ -11,7 +11,7 @@ import { updateLoginStatus, setUser } from './redux/reducers/userSlice';
 // Components and pages imports
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
-import Appointments from './components/pages/Appointments';
+// import Appointments from './components/pages/Appointments';
 import AppointmentManagement from './components/patient/AppointmentManagement';
 import UpdateUserProfile from './components/pages/settings/UpdateUserProfile';
 import LoginPage from './components/pages/LoginPage';

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../config";
+
 import styles from "../userAuthentication.module.css";
 import InputField from "../../common/InputField";
 import Button from "../../common/Button";
@@ -32,7 +34,7 @@ const PasswordResetForm = () => {
     try {
       // Send a password reset request to the server
       const response = await fetch(
-        "http://localhost:8000/auth/password-reset",
+        `${BASE_URL}/auth/password-reset`,
         {
           method: "POST",
           headers: {

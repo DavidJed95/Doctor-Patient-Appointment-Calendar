@@ -8,7 +8,6 @@ async function getTreatments() {
   try {
     const treatmentSQL = `SELECT * FROM Treatments`;
     const result = await doQuery(treatmentSQL);
-    console.log("Fetched treatments from database: ", result);
     return result;
   } catch (error) {
     console.error("Error fetching treatments: ", error);

@@ -8,7 +8,7 @@ export const fetchShiftsForSpecialist = createAsyncThunk(
   async (medicalSpecialistID, { rejectWithValue }) => {
     try {
       const response = await shiftsAPI.fetchShiftsForSpecialist(medicalSpecialistID);
-      console.log(`Fetching shifts for specialist by id (eventsSlice.js): ${response}`);
+      // console.log(`Fetching shifts for specialist by id (eventsSlice.js): ${response}`);
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -77,7 +77,7 @@ export const eventsSlice = createSlice({
       .addCase(fetchShiftsForSpecialist.fulfilled, (state, action) => {
         state.SpecialistAvailability = action.payload;
         state.loading = false;
-        console.log(`specialist shifts redux: ${state.SpecialistAvailability}`)
+        // console.log(`specialist shifts redux: ${state.SpecialistAvailability}`)
       })
       .addCase(fetchShiftsForSpecialist.rejected, (state, action) => {
         state.error = action.payload;

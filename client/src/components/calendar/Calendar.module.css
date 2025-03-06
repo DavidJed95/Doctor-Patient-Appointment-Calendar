@@ -1,14 +1,35 @@
 .fc-event-available {
-    background-color: green;
-    color: white;
+  background-color: green;
+  color: white;
 }
 
 .fc-event-unavailable {
-    background-color: gray;
-    color: white;
+  background-color: gray;
+  color: white;
 }
 
 .fc-event-appointment {
-    background-color: blue;
-    color: white;
+  background-color: blue;
+  color: white;
+}
+
+.paid-appointment {
+  background-color: #4caf50;
+  color: white;
+}
+.unpaid-appointment {
+  background-color: #f44336;
+  color: white;
+}
+
+.fc-event-available {
+  background-color: #f93e0a;
+  border-color: #3788d8;
+  color: #ff0505; /* Text color */
+}
+
+.fc-event-unavailable {
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: #ffffff; /* Text color */
 }

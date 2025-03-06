@@ -10,7 +10,7 @@ import {
   removeEvent,
   updateEvent,
 } from '../../redux/reducers/eventsSlice.js';
-import Modal from '../common/Modal';
+import Modal from '../common/Modal.jsx';
 import {
   fetchAppointmentsAPI,
   addAppointmentAPI,
@@ -18,7 +18,7 @@ import {
   deleteAppointmentAPI,
 } from '../patient/appointmentsAPI';
 
-import Button from '../common/Button';
+import Button from '../common/Button.jsx';
 
 const Appointments = () => {
   const [initiatePayment, setInitiatePayment] = useState(false);
